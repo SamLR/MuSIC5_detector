@@ -31,50 +31,80 @@
 #include "globals.hh"
 
 class G4VPhysicalVolume;
+class G4LogicalVolume;
 class G4Material;
 class G4Element;
+class Field;
+class DetectorConstructionMessenger;
 
 class DetectorConstruction : public G4VUserDetectorConstruction
 {
-   public:
-      DetectorConstruction(
-            G4String fname_sol,
-            G4String fname_dip,
-            int polarity);
-      ~DetectorConstruction();
+public:
+    DetectorConstruction();
+    ~DetectorConstruction();
 
-   public:
-      G4VPhysicalVolume* Construct();
+public:
+    G4VPhysicalVolume* Construct();
+    
+    // inline changes
+    inline void SetSolFieldName(G4String newFile) {f_fname_sol = newFile;};
+    inline void SetDipFieldName(G4String newFile) {f_fname_dip = newFile;};
 
-   private:
+    inline void SetScint1z(double newVal) {f_scint1z = newVal;};
+    inline void SetScint2z(double newVal) {f_scint2z = newVal;};
+    inline void SetDegraderZ(double newVal) {f_degraderZ = newVal;};
+    inline void SetTargetZ(double newVal) {f_targetZ = newVal;};
 
-      G4String f_fname_sol;
-      G4String f_fname_dip;
-      int f_dip_polarity;
+    // these need some amount of checking
+    void SetPolarity(double);
+    void SetDegraderMat(G4String);
+    void SetTargetMat(G4String);
+    
+private:
+    void DefineMaterials();
 
-      void DefineMaterials();
+    DetectorConstructionMessenger* f_messenger;
+    Field* f_myField;// the field map
 
-      G4Material* matVac;
-      G4Material* matAir;
-      G4Material* matCu;
-      G4Material* matMg;
-      G4Material* matSci;
-      G4Material* matMylar;
-      G4Material* matDegrader;
+    G4String f_fname_sol; // solenoid fieldmap
+    G4String f_fname_dip; // dipole fieldmap
+    double f_dip_polarity; // dipole polarity & scaling
+    
+    double f_scint1z; // scintillator thickness
+    double f_scint2z;
 
-      G4Material* Air;
-      G4Material* Ar;
-      G4Material* Silicon;
-      G4Material* Scinti;
-      G4Material* Lead;
-      G4Material* Al;
-      G4Material* Mylar;
-      G4Material* Polystyrene;
+    double f_degraderZ; // degreader thickness
+    double f_targetZ; // degreader thickness
+    G4Material* f_degraderMat; // degrader material
+    G4Material* f_targetMat; // degrader material
+    
+    G4LogicalVolume*   f_logic_world; // world volume
+    G4VPhysicalVolume* f_physi_world;
+    
+    G4LogicalVolume*   f_logic_sci1; // scint 1 & 2
+    G4VPhysicalVolume* f_physi_sci1;
+                                   
+    G4LogicalVolume*   f_logic_sci2;
+    G4VPhysicalVolume* f_physi_sci2;
+    
+    G4LogicalVolume*   f_logic_target; // target
+    G4VPhysicalVolume* f_physi_target;
+    
+    G4LogicalVolume*   f_logic_degrader; // degrader
+    G4VPhysicalVolume* f_physi_degrader;
+    
+      // pure elements
+    G4Material* Pb;
+    G4Material* Al;
+    G4Material* Mg;
+    G4Material* Cu;
 
-      G4Element* H;
-      G4Element* C;
-      G4Element* N;
-      G4Element* O;
+      // compounds & mixtures
+    G4Material* Air;
+    G4Material* Scint;      
+    G4Material* Mylar;
+    G4Material* Polystyrene;
+    G4Material* Polyethylene;
 };
 
 #endif

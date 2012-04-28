@@ -8,6 +8,8 @@
 #/control/verbose 2
 #/control/saveHistory
 #
+/MuSIC_Detector/degraderZ Cu
+
 /run/verbose 0
 /event/verbose 0
 /tracking/verbose 0

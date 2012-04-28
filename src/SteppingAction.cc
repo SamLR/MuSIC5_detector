@@ -103,7 +103,8 @@ void SteppingAction::UserSteppingAction(const G4Step * aStep)
     int acounter=1;
     if      (strcmp(volname,"sci1")==0)     { acounter = 1; } 
     else if (strcmp(volname,"target")==0)   { acounter = 2; } 
-    else if (strcmp(volname,"sci2")==0)     { acounter = 3; }
+    else if (strcmp(volname,"sci2")==0)     { acounter = 3; } 
+    else if (strcmp(volname,"degrader")==0) { acounter = 4; }
     else return;
 
     const G4VProcess * vp = aStep->GetPreStepPoint()->GetProcessDefinedStep();

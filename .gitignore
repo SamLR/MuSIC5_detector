@@ -18,3 +18,7 @@ g4blout/
 root/
 *.root
 WD/
+*.d
+*.so
+images/
+.DS_Store
