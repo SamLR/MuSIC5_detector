@@ -71,15 +71,15 @@ DetectorConstruction::~DetectorConstruction()
     delete f_myField;
 
     delete f_logic_world; // world volume
-    delete f_physi_world;
-    delete f_logic_sci1; // scint 1 & 2
-    delete f_physi_sci1;
-    delete f_logic_sci2;
-    delete f_physi_sci2;
-    delete f_logic_target; // target
-    delete f_physi_target;
-    delete f_logic_degrader; // degrader
-    delete f_physi_degrader;
+//    delete f_physi_world;
+//    delete f_logic_sci1; // scint 1 & 2
+//    delete f_physi_sci1;
+//    delete f_logic_sci2;
+//    delete f_physi_sci2;
+//    delete f_logic_target; // target
+//    delete f_physi_target;
+//    delete f_logic_degrader; // degrader
+//    delete f_physi_degrader;
     
       // pure elements
     delete Pb;
