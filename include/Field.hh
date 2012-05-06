@@ -39,6 +39,8 @@ class Field : public G4MagneticField
     Field(G4String fname_sol, G4String fname_dip, int polarity); // +1: dipole By >0, -1: dipole By <0
     ~Field();
     void GetFieldValue( const  double Point[3], double *Bfield ) const;
+    void SetDipoleField(G4String fname) {field_dip->SetFile(fname);};
+    void SetSolenoidField(G4String fname) {field_sol->SetFile(fname);};
 
   private:
     FieldSol* field_sol;

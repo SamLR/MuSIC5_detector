@@ -28,38 +28,48 @@
 #define FieldDip_H 1
 
 #include "globals.hh"
+#include "G4String.hh"
+
+class G4String;
 
 class FieldDip
 {
-   public:
-      FieldDip(G4String fname, int polarity);
-      ~FieldDip();
+public:
+    FieldDip(G4String fname, int polarity);    
+    ~FieldDip();
+    
+    void GetFieldValue( const  double Point[3], double *Bfield );
+    void SetFile(G4String &fname) {file_name = fname;};
+private:
+    
+    FieldDip();    
 
-      void GetFieldValue( const  double Point[3], double *Bfield );
-
-   private:
-
+    void init();
+    void initArray();
+    
 #define MAX_DIP_NX 23
 #define MAX_DIP_NY 21
 #define MAX_DIP_NZ 51
-      double magfld_bx[MAX_DIP_NX][MAX_DIP_NY][MAX_DIP_NZ];
-      double magfld_by[MAX_DIP_NX][MAX_DIP_NY][MAX_DIP_NZ];
-      double magfld_bz[MAX_DIP_NX][MAX_DIP_NY][MAX_DIP_NZ];
-
-      int gpos_to_index(double x, double y, double z, int* ix, int* iy, int* iz);
-      int cpos_to_index(double x, double y, double z, int* ix, int* iy, int* iz);
-      void set_bfld(double x, double y, double z, double bx, double by, double bz);
-      void get_bfield(double x, double y, double z, double *bx, double* by, double *bz);
-
-      void global_to_center(double gx, double gy, double gz, double* cx, double* cy, double* cz);
-
-
-      double coil8_x0; //coil8 (last coil of dipole magnet) in global coordinate [mm]
-      double coil8_z0;
-      double cos36;
-      double sin36;
-
-      double dip_step; // step size in mm
+    double magfld_bx[MAX_DIP_NX][MAX_DIP_NY][MAX_DIP_NZ];
+    double magfld_by[MAX_DIP_NX][MAX_DIP_NY][MAX_DIP_NZ];
+    double magfld_bz[MAX_DIP_NX][MAX_DIP_NY][MAX_DIP_NZ];
+    
+    int gpos_to_index(double x, double y, double z, int* ix, int* iy, int* iz);
+    int cpos_to_index(double x, double y, double z, int* ix, int* iy, int* iz);
+    void set_bfld(double x, double y, double z, double bx, double by, double bz);
+    void get_bfield(double x, double y, double z, double *bx, double* by, double *bz);
+    
+    void global_to_center(double gx, double gy, double gz, double* cx, double* cy, double* cz);
+    
+    double coil8_x0; //coil8 (last coil of dipole magnet) in global coordinate [mm]
+    double coil8_z0;
+    double cos36;
+    double sin36;
+    
+    double dip_step; // step size in mm
+    double polarity;
+    G4String file_name;
+    bool initialised;
 };
 
 #endif

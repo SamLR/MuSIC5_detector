@@ -11,13 +11,17 @@
 #include "G4UIcmdWithADoubleAndUnit.hh"
 
 DetectorConstructionMessenger::DetectorConstructionMessenger(DetectorConstruction* dc)
-    : detConstructor_m(dc)
+: detConstructor_m(dc), updateCmd_m(NULL), UIdirectory_m(NULL),  
+solenoidFileName_m(NULL), dipoleFileName_m(NULL), degraderMaterial_m(NULL), 
+targetMaterial_m(NULL), dipolePolarityStrength_m(NULL), scint1Thickness_m(NULL), 
+scint2Thickness_m(NULL), degraderThickness_m(NULL), targetThickness_m(NULL)
 {
     init();
 }
 
 DetectorConstructionMessenger::~DetectorConstructionMessenger()
 {
+    delete updateCmd_m;
     delete UIdirectory_m; 
     delete solenoidFileName_m;
     delete dipoleFileName_m;
@@ -38,19 +42,16 @@ void DetectorConstructionMessenger::init()
     solenoidFileName_m = new G4UIcmdWithAString("/MuSIC_Detector/solField", this); 
     solenoidFileName_m->SetGuidance("Specify the fieldmap to be used for the solenoid");
     solenoidFileName_m->SetDefaultValue("fieldmap/fieldmap_solenoid.txt");
-    solenoidFileName_m->AvailableForStates(G4State_PreInit,G4State_Idle);
 
     // dipole fieldmap name & polarity 
     dipoleFileName_m = new G4UIcmdWithAString("/MuSIC_Detector/dipField", this);
     dipoleFileName_m->SetGuidance("Specify the fieldmap to be used for the dipole");
     dipoleFileName_m->SetDefaultValue("fieldmap/fieldmap_dipole.txt");
-    dipoleFileName_m->AvailableForStates(G4State_PreInit,G4State_Idle);
 
     dipolePolarityStrength_m = new G4UIcmdWithADouble("/MuSIC_Detector/polarity", this);
     dipolePolarityStrength_m->SetGuidance("Scale the dipole field by some amount x (-1 < x < 1)");
     dipolePolarityStrength_m->SetParameterName("polarity", true);
     dipolePolarityStrength_m->SetDefaultValue(1.0);
-    // dipolePolarityStrength_m->AvailableForStates(G4State_PreInit,G4State_Idle);
 
     // scintillator 1's thickness (closer of the two)
     scint1Thickness_m = new G4UIcmdWithADoubleAndUnit("/MuSIC_Detector/scint1z", this); // closer
@@ -58,7 +59,6 @@ void DetectorConstructionMessenger::init()
     scint1Thickness_m->SetParameterName("scint1z", true);
     scint1Thickness_m->SetDefaultValue(1.0);
     scint1Thickness_m->SetDefaultUnit("mm");
-    scint1Thickness_m->AvailableForStates(G4State_PreInit,G4State_Idle);
 
     // scintillator 2's thickness
     scint2Thickness_m = new G4UIcmdWithADoubleAndUnit("/MuSIC_Detector/scint2z", this); // further
@@ -66,7 +66,6 @@ void DetectorConstructionMessenger::init()
     scint2Thickness_m->SetParameterName("scint2z", true);
     scint2Thickness_m->SetDefaultValue(20.0);
     scint2Thickness_m->SetDefaultUnit("mm");
-    scint2Thickness_m->AvailableForStates(G4State_PreInit,G4State_Idle);
 
     // degrader thickness & material
     degraderThickness_m = new G4UIcmdWithADoubleAndUnit("/MuSIC_Detector/degraderZ", this); 
@@ -74,12 +73,10 @@ void DetectorConstructionMessenger::init()
     degraderThickness_m->SetParameterName("degraderZ", true);
     degraderThickness_m->SetDefaultValue(10.0);
     degraderThickness_m->SetDefaultUnit("mm");
-    degraderThickness_m->AvailableForStates(G4State_PreInit,G4State_Idle);
 
-    degraderMaterial_m = new G4UIcmdWithAString("/MuSIC_Detector/degragerMat", this); 
+    degraderMaterial_m = new G4UIcmdWithAString("/MuSIC_Detector/degraderMat", this); 
     degraderMaterial_m->SetGuidance("Set the material to make the degrader from");
-    degraderMaterial_m->SetDefaultValue("Pb");
-    degraderMaterial_m->AvailableForStates(G4State_PreInit,G4State_Idle);
+    degraderMaterial_m->SetDefaultValue("Polystyrene");
     
     // target thickness & material
     targetThickness_m = new G4UIcmdWithADoubleAndUnit("/MuSIC_Detector/targetZ", this); 
@@ -87,12 +84,14 @@ void DetectorConstructionMessenger::init()
     targetThickness_m->SetParameterName("targetZ", true);
     targetThickness_m->SetDefaultValue(10.0);
     targetThickness_m->SetDefaultUnit("mm");
-    targetThickness_m->AvailableForStates(G4State_PreInit,G4State_Idle);
 
     targetMaterial_m = new G4UIcmdWithAString("/MuSIC_Detector/targetMat", this); 
     targetMaterial_m->SetGuidance("Set the material to make the target from");
     targetMaterial_m->SetDefaultValue("Cu");
-    targetMaterial_m->AvailableForStates(G4State_PreInit,G4State_Idle);
+    
+    updateCmd_m = new G4UIcommand("/MuSIC_Detector/update",this);
+    updateCmd_m->SetGuidance("Update the detector geometry with changed values.");
+    updateCmd_m->SetGuidance("Must be run before beamOn if detector has been changed.");
 }
 
 void DetectorConstructionMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
@@ -132,6 +131,10 @@ void DetectorConstructionMessenger::SetNewValue(G4UIcommand* command, G4String n
     else if ( command == targetMaterial_m)
     {
         detConstructor_m->SetTargetMat(newValue);
+    } 
+    else if ( command == updateCmd_m)
+    {
+        detConstructor_m->UpdateGeometry();
     }
 
 }

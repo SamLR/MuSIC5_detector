@@ -45,12 +45,17 @@
 #include "G4SDManager.hh"
 #include "G4VisAttributes.hh"
 #include "G4Colour.hh"
+#include "G4SolidStore.hh"
+#include "G4LogicalVolumeStore.hh"
+#include "G4PhysicalVolumeStore.hh"
+#include "G4GeometryManager.hh"
+#include "G4RunManager.hh"
 
 
 #include <string.h>
 
 DetectorConstruction::DetectorConstruction()
-    :f_myField(0), 
+    :f_myField(0), f_updated(false),
     f_fname_sol("fieldmap/fieldmap_solenoid.txt"), f_fname_dip("fieldmap/fieldmap_dipole.txt"),
     f_dip_polarity(1.0),
     f_scint1z(3.5*mm), f_scint2z (3.5*mm), f_degraderZ(0.2*mm), f_targetZ(6*mm) 
@@ -87,6 +92,7 @@ DetectorConstruction::~DetectorConstruction()
     delete Polystyrene;
     delete Polyethylene;
 }
+
 void DetectorConstruction::DefineMaterials()
 { 
     G4String symbol;        
@@ -138,14 +144,19 @@ G4ThreeVector get_global_pos(double dist_from_coil8)
     double glb_z = dist_from_coil8*cos(36.0*deg) + coil8_z;
     return G4ThreeVector(glb_x,0.0,glb_z);
 }
+
 G4VPhysicalVolume* DetectorConstruction::Construct()
 {
    //-------------------------------------------------------------------------
    // Magnetic field
    //-------------------------------------------------------------------------
 
-    static G4bool fieldIsInitialized = false;
-    if(!fieldIsInitialized)
+    if (f_myField) 
+    {
+        delete f_myField;
+    }
+    
+    if(!f_myField)
     {
         f_myField = new Field(f_fname_sol,f_fname_dip,f_dip_polarity);
         G4FieldManager* fieldMgr
@@ -153,7 +164,6 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
             ->GetFieldManager();
         fieldMgr->SetDetectorField(f_myField);
         fieldMgr->CreateChordFinder(f_myField);
-        fieldIsInitialized = true;
     }
 
    //-------------------------------------------------------------------------
@@ -244,6 +254,7 @@ void DetectorConstruction::SetPolarity(double newPol)
     } else {
         f_dip_polarity = newPol;
     }
+    f_updated = true;
 }
 
 void DetectorConstruction::SetDegraderMat(G4String newVal)
@@ -252,9 +263,10 @@ void DetectorConstruction::SetDegraderMat(G4String newVal)
     if (newMat)
     {
         f_degraderMat = newMat;
-        f_logic_degrader->SetMaterial(f_degraderMat);
+//        f_logic_degrader->SetMaterial(f_degraderMat);
         G4cout << "Degrader now made from "<< newVal << G4endl;
     }
+    f_updated = true;
 }
 void DetectorConstruction::SetTargetMat(G4String newVal)
 {
@@ -262,7 +274,42 @@ void DetectorConstruction::SetTargetMat(G4String newVal)
     if (newMat)
     {
         f_targetMat = newMat;
-        f_logic_target->SetMaterial(f_targetMat);
+//        f_logic_target->SetMaterial(f_targetMat);
         G4cout << "Target now made from "<< newVal << G4endl;
     }
+    f_updated = true;
+}
+
+void DetectorConstruction::SetDipFieldName(G4String newFile)
+{
+    f_fname_dip = newFile;
+//    f_myField->SetDipoleField(newFile);
+    f_updated = true;
+}
+
+void DetectorConstruction::SetSolFieldName(G4String newFile)
+{
+    f_fname_sol = newFile;
+//    f_myField->SetSolenoidField(newFile);
+    f_updated=true;
+}
+
+void DetectorConstruction::UpdateGeometry()
+{
+    
+    // clean-up previous geometry
+    G4GeometryManager::GetInstance()->OpenGeometry();
+    
+    G4PhysicalVolumeStore::GetInstance()->Clean();
+    G4LogicalVolumeStore::GetInstance()->Clean();
+    G4SolidStore::GetInstance()->Clean();
+//    G4LogicalSkinSurface::CleanSurfaceTable();
+//    G4LogicalBorderSurface::CleanSurfaceTable();
+//    G4SurfaceProperty::CleanSurfacePropertyTable();
+    
+    //define new one
+    G4RunManager::GetRunManager()->DefineWorldVolume(Construct());
+    G4RunManager::GetRunManager()->GeometryHasBeenModified();
+    
+    f_updated=false;
 }

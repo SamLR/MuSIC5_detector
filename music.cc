@@ -103,7 +103,7 @@ int main(int argc,char** argv)
     G4UserSteppingAction* stepping_action = new SteppingAction(root);
     runManager->SetUserAction(stepping_action);
 
-    runManager->Initialize();
+//    runManager->Initialize();
 
 #ifdef G4VIS_USE
     G4VisManager* visManager = new G4VisExecutive;
@@ -115,7 +115,7 @@ int main(int argc,char** argv)
 
     if (argc==4) // batch mode
     {
-        G4String command = "/control/execute ";
+        G4String  command = "/control/execute ";
         G4String filename = macro_name;
         UImanager->ApplyCommand(command+filename);
         runManager->BeamOn(root->nevents_g4bl);

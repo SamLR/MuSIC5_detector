@@ -47,24 +47,26 @@ public:
     G4VPhysicalVolume* Construct();
     
     // inline changes
-    inline void SetSolFieldName(G4String newFile) {f_fname_sol = newFile;};
-    inline void SetDipFieldName(G4String newFile) {f_fname_dip = newFile;};
+    void SetSolFieldName(G4String newFile);
+    void SetDipFieldName(G4String newFile);
 
-    inline void SetScint1z(double newVal) {f_scint1z = newVal;};
-    inline void SetScint2z(double newVal) {f_scint2z = newVal;};
-    inline void SetDegraderZ(double newVal) {f_degraderZ = newVal;};
-    inline void SetTargetZ(double newVal) {f_targetZ = newVal;};
+    void SetScint1z  (const double &newVal) {f_scint1z = newVal;   f_updated = true;};
+    void SetScint2z  (const double &newVal) {f_scint2z = newVal;   f_updated = true;};
+    void SetDegraderZ(const double &newVal) {f_degraderZ = newVal; f_updated = true;};
+    void SetTargetZ  (const double &newVal) {f_targetZ = newVal;   f_updated = true;};
 
     // these need some amount of checking
     void SetPolarity(double);
     void SetDegraderMat(G4String);
     void SetTargetMat(G4String);
-    
+    void UpdateGeometry();
 private:
     void DefineMaterials();
 
     DetectorConstructionMessenger* f_messenger;
     Field* f_myField;// the field map
+    
+    bool f_updated;
 
     G4String f_fname_sol; // solenoid fieldmap
     G4String f_fname_dip; // dipole fieldmap
