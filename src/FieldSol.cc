@@ -31,12 +31,16 @@ void FieldSol::index_to_pos(int ix, int iy, int iz, double *x, double *y, double
     *x = region_xmin + ix*sol_step;
     *y = 0.0         + iy*sol_step;
     *z = region_xmin + iz*sol_step;
+    
 }
 void FieldSol::pos_to_index(double x, double y, double z, int* ix, int* iy, int* iz)
 {
-    *ix = (int) (x - region_xmin)/sol_step;
-    *iy = (int) (y - 0.0        )/sol_step;
-    *iz = (int) (z - region_zmin)/sol_step;
+//    *ix = (int) (x - region_xmin)/sol_step;
+//    *iy = (int) (y - 0.0        )/sol_step;
+//    *iz = (int) (z - region_zmin)/
+    *ix = abs (static_cast<int>((x - region_xmin)/sol_step));
+    *iy = abs (static_cast<int>((y - 0.0        )/sol_step)); // y is reflected about y=0
+    *iz = abs (static_cast<int>((z - region_zmin)/sol_step));
     //printf("pos_to_index: x %lf y %lf z %lf ix %d iy %d iz %d\n",x,y,z,*ix,*iy,*iz);
 }
 void FieldSol::set_bfld(double x, double y, double z, double bx, double by, double bz)
