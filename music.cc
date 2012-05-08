@@ -115,12 +115,11 @@ int main(int argc,char** argv)
 
     if (argc==4) // batch mode
     {
-        G4String  command = "/control/execute ";
+        G4String command  = "/control/execute ";
         G4String filename = macro_name;
         UImanager->ApplyCommand(command+filename);
         runManager->BeamOn(root->nevents_g4bl);
-    }
-    else           // interactive mode : define UI session
+    } else           // interactive mode : define UI session
     { 
 #ifdef G4UI_USE
         G4UIExecutive * ui = new G4UIExecutive(argc,argv);

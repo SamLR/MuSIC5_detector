@@ -56,7 +56,7 @@
 
 DetectorConstruction::DetectorConstruction()
     :f_myField(0), f_updated(false),
-    f_fname_sol("fieldmap/fieldmap_solenoid.txt"), f_fname_dip("fieldmap/fieldmap_dipole.txt"),
+    f_fname_sol("../../fieldmap/fieldmap_solenoid.txt"), f_fname_dip("../../fieldmap/fieldmap_dipole.txt"),
     f_dip_polarity(1.0),
     f_scint1z(3.5*mm), f_scint2z (3.5*mm), f_degraderZ(0.2*mm), f_targetZ(6*mm) 
 {
@@ -70,7 +70,7 @@ DetectorConstruction::~DetectorConstruction()
 {
     delete f_myField;
 
-    delete f_logic_world; // world volume
+//    delete f_logic_world; // world volume
 //    delete f_physi_world;
 //    delete f_logic_sci1; // scint 1 & 2
 //    delete f_physi_sci1;

@@ -1,32 +1,9 @@
-# $Id: run1.mac,v 1.2 2000-11-21 10:59:42 maire Exp $
-#
-# Macro file for "exampleN03.cc"
-# 
-# can be run in batch, without graphic
-# or interactively: Idle> /control/execute run1.mac
-#
-#/control/verbose 2
-#/control/saveHistory
-#
-/MuSIC_Detector/degraderZ Cu
+/MuSIC_Detector/degraderZ 1 mm
+/MuSIC_Detector/dipField ../../fieldmap/fieldmap_dipole.txt
+/MuSIC_Detector/solField ../../fieldmap/fieldmap_solenoid.txt
 
-/run/verbose 0
-/event/verbose 0
-/tracking/verbose 0
-# 
-# muon 300 MeV to the direction (1.,0.,0.)
-# 3 events
-#
-#/gun/particle mu+
-#/gun/particle pi-
-#/gun/energy 0 MeV
-#/run/beamOn 13198
+/run/initialize
 
-#By-0
-#/run/beamOn 18300
-# By-0.04
-#/run/beamOn 22611
-# By+0.04
-#/run/beamOn 11274 
-
-#/run/beamOn 300
+#/run/verbose 0
+#/event/verbose 0
+#/tracking/verbose 0

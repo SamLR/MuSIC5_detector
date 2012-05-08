@@ -41,7 +41,8 @@ void x_y_average_mom()
         "../out/5mm_degrader.root",
         // "../out/1mm_degrader.root"};
         // "../out/10mm_degrader.root"};
-        "../out/test.root"};
+        // "../out/test.root"
+        "../../out.root"};
 
     TFile* files [] = {NULL, NULL, NULL};
     TTree* trees [] = {NULL, NULL, NULL};
