@@ -118,13 +118,19 @@ int main(int argc,char** argv)
         G4String command  = "/control/execute ";
         G4String filename = macro_name;
         UImanager->ApplyCommand(command+filename);
+#ifndef G4VIS_USE 
         runManager->BeamOn(root->nevents_g4bl);
+#endif
+#ifdef G4VIS_USE
+        delete visManager;
+#endif
     } else           // interactive mode : define UI session
     { 
 #ifdef G4UI_USE
         G4UIExecutive * ui = new G4UIExecutive(argc,argv);
 #ifdef G4VIS_USE
         UImanager->ApplyCommand("/control/execute vis.mac");     
+
 #endif
         ui->SessionStart();
         delete ui;
