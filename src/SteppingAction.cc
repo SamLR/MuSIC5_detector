@@ -120,8 +120,10 @@ void SteppingAction::UserSteppingAction(const G4Step * aStep)
     G4StepPoint* point1 = aStep->GetPreStepPoint();
     G4StepPoint* point2 = aStep->GetPostStepPoint();
     
-    if (point2==NULL)
-        return;
+    // check pointers returned correctly
+    if (point2==NULL || point1==NULL) return;
+    // check if 1st step in volume 
+    if (point1->GetStepStatus() != fGeomBoundary) return;
     
     const G4String& volname = point1->GetTouchableHandle()->GetVolume()->GetName();
     int acounter=1;
