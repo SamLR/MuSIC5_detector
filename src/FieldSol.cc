@@ -25,6 +25,7 @@
 //
 
 #include "FieldSol.hh"
+#include <assert.h>
 
 void FieldSol::index_to_pos(int ix, int iy, int iz, double *x, double *y, double *z)
 {
@@ -118,9 +119,10 @@ void FieldSol::get_bfield(double x, double y, double z, double *bx, double* by, 
             (z>=region_zmin && z<=region_zmax)) )
       return;
 
-    if (y < 0) y = -y;
    int ix,iy,iz;
-   pos_to_index(x,y,z,&ix,&iy,&iz);
+    // the abs value of y gives the index, invert if y<0
+   pos_to_index(x,abs(y),z,&ix,&iy,&iz); 
+    assert(ix>=0 && iy>=0 && iz>=0);
    double bx0 = magfld_bx[ix][iy][iz];
    double by0 = magfld_by[ix][iy][iz];
    double bz0 = magfld_bz[ix][iy][iz];
