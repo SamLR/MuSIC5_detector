@@ -114,5 +114,39 @@ void SteppingAction::UserSteppingAction(const G4Step * aStep)
 
     set_hit(acounter,procname.c_str(),trkid,parentid,pdgid,x,y,z,px,py,pz,kinetic,edep,tof);
 }
-
+//void SteppingAction::UserSteppingAction(const G4Step * aStep)
+//{
+//    G4Track * track = aStep->GetTrack();
+//    G4StepPoint* point1 = aStep->GetPreStepPoint();
+//    G4StepPoint* point2 = aStep->GetPostStepPoint();
+//    
+//    if (point2==NULL)
+//        return;
+//    
+//    const G4String& volname = point1->GetTouchableHandle()->GetVolume()->GetName();
+//    int acounter=1;
+//    if      (strcmp(volname.c_str(),"sci1")==0)     { acounter = 1; } 
+//    else if (strcmp(volname.c_str(),"target")==0)   { acounter = 2; } 
+//    else if (strcmp(volname.c_str(),"sci2")==0)     { acounter = 3; }
+//    else return;
+//    
+//    int parentid = track->GetParentID();
+//    int trkid = track->GetTrackID();
+//    int pdgid  = track->GetDefinition()->GetPDGEncoding();
+//    double kinetic = track->GetKineticEnergy()/MeV;
+//    double tof = track->GetGlobalTime()/ns;
+//    double x = track->GetPosition().x()/cm;
+//    double y = track->GetPosition().y()/cm;
+//    double z = track->GetPosition().z()/cm;
+//    double px = track->GetMomentum().x()/MeV;
+//    double py = track->GetMomentum().y()/MeV;
+//    double pz = track->GetMomentum().z()/MeV;
+//    double edep = aStep->GetTotalEnergyDeposit()/MeV;
+//    const G4String& procname = point2->GetProcessDefinedStep()->GetProcessName();
+//    
+//    //int stepnumber =track->GetCurrentStepNumber();
+//    //printf("%d volname %s procname %s y=%lf\n",stepnumber,volname.c_str(),procname.c_str(),y);
+//    
+//    set_hit(acounter,procname.c_str(),trkid,parentid,pdgid,x,y,z,px,py,pz,kinetic,edep,tof);
+//}
 
