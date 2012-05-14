@@ -118,6 +118,7 @@ void FieldSol::get_bfield(double x, double y, double z, double *bx, double* by, 
             (z>=region_zmin && z<=region_zmax)) )
       return;
 
+    if (y < 0) y = -y;
    int ix,iy,iz;
    pos_to_index(x,y,z,&ix,&iy,&iz);
    double bx0 = magfld_bx[ix][iy][iz];
