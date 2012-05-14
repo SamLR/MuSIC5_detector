@@ -36,7 +36,8 @@ double length(double x, double  y, double  z)
 
 void quick_mom_plot()
 {
-    TString file_name = "../../out.root";
+    TString file_name = "../../output/pc144_old_data/1mm_degrader.root";
+    // TString file_name = "../../output/out.root";
     cout << "will try to open "<<file_name << endl;
     TFile* files = NULL;
     TTree* tree = NULL;
