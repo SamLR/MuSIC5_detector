@@ -113,12 +113,17 @@ void FieldSol::get_bfield(double x, double y, double z, double& bx, double& by, 
         }
     }
         
-    if (y<0) y = -y; // y is symmetric about 0 and only recorded for y>0
     unsigned int ix=uint::max(), iy=uint::max(), iz=uint::max();
-    pos_to_index(x,y,z,ix,iy,iz);
+    pos_to_index(x,abs(y),z,ix,iy,iz);
+
     bx = magfld_bx[ix][iy][iz];
     by = magfld_by[ix][iy][iz];
     bz = magfld_bz[ix][iy][iz];
+    
+    if (y < 0)
+    {
+     by = -by; // reflect y   
+    }
 }
 
 void FieldSol::GetFieldValue(const double Point[3],double *Bfield)
