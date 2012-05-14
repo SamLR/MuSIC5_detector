@@ -25,56 +25,106 @@
 //
 
 #include "FieldDip.hh"
+#include <limits>
 
-void FieldDip::global_to_center(double gx, double gy, double gz, double* cx, double* cy, double* cz)
-{
-    *cy = gy;
-    
-    *cx = (gx-coil8_x0)*cos36 - (gz-coil8_z0)*sin36;
-    *cz = (gx-coil8_x0)*sin36 + (gz-coil8_z0)*cos36;
-    //printf("(gx,gy,gz)=(%lf,%lf,%lf) == (cx,cy,cz)=(%lf,%lf,%lf)\n",gx,gy,gz,*cx,*cy,*cz);
-}
+using namespace std;
+typedef numeric_limits<double> dbl;
+typedef numeric_limits<unsigned int> uint;
 
-int FieldDip::cpos_to_index(double cx, double cy, double cz, int* ix, int* iy, int* iz)
+void set_quadrant_polarity(int quadrant, double& sx, double& sy, double& sz) 
 {
-    int loc;
-    int ix0 = cx /dip_step;
-    int iy0 = cy /dip_step;
-    int iz0 = cz /dip_step;
-    if (abs(ix0) >= MAX_DIP_NX || abs(iy0) >= MAX_DIP_NY || abs(iz0) >= MAX_DIP_NZ) {
-        loc = 0;
-        return loc;
+    sx = 0; sy = 0; sz = 0;
+    switch (abs(quadrant)) 
+    {
+        case 1:
+            sx = 1.0;
+            sy = 1.0;
+            sz = 1.0; 
+            return;
+        case 2:
+            sx =-1.0;
+            sy = 1.0;
+            sz = 1.0; 
+            return;
+        case 3:
+            sx =-1.0;
+            sy = 1.0;
+            sz =-1.0;
+            return;  
+        case 4:
+            sx = 1.0;
+            sy = 1.0; 
+            sz =-1.0; 
+            return;
+        default:
+            return;
     }
-    if      (ix0>0 && iz0>0 && iy0>0) loc = 1;
-    else if (ix0<0 && iz0>0 && iy0>0) loc = 2;
-    else if (ix0<0 && iz0<0 && iy0>0) loc = 3;
-    else if (ix0>0 && iz0<0 && iy0>0) loc = 4;
-    else if (ix0>0 && iz0>0 && iy0<0) loc = -1;
-    else if (ix0<0 && iz0>0 && iy0<0) loc = -2;
-    else if (ix0<0 && iz0<0 && iy0<0) loc = -3;
-    else if (ix0>0 && iz0<0 && iy0<0) loc = -4;
-    
-    
-    *ix = abs(ix0);
-    *iy = abs(iy0);
-    *iz = abs(iz0);
-    
-    //printf("ix0 %d iy0 %d iz0 %d --- ix %d iy %d iz %d -- loc %d\n",ix0,iy0,iz0,*ix,*iy,*iz,loc);
-    
-    return loc;
 }
 
-int FieldDip::gpos_to_index(double x, double y, double z, int* ix, int* iy, int* iz)
+void FieldDip::check_min_max_bounds(double const x, double const y, double const z)
 {
-    double cx,cy,cz;
-    global_to_center(x,y,z,&cx,&cy,&cz);
-    return cpos_to_index(cx,cy,cz,ix,iy,iz);
+    // check & set minimum extents
+    if (x < global_xmin) global_xmin = x;
+    if (y < global_ymin) global_ymin = y;
+    if (z < global_zmin) global_zmin = z;
+    // check & set maximum extents
+    if (x > global_xmax) global_xmax = x;
+    if (y > global_ymax) global_ymax = y;
+    if (z > global_zmax) global_zmax = z;
 }
 
-void FieldDip::set_bfld(double x, double y, double z, double bx, double by, double bz)
+void FieldDip::global_to_center(double gx, double gy, double gz, double& cx, double& cy, double& cz)
 {
-    int i,j,k;
-    cpos_to_index(x,y,z,&i,&j,&k);
+    cy = gy;
+    cx = (gx-coil8_x0)*cos36 - (gz-coil8_z0)*sin36;
+    cz = (gx-coil8_x0)*sin36 + (gz-coil8_z0)*cos36;
+}
+
+
+void FieldDip::center_to_global(double cx, double cy, double cz, double& gx, double& gy, double& gz)
+{
+    gy = cy;
+    gx = cx*cos36 + cz*sin36 + coil8_x0;
+    gz = cz*cos36 - cx*sin36 + coil8_z0;
+}
+
+int FieldDip::centre_pos_to_index(double x, double y, double z, 
+                                  unsigned int& ix, unsigned int& iy, unsigned int& iz)
+{
+    int quadrant = 0;
+    int ix0 = static_cast<int>( x/step_size );
+    int iy0 = static_cast<int>( y/step_size );
+    int iz0 = static_cast<int>( z/step_size );
+    
+    if (abs(ix0) >= MAX_DIP_NX || abs(iy0) >= MAX_DIP_NY || abs(iz0) >= MAX_DIP_NZ) quadrant = 0;    
+    else if (ix0>0 && iz0>0 && iy0>0) quadrant = 1;
+    else if (ix0<0 && iz0>0 && iy0>0) quadrant = 2;
+    else if (ix0<0 && iz0<0 && iy0>0) quadrant = 3;
+    else if (ix0>0 && iz0<0 && iy0>0) quadrant = 4;
+    else if (ix0>0 && iz0>0 && iy0<0) quadrant = -1;
+    else if (ix0<0 && iz0>0 && iy0<0) quadrant = -2;
+    else if (ix0<0 && iz0<0 && iy0<0) quadrant = -3;
+    else if (ix0>0 && iz0<0 && iy0<0) quadrant = -4;
+    
+    ix = abs(ix0);
+    iy = abs(iy0);
+    iz = abs(iz0);
+    
+    return quadrant;
+}
+
+int FieldDip::global_pos_to_index(double x, double y, double z, 
+                                  unsigned int& ix, unsigned int& iy, unsigned int& iz)
+{
+    double cx=dbl::max(), cy=dbl::max(), cz=dbl::max();
+    global_to_center(x,y,z,cx,cy,cz);
+    return centre_pos_to_index(cx,cy,cz,ix,iy,iz);
+}
+
+void FieldDip::set_bfield(double x, double y, double z, double bx, double by, double bz)
+{
+    unsigned int i=uint::max(),j=uint::max(),k=uint::max();
+    centre_pos_to_index(x,y,z,i,j,k);
     
     if (i >= MAX_DIP_NX || j >= MAX_DIP_NY || k >= MAX_DIP_NZ) {
         fprintf(stderr,"ERROR: FieldDip::set_bfld overflowed x=%lf y=%lf z=%lf\n",x,y,z);
@@ -88,28 +138,20 @@ void FieldDip::set_bfld(double x, double y, double z, double bx, double by, doub
 
 
 FieldDip::FieldDip(G4String fname, int polarity)
-: coil8_x0 (776.3), coil8_z0 (3420.1), 
-cos36(0.809016994), sin36(0.587785252),
-dip_step(10.0), polarity(polarity), file_name(fname), initialised(false)
+: coil8_x0 (776.3),      coil8_z0 (3420.1),       // set the dipole origin
+cos36(0.809016994),      sin36(0.587785252),      // precalc useful numbers 
+global_xmin(dbl::max()), global_xmax(dbl::min()), // set for absolute min&max
+global_ymin(dbl::max()), global_ymax(dbl::min()), 
+global_zmin(dbl::max()), global_zmax(dbl::min()),
+step_size(10.0),         polarity(polarity),      
+file_name(fname),        initialised(false)
 {
-    initArray();
     init();
 }
 
-void FieldDip::initArray()
-{
-    for (int i = 0; i < MAX_DIP_NX; ++i)
-    {
-        for (int j = 0; j < MAX_DIP_NY; ++j) 
-        {
-            for (int k = 0; k < MAX_DIP_NZ; ++k) 
-            {
-                magfld_bx[i][j][k] = 0.0;
-                magfld_by[i][j][k] = 0.0;
-                magfld_bz[i][j][k] = 0.0;
-            }
-        }
-    }
+FieldDip::FieldDip()
+{ 
+    FieldDip::FieldDip(G4String("ERROR: NO FILE SPECIFIED"), 0);
 }
 
 void FieldDip::init()
@@ -124,28 +166,41 @@ void FieldDip::init()
             return;
         }
         /* map data is defined in centerline coordinate */
-        double in_x, in_y, in_z;
-        double in_bx, in_by, in_bz;
-        double in_ba;
+        double in_x=dbl::max(), in_y=dbl::max(), in_z=dbl::max(); // make errors obvious
+        double in_bx=dbl::max(), in_by=dbl::max(), in_bz=dbl::max();
+        double in_ba=dbl::max();
         
         while (fgets(line,sizeof(line),fp)) {
             sscanf(line,"%lf %lf %lf %lg %lg %lg %lg",&in_x,&in_y,&in_z,&in_bx,&in_by,&in_bz,&in_ba);
-            //printf("(%lf %lf %lf) =  (%lf %lf %lf %lf)\n",line,in_x,in_y,in_z,in_bx,in_by,in_bz,in_ba);
             
-            set_bfld(in_x,in_y,in_z,
+            set_bfield(in_x,in_y,in_z,
                      in_bx*polarity,
                      in_by*polarity,
                      in_bz*polarity);
+            
+            check_min_max_bounds(in_x, in_y, in_z);
+            
         }
         fclose(fp);
-        printf("Finish to read dipole field map\n");
+        if (global_xmin == 0) global_xmin = -global_xmax; // assume 0 values => symetric
+        if (global_ymin == 0) global_ymin = -global_ymax;
+        if (global_zmax == 0) global_zmin = -global_zmax;
+        
+        // actually make the mins/maxs global
+        center_to_global(global_xmin, global_ymin, global_zmin, 
+                         global_xmin, global_ymin, global_zmin);
+        center_to_global(global_xmax, global_ymax, global_zmax, 
+                         global_xmax, global_ymax, global_zmax);
+        
+        printf("Finished reading dipole field map\n");
         initialised = true;
     }
 }
 
 FieldDip::~FieldDip()
 {;}
-void FieldDip::get_bfield(double x, double y, double z, double *bx, double* by, double *bz)
+
+void FieldDip::get_bfield(double x, double y, double z, double& bx, double& by, double& bz)
 {
     if(!initialised)
     {
@@ -156,69 +211,44 @@ void FieldDip::get_bfield(double x, double y, double z, double *bx, double* by, 
             exit(1);
         }
     }
-    int ix,iy,iz;
-    int loc = gpos_to_index(x,y,z,&ix,&iy,&iz);
     
-    double sx=1.0;
-    double sy=1.0;
-    double sz=1.0;
+    // dipole only defined in positive quadrant, it is symmetric though
+    // make this always break if indecies are not assigned elsewhere
+    unsigned int ix=uint::max(), iy=uint::max(), iz=uint::max(); 
+    double sx=0, sy=0, sz=0;
+    int quadrant = global_pos_to_index(x,y,z,ix,iy,iz);
     
-    if      (loc==1||loc==-1)  { sx=+1.0; sy=1.0; sz=+1.0; }
-    else if (loc==2||loc==-2)  { sx=-1.0; sy=1.0; sz=+1.0; }
-    else if (loc==3||loc==-3)  { sx=-1.0; sy=1.0; sz=-1.0; }
-    else if (loc==4||loc==-4)  { sx=+1.0; sy=1.0; sz=-1.0; }
-    else {
-        *bx=0.0;
-        *by=0.0;
-        *bz=0.0;
-        return;
+    // quadrant of 0 means that the particle is outside the area defined in the fieldmap
+    if (quadrant == 0)
+    {
+        bx = 0.0;
+        by = 0.0;
+        bz = 0.0;
+    } else 
+    {
+        set_quadrant_polarity(quadrant, sx, sy, sz);
+        
+        bx = sx*magfld_bx[ix][iy][iz];
+        by = sy*magfld_by[ix][iy][iz];
+        bz = sz*magfld_bz[ix][iy][iz];   
     }
-    
-    /*
-     printf("(x,y,z)=(%lf,%lf,%lf) (ix,iy,iz)=(%d,%d,%d) (bx,by,bz)=(%lf,%lf,%lf)\n",
-     x,y,z,
-     ix,iy,iz,
-     magfld_bx[ix][iy][iz],
-     magfld_by[ix][iy][iz],
-     magfld_bz[ix][iy][iz]);
-     */
-    
-    *bx = sx*magfld_bx[ix][iy][iz];
-    *by = sy*magfld_by[ix][iy][iz];
-    *bz = sz*magfld_bz[ix][iy][iz];
 }
 
 void FieldDip::GetFieldValue(const double Point[3],double *Bfield)
 {
-    Bfield[0] = 0.0;
-    Bfield[1] = 0.0;
-    Bfield[2] = 0.0;
+    if (not valid_position(Point[0],Point[1],Point[2])) return;
     
-    double posx = Point[0];
-    double posy = Point[1];
-    double posz = Point[2];
+    double bx = dbl::max(), by = dbl::max(), bz = dbl::max();
     
-    double bx,by,bz;
-    
-    //get_bfield(posx,posy,posz,&Bfield[0],&Bfield[1],&Bfield[2]); <= wrong !!! no unit  corrected 2011.9.7
-    get_bfield(posx,posy,posz,&bx,&by,&bz);
+    get_bfield(Point[0],Point[1],Point[2],bx,by,bz);
     
     Bfield[0] = bx*tesla;
     Bfield[1] = by*tesla;
     Bfield[2] = bz*tesla;
     
-    
-    //fprintf(stderr,"Dipole: %lf %lf %lf = %lf %lf %lf\n",posx,posy,posz,Bfield[0],Bfield[1],Bfield[2]);
-    
 }
 
-FieldDip::FieldDip()
-: coil8_x0 (776.3), coil8_z0 (3420.1), 
-cos36(0.809016994), sin36(0.587785252),
-dip_step(10.0), polarity(1), file_name("ERROR"), initialised(false)
-{ 
-    initArray();
-}
+
 
 
 

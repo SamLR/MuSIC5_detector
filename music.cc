@@ -144,7 +144,7 @@ int main(int argc,char** argv)
    //                 owned and deleted by the run manager, so they should not
    //                 be deleted in the main() program !
     delete runManager;
-
+    printf("Run manager deleted, exiting normally \n");
     return 0;
 }
 

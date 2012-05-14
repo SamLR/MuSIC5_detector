@@ -39,8 +39,8 @@ Field::~Field()
 }
 void Field::GetFieldValue(const double Point[3],double *Bfield) const
 {
-    double bfield_sol[3];
-    double bfield_dip[3];
+    double bfield_sol[] = {0, 0, 0};
+    double bfield_dip[] = {0, 0, 0};
     
     field_sol->GetFieldValue(Point,bfield_sol);
     field_dip->GetFieldValue(Point,bfield_dip);

@@ -25,44 +25,47 @@
 //
 
 #include "FieldSol.hh"
+#include <limits>
 
-void FieldSol::index_to_pos(int ix, int iy, int iz, double *x, double *y, double *z)
+using namespace std;
+typedef numeric_limits<double> dbl;
+typedef numeric_limits<unsigned int> uint;
+
+void FieldSol::index_to_pos(unsigned int ix, unsigned int iy, unsigned int iz,
+                            double &x, double &y, double &z)
 {
-    *x = region_xmin + ix*sol_step;
-    *y = 0.0         + iy*sol_step;
-    *z = region_xmin + iz*sol_step;
+    x = region_xmin + ix*sol_step;
+    y = 0.0         + iy*sol_step;
+    z = region_xmin + iz*sol_step;
     
 }
-void FieldSol::pos_to_index(double x, double y, double z, int* ix, int* iy, int* iz)
-{
-//    *ix = (int) (x - region_xmin)/sol_step;
-//    *iy = (int) (y - 0.0        )/sol_step;
-//    *iz = (int) (z - region_zmin)/
-    *ix = abs (static_cast<int>((x - region_xmin)/sol_step));
-    *iy = abs (static_cast<int>((y - 0.0        )/sol_step)); // y is reflected about y=0
-    *iz = abs (static_cast<int>((z - region_zmin)/sol_step));
-    //printf("pos_to_index: x %lf y %lf z %lf ix %d iy %d iz %d\n",x,y,z,*ix,*iy,*iz);
+
+// change to unsigned?
+void FieldSol::pos_to_index(double x, double y, double z, 
+                            unsigned int& ix, unsigned int& iy, unsigned int& iz)
+{ // re profile this using conditional tests to swap out abs
+    ix = static_cast<unsigned int>((x - region_xmin)/sol_step);
+    iy = static_cast<unsigned int>((y - 0.0        )/sol_step); // y is reflected about y=0
+    iz = static_cast<unsigned int>((z - region_zmin)/sol_step);
+//    ix = static_cast<int>((x - region_xmin)/sol_step); 
+//    iy = static_cast<int>((y - 0.0        )/sol_step); // y is reflected about y=0
+//    iz = static_cast<int>((z - region_zmin)/sol_step);
+    
+
 }
-void FieldSol::set_bfld(double x, double y, double z, double bx, double by, double bz)
+
+void FieldSol::set_bfield(double x, double y, double z, double bx, double by, double bz)
 {
-    int i,j,k;
-    pos_to_index(x,y,z,&i,&j,&k);
+    unsigned int i,j,k;
+    pos_to_index(x,y,z,i,j,k);
     magfld_bx[i][j][k] = bx;
     magfld_by[i][j][k] = by;
     magfld_bz[i][j][k] = bz;
 }
-void FieldSol::get_bfld(double x, double y, double z, double *bx, double *by, double *bz)
-{
-    int i,j,k;
-    pos_to_index(x,y,z,&i,&j,&k);
-    *bx = magfld_bx[i][j][k];
-    *by = magfld_by[i][j][k];
-    *bz = magfld_bz[i][j][k];
-}
 
 FieldSol::FieldSol(G4String fname)
 :sol_step (20.0), 
-region_xmin ( 760.0), region_xmax (1240.0), 
+region_xmin ( 760.0), region_xmax (1240.0),// FIX ME these should be set in init
 region_ymin (-240.0), region_ymax ( 240.0), 
 region_zmin (3520.0), region_zmax (4000.0),
 file_name(fname), initialised(false)
@@ -84,23 +87,23 @@ void FieldSol::init()
             return;
         }
         /* map data is defined in global coordinate */
-        double in_x,in_y,in_z;
-        double in_bx,in_by,in_bz;
+        double in_x=dbl::max(), in_y=dbl::max(), in_z=dbl::max();
+        double in_bx=dbl::max(), in_by=dbl::max(), in_bz=dbl::max();
         while (fgets(line,sizeof(line),fp)) 
         {
             sscanf(line,"%lf %lf %lf %lf %lf %lf",&in_x,&in_y,&in_z,&in_bx,&in_by,&in_bz);
-            set_bfld(in_x,in_y,in_z,in_bx,in_by,in_bz);
+            set_bfield(in_x,in_y,in_z,in_bx,in_by,in_bz);
         }
         fclose(fp);
-        printf("Finish to read solenoid field map\n");
+        printf("Finished reading solenoid field map\n");
         initialised = true;
     }
     
 }
 
-void FieldSol::get_bfield(double x, double y, double z, double *bx, double* by, double *bz)
+void FieldSol::get_bfield(double x, double y, double z, double& bx, double& by, double& bz)
 {
-    if (!initialised)
+    if (!initialised) // allows field map to be set late
     {
         init();
         if(!initialised) 
@@ -109,47 +112,25 @@ void FieldSol::get_bfield(double x, double y, double z, double *bx, double* by, 
             exit(1);
         }
     }
-    *bx = 0.0;
-    *by = 0.0;
-    *bz = 0.0;
-    
-    if (!((x>=region_xmin && x<=region_xmax) &&
-          (y>=region_ymin && y<=region_ymax) &&
-          (z>=region_zmin && z<=region_zmax)) )
-        return;
-    
-    int ix,iy,iz;
-    pos_to_index(x,y,z,&ix,&iy,&iz);
-    double bx0 = magfld_bx[ix][iy][iz];
-    double by0 = magfld_by[ix][iy][iz];
-    double bz0 = magfld_bz[ix][iy][iz];
-    if (y<0) by0 = -by0;
-    
-    *bx = bx0;
-    *by = by0;
-    *bz = bz0;
+        
+    if (y<0) y = -y; // y is symmetric about 0 and only recorded for y>0
+    unsigned int ix=uint::max(), iy=uint::max(), iz=uint::max();
+    pos_to_index(x,y,z,ix,iy,iz);
+    bx = magfld_bx[ix][iy][iz];
+    by = magfld_by[ix][iy][iz];
+    bz = magfld_bz[ix][iy][iz];
 }
 
 void FieldSol::GetFieldValue(const double Point[3],double *Bfield)
 {
-    Bfield[0] = 0.0;
-    Bfield[1] = 0.0;
-    Bfield[2] = 0.0;
+    if (not valid_position(Point[0],Point[1],Point[2])) return;
     
-    // double posx = Point[0];
-    // double posy = Point[1];
-    // double posz = Point[2];
-    
-    double bx,by,bz;
-    
-    //get_bfield(posx,posy,posz,&Bfield[0],&Bfield[1],&Bfield[2]); <= wrong !!! no unit  corrected 2011.9.7
-    get_bfield(Point[0],Point[1],Point[2],&bx,&by,&bz);
-    // get_bfield(posx,posy,posz,&bx,&by,&bz);
+    double bx=dbl::max(),by=dbl::max(),bz=dbl::max();
+
+    get_bfield(Point[0],Point[1],Point[2],bx,by,bz);
+
     Bfield[0] = bx*tesla;
     Bfield[1] = by*tesla;
     Bfield[2] = bz*tesla;
-    
-    
-    //printf("%lf %lf %lf = %lf %lf %lf\n",posx,posy,posz,Bfield[0],Bfield[1],Bfield[2]);
 }
 

@@ -40,6 +40,12 @@ public:
     
 private:
     void init();
+    inline bool valid_position(double x, double y, double z) 
+    { 
+        return (x >= region_xmin) && (x <= region_xmax) &&
+               (y >= region_ymin) && (y <= region_ymax) &&
+               (z >= region_zmin) && (z <= region_zmax);  
+    };
 #define MAX_SOL_NX 25
 #define MAX_SOL_NY 13
 #define MAX_SOL_NZ 25
@@ -47,11 +53,13 @@ private:
     double magfld_by[MAX_SOL_NX][MAX_SOL_NY][MAX_SOL_NZ];
     double magfld_bz[MAX_SOL_NX][MAX_SOL_NY][MAX_SOL_NZ];
     
-    void index_to_pos(int ix, int iy, int iz, double *x, double *y, double *z);
-    void pos_to_index(double x, double y, double z, int* ix, int* iy, int* iz);
-    void set_bfld(double x, double y, double z, double bx, double by, double bz);
-    void get_bfld(double x, double y, double z, double *bx, double *by, double *bz);
-    void get_bfield(double x, double y, double z, double *bx, double* by, double *bz);
+    void index_to_pos(unsigned int ix, unsigned int iy, unsigned int iz, 
+                      double &x, double &y, double &z);
+    void pos_to_index(double x, double y, double z, 
+                      unsigned int& ix, unsigned int& iy, unsigned int& iz);
+    void set_bfield(double x, double y, double z, double bx, double by, double bz);
+    void get_bfield(double x, double y, double z, double& bx, double& by, double& bz);
+//    void get_bfield(double x, double y, double z, double& bx, double& by, double& bz);
     
     double sol_step; // step size in mm
     double region_xmin; // solenoid field map region in global coordinate [mm]

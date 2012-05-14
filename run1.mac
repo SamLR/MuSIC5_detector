@@ -4,6 +4,11 @@
 
 /run/initialize
 
-#/run/verbose 0
-#/event/verbose 0
-#/tracking/verbose 0
+#/run/verbose 2
+#/event/verbose 2
+#/tracking/verbose 2
+#/control/verbose 2
+#/persistency/verbose 2
+#/geometry/navigator/verbose 2
+#/cuts/verbose 2
+#/particle/verbose 2

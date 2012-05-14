@@ -45,7 +45,13 @@ private:
     FieldDip();    
 
     void init();
-    void initArray();
+    void check_min_max_bounds(double const x, double const y, double const z);
+    inline bool valid_position(double x, double y, double z) 
+    { 
+        return (x > global_xmin) && (x < global_xmax) &&
+               (y > global_ymin) && (y < global_ymax) &&
+               (z > global_zmin) && (z < global_zmax);  
+    };
     
 #define MAX_DIP_NX 23
 #define MAX_DIP_NY 21
@@ -54,19 +60,34 @@ private:
     double magfld_by[MAX_DIP_NX][MAX_DIP_NY][MAX_DIP_NZ];
     double magfld_bz[MAX_DIP_NX][MAX_DIP_NY][MAX_DIP_NZ];
     
-    int gpos_to_index(double x, double y, double z, int* ix, int* iy, int* iz);
-    int cpos_to_index(double x, double y, double z, int* ix, int* iy, int* iz);
-    void set_bfld(double x, double y, double z, double bx, double by, double bz);
-    void get_bfield(double x, double y, double z, double *bx, double* by, double *bz);
+    // functions for converting between the co-ordinate systems
+    void global_to_center(double gx, double gy, double gz, double& cx, double& cy, double& cz);
+    void center_to_global(double cx, double cy, double cz, double& gx, double& gy, double& gz);
+    // find the index given co ordinates in the system
+    int global_pos_to_index(double x, double y, double z, 
+                            unsigned int& ix, unsigned int& iy, unsigned int& iz);
+    int centre_pos_to_index(double x, double y, double z, 
+                            unsigned int& ix, unsigned int& iy, unsigned int& iz);
     
-    void global_to_center(double gx, double gy, double gz, double* cx, double* cy, double* cz);
+    // get and set bfield
+    void set_bfield(double x, double y, double z, double bx, double by, double bz);
+    void get_bfield(double x, double y, double z, double &bx, double& by, double &bz);
+    
+    
     
     double coil8_x0; //coil8 (last coil of dipole magnet) in global coordinate [mm]
     double coil8_z0;
     double cos36;
     double sin36;
     
-    double dip_step; // step size in mm
+    double global_xmin; // solenoid field map region in global coordinate [mm]
+    double global_xmax;
+    double global_ymin;
+    double global_ymax;
+    double global_zmin;
+    double global_zmax;
+    
+    double step_size; // step size in mm
     double polarity;
     G4String file_name;
     bool initialised;
