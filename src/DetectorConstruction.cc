@@ -314,7 +314,15 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
    G4Box* solid_sci1 = new G4Box("sci1",sci1_hx,sci1_hy,sci1_hz);
    G4LogicalVolume* logic_sci1 = new G4LogicalVolume(solid_sci1,matSci,"sci1",0,0,0);
    G4VPhysicalVolume* physi_sci1 = new G4PVPlacement(G4Transform3D(rot_36,sci1_pos),logic_sci1,"sci1", logic_world,false,0);
-
+    
+    double deg_hx = 380.0/2.0;
+    double deg_hy = 50.0/2.0;
+    double deg_hz = 1/2.0;
+    G4ThreeVector deg_pos = get_global_pos(435.75);
+    G4Box* solid_deg = new G4Box("sci1",deg_hx,deg_hy,deg_hz);
+    G4LogicalVolume* logic_deg = new G4LogicalVolume(solid_deg,Polystyrene,"deg",0,0,0);
+    G4VPhysicalVolume* physi_deg = new G4PVPlacement(G4Transform3D(rot_36,deg_pos),logic_deg,"deg", logic_world,false,0);
+    
    /* scintillator bar (sci2) */
    double sci2_hx = sci1_hx;
    double sci2_hy = sci1_hy;
