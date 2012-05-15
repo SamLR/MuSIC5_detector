@@ -70,6 +70,7 @@ void SteppingAction::set_hit(int acounter, const char* aprocname, int atrkid, in
     else if (strcmp(aprocname,"CHIPSNuclearCaptureAtRest")==0) {  f_root->procid[g_nhit]=19; }
     else if (strcmp(aprocname,"PionMinusInelastic")==0)        {  f_root->procid[g_nhit]=20; }
 
+    
     f_root->counter[g_nhit] = acounter;
     f_root->trkid[g_nhit] = atrkid;
     f_root->parentid[g_nhit] = aparentid;
