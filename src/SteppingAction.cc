@@ -97,8 +97,6 @@ void SteppingAction::UserSteppingAction(const G4Step * aStep)
     
     if (point2==NULL || point1==NULL) return;
     
-    if (point1->GetStepStatus() != fGeomBoundary) return; // only count particles entering
-    
     const G4String& volname = point1->GetTouchableHandle()->GetVolume()->GetName();
     
     int acounter = 0;
