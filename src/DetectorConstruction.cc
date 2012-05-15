@@ -69,17 +69,6 @@ DetectorConstruction::DetectorConstruction()
 DetectorConstruction::~DetectorConstruction()
 {
     delete f_myField;
-
-//    delete f_logic_world; // world volume
-//    delete f_physi_world;
-//    delete f_logic_sci1; // scint 1 & 2
-//    delete f_physi_sci1;
-//    delete f_logic_sci2;
-//    delete f_physi_sci2;
-//    delete f_logic_target; // target
-//    delete f_physi_target;
-//    delete f_logic_degrader; // degrader
-//    delete f_physi_degrader;
     
       // pure elements
     delete Pb;
@@ -104,7 +93,7 @@ void DetectorConstruction::DefineMaterials()
     G4Element* C  = new G4Element("Carbon"  ,symbol="C" , z= 6., a= 12.01*g/mole);
     G4Element* N  = new G4Element("Nitrogen",symbol="N" , z= 7., a= 14.01*g/mole);
     G4Element* O  = new G4Element("Oxygen"  ,symbol="O" , z= 8., a= 16.00*g/mole);
-// elements for use as is
+// elements for use on their own
     Al = new G4Material("Aluminium", z=13.0, a= 26.98 *g/mole, density= 2.700*g/cm3);
     Pb = new G4Material("Lead",      z=82.0, a= 207.19*g/mole, density= 11.35*g/cm3);
     Mg = new G4Material("Magnesium", z=12.0, a= 24.305*g/mole, density= 1.738*g/cm3);
