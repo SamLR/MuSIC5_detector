@@ -58,7 +58,7 @@ DetectorConstruction::DetectorConstruction()
     :f_myField(0), f_updated(false),
     f_fname_sol("../../fieldmap/fieldmap_solenoid.txt"), f_fname_dip("../../fieldmap/fieldmap_dipole.txt"),
     f_dip_polarity(1.0),
-    f_scint1z(3.5*mm), f_scint2z (3.5*mm), f_degraderZ(0.2*mm), f_targetZ(6*mm) 
+    f_scint1z(3.5*mm), f_scint2z (3.5*mm), f_degraderZ(1*mm), f_targetZ(6*mm) 
 {
     f_messenger = new DetectorConstructionMessenger(this);
     DefineMaterials();
@@ -179,7 +179,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
     double sci_hx = 380.0/2.0; // dimensions of both scintillators are the same in xy plane
     double sci_hy = 50.0/2.0;
-    G4ThreeVector sci1_pos = get_global_pos(coil8_to_scint1);
+//    G4ThreeVector sci1_pos = get_global_pos(coil8_to_scint1);
+    
+    G4ThreeVector sci1_pos = get_global_pos(439.75);
     G4Box* solid_sci1 = new G4Box("sci1", sci_hx, sci_hy, f_scint1z/2.0);
     f_logic_sci1 = new G4LogicalVolume(solid_sci1,Scint,"sci1",0,0,0);
     f_physi_sci1 = new G4PVPlacement(G4Transform3D(rot_36,sci1_pos),f_logic_sci1,"sci1", f_logic_world,false,0);
@@ -188,7 +190,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     double target_posZ = coil8_to_scint1 + (f_scint1z/2.0) + 3 + (f_targetZ/2.0); // '3' is thickness of separators
     double target_hx = 370.0/2.0;
     double target_hy = 80.0/2.0;
-    G4ThreeVector target_pos = get_global_pos(target_posZ);
+//    G4ThreeVector target_pos = get_global_pos(target_posZ);
+    G4ThreeVector target_pos = get_global_pos(447.5);
     G4Box* solid_target = new G4Box("target",target_hx,target_hy,f_targetZ/2.0);
     f_logic_target = new G4LogicalVolume(solid_target,f_targetMat,"target",0,0,0);
     f_physi_target = new G4PVPlacement(G4Transform3D(rot_36,target_pos),f_logic_target,"target", f_logic_world,false,0);
@@ -196,7 +199,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
    // scintillator bar (sci2)
    // dimensions are the same as scint 1 (other than thickness)
     double scint2_posz = target_posZ + 3 + (f_scint2z/2.0);
-    G4ThreeVector sci2_pos = get_global_pos(scint2_posz);
+//    G4ThreeVector sci2_pos = get_global_pos(scint2_posz);
+    G4ThreeVector sci2_pos = get_global_pos(455.25);
     G4Box* solid_sci2 = new G4Box("sci2", sci_hx, sci_hy, f_scint2z/2.0);
     f_logic_sci2 = new G4LogicalVolume(solid_sci2,Scint,"sci2",0,0,0);
     f_physi_sci2 = new G4PVPlacement(G4Transform3D(rot_36,sci2_pos),f_logic_sci2,"sci2", f_logic_world,false,0);
@@ -204,9 +208,12 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     // degrader
     // degrader is in front of scint 1
     double degrader_posz = coil8_to_scint1 - (f_scint1z/2.0) - 3 - (f_degraderZ/2.0);
-    double degrader_hx = 370.0/2.0;
-    double degrader_hy = 80.0/2.0;
-    G4ThreeVector degrader_pos = get_global_pos(degrader_posz);
+//    double degrader_hx = 370.0/2.0;
+//    double degrader_hy = 80.0/2.0;
+    double degrader_hx = 380.0/2.0;
+    double degrader_hy = 50.0/2.0;
+//    G4ThreeVector degrader_pos = get_global_pos(degrader_posz);
+    G4ThreeVector degrader_pos = get_global_pos(435.75);
     G4Box* solid_degrader = new G4Box("degrader",degrader_hx,degrader_hy,f_degraderZ/2.0);
     f_logic_degrader = new G4LogicalVolume(solid_degrader,f_degraderMat,"degrader",0,0,0);
     f_physi_degrader = new G4PVPlacement(G4Transform3D(rot_36,degrader_pos),f_logic_degrader,"degrader", f_logic_world,false,0);
