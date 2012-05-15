@@ -38,6 +38,7 @@ void quick_mom_plot()
 {
     // TString file_name = "../../output/pc144_old_data/1mm_degrader.root";
     TString file_name = "../../output/out.root";
+    // TString file_name = "../../output/out_original.root";
     cout << "will try to open "<<file_name << endl;
     TFile* files = NULL;
     TTree* tree = NULL;
@@ -103,9 +104,9 @@ void quick_mom_plot()
         // cout << branch.g_nhit << endl;
         for(int hit = 0; hit < branch.g_nhit; ++hit)
         { // loop over all the hits        
-            if (*branch.counter == 1)
+            if (branch.counter[hit] == 1)
             { // particle in scint 1    
-                int pid = *(branch.pdgid);
+                int pid = branch.pdgid[hit];
                 if (abs(pid) == 11 || abs(pid) == 13 || abs(pid) == 211 || pid == 2212)
                 { // charged particle
                     double momentum = length (branch.px[hit],branch.py[hit],branch.pz[hit]);
