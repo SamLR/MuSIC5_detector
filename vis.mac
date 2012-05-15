@@ -5,21 +5,21 @@
 # Sets some default verbose
 #
 /control/verbose 2
+/control/execute ../../MuSIC5_detector/run1.mac
 /run/verbose 2
 
-# Use this open statement to create a .heprep file suitable for
-# viewing in HepRApp:
 /vis/open HepRepFile
+/vis/heprep/setFileName music5_1
 
 # Draw geometry:
+
 /vis/drawVolume
 
-# Draw smooth trajectories at end of event, showing trajectory points
-# as markers 2 pixels wide:
+# for drawing the tracks
 /vis/scene/add/trajectories smooth
 
-# To superimpose all of the events from a given run:
+/vis/scene/add/hits
+
 /vis/scene/endOfEventAction accumulate
 
-#
-/run/beamOn 10
+/run/beamOn 50

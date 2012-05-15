@@ -26,132 +26,110 @@
 
 #include "FieldSol.hh"
 #include <assert.h>
+#include <limits>
 
-void FieldSol::index_to_pos(int ix, int iy, int iz, double *x, double *y, double *z)
+using namespace std;
+typedef numeric_limits<double> dbl;
+typedef numeric_limits<unsigned int> uint;
+
+void FieldSol::index_to_pos(unsigned int ix, unsigned int iy, unsigned int iz,
+                            double &x, double &y, double &z)
 {
-    *x = region_xmin + ix*sol_step;
-    *y = 0.0         + iy*sol_step;
-    *z = region_xmin + iz*sol_step;
+    x = region_xmin + ix*sol_step;
+    y = 0.0         + iy*sol_step;
+    z = region_xmin + iz*sol_step;
+    
 }
-void FieldSol::pos_to_index(double x, double y, double z, int* ix, int* iy, int* iz)
+
+// change to unsigned?
+void FieldSol::pos_to_index(double x, double y, double z, 
+                            unsigned int& ix, unsigned int& iy, unsigned int& iz)
 {
-    *ix = (x - region_xmin)/sol_step;
-    *iy = (y - 0.0        )/sol_step;
-    *iz = (z - region_zmin)/sol_step;
-    //printf("pos_to_index: x %lf y %lf z %lf ix %d iy %d iz %d\n",x,y,z,*ix,*iy,*iz);
+    ix = static_cast<unsigned int>((x - region_xmin)/sol_step);
+    iy = static_cast<unsigned int>((y - 0.0        )/sol_step);
+    iz = static_cast<unsigned int>((z - region_zmin)/sol_step);
 }
-void FieldSol::set_bfld(double x, double y, double z, double bx, double by, double bz)
+
+void FieldSol::set_bfield(double x, double y, double z, double bx, double by, double bz)
 {
-    int i,j,k;
-    pos_to_index(x,y,z,&i,&j,&k);
+    unsigned int i,j,k;
+    pos_to_index(x,y,z,i,j,k);
     magfld_bx[i][j][k] = bx;
     magfld_by[i][j][k] = by;
     magfld_bz[i][j][k] = bz;
 }
-void FieldSol::get_bfld(double x, double y, double z, double *bx, double *by, double *bz)
-{
-    int i,j,k;
-    pos_to_index(x,y,z,&i,&j,&k);
-    *bx = magfld_bx[i][j][k];
-    *by = magfld_by[i][j][k];
-    *bz = magfld_bz[i][j][k];
-}
+
 FieldSol::FieldSol(G4String fname)
+:sol_step (20.0), 
+region_xmin ( 760.0), region_xmax (1240.0),// FIX ME these should be calculated in init
+region_ymin (-240.0), region_ymax ( 240.0), 
+region_zmin (3520.0), region_zmax (4000.0),
+file_name(fname), initialised(false)
 {
-   /*
-      Input file is one region of MUSIC-FILL-map1-X=+-2000-Y==0-1000-Z=-1000-5000.table
-      x=[ 760,  1240]
-      y=[   0,   240]
-      z=[3520, 40000]
-      step is 20 mm, 2cm
-
-      Detector region is
-      x=[750,1250]
-      y=[-250,250]
-      z=[3504,4004]
-
-
-      Magnetic field in y<0 is calculated by reversing By.
-      By(y<0) = -By(y>0)
-
-*/
-   // Initialize
-   sol_step = 20.0;
-
-   region_xmin = 760.0;
-   region_xmax = 1240.0;
-   region_ymin = -240.0;
-   region_ymax = 240.0;
-   region_zmin = 3520.0;
-   region_zmax = 4000.0;
-
-
-   // Read field map
-   FILE* fp = fopen(fname.c_str(),"r");
-   char line[514];
-   if (fp==NULL) {
-      fprintf(stderr,"Magnetic field map %s cannot be open\n",fname.c_str());
-   }
-   /* map data is defined in global coordinate */
-   double in_x,in_y,in_z;
-   double in_bx,in_by,in_bz;
-   while (fgets(line,sizeof(line),fp)) {
-      sscanf(line,"%lf %lf %lf %lf %lf %lf",&in_x,&in_y,&in_z,&in_bx,&in_by,&in_bz);
-      //printf("i %2d in_x %8.3lf\n",i,in_x);
-      //printf("j %2d in_y %8.3lf\n",j,in_y);
-      //printf("k %2d in_z %8.3lf\n",k,in_z);
-      set_bfld(in_x,in_y,in_z,in_bx,in_by,in_bz);
-   }
-   fclose(fp);
-   printf("Finish to read solenoid field map\n");
+    // Read field map
+    init();
 }
 
-FieldSol::~FieldSol()
-{;}
-void FieldSol::get_bfield(double x, double y, double z, double *bx, double* by, double *bz)
+FieldSol::~FieldSol() {;}
+
+void FieldSol::init()
 {
-   *bx = 0.0;
-   *by = 0.0;
-   *bz = 0.0;
+    if (!initialised)
+    {
+        FILE* fp = fopen(file_name.c_str(),"r");
+        char line[514];
+        if (fp==NULL) {
+            fprintf(stderr,"Magnetic field map %s cannot be opened\n",file_name.c_str());
+            return;
+        }
+        /* map data is defined in global coordinate */
+        double in_x=dbl::max(), in_y=dbl::max(), in_z=dbl::max();
+        double in_bx=dbl::max(), in_by=dbl::max(), in_bz=dbl::max();
+        while (fgets(line,sizeof(line),fp)) 
+        {
+            sscanf(line,"%lf %lf %lf %lf %lf %lf",&in_x,&in_y,&in_z,&in_bx,&in_by,&in_bz);
+            set_bfield(in_x,in_y,in_z,in_bx,in_by,in_bz);
+        }
+        fclose(fp);
+        printf("Finished reading solenoid field map\n");
+        initialised = true;
+    }
+    
+}
 
-   if (!((x>=region_xmin && x<=region_xmax) &&
-            (y>=region_ymin && y<=region_ymax) &&
-            (z>=region_zmin && z<=region_zmax)) )
-      return;
-
-   int ix,iy,iz;
-    // the abs value of y gives the index, invert if y<0
-   pos_to_index(x,abs(y),z,&ix,&iy,&iz); 
+void FieldSol::get_bfield(double x, double y, double z, double& bx, double& by, double& bz)
+{
+    if (!initialised) // allows field map to be set late
+    {
+        init();
+        if(!initialised) 
+        {
+            fprintf(stderr,"Magnetic field map %s cannot be opened, exiting\n",file_name.c_str());
+            exit(1);
+        }
+    }
+        
+    unsigned int ix=uint::max(), iy=uint::max(), iz=uint::max();
+    pos_to_index(x,abs(y),z,ix,iy,iz);
     assert(ix>=0 && iy>=0 && iz>=0);
-   double bx0 = magfld_bx[ix][iy][iz];
-   double by0 = magfld_by[ix][iy][iz];
-   double bz0 = magfld_bz[ix][iy][iz];
-   if (y<0) by0 = -by0;
 
-   *bx = bx0;
-   *by = by0;
-   *bz = bz0;
+    bx = magfld_bx[ix][iy][iz];
+    by = magfld_by[ix][iy][iz];
+    bz = magfld_bz[ix][iy][iz];
+    
+    if (y < 0) by = -by;
 }
 
 void FieldSol::GetFieldValue(const double Point[3],double *Bfield)
 {
-   Bfield[0] = 0.0;
-   Bfield[1] = 0.0;
-   Bfield[2] = 0.0;
+    if (not valid_position(Point[0],Point[1],Point[2])) return;
+    
+    double bx=dbl::max(),by=dbl::max(),bz=dbl::max();
 
-   double posx = Point[0];
-   double posy = Point[1];
-   double posz = Point[2];
+    get_bfield(Point[0],Point[1],Point[2],bx,by,bz);
 
-   double bx,by,bz;
-
-   //get_bfield(posx,posy,posz,&Bfield[0],&Bfield[1],&Bfield[2]); <= wrong !!! no unit  corrected 2011.9.7
-   get_bfield(posx,posy,posz,&bx,&by,&bz);
-   Bfield[0] = bx*tesla;
-   Bfield[1] = by*tesla;
-   Bfield[2] = bz*tesla;
-
-
-   //printf("%lf %lf %lf = %lf %lf %lf\n",posx,posy,posz,Bfield[0],Bfield[1],Bfield[2]);
+    Bfield[0] = bx*tesla;
+    Bfield[1] = by*tesla;
+    Bfield[2] = bz*tesla;
 }
 

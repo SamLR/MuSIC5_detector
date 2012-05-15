@@ -86,51 +86,23 @@ void SteppingAction::set_hit(int acounter, const char* aprocname, int atrkid, in
     f_root->tof[g_nhit] = atof;
     f_root->g_nhit++;
 }
-//void SteppingAction::UserSteppingAction(const G4Step * aStep)
-//{
-//    int parentid = aStep->GetTrack()->GetParentID();
-//    int trkid = aStep->GetTrack()->GetTrackID();
-//    int pdgid  = aStep->GetTrack()->GetDefinition()->GetPDGEncoding();
-//    double kinetic = aStep->GetTrack()->GetKineticEnergy()/MeV;
-//    double x = aStep->GetPreStepPoint()->GetPosition().x()/cm;
-//    double y = aStep->GetPreStepPoint()->GetPosition().y()/cm;
-//    double z = aStep->GetPreStepPoint()->GetPosition().z()/cm;
-//    double px = aStep->GetPreStepPoint()->GetMomentum().x()/MeV;
-//    double py = aStep->GetPreStepPoint()->GetMomentum().y()/MeV;
-//    double pz = aStep->GetPreStepPoint()->GetMomentum().z()/MeV;
-//    double edep = aStep->GetTotalEnergyDeposit()/MeV;
-//    double tof = aStep->GetTrack()->GetGlobalTime()/ns;
-//    const G4String& volname = aStep->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetName();
-//    int acounter=1;
-//    if      (strcmp(volname,"sci1")==0)     { acounter = 1; } 
-//    else if (strcmp(volname,"target")==0)   { acounter = 2; } 
-//    else if (strcmp(volname,"sci2")==0)     { acounter = 3; }
-//    else return;
-//
-//    const G4VProcess * vp = aStep->GetPreStepPoint()->GetProcessDefinedStep();
-//    if (vp==NULL) {
-//       return;
-//    }
-//    const G4String& procname = vp->GetProcessName();
-//
-//    set_hit(acounter,procname.c_str(),trkid,parentid,pdgid,x,y,z,px,py,pz,kinetic,edep,tof);
-//}
+
 void SteppingAction::UserSteppingAction(const G4Step * aStep)
-{ // updated version of function from sakamoto-san
+{ 
     G4Track * track = aStep->GetTrack();
     G4StepPoint* point1 = aStep->GetPreStepPoint();
     G4StepPoint* point2 = aStep->GetPostStepPoint();
     
-    // check pointers returned correctly
     if (point2==NULL || point1==NULL) return;
-    // check if 1st step in volume 
-    if (point1->GetStepStatus() != fGeomBoundary) return;
     
     const G4String& volname = point1->GetTouchableHandle()->GetVolume()->GetName();
-    int acounter=1;
+    
+    int acounter = 0;
+    
     if      (strcmp(volname.c_str(),"sci1")==0)     { acounter = 1; } 
     else if (strcmp(volname.c_str(),"target")==0)   { acounter = 2; } 
     else if (strcmp(volname.c_str(),"sci2")==0)     { acounter = 3; }
+    else if (strcmp(volname.c_str(),"degrader")==0) { acounter = 4; }
     else return;
     
     int parentid = track->GetParentID();
@@ -146,9 +118,6 @@ void SteppingAction::UserSteppingAction(const G4Step * aStep)
     double pz = track->GetMomentum().z()/MeV;
     double edep = aStep->GetTotalEnergyDeposit()/MeV;
     const G4String& procname = point2->GetProcessDefinedStep()->GetProcessName();
-    
-    //int stepnumber =track->GetCurrentStepNumber();
-    //printf("%d volname %s procname %s y=%lf\n",stepnumber,volname.c_str(),procname.c_str(),y);
     
     set_hit(acounter,procname.c_str(),trkid,parentid,pdgid,x,y,z,px,py,pz,kinetic,edep,tof);
 }

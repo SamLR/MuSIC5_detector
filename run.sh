@@ -10,4 +10,10 @@ macro=run1.mac
 #../../bin/Linux-g++/music $sol $dip $pol $in_root /tmp/out.root
 
 # Batch mode
-../../bin/Linux-g++/music $sol $dip $pol $in_root $out_root $macro  > /dev/null
+
+if [ $OSTYPE = "darwin11" ]; then
+    WD/bin/Darwin-g++/music $in_root $out_root run1.mac
+    # WD/bin/Darwin-g++/music $sol $dip $pol $in_root $out_root $macro  
+else
+    ../../bin/Linux-g++/music $sol $dip $pol $in_root $out_root $macro  > /dev/null
+fi

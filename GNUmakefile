@@ -6,6 +6,7 @@
 name := music
 G4TARGET := $(name)
 G4EXLIB := true
+G4WORKDIR := $PWD
 
 ifndef G4INSTALL
   G4INSTALL = ../../..
