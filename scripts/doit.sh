@@ -29,8 +29,16 @@
 ls # this should only go to log
 ls --xyz # this should raise an error printed to screen & logged
 
-# quick test of something utterly different
-# cmd="$exe $X"
-# exe="ls"
-# X="-l"
-# echo $cmd
+# quick test of something utterly different (command delay)
+cmd='$exe $X' # use of ' makes bash treat this as as a literal
+exe="ls"
+X="-l"
+eval $cmd
+
+# git voodoo
+# gets the commit number and makes it pretty as well as the current branch
+
+gitcommit="$(git log --pretty=format:'%h' -n 1)" || gitcommit="not commited"
+gitbranch="$(git symbolic-ref HEAD 2>/dev/null)" || gitbranch="unnamed branch"
+gitbranch=${gitbranch##refs/heads/}
+echo $gitbranch $gitcommit 
