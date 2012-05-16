@@ -5,12 +5,17 @@
 
 # what we want to generate
 thicknesses=( 0.2 1 2 5 10 ) # degrader thicknesses in mm
-materials=( Aluminium Polystyrene ) # & Polyethylene?
+# run with air for each for comparison (curious as to change caused
+# by shift in z) ... and because I can't come up with a good way of testing
+# air once
+materials=( Air Aluminium Polystyrene ) # & Polyethylene?
+
 
 # locations etc
 root="../.."
 infile="$root/g4blout/monitor6_By-0T_cor.root"
-exe="$root/build/Release/music" # usage: ./music <in.root> <out.root> [run.mac]
+exedir="$root/build/Release"
+exe="$exedir/music" # usage: ./music <in.root> <out.root> [run.mac]
 outdir="$root/output"
 logdir="$outdir/log"
 runlog="$logdir/run.log" # master log
@@ -49,6 +54,11 @@ $header
     echo -e $bulk
 }
 
+# record exe status
+echo "\`ls -l $exedir\` results in:" >> $runlog
+ls -l $exedir >> $runlog 
+echo -e "************************\n" >> $runlog
+
 # generate the macros & run the program
 for mat in ${materials[@]}; # loop over all entries in the array materials
 do
@@ -59,6 +69,7 @@ do
         macfile="$logdir/$prefix.mac" # save the macros with the logs
         logfile="$logdir/$prefix.log"
         make_macro $mat $thickness $macfile > $macfile
+        echo "$mat $thickness run started" | tee -a $runlog 
         echo $macfile " generated" >> $runlog
         execmd="$exe $infile $outfile $macfile"
                 # for an explanation of the below command see doit.sh
