@@ -1,5 +1,4 @@
 #define MAX_HIT 500
-
 struct branches_struct
 {
     int g_iev;
@@ -29,13 +28,35 @@ struct branches_struct
     double tof[MAX_HIT];
 };
 
+template <class T>
+bool is_in(const vector<T> vec, const T& target)
+{
+    for(vector<T>::iterator iter = vec.begin(); iter < vec.end(); ++iter)
+    {
+        if (*iter == target) return true;
+    }
+    return false;
+}
+
 double length(double x, double  y, double  z)
 {
     return sqrt(x*x + y*y + z*z);
 }
 
+void test_is_in()
+{
+    vector<int> d;
+    d.push_back(10);
+    d.push_back(9);
+    d.push_back(2);
+    d.push_back(7);
+    d.push_back(1);
+    cout << is_in(d, 1) << " " << is_in(d,100) << endl;
+}
+
 void quick_mom_plot()
 {
+    // test_is_in();
     // TString file_name = "../../output/pc144_old_data/1mm_degrader.root";
     TString file_name = "../../output/out.root";
 
@@ -97,37 +118,44 @@ void quick_mom_plot()
 
     cout << "Lock \'n\' loaded " << entries << " entries."<< endl;
 
+    int charged_count = 0;
+    int individuals = 0;
+
     for(int entry = 0; entry < entries; ++entry)
     { // loop over all entries
         tree->GetEntry(entry);
-            // branch should now have all the data loaded to it
-        // cout << branch.g_nhit << endl;
+              // branch should now have all the data loaded to it
+        vector <int> seen_trackIDs; // skip list
         for(int hit = 0; hit < branch.g_nhit; ++hit)
-        { // loop over all the hits        
-            if (branch.counter[hit] == 1)
-            { // particle in scint 1    
-                int pid = branch.pdgid[hit];
-                if (abs(pid) == 11 || abs(pid) == 13 || abs(pid) == 211 || pid == 2212)
-                { // charged particle
-                    double momentum = length (branch.px[hit],branch.py[hit],branch.pz[hit]);
-                    scint1_mom_charged->Fill(momentum);
-                    if (pid == 13) // negative muon
-                    {
-                        scint1_mom_muon_neg->Fill(momentum);
-                        scint1_mom_muon->Fill(momentum);
-                    } else if (pid == -13) // positive muon
-                    {   
-                        scint1_mom_muon_pos->Fill(momentum);
-                        scint1_mom_muon->Fill(momentum);
-                    }
-                }
-            }
-        }
+        {
+              // skip conditions: not in scint 1, not charged, seen it already
+            ++individuals;
+            int counter = branch.counter[hit];
+            if (counter != 1) continue;
+
+            int pid = branch.pdgid[hit];
+            if (!(abs(pid) == 11 || abs(pid) == 13 || 
+                abs(pid) == 211 || pid == 2212))
+                continue;
+
+            int trackID = branch.trkid[hit];
+            if (is_in(seen_trackIDs, trackID)) continue;
+
+            double momentum = length (branch.px[hit],branch.py[hit],branch.pz[hit]);
+            scint1_mom_charged->Fill(momentum);
+
+            if (abs(pid) == 13) scint1_mom_muon->Fill(momentum);
+            seen_trackIDs.push_back(trackID);
+            ++charged_count;
+        }    
 
     }
+
+    cout << "Total tracks: "<< individuals << " counted "<< 
+        charged_count << " skipped: " << (individuals - charged_count) << endl;
     TCanvas* c_charged = new TCanvas("charged", "charged");
     scint1_mom_charged->Draw();
-    
+
     TCanvas* c_muon = new TCanvas("muon", "muon");
     scint1_mom_muon->Draw();
 }            
