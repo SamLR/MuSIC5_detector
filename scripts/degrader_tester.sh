@@ -62,10 +62,10 @@ do
         echo $macfile " generated" >> $runlog
         execmd="$exe $infile $outfile $macfile"
                 # for an explanation of the below command see doit.sh
-        cmd="($execmd >> $logfile) 2>&1 | tee -a $logfile $runlog"
+        cmd="( $execmd >> $logfile ) 2>&1 | tee -a $logfile $runlog"
         echo "Running command:" >> $runlog
         echo $cmd >> $runlog
-        exec $cmd
+        eval $cmd
         # this will also go to stdout
         echo "$mat $thickness run complete" | tee -a $runlog 
         echo -e "************************\n" >> $runlog
