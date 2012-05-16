@@ -52,7 +52,7 @@ void EventAction::BeginOfEventAction(const G4Event* event)
 void EventAction::EndOfEventAction(const G4Event* evt)
 {
     f_root->tree_out->Fill();
-    int iev = evt->GetEventID();
-    if (iev%1000==0) fprintf(stderr,"iev %d\n",iev);
+//    int iev = evt->GetEventID();
+//    if (iev%1000==0) fprintf(stderr,"iev %d\n",iev);
 }
 
