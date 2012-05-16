@@ -22,3 +22,5 @@ WD/
 *.so
 images/
 .DS_Store
+log
+er.log

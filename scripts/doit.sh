@@ -8,15 +8,29 @@
 #
 # the command works as advertised
 # 
-# `(./doit.sh >> log)` appends stdout from doit.sh to log (can use > to overwrite)
-#        the brackets ensure that this redirect happens first
+# `(./doit.sh >> log)` appends stdout from doit.sh to log (can use > to 
+#        overwrite) the brackets ensure that this redirect happens first
 # `2>&1` redirects stderr (file handler '2') to stdout (file handler '1')
 #       '>&' indicates direct to file handler rather than filename (which 
 #        would be just '>')
-# `| tee -a log` pipes the result (i.e. stderr redirected to stdout) to tee. Tee 
-#       appends (-a) this to log and prints it
+# `| tee -a log` pipes the result (i.e. stderr redirected to stdout) to tee.  
+#       Tee appends (-a) this to log and prints it
 #
+# Useful observation: any further files added to tee will receive ONLY the 
+#   stderr output of doit. Makes creation of separate error logs easy
+#
+# Multiple commands can be grouped and run like this. Only the last stdout is 
+#   redirected though so the commands must be grouped and redirected as a 
+#   whole eg:
+#   `({ pwd && ./doit.sh  ;} >> log) 2>&1 | tee -a log er.log` NOTE SPACES!
+#   the opposite ordering will fail (i.e. `./doit.sh && pwd` as doit fails)
+#   not sure how to skip that... never mind 
 
 ls # this should only go to log
 ls --xyz # this should raise an error printed to screen & logged
 
+# quick test of something utterly different
+# cmd="$exe $X"
+# exe="ls"
+# X="-l"
+# echo $cmd
