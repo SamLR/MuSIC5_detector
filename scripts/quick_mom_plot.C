@@ -58,7 +58,8 @@ void quick_mom_plot()
 {
     // test_is_in();
     // TString file_name = "../../output/pc144_old_data/1mm_degrader.root";
-    TString file_name = "../../output/out.root";
+    // TString file_name = "../../output/out.root";
+    TString file_name = "../../output/run_Air_0.2mm.root";
 
     cout << "will try to open "<<file_name << endl;
     TFile* files = NULL;
@@ -134,9 +135,11 @@ void quick_mom_plot()
             if (counter != 1) continue;
 
             int pid = branch.pdgid[hit];
-            if (!(abs(pid) == 11 || abs(pid) == 13 || 
-                abs(pid) == 211 || pid == 2212))
-                continue;
+            // if ((abs(pid) != 11 || abs(pid) != 13 || 
+            //     abs(pid) != 211 || pid != 2212))
+            //     continue;
+            
+            if (abs(pid) != 13) continue;
 
             int trackID = branch.trkid[hit];
             if (is_in(seen_trackIDs, trackID)) continue;
