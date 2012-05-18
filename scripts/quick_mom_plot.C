@@ -169,8 +169,8 @@ void quick_mom_plot()
     cout << "Total tracks: "<< individuals << " counted "<< 
           charged_count << " skipped: " << (individuals - charged_count) << endl;
     cout << "Events with more than 1 chaged particle in scint1 " << multihit << endl;
-    cout << "Number of multihits should be the difference of 'charged \
-        particles at scint 1' and total counted tracks" << endl
+    cout << "Number of multihits should be the difference of 'charged 
+        particles at scint 1' and total counted tracks" << endl;
     TCanvas* c_charged = new TCanvas("charged", "charged");
     scint1_mom_charged->Draw();
 

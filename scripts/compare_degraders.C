@@ -54,6 +54,15 @@ TTree* init_tree(const TFile* file, const TString& treename, const bool& verbose
     }
 }
 
+TTree* init(const TString& filename,  const branches_struct& branch){
+    // open the file, create and return a tree with assigned branches
+    TFile* file = init_file(filename);
+    TTree* tree = init_tree(file, "t");
+
+    set_address(branch, tree);
+    return tree;
+}
+
 TH1F* init_hist(const TString& name, 
     const int& n_bins,
     const int& min_x, 
@@ -68,7 +77,6 @@ const int& linecolor) {
     hist->SetLineColor(linecolor);
     return hist;
 }                
-
 
 void set_address(const branches_struct& branch, const TTree* tree) { // assign the addresses of the various brances
     tree->SetBranchAddress("iev",&branch.g_iev);
@@ -178,7 +186,7 @@ void smart_cut_muons(const branches_struct& branch, const int hit, const TH1F* h
     if(branch.counter[hit] != 1) return; // not in scint 1? return
 
     if(is_in(seen_tracks, branch.trkid[hit])) return; // seen it already
-    
+
     // fill the histogram with the momentum
     hist->Fill(length(branch.px[hit],branch.py[hit],branch.pz[hit]));
     // note that we've now seen this track
@@ -194,35 +202,38 @@ void compare_air(const TString& prefix, const TString& suffix) {
 
     const int n_files = 3;
     TH1F* histograms [] = {NULL, NULL, NULL}; 
+    TLegend* legend = new TLegend(0.1,0.7,0.48,0.9);
+    legend->SetHeader("thickness of 'air' degrader");
 
     cout << "Begin" << endl;
 
     for(int i = 0; i < n_files; ++i) {
-
-        TString title = file_list[i]; // alias
-        TString filename = prefix + title + suffix; // make the full location
-
-        // initialise things
-        TFile* file  = init_file(filename);
-        TTree* tree = init_tree(file, "t");
+        TString filename = prefix + file_list[i] + suffix; // make the full location
+        // 
+        // // initialise things
+        // TFile* file  = init_file(filename);
+        // TTree* tree = init_tree(file, "t");
 
         branches_struct branch;
-        set_address(branch, tree);
+        // set_address(branch, tree);
 
-        cout << "Tree: `t` from " << title << " now loaded"<<endl;
+        TTree* tree = init(filename, branch);
+
+        cout << "Tree: `t` from " << file_list[i] << " now loaded"<<endl;
         cout << "Expect " << tree->GetEntries("(abs(pdgid)==13)&&counter==1") << " muons." << endl;
         // make the histogram
         const int n_bins = 50, minx = 0, maxx = 200;
         const TString xtitle = "Momentum(MeV)";
         const TString ytitle = "count";
+        TString title="Comparison of muon momentum with Air degrader";
         histograms[i] = 
             init_hist(title, n_bins, minx, maxx, xtitle, ytitle, colours[i]);
         loop_entries(tree, histograms[i], branch, &smart_cut_muons, true);
-        // loop_entries(tree, histograms[i], branch, &basic_cut, true);
 
+        legend->AddEntry(histograms[i], file_list[i]);
         histograms[i]->Draw(draw_opts[i]); 
     }
-
+    legend->Draw();
 }
 
 void check_tracks(const TString& prefix, const TString& suffix) {
@@ -263,10 +274,67 @@ void check_tracks(const TString& prefix, const TString& suffix) {
     cout << "GetEntries() result:" << tree->GetEntries("(pdgid==13||pdgid==-13)&&counter==1") << endl;
 }
 
+TH1F* gen_hist(const TString& filename, const TString& title) {
+    branches_struct branch;
+    TTree* tree = init(filename, branch); //initialise the tree for air
+    TString title_xaxis = "Momentum (MeV)";
+    TString title_yaxis = "Count";
+    TH1F* hist = init_hist(title, 50, 0, 200, title_xaxis, title_yaxis, 1);
+    loop_entries(tree, hist, branch, &smart_cut_muons, true);
+    return hist;
+}
+
 void compare_degraders() {
 // test();
-    TString file_prefix = "../../output/";
-    TString file_suffix = ".root";
-    // check_tracks(file_prefix, file_suffix);
-    compare_air(file_prefix, file_suffix);
+    TString prefix = "../../output/";
+    TString suffix = ".root";
+
+    // open a file with no degrader (only air) and create a hist of muon momentum
+    TString air_file = "run_Air_5mm"; // file to use as the base line
+    TH1F* air_hist = gen_hist( (prefix + air_file + suffix), air_file);
+    air_hist->SetTitle("Affect of degrader on muon momentum");
+    // air_hist->Draw();
+    
+    // now generate the comparisons
+    TString degrader_files [] = {"run_Aluminium_0.2mm",
+        "run_Aluminium_10mm",
+        "run_Aluminium_1mm",
+        "run_Aluminium_2mm",
+        "run_Aluminium_5mm",
+        "run_Polystyrene_0.2mm",
+        "run_Polystyrene_10mm",
+        "run_Polystyrene_1mm",
+        "run_Polystyrene_2mm",
+        "run_Polystyrene_5mm"};
+    
+    const unsigned int n_files = 10;
+    TH1F* hists [n_files];
+    TCanvas* canvases [n_files];
+    TLegend* legends [n_files];
+    
+    for(unsigned int file = 0; file < n_files; ++file) {
+        // generate the histogram
+        TString filename = prefix + degrader_files[file] + suffix;
+        hists[file] = gen_hist(filename, degrader_files[file]);
+        // draw on a new canvas with the air histogram for comparison
+        canvases[file] = new TCanvas(degrader_files[file],degrader_files[file]);
+        air_hist->Draw();
+        hists[file]->SetLineColor(2);
+        hists[file]->Draw("SAME");
+        // create a legend for extra info
+        legends[file] = new TLegend(0.1,0.7,0.48,0.9);
+        legends[file]->SetHeader(degrader_files[file]);
+        legends[file]->AddEntry(air_hist, "no degrader");
+        legends[file]->AddEntry(hists[file], degrader_files[file]);
+        legends[file]->SetFillColor(0);
+        legends[file]->Draw();
+    }
+
 }
+
+
+
+
+
+
+
