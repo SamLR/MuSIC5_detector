@@ -178,7 +178,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     double sci_hy = 50.0/2.0;
     G4ThreeVector sci1_pos = get_global_pos(coil8_to_scint1);
     G4Box* solid_sci1 = new G4Box("sci1", sci_hx, sci_hy, f_scint1z/2.0);
-    f_logic_sci1 = new G4LogicalVolume(solid_sci1,Scint,"sci1",0,0,0);
+    f_logic_sci1 = new G4LogicalVolume(solid_sci1,Air,"sci1",0,0,0);
+//        f_logic_sci1 = new G4LogicalVolume(solid_sci1,Scint,"sci1",0,0,0);
     f_physi_sci1 = new G4PVPlacement(G4Transform3D(rot_36,sci1_pos),f_logic_sci1,"sci1", f_logic_world,false,0);
 
     //copper target (target) 
@@ -195,7 +196,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     double scint2_posz = target_posZ + 3 + (f_scint2z/2.0);
     G4ThreeVector sci2_pos = get_global_pos(scint2_posz);
     G4Box* solid_sci2 = new G4Box("sci2", sci_hx, sci_hy, f_scint2z/2.0);
-    f_logic_sci2 = new G4LogicalVolume(solid_sci2,Scint,"sci2",0,0,0);
+    f_logic_sci2 = new G4LogicalVolume(solid_sci2,Air,"sci2",0,0,0);
+//    f_logic_sci2 = new G4LogicalVolume(solid_sci2,Scint,"sci2",0,0,0);
     f_physi_sci2 = new G4PVPlacement(G4Transform3D(rot_36,sci2_pos),f_logic_sci2,"sci2", f_logic_world,false,0);
 
     // degrader
