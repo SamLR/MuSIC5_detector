@@ -147,7 +147,10 @@ double length(const double& x, const double& y, const double& z) {
     return sqrt(x*x + y*y + z*z);
 }
 
+
+// DONT USE BASIC CUT! 
 void basic_cut(const branches_struct& branch, const int hit, const TH1F* hist) {
+    cout << "You probably shouldn't be using this" << endl;
     if (abs(branch.pdgid [hit]) == 13) {
         const double momentum = length(branch.px[hit],branch.py[hit],branch.pz[hit]);
         hist->Fill(momentum);
@@ -217,10 +220,48 @@ void compare_air(const TString& prefix, const TString& suffix) {
 
 }
 
+void check_tracks(const TString& prefix, const TString& suffix) {
+    TString filename = prefix + "run_Air_5mm" + suffix;
+    TFile* file = init_file(filename); 
+    TTree* tree = init_tree(file, "t");
+    branches_struct branch;
+    set_address(branch,tree);
+    
+    // map<int, int> track_counts; 
+    unsigned int n_entries = tree->GetEntries();
+    unsigned int n_muons = 0;
+    for(unsigned int entry = 0; entry < n_entries; ++entry){
+        tree->GetEntry(entry);
+        vector<int> seen_tracks;
+        vector<int> uniq_tracks;
+        if(branch.g_nhit==0) continue;
+        for(unsigned int hit = 0; hit < branch.g_nhit; ++hit){
+            if( abs(branch.pdgid[hit])!=13 ) continue;
+            if( branch.counter[hit]!=1 ) continue;
+            bool seen = false;
+            seen_tracks.push_back(branch.trkid[hit]);
+            for(unsigned int i = 0; i < uniq_tracks.size(); ++i) {
+                if( branch.trkid[hit] == uniq_tracks[i]) seen=true;
+            }
+            if(seen) continue;
+            
+            ++n_muons;
+            uniq_tracks.push_back(branch.trkid[hit]);
+        }
+        
+        for(unsigned int i = 0; i < seen_tracks.size(); ++i) {
+            cout << "seen track:" << seen_tracks[i] << endl;
+        }
+        cout << "*********" << endl;
+    }
+    cout << "unique muon tracks: " << n_muons << endl;
+    cout << "GetEntries() result:" << tree->GetEntries("(pdgid==13||pdgid==-13)&&counter==1") << endl;
+}
+
 void compare_degraders() {
 // test();
     TString file_prefix = "../../output/";
     TString file_suffix = ".root";
-
+    // check_tracks(file_prefix, file_suffix);
     compare_air(file_prefix, file_suffix);
 }
