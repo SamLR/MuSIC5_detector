@@ -125,17 +125,19 @@ void loop_entries(const TTree* tree,
               // func to fill the return histogram
     void (*cut)(const branches_struct&, const int, const TH1F*), 
               // want tons of stdout?
-const bool& verbose=false)  { 
+const bool& verbose=false)  {
             // return a histogram filled according to apply_cut
 
     const unsigned int n_entries = tree->GetEntries();    
 
     if(verbose) cout << "Tree loaded. "<< n_entries << " entries found." << endl;
 
-    for(unsigned int entry = 0; entry < n_entries; ++entry) { // loop over each entry and see if it passes the cuts
+    for(unsigned int entry = 0; entry < n_entries; ++entry) { 
+        // loop over each entry and see if it passes the cuts
+        if(verbose && (entry%1000==0)) cout << "Entry: " << entry<< endl;
         tree->GetEntry(entry);
         const unsigned int n_hits = branch.g_nhit;
-        if(verbose && (entry%1000==0)) cout << "Entry: " << entry<< endl;
+        if( n_hits==0 ) continue; // skip entries with no events
         for(unsigned int hit = 0; hit < n_hits; ++hit) {
             cut(branch, hit, histo);
         }
@@ -167,12 +169,14 @@ bool is_in(const vector<T> vec, const T& target){
 
 void smart_cut_muons(const branches_struct& branch, const int hit, const TH1F* hist) {
     static vector<int> seen_tracks;
-    if(hit == 0) seen_tracks.clear(); // new event so reset this
-    
-    if(abs(branch.pdgid[hit] != 13)) return; // not a muon? return
-    
+    if(hit == 0) {
+        seen_tracks.clear();
+    } // new event so reset this
+
+    if(abs(branch.pdgid[hit]) != 13) return; // not a muon? return
+
     if(branch.counter[hit] != 1) return; // not in scint 1? return
-    
+
     if(is_in(seen_tracks, branch.trkid[hit])) return; // seen it already
     
     // fill the histogram with the momentum
@@ -194,27 +198,28 @@ void compare_air(const TString& prefix, const TString& suffix) {
     cout << "Begin" << endl;
 
     for(int i = 0; i < n_files; ++i) {
-        
+
         TString title = file_list[i]; // alias
         TString filename = prefix + title + suffix; // make the full location
-        
+
         // initialise things
         TFile* file  = init_file(filename);
         TTree* tree = init_tree(file, "t");
-        
+
         branches_struct branch;
         set_address(branch, tree);
-        
+
         cout << "Tree: `t` from " << title << " now loaded"<<endl;
+        cout << "Expect " << tree->GetEntries("(abs(pdgid)==13)&&counter==1") << " muons." << endl;
         // make the histogram
-        const int n_bins = 200, minx = 0, maxx = 200;
+        const int n_bins = 50, minx = 0, maxx = 200;
         const TString xtitle = "Momentum(MeV)";
         const TString ytitle = "count";
         histograms[i] = 
             init_hist(title, n_bins, minx, maxx, xtitle, ytitle, colours[i]);
         loop_entries(tree, histograms[i], branch, &smart_cut_muons, true);
         // loop_entries(tree, histograms[i], branch, &basic_cut, true);
-        
+
         histograms[i]->Draw(draw_opts[i]); 
     }
 
@@ -226,7 +231,7 @@ void check_tracks(const TString& prefix, const TString& suffix) {
     TTree* tree = init_tree(file, "t");
     branches_struct branch;
     set_address(branch,tree);
-    
+
     // map<int, int> track_counts; 
     unsigned int n_entries = tree->GetEntries();
     unsigned int n_muons = 0;
@@ -244,11 +249,11 @@ void check_tracks(const TString& prefix, const TString& suffix) {
                 if( branch.trkid[hit] == uniq_tracks[i]) seen=true;
             }
             if(seen) continue;
-            
+
             ++n_muons;
             uniq_tracks.push_back(branch.trkid[hit]);
         }
-        
+
         for(unsigned int i = 0; i < seen_tracks.size(); ++i) {
             cout << "seen track:" << seen_tracks[i] << endl;
         }
