@@ -108,7 +108,11 @@ void quick_mom_plot()
     tree->SetBranchAddress("tof",&branch.tof);
 
     entries = tree->GetEntries();
-    cout << "Tree in file " << file_name<< " has "<< entries << endl;
+    cout << "File " << file_name<< " has "<< entries << " entries" << endl;
+    TString muon_pick = "abs(pdgid)==13&&counter==1";
+    cout << "Muons: " << tree->GetEntries(muon_pick) << " at scint 1" << endl;
+    TString charged_pick = "(abs(pdgid)==13||abs(pdgid)==11||abs(pdgid)==211||pdgid==2212)&&counter==1";
+    cout << "Charged particles: " << tree->GetEntries(charged_pick)<< " at scint 1" << endl;
 
     TString name = "muon_momentum";
     TString name2  = "charged_momentum";
@@ -117,10 +121,13 @@ void quick_mom_plot()
     scint1_mom_muon_neg = new TH1F(name+"neg", name+"neg", 100, 0, 200);
     scint1_mom_charged  = new TH1F(name2, name2, 100, 0, 200);
 
-    cout << "Lock \'n\' loaded " << entries << " entries."<< endl;
+    cout << "Lock \'n\' loaded " << endl;
+    
 
-    int charged_count = 0;
-    int individuals = 0;
+    unsigned int charged_count = 0;
+    unsigned int individuals = 0;
+    unsigned int n_muons = 0;
+    unsigned int multihit = 0;
 
     for(int entry = 0; entry < entries; ++entry)
     { // loop over all entries
@@ -135,19 +142,24 @@ void quick_mom_plot()
             if (counter != 1) continue;
 
             int pid = branch.pdgid[hit];
-            // if ((abs(pid) != 11 || abs(pid) != 13 || 
-            //     abs(pid) != 211 || pid != 2212))
-            //     continue;
-            
-            if (abs(pid) != 13) continue;
+            if ( !(abs(pid) == 11 || abs(pid) == 13 || 
+                  abs(pid) == 211 || pid == 2212)  )
+                continue;
 
             int trackID = branch.trkid[hit];
             if (is_in(seen_trackIDs, trackID)) continue;
 
             double momentum = length (branch.px[hit],branch.py[hit],branch.pz[hit]);
             scint1_mom_charged->Fill(momentum);
+            
+            if(seen_trackIDs > 0){
+                ++multihit; // see how many entries have multiple hits
+            }
 
-            if (abs(pid) == 13) scint1_mom_muon->Fill(momentum);
+            if (abs(pid) == 13) {
+                scint1_mom_muon->Fill(momentum);
+                ++n_muons;
+            }
             seen_trackIDs.push_back(trackID);
             ++charged_count;
         }    
@@ -155,7 +167,10 @@ void quick_mom_plot()
     }
 
     cout << "Total tracks: "<< individuals << " counted "<< 
-        charged_count << " skipped: " << (individuals - charged_count) << endl;
+          charged_count << " skipped: " << (individuals - charged_count) << endl;
+    cout << "Events with more than 1 chaged particle in scint1 " << multihit << endl;
+    cout << "Number of multihits should be the difference of 'charged \
+        particles at scint 1' and total counted tracks" << endl
     TCanvas* c_charged = new TCanvas("charged", "charged");
     scint1_mom_charged->Draw();
 
