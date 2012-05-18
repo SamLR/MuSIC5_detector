@@ -58,8 +58,8 @@ void quick_mom_plot()
 {
     // test_is_in();
     // TString file_name = "../../output/pc144_old_data/1mm_degrader.root";
-    // TString file_name = "../../output/out.root";
-    TString file_name = "../../output/run_Air_0.2mm.root";
+    TString file_name = "../../output/out.root";
+    // TString file_name = "../../output/run_Air_0.2mm.root";
 
     cout << "will try to open "<<file_name << endl;
     TFile* files = NULL;
