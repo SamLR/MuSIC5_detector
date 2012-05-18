@@ -176,18 +176,17 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     // position of scint1 WRT coil8
     double coil8_to_scint1 = 440; 
 
-    double sci_hx = 380.0/2.0; // dimensions of both scintillators are the same in xy plane
-    double sci_hy = 50.0/2.0;
+    double sci_hx = 450.0/2.0; // dimensions of both scintillators are the same in xy plane
+    double sci_hy = 450.0/2.0;
     G4ThreeVector sci1_pos = get_global_pos(coil8_to_scint1);
     G4Box* solid_sci1 = new G4Box("sci1", sci_hx, sci_hy, f_scint1z/2.0);
     f_logic_sci1 = new G4LogicalVolume(solid_sci1,f_scint1Mat,"sci1",0,0,0);
-//        f_logic_sci1 = new G4LogicalVolume(solid_sci1,Scint,"sci1",0,0,0);
     f_physi_sci1 = new G4PVPlacement(G4Transform3D(rot_36,sci1_pos),f_logic_sci1,"sci1", f_logic_world,false,0);
 
     //copper target (target) 
     double target_posZ = coil8_to_scint1 + (f_scint1z/2.0) + 3 + (f_targetZ/2.0); // '3' is thickness of separators
-    double target_hx = 370.0/2.0;
-    double target_hy = 80.0/2.0;
+    double target_hx = 450.0/2.0;
+    double target_hy = 450.0/2.0;
     G4ThreeVector target_pos = get_global_pos(target_posZ);
     G4Box* solid_target = new G4Box("target",target_hx,target_hy,f_targetZ/2.0);
     f_logic_target = new G4LogicalVolume(solid_target,f_targetMat,"target",0,0,0);
@@ -199,14 +198,13 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     G4ThreeVector sci2_pos = get_global_pos(scint2_posz);
     G4Box* solid_sci2 = new G4Box("sci2", sci_hx, sci_hy, f_scint2z/2.0);
     f_logic_sci2 = new G4LogicalVolume(solid_sci2,f_scint2Mat,"sci2",0,0,0);
-//    f_logic_sci2 = new G4LogicalVolume(solid_sci2,Scint,"sci2",0,0,0);
     f_physi_sci2 = new G4PVPlacement(G4Transform3D(rot_36,sci2_pos),f_logic_sci2,"sci2", f_logic_world,false,0);
 
     // degrader
     // degrader is in front of scint 1
     double degrader_posz = coil8_to_scint1 - (f_scint1z/2.0) - 3 - (f_degraderZ/2.0);
-    double degrader_hx = 370.0/2.0;
-    double degrader_hy = 80.0/2.0;
+    double degrader_hx = 450.0/2.0;
+    double degrader_hy = 450.0/2.0;
     G4ThreeVector degrader_pos = get_global_pos(degrader_posz);
     G4Box* solid_degrader = new G4Box("degrader",degrader_hx,degrader_hy,f_degraderZ/2.0);
     f_logic_degrader = new G4LogicalVolume(solid_degrader,f_degraderMat,"degrader",0,0,0);
