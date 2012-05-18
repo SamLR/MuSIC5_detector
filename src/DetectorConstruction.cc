@@ -60,8 +60,10 @@ DetectorConstruction::DetectorConstruction()
 {
     f_messenger = new DetectorConstructionMessenger(this);
     DefineMaterials();
+    f_scint1Mat   = G4Material::GetMaterial("Air"); 
+    f_scint2Mat   = G4Material::GetMaterial("Air");
     f_degraderMat = G4Material::GetMaterial("Polystyrene");
-    f_targetMat = G4Material::GetMaterial("Copper");
+    f_targetMat   = G4Material::GetMaterial("Copper");
 }
 
 DetectorConstruction::~DetectorConstruction()
@@ -178,7 +180,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     double sci_hy = 50.0/2.0;
     G4ThreeVector sci1_pos = get_global_pos(coil8_to_scint1);
     G4Box* solid_sci1 = new G4Box("sci1", sci_hx, sci_hy, f_scint1z/2.0);
-    f_logic_sci1 = new G4LogicalVolume(solid_sci1,Air,"sci1",0,0,0);
+    f_logic_sci1 = new G4LogicalVolume(solid_sci1,f_scint1Mat,"sci1",0,0,0);
 //        f_logic_sci1 = new G4LogicalVolume(solid_sci1,Scint,"sci1",0,0,0);
     f_physi_sci1 = new G4PVPlacement(G4Transform3D(rot_36,sci1_pos),f_logic_sci1,"sci1", f_logic_world,false,0);
 
@@ -196,7 +198,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     double scint2_posz = target_posZ + 3 + (f_scint2z/2.0);
     G4ThreeVector sci2_pos = get_global_pos(scint2_posz);
     G4Box* solid_sci2 = new G4Box("sci2", sci_hx, sci_hy, f_scint2z/2.0);
-    f_logic_sci2 = new G4LogicalVolume(solid_sci2,Air,"sci2",0,0,0);
+    f_logic_sci2 = new G4LogicalVolume(solid_sci2,f_scint2Mat,"sci2",0,0,0);
 //    f_logic_sci2 = new G4LogicalVolume(solid_sci2,Scint,"sci2",0,0,0);
     f_physi_sci2 = new G4PVPlacement(G4Transform3D(rot_36,sci2_pos),f_logic_sci2,"sci2", f_logic_world,false,0);
 
@@ -228,6 +230,29 @@ void DetectorConstruction::SetPolarity(double newPol)
     }
     f_updated = true;
 }
+
+void DetectorConstruction::SetScint1Mat(G4String newVal)
+{
+    G4Material* newMat = G4Material::GetMaterial(newVal);
+    if (newMat)
+    {
+        f_scint1Mat = newMat;
+        G4cout << "Scint1 now made from "<< newVal << G4endl;
+    }
+    f_updated = true;
+}
+
+void DetectorConstruction::SetScint2Mat(G4String newVal)
+{
+    G4Material* newMat = G4Material::GetMaterial(newVal);
+    if (newMat)
+    {
+        f_scint2Mat = newMat;
+        G4cout << "Scint2 now made from "<< newVal << G4endl;
+    }
+    f_updated = true;
+}
+
 
 void DetectorConstruction::SetDegraderMat(G4String newVal)
 {

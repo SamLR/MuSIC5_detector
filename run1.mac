@@ -1,5 +1,8 @@
 /MuSIC_Detector/degraderZ 1 mm
-#/MuSIC_Detector/degraderMat Air
+
+/MuSIC_Detector/scint1Mat Air
+/MuSIC_Detector/scint2Mat Air
+
 /MuSIC_Detector/dipField ../../fieldmap/fieldmap_dipole.txt
 /MuSIC_Detector/solField ../../fieldmap/fieldmap_solenoid.txt
 

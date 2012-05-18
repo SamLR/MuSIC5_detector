@@ -31,11 +31,17 @@ private:
     
     G4UIcommand*   updateCmd_m;
     G4UIdirectory* UIdirectory_m; 
+    // scale the dipole field
+    G4UIcmdWithADouble* dipolePolarityStrength_m; // scale the dipole strength & polarity
+    // field map file names
     G4UIcmdWithAString* solenoidFileName_m; // set the filenames for the field maps
     G4UIcmdWithAString* dipoleFileName_m;
+    // material information
+    G4UIcmdWithAString* scint1Material_m; // set scint materials, usual used to 
+    G4UIcmdWithAString* scint2Material_m; // toggle them on and off
     G4UIcmdWithAString* degraderMaterial_m; // set the  degrader material 
     G4UIcmdWithAString* targetMaterial_m; // set the target material 
-    G4UIcmdWithADouble* dipolePolarityStrength_m; // scale the dipole strength & polarity
+    // component thicknesses
     G4UIcmdWithADoubleAndUnit* scint1Thickness_m; // closer
     G4UIcmdWithADoubleAndUnit* scint2Thickness_m; // further
     G4UIcmdWithADoubleAndUnit* degraderThickness_m;
