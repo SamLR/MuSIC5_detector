@@ -49,12 +49,12 @@ void SteppingAction::set_hit(int acounter, const char* aprocname, int atrkid, in
     }
 
     int g_nhit = f_root->g_nhit;
-    if (strcmp(aprocname,"msc")==0)                            {  f_root->procid[g_nhit]=1; }
+    if (strcmp(aprocname,"msc")==0)                            {  f_root->procid[g_nhit]=1; } // multiple scattering
     else if (strcmp(aprocname,"Transportation")==0)            {  f_root->procid[g_nhit]=2; }
     else if (strcmp(aprocname,"eIoni")==0)                     {  f_root->procid[g_nhit]=3; }
     else if (strcmp(aprocname,"eBrem")==0)                     {  f_root->procid[g_nhit]=4; }
     else if (strcmp(aprocname,"CoulombScat")==0)               {  f_root->procid[g_nhit]=5; }
-    else if (strcmp(aprocname,"phot")==0)                      {  f_root->procid[g_nhit]=6; }
+    else if (strcmp(aprocname,"phot")==0)                      {  f_root->procid[g_nhit]=6; } // photo electric effect
     else if (strcmp(aprocname,"compt")==0)                     {  f_root->procid[g_nhit]=7; }
     else if (strcmp(aprocname,"muMsc")==0)                     {  f_root->procid[g_nhit]=8; }
     else if (strcmp(aprocname,"muIoni")==0)                    {  f_root->procid[g_nhit]=9; }
