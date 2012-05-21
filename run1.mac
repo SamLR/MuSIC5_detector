@@ -1,8 +1,8 @@
 /MuSIC_Detector/degraderZ 1 mm
 
 
-/MuSIC_Detector/dipField ../../fieldmap/fieldmap_dipole.txt
-/MuSIC_Detector/solField ../../fieldmap/fieldmap_solenoid.txt
+/MuSIC_Detector/dipField ../../MuSIC5_detector/fieldmap/fieldmap_dipole.txt
+/MuSIC_Detector/solField ../../MuSIC5_detector/fieldmap/fieldmap_solenoid.txt
 
 /run/initialize
 

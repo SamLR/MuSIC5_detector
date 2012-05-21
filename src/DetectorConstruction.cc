@@ -54,7 +54,8 @@
 
 DetectorConstruction::DetectorConstruction()
     :f_myField(0), f_updated(false),
-    f_fname_sol("../../fieldmap/fieldmap_solenoid.txt"), f_fname_dip("../../fieldmap/fieldmap_dipole.txt"),
+    f_fname_sol("../../fieldmap/MuSIC5_detector/fieldmap_solenoid.txt"), 
+    f_fname_dip("../../fieldmap/MuSIC5_detector/fieldmap_dipole.txt"),
     f_dip_polarity(1.0),
     f_scint1z(3.5*mm), f_scint2z (3.5*mm), f_degraderZ(1*mm), f_targetZ(6*mm) 
 {

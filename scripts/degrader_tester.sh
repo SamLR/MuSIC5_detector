@@ -44,8 +44,8 @@ $header
 #\t material:  $1\n\
 #\t thickness: $2\n\
 # \n\n\
-/MuSIC_Detector/dipField ../../fieldmap/fieldmap_dipole.txt\n\
-/MuSIC_Detector/solField ../../fieldmap/fieldmap_solenoid.txt\n\
+/MuSIC_Detector/dipField ../../MuSIC5_detector/fieldmap/fieldmap_dipole.txt\n\
+/MuSIC_Detector/solField ../../MuSIC5_detector/fieldmap/fieldmap_solenoid.txt\n\
 \n\
 /MuSIC_Detector/degraderMat $1\n\
 /MuSIC_Detector/degraderZ $2 mm\n\

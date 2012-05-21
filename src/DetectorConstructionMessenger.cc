@@ -47,12 +47,12 @@ void DetectorConstructionMessenger::init()
     // solenoid fieldmap name
     solenoidFileName_m = new G4UIcmdWithAString("/MuSIC_Detector/solField", this); 
     solenoidFileName_m->SetGuidance("Specify the fieldmap to be used for the solenoid");
-    solenoidFileName_m->SetDefaultValue("fieldmap/fieldmap_solenoid.txt");
+    solenoidFileName_m->SetDefaultValue("../../MuSIC5_detector/fieldmap/fieldmap_solenoid.txt");
 
     // dipole fieldmap name & polarity 
     dipoleFileName_m = new G4UIcmdWithAString("/MuSIC_Detector/dipField", this);
     dipoleFileName_m->SetGuidance("Specify the fieldmap to be used for the dipole");
-    dipoleFileName_m->SetDefaultValue("fieldmap/fieldmap_dipole.txt");
+    dipoleFileName_m->SetDefaultValue("../../MuSIC5_detector/fieldmap/fieldmap_dipole.txt");
 
     dipolePolarityStrength_m = new G4UIcmdWithADouble("/MuSIC_Detector/polarity", this);
     dipolePolarityStrength_m->SetGuidance("Scale the dipole field by some amount x (-1 < x < 1)");
