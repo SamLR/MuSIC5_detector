@@ -1,0 +1,439 @@
+*   g4beamline input file  for MUSIC solenoid
+#   2008/01/27 M. Yoshida
+### ----------------------------------------------
+### Parameters
+### ----------------------------------------------
+#param -unset nevent=10000000
+param -unset nevent=1
+param -unset btype=1
+param -unset decay=1
+param -unset stochastic=1
+param -unset first=1
+param -unset last=1
+#param -unset last=10000000
+param -unset rootname=g4beamline
+param histoFile=$rootname
+ 
+# kill events with CPU time over 30 seconds
+param eventTimeLimit=30
+
+#physics QGSP doDecay=$decay doStochastics=$stochastic minRangeCut=1.0
+physics QGSP_BERT doStochastics=$stochastic minRangeCut=1.0
+
+#Minimum Kinetic Energy to track : 0.001[MeV]
+#Maximum lab time to track maxTime=10000[ns].
+#trackcuts keep=proton,pi+,pi-,mu+,mu- kineticEnergyCut=0.001 maxTime=10000
+trackcuts kineticEnergyCut=0.001 maxTime=10000
+
+particlecolor proton=1,1,0 pi+=1,0,0 pi-=0,1,0 mu+=0,0,1 mu-=0,1,1 \
+              plus=0.2,0,0 minus=0,0,0.2 neutral=0,0.2,0
+
+coil default tolerance=0.002 maxR=500.
+solenoid default color=1,0,0
+tubs default color=0.3,0.3,0.5
+polycone default color=0.3,0.3,0.5
+virtualdetector default color='invisible'
+#virtualdetector default color=1,1,1
+
+
+# ----------------------------------------------
+# Pion Production Target
+# ----------------------------------------------
+#
+param targetRadius=19.9
+param targetLength=199.9
+param targetMaterial=G4_GRAPHITE
+#
+#param targetRadius=6.0
+#param targetLength=160.0
+#param targetMaterial=G4_W
+#
+param targetHrzAngle=-20
+param targetVrtAngle=-12
+
+#tubs ProdTarget innerRadius=0.0 outerRadius=$targetRadius length=$targetLength material=$targetMaterial color=0.6,0.6,1.0
+tubs ProdTarget innerRadius=0.0 outerRadius=$targetRadius length=$targetLength material=$targetMaterial color='0.4,0.3,0.3'
+
+### ----------------------------------------------
+### Beam Setting
+param BeamEnergy=392.
+param BeamMomentum=sqrt(($BeamEnergy+938.272)^2-938.272^2)
+#
+#param BeamDistance=$targetLength/2.
+#param BeamHrzAngle=180+($targetHrzAngle)
+#param BeamVrtAngle=$targetVrtAngle
+#param XXX=0.
+#param YYY=0.
+#param ZZZ=0.
+#
+param BeamDistance=2000.
+param BeamHrzAngle=180-20
+param BeamVrtAngle=0
+param XXX=0.
+param YYY=70.
+param ZZZ=0.0
+#
+#Rotate in horizontal plane
+param BeamXin=$XXX-$BeamDistance*sin($BeamHrzAngle/180*3.141593)
+param BeamZin=$ZZZ-$BeamDistance*cos($BeamHrzAngle/180*3.141593)
+#Rotate in vertical plane
+param BeamYin=$YYY-$BeamZin*tan($BeamVrtAngle/180*3.141593)
+
+#Beam spread
+#param BeamSigmaX=0.001
+#param BeamSigmaY=0.001
+param BeamSigmaX=2.0
+param BeamSigmaY=2.0
+
+### ----------------------------------------------
+if $btype==1
+### ----------------------------------------------
+#
+beam gaussian particle=proton firstEvent=$first lastEvent=$last\
+              meanMomentum=$BeamMomentum sigmaP=0.0 \
+              meanMomentum=$BeamMomentum sigmaP=0.0 \
+              beamX=$BeamXin beamY=$BeamYin beamZ=$BeamZin \
+              maxR=100.0 rotation=Y$BeamHrzAngle,X$BeamVrtAngle \
+              sigmaX=$BeamSigmaX sigmaY=$BeamSigmaY sigmaXp=0.000 sigmaYp=0.000 \
+              meanT=0.0 sigmaT=0.0
+
+
+### ----------------------------------------------
+elseif $btype==2
+### ----------------------------------------------
+  beam ascii nEvents=$nevent \
+	filename='/afs/lepton.phys.sci.osaka-u.ac.jp/usr1/yoshida/work1/MARS/work/mars_081017-RCNPmu/TargetOnly/Graphite-R20-L200-400MeV-10M.txt.g4bl' \
+	format=BLTrackFile \
+	rotation=Y$targetHrzAngle,X$targetVrtAngle
+#
+
+### ----------------------------------------------
+elseif $btype==3
+### ----------------------------------------------
+  beam gaussian particle=proton nEvents=1 \
+              meanMomentum=$BeamMomentum sigmaP=0.0 \
+              beamX=$BeamXin beamY=$BeamYin beamZ=$BeamZin \
+              maxR=100.0 rotation=Y$BeamHrzAngle,X$BeamVrtAngle \
+              sigmaX=0.0 sigmaY=0.0 sigmaXp=0.000 sigmaYp=0.000 \
+              meanT=0.0 sigmaT=0.0
+#
+#              sigmaX=$BeamSigmaX sigmaY=$BeamSigmaY sigmaXp=0.000 sigmaYp=0.000 \
+#              meanT=0.0 sigmaT=0.0
+
+  beam ascii nEvents=$nevent\
+	filename='beam.in' \
+	format=BLTrackFile \
+	rotation=Y$targetHrzAngle,X$targetVrtAngle
+### ----------------------------------------------
+else
+### ----------------------------------------------
+  beam gaussian nEvents=1 particle=proton meanMomentum=999999.
+
+### ----------------------------------------------
+endif
+### ----------------------------------------------
+
+# ----------------------------------------------
+# Capture Solenoid
+# ----------------------------------------------
+param lenCapSol=1000.0
+param riCapSol=450.0
+param roCapSol=43.0+$riCapSol
+#current [A/mm2]
+param ampCapSol=73.0
+
+
+coil CapSolC innerRadius=$riCapSol outerRadius=$roCapSol \
+               length=$lenCapSol material=Cu
+solenoid CapSol coilName=CapSolC current=$ampCapSol
+
+### Sim
+param lenCapSolSim=400.0
+param riCapSolSim=$roCapSol
+param roCapSolSim=$riCapSolSim+12.
+#current [A/mm2]
+param ampCapSolSim=$ampCapSol
+coil CapSolSimC innerRadius=$riCapSolSim outerRadius=$roCapSolSim \
+               length=$lenCapSolSim material=Cu
+solenoid CapSolSim coilName=CapSolSimC current=$ampCapSolSim
+
+### Radiation Shielding around Production Target
+param lenCapSolS=1100
+param roCapSolS=360
+param riCapSolS=100
+#polycone CapSolS  material=Cu \
+#	z=0,400,500,700,1000 \
+#	innerRadius=240,100,100,270,270 \
+#	outerRadius=360,360,360,360,360 \
+#	color="0.4,0.1,0.1"
+polycone CapSolS  material=Cu \
+	z=0,400,550,750,$lenCapSolS \
+	innerRadius=260,$riCapSolS,$riCapSolS,270,270 \
+	outerRadius=$roCapSolS,$roCapSolS,$roCapSolS,$roCapSolS,$roCapSolS \
+	color="0.7,0.7,1.0"
+#	color="0.4,0.1,0.1"
+
+### Cryostat (inner wall)
+param lenCapSolIW=1400.
+param roCapSolIW=$riCapSol-70.
+param riCapSolIW=$roCapSolIW-10.
+tubs CapSolIW innerRadius=$riCapSolIW outerRadius=$roCapSolIW length=$lenCapSolIW material=Fe
+
+### Cryostat (outer wall)
+param lenCapSolOW=$lenCapSolIW
+param roCapSolOW=750.
+param riCapSolOW=750.-10.
+tubs CapSolOW innerRadius=$riCapSolOW outerRadius=$roCapSolOW length=$lenCapSolOW material=Fe
+
+### Cryostat (upstream wall)
+param lenCapSolUW=10.
+param riCapSolUW=$riCapSolIW
+param roCapSolUW=$roCapSolOW
+tubs CapSolUW innerRadius=$riCapSolUW outerRadius=$roCapSolUW length=$lenCapSolUW material=Fe
+
+### Cryostat (downstream wall)
+param lenCapSolDW=10.
+param riCapSolDW=$riCapSolIW
+param roCapSolDW=$roCapSolOW
+tubs CapSolDW innerRadius=$riCapSolDW outerRadius=$roCapSolDW length=$lenCapSolDW material=Fe
+#
+### Dwonstream Flange
+param lenCapSolFL=10.
+param riCapSolFL=0.0
+param roCapSolFL=$roCapSolIW
+tubs CapSolFL innerRadius=$riCapSolFL outerRadius=$roCapSolFL length=$lenCapSolFL material=Fe
+#
+### Yoke ###
+param lenCapSolYO=$lenCapSolOW
+param riCapSolYO=$roCapSolOW+50.
+param roCapSolYO=$riCapSolYO+400.
+tubs CapSolYO innerRadius=$riCapSolYO outerRadius=$roCapSolYO length=$lenCapSolYO material=Fe color=0.4,0.0,0.0
+### Yoke End ###
+param lenCapSolYE=200.
+param riCapSolYE=$riCapSolYO-200.
+param roCapSolYE=$roCapSolYO
+tubs CapSolYE innerRadius=$riCapSolYE outerRadius=$roCapSolYE length=$lenCapSolYE material=Fe color=0.4,0.0,0.0
+#
+# ----------------------------------------------
+# Bending Solenoid
+# ----------------------------------------------
+param lenBentSol=200.0
+param riBentSol=230.0
+param roBentSol=$riBentSol+30.0
+#current [A/mm2]
+param ampBentSol=84.0
+
+coil BentSolC innerRadius=$riBentSol outerRadius=$roBentSol length=$lenBentSol
+solenoid BentSol  coilName=BentSolC current=$ampBentSol
+
+### Cryostat (inner wall)
+param lenBentSolIW=340.
+param riBentSolIW=$riBentSol-50.
+param roBentSolIW=$riBentSol-40.
+tubs BentSolIW  innerRadius=$riBentSolIW outerRadius=$roBentSolIW length=$lenBentSolIW material=Fe
+
+### Cryostat (outer wall)
+param lenBentSolOW=380.
+param riBentSolOW=1000./2.-10.
+param roBentSolOW=1000./2.
+tubs BentSolOW  innerRadius=$riBentSolOW outerRadius=$roBentSolOW length=$lenBentSolOW material=Fe
+
+### Cryostat (upstream wall)
+param lenBentSolUW=10.
+param riBentSolUW=$riBentSolIW
+param roBentSolUW=$roBentSolOW
+tubs BentSolUW  innerRadius=$riBentSolUW outerRadius=$roBentSolUW length=$lenBentSolUW material=Fe
+
+### Cryostat (downstream wall)
+param lenBentSolDW=10.
+param riBentSolDW=$riBentSolIW
+param roBentSolDW=$roBentSolOW
+tubs BentSolDW  innerRadius=$riBentSolDW outerRadius=$roBentSolDW length=$lenBentSolDW material=Fe
+
+### Chamber connecting between Capture solenoid
+###  and Transport Solenoid
+param lenConn=200.
+param riConn=$riBentSolIW
+param roConn=$riBentSolIW+10.
+tubs Conn  innerRadius=$riConn outerRadius=$roConn length=$lenConn material=Fe
+
+### EndCap of Capture solenoid
+param lenCapSolEC=10.
+param roCapSolEC=$riCapSolIW
+param riCapSolEC=$riBentSolIW
+tubs CapSolEC  innerRadius=$riCapSolEC outerRadius=$roCapSolEC length=$lenCapSolEC material=Fe
+
+# ----------------------------------------------
+# Beam Monitor 
+# ----------------------------------------------
+virtualdetector monitor radius=500.0 length=1.0 material=Vacuum
+virtualdetector monitor_big radius=2000.0 length=1.0 material=Vacuum color=0,0,1
+virtualdetector monitor_big2 radius=2000.0 length=1.0 material=Vacuum color=0,0,1
+tubs trackKiller outerRadius=500.0 length=1.0 material=Vacuum kill=1
+# ----------------------------------------------
+# Target Monitor 
+# ----------------------------------------------
+#virtualdetector TargetMonitor radius=450.0 length=1.0 material=Vacuum \
+#	require="PDGid==2212||PDGid==211||PDGid==-211||PDGid==13||PDGid==-13"
+param vdTargetInnerRadius=$targetRadius+1.0
+param vdTargetOuterRadius=$targetRadius+2.0
+param vdTargetLength=$targetLength+4.0
+
+virtualdetector VDTargetB innerRadius=$vdTargetInnerRadius radius=$vdTargetOuterRadius length=$vdTargetLength material=Vacuum
+
+virtualdetector VDTargetS radius=$vdTargetInnerRadius length=1.0 material=Vacuum
+
+group Target length=$vdTargetLength radius=$vdTargetOuterRadius
+  #place VDTargetB   x=0. y=0. z=0. rename=TargetB
+  #place VDTargetS   x=0. y=0. z=-$vdTargetLength/2.+0.5 rename=TargetU
+  #place VDTargetS   x=0. y=0. z=$vdTargetLength/2.-0.5 rename=TargetD
+  place ProdTarget  x=0. y=0. z=0.
+endgroup
+
+
+
+### ----------------------------------------------
+### NTuple
+### ----------------------------------------------
+#newparticlentuple NEWPARTICLES format=bltrackfile filename=newparticles require="PDGid==211||PDGid==-211||PDGid==13||PDGid==-13"
+
+# ----------------------------------------------
+# Layout Objects
+# ----------------------------------------------
+param zShift=50.
+param zsta=0.0-($lenCapSol/2.)+($zShift)
+
+place 	trackKiller 	z=$zsta-2.0
+#place 	monitor 	z=$zsta-1.0 rename=monitor0
+param curr=83.7
+place 	CapSolSim 	front=1 z=$zsta current=$curr
+place 	CapSol 	front=1 z=$zsta current=$curr
+place 	CapSolSim 	front=1 z=$zsta+$lenCapSol-$lenCapSolSim current=0.6*$curr
+place 	CapSolS 	z=-$lenCapSolS/2.
+place 	CapSolIW 	z=0.0
+place 	CapSolOW 	z=0.0
+place 	CapSolUW 	z=-$lenCapSolIW/2.
+place 	CapSolDW 	z=$lenCapSolIW/2.
+place 	CapSolYO 	z=0.0
+place 	CapSolYE 	z=-$lenCapSolYO/2.-$lenCapSolYE/2.
+place 	CapSolFL 	z=-$lenCapSolIW/2.
+place 	CapSolEC 	z=$lenCapSolIW/2. initialPhi=-180 finalPhi=150
+place 	Conn		front=1 z=$lenCapSolIW/2.
+
+#place 	monitor 	z=$Zcl+1.0 rename=monitor1
+
+if $btype==0||$btype==1||$btype==2||$btype==3
+#  place ProdTarget	z=0.0 rotation=Y$targetHrzAngle,X$targetVrtAngle
+  place Target	z=0.0 rotation=Y$targetHrzAngle,X$targetVrtAngle
+endif
+
+param zsta=$zsta+$lenCapSol
+
+# dz=1100mm from target to BT coil
+param zsta=1100.
+
+# transport solenoid 200mm
+# Number of Coils = NSector+1
+#param NSector=8
+#param NSector=15
+param pitchAngle=6.0
+param BendingRadius=3000.0
+param HalfPitch=$BendingRadius*tan($pitchAngle/2.0*3.1415926535/180.)
+param CoilPitch=2.0*$HalfPitch
+param jseg=0
+param TiltAngle=X2
+
+
+
+#0-90
+#First segment
+#place 	monitor 	z=$zsta-10. rename=monitor3
+
+param zcenter=$zsta+$lenBentSol/2.
+param jseg=$jseg+1
+place 	BentSol       z=$zcenter rotation=$TiltAngle rename=BentSol$jseg current=84.
+place 	BentSolIW     z=$zcenter
+place 	BentSolOW     z=$zcenter initialPhi=-180 finalPhi=150
+
+place 	BentSolIW     front=1 z=$zcenter-300. initialPhi=-180 finalPhi=150
+place 	BentSolOW     front=1 z=$zcenter-300. initialPhi=-180 finalPhi=150
+place 	BentSolUW     z=$zcenter-300. initialPhi=-180 finalPhi=150
+
+param nseg=3
+do iseg 1 $nseg
+  param zcorner=$zcenter+$HalfPitch
+  corner C z=$zcorner rotation=Y$pitchAngle
+  param zcenter=$zcorner+$HalfPitch
+  param jseg=$jseg+1
+  place 	BentSol       z=$zcenter rotation=$TiltAngle rename=BentSol$jseg current=84.
+  place 	BentSolIW     z=$zcenter
+  place 	BentSolOW     z=$zcenter
+#  place 	monitor        z=$Zcl+1.0 rename=monitor#
+enddo
+
+param zcorner=$zcenter+$HalfPitch
+corner C z=$zcorner rotation=Y$pitchAngle
+param zcenter=$zcorner+$HalfPitch
+param jseg=$jseg+1
+place 	BentSol       z=$zcenter rotation=$TiltAngle rename=BentSol$jseg current=84.
+place 	BentSolIW     z=$zcenter
+place 	BentSolOW     z=$zcenter
+place 	BentSolIW     front=1 z=$zcenter-$lenBentSolIW+200.
+place 	BentSolOW     front=1 z=$zcenter-$lenBentSolOW+200.
+place 	BentSolDW     z=$zcenter+200.
+
+param zsta=$zcenter+400.
+place 	BentSolIW     z=$zsta-200.
+
+
+#90-180
+#place 	monitor 	z=$zsta-10. rename=monitor4
+
+param zcenter=$zsta+$lenBentSol/2.
+param jseg=$jseg+1
+place 	BentSol       z=$zcenter rotation=$TiltAngle rename=BentSol$jseg current=84.
+place 	BentSolIW     z=$zcenter
+place 	BentSolOW     z=$zcenter
+
+#place 	monitor_big2        z=$zcenter-200 rename=monitor7
+
+place 	BentSolIW     front=1 z=$zcenter-200.
+place 	BentSolOW     front=1 z=$zcenter-200.
+place 	BentSolUW     z=$zcenter-200.
+
+
+param nseg=1
+do iseg 1 $nseg
+  param zcorner=$zcenter+$HalfPitch
+  corner C z=$zcorner rotation=Y$pitchAngle
+  param zcenter=$zcorner+$HalfPitch
+  param jseg=$jseg+1
+  place 	BentSol       z=$zcenter rotation=$TiltAngle rename=BentSol$jseg current=84.
+  place 	BentSolIW     z=$zcenter
+  place 	BentSolOW     z=$zcenter
+#  place 	monitor        z=$Zcl+1.0 rename=monitor#
+enddo
+
+param zcorner=$zcenter+$HalfPitch
+corner C z=$zcorner rotation=Y$pitchAngle
+param zcenter=$zcorner+$HalfPitch
+param jseg=$jseg+1
+place 	BentSol       z=$zcenter rotation=$TiltAngle rename=BentSol$jseg current=84.
+place 	BentSolIW     z=$zcenter
+place 	BentSolOW     z=$zcenter
+#place 	monitor        z=$Zcl+10. rename=monitor5
+place 	BentSolIW     front=1 z=$zcenter-$lenBentSolIW+300.
+place 	BentSolOW     front=1 z=$zcenter-$lenBentSolOW+300.
+place 	BentSolDW     z=$zcenter+300.
+#place 	monitor        z=$Zcl+10. rename=monitor6
+place 	monitor_big        z=$Zcl+10. rename=monitor6
+
+
+place 	trackKiller 	z=$Zcl+11.0
+
+### ----------------------------------------------
+if $btype==9999
+### ----------------------------------------------
+printfield exit=1 type=cylinder file='field.txt' \
+	Z0=-1000. nZ=200 dZ=10.  nR=100 dR=5.
+endif
