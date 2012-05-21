@@ -2,11 +2,11 @@
 
 // returns a pointer to new file, basically a wrapper for TFile
 TFile* init_file(const TString& file_name, // the file to open
-    const& TString options="READ", // options: read, write, recreate etc
+    const TString& options="READ", // options: read, write, recreate etc
     const bool verbose=false // more info
 ){
     // this is a pretty basic wrapper for TFile
-    TFile* file = new TFile(filename, options);
+    TFile* file = new TFile(file_name, options);
     if (!file->IsOpen()) { 
         exit(1); // if it didn't load something's wrong
     } else {
@@ -16,12 +16,14 @@ TFile* init_file(const TString& file_name, // the file to open
 }
 
 // returns a pointer to a new TTree, basically another wrapper
-template <class T>
 typedef void (*set_branch_address)(const T&, const TTree*);
-TTree* init_tree(const TFile* file, // file to load from
+template <class T> 
+TTree* init_tree (
+    const TFile* file, // file to load from
     const TString& treename,        // tree to load
     const T& branch,                // where to load the branches
-    set_branch_address address,     // function to load the branches
+    // void (*set_branch_address)(const T&, const TTree*), // function to set branches
+    set_branch_address func,
     const bool& verbose=false       // YUM more output!
 ) {
     TTree* tree = (TTree*) file->Get(treename);
@@ -30,7 +32,7 @@ TTree* init_tree(const TFile* file, // file to load from
         exit(1); // if it didn't load something's wrong
     } else {
         if(verbose) cout << "Returning "<< treename << endl;
-        (*address)(branch, tree);
+        (*func)(branch, tree);
         return tree;
     }
 }
@@ -41,10 +43,18 @@ double length (const double& x, const double& y, const double& z){
 }
 
 // searches for target in the vector
-template <class T>
-bool is_in (const vector<T>& vec, const T& target){
+typedef bool (*comparison)(const T&, const T&);
+template <class T> bool is_in (const vector<T>& vec, const T& target, comparison func){
     for(vector<T>::iterator iter = vec.begin(); iter < vec.end(); ++iter){
-        if (*iter == target) return true;
+        if ((*func<T>)(*iter,target)) return true;
+    }
+    return false;
+}
+
+// overload for basic equals test
+template <class T> bool is_in (const vector<T>& vec, const T& target){
+    for(vector<T>::iterator iter = vec.begin(); iter < vec.end(); ++iter){
+        if ( (*iter)==target ) return true;
     }
     return false;
 }
@@ -52,16 +62,16 @@ bool is_in (const vector<T>& vec, const T& target){
 // general for of the cut function (user supplies)
 // S & T are some user defined objects (assumed to be a branch and some
 // sort of output object eg a histogram) bool is passed the value of verbose
-template <class S, class T>
-typedef void (*cut_func_ptr)(const S& branch, const T* TObject, const bool);
+typedef void (*cut_func_ptr)(const S& in_obj, const T* out_obj, const bool);
+template <class S, class T> 
 void loop_entries(
     const TTree* in_tree,       // tree to loop over
-    const S& branch,            // first object for cut (e.g. tree's branch struct)
-    const T* object_for_cut,    // second object for cut (e.g hist, out_tree)
+    const S& in_obj_for_cut,    // input object for cut
+    const T** out_obj_for_cut,  // array of pointers to out objects
     const unsigned int n_funcs, // how many functions are in the array
     cut_func_ptr* cuts,         // array of function pointers for each loop
     const bool& verbose=false   // yay more info!
-)  {
+)  {    
     const unsigned int n_entries = in_tree->GetEntries();    
     
     if(verbose) cout << "Tree loaded. "<< n_entries << " entries found." << endl;
@@ -73,11 +83,74 @@ void loop_entries(
         for(unsigned int func = 0; func < n_funcs; ++func) {
                 // Dark voodoo! loop over the array of function pointers
                 // calling each function in turn
-            (*cuts[func])(branch, cut_to_object, verbose);
+            (*cuts[func])(in_obj_for_cut, out_obj_for_cut[func], verbose);
         }
-            // cut(branch, hit, cut_to_object);
 
     }
     if(verbose) cout << "filling finished" << endl;
 }
 
+void draw_pretty_two_hists(const TH1F* baseHist, 
+    const TH1F* frontHist, 
+    const TString title,
+    const TString baseTitle,
+    const TString frontTitle,
+    const TString img_save_location,
+    const TString options = ""
+) {
+    TCanvas* can = new TCanvas(title, title);
+    baseHist->SetTitle(title);
+    baseHist->Draw(options);
+    frontHist->SetLineColor(2);
+    frontHist->Draw((options + "SAMES"));
+    
+    can->Update(); // allows access to the stats boxes (THE FUCK?!)
+    TPaveStats* base_st  = (TPaveStats*)  baseHist->FindObject("stats");
+    base_st->SetOptStat(1002200);
+    // base_st->SetOptStat("MR");
+    base_st->SetX1NDC(0.65);
+    base_st->SetX2NDC(0.9);
+    base_st->SetY1NDC(0.59);
+    base_st->SetY2NDC(0.74);
+    TPaveStats* front_st = (TPaveStats*) frontHist->FindObject("stats");
+    front_st->SetOptStat(1002200);
+    front_st->SetX1NDC(0.65);
+    front_st->SetX2NDC(0.9);
+    front_st->SetY1NDC(0.75);
+    front_st->SetY2NDC(0.9);
+    
+        // create a legend for extra info
+    TLegend* leg = new TLegend(0.44,0.75,0.64,0.9);
+    leg->AddEntry(baseHist, baseTitle); // add the two histrograms to the legend
+    leg->AddEntry(frontHist, frontTitle);
+    leg->SetFillColor(0);
+    leg->Draw();
+
+    can->SaveAs(img_save_location);
+}
+
+// the stupidly long variable name is to try and stop namespace collisions @ global
+const int __useful_default_colour_selection [] =  {1, 2, 4, 3, 6, 7, 8, 9};
+void draw_pretty_hists(const int& n_hists,
+    const TH1** hist_array, 
+    const TString title,
+    const TString img_save_location,
+    const int colours* = __useful_default_colour_selection,
+    const TString options = ""
+) {
+    TCanvas* can = new TCanvas(title, title);
+    TLegend* leg = new TLegend(0.1,0.7,0.48,0.9);
+    leg->SetHeader(title);    
+    
+    for(unsigned int hist = 0; hist < n_hists; ++hist) {
+        hist_array[hist]->SetLineColor(colours[hist]);
+        TString draw_opt = (hist==0) ? options : (options+ " SAME");
+        hist_array[hist]->Draw(draw_opt);
+        leg->AddEntry(hist_array[hist]);
+    }
+
+    leg->SetFillColor(0);
+    leg->Draw();
+
+    can->SaveAs(img_save_location);
+}
