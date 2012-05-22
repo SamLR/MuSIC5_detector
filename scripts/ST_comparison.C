@@ -68,7 +68,7 @@ void ST_comparison(){
         "Polystyrene_5mm"};
     const TString file_prefix = "../../output/ST_optimisation_";
     const TString file_suffix = ".root";
-    const TString img_prefix = "../../../images/ST_optimisation_";
+    const TString img_prefix = "../../../images/ST_optimisation/ST_optimisation_";
     const TString img_suffix = ".eps";
     const TString xtitle = "Momentum (MeV)";
     const TString ytitle = "Count";

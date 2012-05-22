@@ -68,7 +68,7 @@ void degrader_comparison(){
         "run_Polystyrene_5mm"};
     const TString file_prefix = "../../output/archive_22May/";
     const TString file_suffix = ".root";
-    const TString img_prefix = "../../../images/";
+    const TString img_prefix = "../../../images/degrader_variations_22_May_2012/";
     const TString img_suffix = ".eps";
     const TString xtitle = "Momentum (MeV)";
     const TString ytitle = "Count";

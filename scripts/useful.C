@@ -122,7 +122,7 @@ void draw_pretty_two_hists(const TH1F* baseHist,
     base_st->SetY1NDC(0.59);
     base_st->SetY2NDC(0.74);
     TPaveStats* front_st = (TPaveStats*) frontHist->FindObject("stats");
-    front_st->SetOptStat(1002200);
+    front_st->SetOptStat(1002201);
     front_st->SetX1NDC(0.65);
     front_st->SetX2NDC(0.9);
     front_st->SetY1NDC(0.75);
