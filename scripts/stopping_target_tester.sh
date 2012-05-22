@@ -81,7 +81,7 @@ run_it()
     cmd="( $execmd >> $logfile ) 2>&1 | tee -a $logfile $runlog"
     echo "Running command:" >> $runlog
     echo $cmd >> $runlog
-    # eval $cmd
+    eval $cmd
     # this will also go to stdout
     echo "$1 $2 run complete" | tee -a $runlog 
     echo -e "************************\n" >> $runlog
