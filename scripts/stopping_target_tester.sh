@@ -7,7 +7,7 @@
 runname="ST_optimisation" 
 # what we want to generate
 thicknesses=( 0.2 1 2 5 10 ) # target thicknesses in mm
-materials=( Aluminium Polystyrene ) # & Polyethylene?
+materials=( "Aluminium" "Polystyrene" ) # & Polyethylene?
 
 
 # locations etc
@@ -23,7 +23,8 @@ outdir="$root/output"
 logdir="$outdir/log"
 
 runlog="$logdir/$runname.$log_suf" # master log
-
+degMat="Aluminium"
+degThickness="1"
 
 # gets the current branch & commit info
 # repo info
@@ -42,24 +43,48 @@ header="#\n\
 echo -e $header"# File: $runlog \n" > $runlog
 
 make_macro () 
-{
+# $1 ST material, $2 ST thickness, $3 DegMat $4 DegThickness $5 this filename
+{ 
     bulk="\
 $header\
-# File name: $3\n\
 # Optimising stopping target\n\
-#\t material:  $1\n\
-#\t thickness: $2\n\
+#\t STmaterial\t: $1\n\
+#\t STthickness\t: $2\n\
+#\t DegMaterial\t: $3\n\
+#\t DegThickness\t: $4
+#\n\
+# File name: $5\n\
 # \n\n\
 /MuSIC_Detector/dipField ../../MuSIC5_detector/fieldmap/fieldmap_dipole.txt\n\
 /MuSIC_Detector/solField ../../MuSIC5_detector/fieldmap/fieldmap_solenoid.txt\n\
 \n\
-/MuSIC_Detector/degraderMat Polystyrene\n\
-/MuSIC_Detector/degraderZ 1 mm\n\
 /MuSIC_Detector/targetMat $1\n\
 /MuSIC_Detector/targetZ $2 mm\n\
+/MuSIC_Detector/degraderMat $3\n\
+/MuSIC_Detector/degraderZ $4 mm\n\
 /run/initialize\n\
 "
     echo -e $bulk
+}
+
+run_it()
+{ # $1 = STmaterial, $2 = STthickness, $3 = DegMaterial $4 = DegThickness
+    prefix="${runname}_${1}_${2}mm"
+    outfile="$outdir/$prefix.$outfile_suf"
+    macfile="$logdir/$prefix.$macro_suf" # save the macros with the logs
+    logfile="$logdir/$prefix.$log_suf"
+    make_macro $1 $2 $3 $4 $macfile > $macfile
+    echo "$1 $2 run started" | tee -a $runlog 
+    echo $macfile " generated" >> $runlog
+    execmd="$exe $infile $outfile $macfile"
+    # for an explanation of the below command see doit.sh
+    cmd="( $execmd >> $logfile ) 2>&1 | tee -a $logfile $runlog"
+    echo "Running command:" >> $runlog
+    echo $cmd >> $runlog
+    # eval $cmd
+    # this will also go to stdout
+    echo "$1 $2 run complete" | tee -a $runlog 
+    echo -e "************************\n" >> $runlog
 }
 
 # record exe status
@@ -67,26 +92,14 @@ echo "\`ls -l $exedir\` results in:" >> $runlog
 ls -l $exedir >> $runlog 
 echo -e "************************\n" >> $runlog
 
+echo "Make a basis simulation (1mm Al degrader, no ST)"  | tee -a $runlog 
+run_it Air 5 $degMat $degThickness
+echo "Moving to the main loop " | tee -a $runlog 
 # generate the macros & run the program
 for mat in ${materials[@]}; # loop over all entries in the array materials
 do
     for thickness in ${thicknesses[@]}; 
     do
-        prefix="${runname}_${mat}_${thickness}mm"
-        outfile="$outdir/$prefix.$outfile_suf"
-        macfile="$logdir/$prefix.$macro_suf" # save the macros with the logs
-        logfile="$logdir/$prefix.$log_suf"
-        make_macro $mat $thickness $macfile > $macfile
-        echo "$mat $thickness run started" | tee -a $runlog 
-        echo $macfile " generated" >> $runlog
-        execmd="$exe $infile $outfile $macfile"
-                # for an explanation of the below command see doit.sh
-        cmd="( $execmd >> $logfile ) 2>&1 | tee -a $logfile $runlog"
-        echo "Running command:" >> $runlog
-        echo $cmd >> $runlog
-        eval $cmd
-        # this will also go to stdout
-        echo "$mat $thickness run complete" | tee -a $runlog 
-        echo -e "************************\n" >> $runlog
+        run_it $mat $thickness $degMat $degThickness
     done;
 done;
