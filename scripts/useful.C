@@ -130,8 +130,8 @@ void draw_pretty_two_hists(const TH1F* baseHist,
     
         // create a legend for extra info
     TLegend* leg = new TLegend(0.44,0.75,0.64,0.9);
-    leg->AddEntry(baseHist, baseTitle); // add the two histrograms to the legend
     leg->AddEntry(frontHist, frontTitle);
+    leg->AddEntry(baseHist, baseTitle); // add the two histrograms to the legend
     leg->SetFillColor(0);
     leg->Draw();
 
