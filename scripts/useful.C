@@ -90,6 +90,16 @@ void loop_entries(
     if(verbose) cout << "filling finished" << endl;
 }
 
+TH1F* init_hist (const TString& name, // histogram name & title
+    const int& n_bins, const int& x_low, const int& x_hi, // number of bins, min & max x
+    const TString& xtitle,const TString& ytitle // axis titles
+) {
+    TH1F* hist = new TH1F(name, name, n_bins, x_low, x_hi); // fresh blood!
+    hist->GetXaxis()->SetTitle(xtitle);
+    hist->GetYaxis()->SetTitle(ytitle);
+    return hist;
+}
+
 void draw_pretty_two_hists(const TH1F* baseHist, 
     const TH1F* frontHist, 
     const TString title,
@@ -106,8 +116,7 @@ void draw_pretty_two_hists(const TH1F* baseHist,
     
     can->Update(); // allows access to the stats boxes (THE FUCK?!)
     TPaveStats* base_st  = (TPaveStats*)  baseHist->FindObject("stats");
-    base_st->SetOptStat(1002200);
-    // base_st->SetOptStat("MR");
+    base_st->SetOptStat(1002201); // stats: integral, mean + er, RMS + er, name
     base_st->SetX1NDC(0.65);
     base_st->SetX2NDC(0.9);
     base_st->SetY1NDC(0.59);

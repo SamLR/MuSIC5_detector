@@ -34,7 +34,7 @@ void set_in_branch_address(const in_branch_struct&, const TTree*);
 void stopped_muons(const in_branch_struct&, const TH1F*, const bool);
 void not_stopped_muons(const in_branch_struct&, const TH1F*, const bool);
 
-void degrader_comparison(){
+void ST_comparison(){
     // open file
     // get the tree
     // set branches
@@ -55,20 +55,20 @@ void degrader_comparison(){
          &not_stopped_muons,
          &all_scint1_muons};
          
-    const TString air_root = "run_Air_5mm"; // background comparison for scint 1
-    const TString file_roots [n_files] = {"run_Aluminium_0.2mm",
-        "run_Aluminium_10mm",
-        "run_Aluminium_1mm",
-        "run_Aluminium_2mm",
-        "run_Aluminium_5mm",
-        "run_Polystyrene_0.2mm",
-        "run_Polystyrene_10mm",
-        "run_Polystyrene_1mm",
-        "run_Polystyrene_2mm",
-        "run_Polystyrene_5mm"};
-    const TString file_prefix = "../../output/archive_22May/";
+    const TString air_root = "Air_5mm"; // background comparison for scint 1
+    const TString file_roots [n_files] = {"Aluminium_0.2mm",
+        "Aluminium_10mm",
+        "Aluminium_1mm",
+        "Aluminium_2mm",
+        "Aluminium_5mm",
+        "Polystyrene_0.2mm",
+        "Polystyrene_10mm",
+        "Polystyrene_1mm",
+        "Polystyrene_2mm",
+        "Polystyrene_5mm"};
+    const TString file_prefix = "../../output/ST_optimisation_";
     const TString file_suffix = ".root";
-    const TString img_prefix = "../../../images/";
+    const TString img_prefix = "../../../images/ST_optimisation_";
     const TString img_suffix = ".eps";
     const TString xtitle = "Momentum (MeV)";
     const TString ytitle = "Count";
@@ -80,7 +80,7 @@ void degrader_comparison(){
     TH1F* hists [n_files][n_funcs]; // one for stopped, one for not
     
     // initialise a hist for no degrader
-
+    cout << "Histogram for default (no ST, 1mm Al degrader)" << endl;
     TH1F* air_hist = init_hist ("Air", 50, 0, 200, xtitle, ytitle);
     TH1F* tmp_array [] = {air_hist};
     TFile* in_file = init_file(( file_prefix + air_root + file_suffix ));
@@ -105,7 +105,7 @@ void degrader_comparison(){
         TString name1 = "stopped_"+file_roots[file_no]; // munge munge munge
         TString name2 = "not_stopped_"+file_roots[file_no];
         TString name3 = "compare_to_air_"+file_roots[file_no];
-
+        
         hist_set[0] = init_hist (name1, 50, 0, 200, xtitle, ytitle);
         hist_set[1] = init_hist (name2, 50, 0, 200, xtitle, ytitle);
         hist_set[2] = init_hist (name3, 50, 0, 200, xtitle, ytitle);
@@ -115,8 +115,8 @@ void degrader_comparison(){
         // make pretty pictures! 
         TString h_title = "Muons stopped after " + file_roots[file_no];
         TString img_location = img_prefix + file_roots[file_no] + "_stopped" + img_suffix;
-        draw_pretty_two_hists(hist_set[0], hist_set[1], h_title, 
-            "stopped", "not stopped", img_location);   
+        draw_pretty_two_hists(hist_set[1], hist_set[0], h_title, 
+            "not stopped", "stopped", img_location);   
             
         h_title = "Comparison to Air of "+ file_roots[file_no];
         img_location = img_prefix + file_roots[file_no] + "_post_degrader" + img_suffix;
