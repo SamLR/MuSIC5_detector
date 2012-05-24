@@ -401,6 +401,8 @@ void compare_degraders() {
 
 // FIXME this is starting to break the rule of 7 things
 
+    cout << "THIS IS DEPRICATED DONT USE" << endl;
+    return;
     
     TString image_dir = "../../../images/";
     TString prefix = "../../output/";

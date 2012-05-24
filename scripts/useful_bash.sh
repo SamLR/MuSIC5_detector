@@ -33,7 +33,6 @@ archive_dir ()
         mkdir $archive_dir
         echo "moving in"
         mv $1 $archive_dir/.
-        chmod u-w $archive_dir # write protect it
         mkdir $1
     fi
 }

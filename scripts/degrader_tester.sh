@@ -8,8 +8,10 @@
 # What's the name of this run?
 runname="degrader_optimisation" 
 # what we want to generate
+# thicknesses=( 20 50 100 ) # target thicknesses in mm
 thicknesses=( 0.2 1 2 5 10 ) # target thicknesses in mm
-materials=( "Aluminium" "Polystyrene" ) # & Polyethylene?
+materials=( "Aluminium" ) # & Polyethylene?
+# materials=( "Aluminium" "Polystyrene" ) # & Polyethylene?
 
 # locations etc
 outfile_suf="root" # '.' is added at location, mainly for readability
@@ -25,8 +27,10 @@ logdir="$outdir/log"
 archivedir="$root/output/archive"
 
 runlog="$logdir/$runname.$log_suf" # master log
-STMat="Copper"
-STThickness="6"
+STMat="Aluminium"
+STThickness="1" 
+# STMat="Copper"
+# STThickness="6"
 
 # ===========================================================================#
 # Actually do things!

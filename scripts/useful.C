@@ -10,7 +10,7 @@ TFile* init_file(const TString& file_name, // the file to open
     if (!file->IsOpen()) { 
         exit(1); // if it didn't load something's wrong
     } else {
-        if (verbose) cout << filename << " sucessfully opened"<< endl;
+        if (verbose) cout << file_name << " sucessfully opened"<< endl;
         return file;
     }
 }
@@ -22,7 +22,6 @@ TTree* init_tree (
     const TFile* file, // file to load from
     const TString& treename,        // tree to load
     const T& branch,                // where to load the branches
-    // void (*set_branch_address)(const T&, const TTree*), // function to set branches
     set_branch_address func,
     const bool& verbose=false       // YUM more output!
 ) {

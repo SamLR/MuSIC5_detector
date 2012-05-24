@@ -8,8 +8,10 @@
 # What's the name of this run?
 runname="ST_optimisation" 
 # what we want to generate
-thicknesses=( 0.2 1 2 5 10 ) # target thicknesses in mm
-materials=( "Aluminium" "Polystyrene" ) # & Polyethylene?
+thicknesses=( 20 50 100 ) # target thicknesses in mm
+# thicknesses=( 0.2 1 2 5 10 ) # target thicknesses in mm
+materials=( "Aluminium" ) # & Polyethylene?
+# materials=( "Aluminium" "Polystyrene" ) # & Polyethylene?
 
 # locations etc
 outfile_suf="root" # '.' is added at location, mainly for readability
