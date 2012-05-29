@@ -1,7 +1,8 @@
 #include "stopped_and_degrader_effect.C"
 
 void degrader_comparison(){
-    const unsigned int n_files = 3;
+    // const unsigned int n_files = 3;
+    const unsigned int n_files = 5;
 
      const TString air_root = "Air_5mm"; // background comparison for scint 1
      // const TString file_roots [n_files] = {"Aluminium_20mm",

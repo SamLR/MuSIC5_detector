@@ -6,6 +6,7 @@ TFile* init_file(const TString& file_name, // the file to open
     const bool verbose=false // more info
 ){
     // this is a pretty basic wrapper for TFile
+    cout << file_name << endl;
     TFile* file = new TFile(file_name, options);
     if (!file->IsOpen()) { 
         exit(1); // if it didn't load something's wrong
@@ -70,7 +71,7 @@ void loop_entries(
     const unsigned int n_funcs, // how many functions are in the array
     cut_func_ptr* cuts,         // array of function pointers for each loop
     const bool& verbose=false   // yay more info!
-)  {    
+)  {
     const unsigned int n_entries = in_tree->GetEntries();    
     
     if(verbose) cout << "Tree loaded. "<< n_entries << " entries found." << endl;
@@ -89,11 +90,22 @@ void loop_entries(
     if(verbose) cout << "filling finished" << endl;
 }
 
-TH1F* init_hist (const TString& name, // histogram name & title
+TH1F* init_1Dhist (const TString& name, // histogram name & title
     const int& n_bins, const int& x_low, const int& x_hi, // number of bins, min & max x
     const TString& xtitle,const TString& ytitle // axis titles
 ) {
     TH1F* hist = new TH1F(name, name, n_bins, x_low, x_hi); // fresh blood!
+    hist->GetXaxis()->SetTitle(xtitle);
+    hist->GetYaxis()->SetTitle(ytitle);
+    return hist;
+}
+
+TH2F* init_2Dhist (const TString& name, // histogram name & title
+    const int& n_x_bins, const int& x_low, const int& x_hi, // number of bins, min & max x
+    const int& n_y_bins, const int& y_low, const int& y_hi, // number of bins, min & may y
+    const TString& xtitle,const TString& ytitle // axis titles
+) {
+    TH2F* hist = new TH2F(name, name, n_x_bins, x_low, x_hi, n_y_bins, y_low, y_hi); // fresh blood!
     hist->GetXaxis()->SetTitle(xtitle);
     hist->GetYaxis()->SetTitle(ytitle);
     return hist;
@@ -133,6 +145,21 @@ void draw_pretty_two_hists(const TH1F* baseHist,
     leg->AddEntry(baseHist, baseTitle); // add the two histrograms to the legend
     leg->SetFillColor(0);
     leg->Draw();
+
+    can->SaveAs(img_save_location);
+}
+
+void draw_pretty_hist(const TH1* hist, 
+    const TString img_save_location,
+    const TString options = ""
+) {
+    TString title = hist->GetTitle();
+    TCanvas* can = new TCanvas(title, title);
+    hist->Draw(options);
+    
+    can->Update(); // allows access to the stats boxes (THE FUCK?!)
+    TPaveStats* base_st  = (TPaveStats*)  hist->FindObject("stats");
+    base_st->SetOptStat(1002201); // stats: integral, mean + er, RMS + er, name
 
     can->SaveAs(img_save_location);
 }

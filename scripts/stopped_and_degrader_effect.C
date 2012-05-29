@@ -66,7 +66,7 @@ void do_it_all(const unsigned int& n_files,
         cout << endl<< "Starting file "<< file_roots[file_no] << endl;
         // munge the filename
         TString resolved_filename = file_prefix + file_roots[file_no] + file_suffix;
-        
+        cout << resolved_filename << endl;
         // open up and initialise things
         in_file = init_file(resolved_filename);
         in_tree = init_tree<in_branch_struct>(in_file, "t", branch, &set_in_branch_address);
@@ -77,9 +77,10 @@ void do_it_all(const unsigned int& n_files,
         TString name2 = "not_stopped_"+file_roots[file_no];
         TString name3 = "compare_to_air_"+file_roots[file_no];
         
-        hist_set[0] = init_hist (name1, 50, 0, 200, xtitle, ytitle);
-        hist_set[1] = init_hist (name2, 50, 0, 200, xtitle, ytitle);
-        hist_set[2] = init_hist (name3, 50, 0, 200, xtitle, ytitle);
+        // FIXME Fragile
+        hist_set[0] = init_1Dhist(name1, 50, 0, 200, xtitle, ytitle);
+        hist_set[1] = init_1Dhist(name2, 50, 0, 200, xtitle, ytitle);
+        hist_set[2] = init_1Dhist(name3, 50, 0, 200, xtitle, ytitle);
         // loop-de-loop
         loop_entries<in_branch_struct, TH1F>(in_tree, branch, hist_set, n_funcs, cuts, true);
         
@@ -402,18 +403,4 @@ void not_stopped_charged(const in_branch_struct& branch, const TH1* hist, const 
     }
 }
 
-void xy_average_momentum(const in_branch_struct& branch, const TH2* hist, const bool verbose){
-    const unsigned int n_hits = branch.g_nhit;
     
-    if (n_hits==0) return;
-    
-    intvec tracks;
-    dblvec momentums;
-    
-    
-    
-    
-}
-
-
-
