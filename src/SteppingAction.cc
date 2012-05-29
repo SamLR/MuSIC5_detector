@@ -95,14 +95,30 @@ void SteppingAction::UserSteppingAction(const G4Step * aStep)
     
     if (point2==NULL || point1==NULL) return;
     
+    const G4VPhysicalVolume* nextvol = point2->GetTouchableHandle()->GetVolume();
+    
+    if (!nextvol) return; // if there is no next volume we're exiting the world
+    
     const G4String& volname = point1->GetTouchableHandle()->GetVolume()->GetName();
+    // the next two values tell us if the particle is about to enter another volume
+    // and what that volume is
+    const G4String& nextvolname = nextvol->GetName();
+    const bool exiting_vol = (point1->GetStepStatus() == fGeomBoundary );
     
     int acounter = 0;
-    
-    if      (strcmp(volname.c_str(),"sci1")==0)     { acounter = 1; } 
-    else if (strcmp(volname.c_str(),"target")==0)   { acounter = 2; } 
-    else if (strcmp(volname.c_str(),"sci2")==0)     { acounter = 3; }
-    else if (strcmp(volname.c_str(),"degrader")==0) { acounter = 4; }
+    if     ( volname == "sci1" )     { acounter = 1; } 
+    else if( volname == "target" )   { acounter = 2; } 
+    else if( volname == "sci2" )     { acounter = 3; }
+    else if( volname == "degrader" ) { acounter = 4; }
+    // record stuff specially if we're about to enter the degrader to ST
+    else if( exiting_vol && (nextvolname == "target") )   
+    { 
+        acounter = 1002; 
+    }
+    else if( exiting_vol && (nextvolname == "degrader") ) 
+    { 
+        acounter = 1004; 
+    }
     else return;
     
     int parentid = track->GetParentID();
