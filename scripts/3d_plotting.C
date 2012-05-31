@@ -30,39 +30,55 @@ struct in_branch_struct {
     double tof[500];
 };
 
-void do_it_all2D(const unsigned int& n_files,
+void do_it_all3D(const unsigned int& n_files,
     const TString& file_prefix,
+    const TString& img_prefix,
     const TString& save_root,
     const TString* file_roots,
     const unsigned int& n_funcs,
     cut_func_ptr cuts,
+    const TString* hist_titles,
     const TString* hist_names,
-    TH2F* hists[n_files][n_funcs],
     const TString& file_suffix=".root",
+    const TString& img_suffix=".eps",
     const TString xtitle = "Momentum at degrader (MeV)",
-    const TString ytitle = "Momentum at stopping target (MeV)"
+    const TString ytitle = "Momentum at stopping target (MeV)", 
+    const TString ztitle = "particle", 
 ){
     TString out_file_name = file_prefix + save_root + file_suffix;
     TFile* out_file = init_file(out_file_name, "RECREATE");
     // array of function pointers to use
 
+    TH3F* hists [n_files][n_funcs]; // one for stopped, one for not
     for(unsigned int file_no = 0; file_no < n_files; ++file_no) {
+        in_branch_struct branch;
+        TH3F** hist_set = hists[file_no]; // alias to the pair of hists we want
+
         cout << endl<< "Starting file "<< file_roots[file_no] << endl;
         // munge the filename
         TString resolved_filename = file_prefix + file_roots[file_no] + file_suffix;
-        
         // open up and initialise things
         in_file = init_file(resolved_filename);
-        in_branch_struct branch;
+        
         in_tree = init_tree<in_branch_struct>(in_file, "t", branch, &set_in_branch_address);
 
         // create the histograms then fill them in the loop
         out_file->cd(); // make sure they're added to the save file
         for(unsigned int i = 0; i < n_funcs; ++i) {
             TString name = hist_names[i] + file_roots[file_no]; // munge munge munge
-            hists[file_no][i] = init_2Dhist (name, 50, 0, 200,50, 0, 200, xtitle, ytitle);   
+            hist_set[i] = init_2Dhist (name, 50, 0, 200,50, 0, 200, xtitle, ytitle);   
         }
-        loop_entries<in_branch_struct, TH2F>(in_tree, branch, hists[file_no], n_funcs, cuts, true);
+
+        // loop-de-loop
+        loop_entries<in_branch_struct, TH3F>(in_tree, branch, hist_set, n_funcs, cuts, true);
+
+        // make pretty pictures! 
+        for(unsigned int i = 0; i < n_funcs; ++i) {
+            TString title = hist_titles[i] + file_roots[file_no]; // munge munge munge
+            TString img_location = img_prefix + file_roots[file_no] + title + img_suffix;
+            TString option = "SCAT";
+            draw_pretty_hist(hist_set[i], img_location, option);   
+        }
     }
     out_file->Write();
 
@@ -103,70 +119,21 @@ void set_in_branch_address(const in_branch_struct& branch, const TTree* tree) {
 typedef vector<int> intvec;
 typedef vector<double> dblvec;
 
-const unsigned int pid_to_apid(const int inpid){
+const unsigned int convertPID(const int inpid){
     // convert a PID to one in a restricted range (for z plotting)
     // ( e==11 || µ==13 || π==211 || p==2212 );
     switch (inpid){
-        case  -11: return  1; // e+
-        case   11: return  2; // e-
-        case  -13: return 11; // µ+
-        case   13: return 12; // µ-
-        case  211: return 21; // π+
-        case -211: return 22; // π-
-        case 2212: return 21; // p
-        default: return 0;// shouldn't get called
+        case -211: return -3;
+        case  -13: return -2;
+        case  -11: return -1;
+        case   11: return  1;
+        case   13: return  2;
+        case  211: return  3;
+        case 2212: return  4;
     }
 }
 
-void preDeg_vs_preST_charged_PIDweight(const in_branch_struct& branch, const TH2* hist, const bool verbose){
-    const unsigned int n_hits = branch.g_nhit;
-
-    if (n_hits == 0) return;
-
-    intvec target_tracks_ids;
-    intvec degrader_tracks_ids;
-    dblvec degrader_momentums;
-
-    for(unsigned int hit = 0; hit < n_hits; ++hit) {
-        int pid = branch.pdgid[hit];
-
-        // if ( abs(pid) != 13 ) continue;
-        bool charged = ( abs(pid)==11 || abs(pid)==13 || abs(pid)==211 || pid==2212 );
-        if (!charged) continue;
-        
-        int counter = branch.counter[hit];        
-        if (counter == 1004) {
-            // just before degrader
-            int trackID = branch.trkid[hit];
-            bool seen_it = is_in<int>(degrader_tracks_ids, trackID);
-
-            if (!seen_it) { 
-                     // not seen it so add the track ID to the list 
-                     // and record the momentum
-                degrader_tracks_ids.push_back(trackID);
-                double mom = length (branch.px[hit], branch.py[hit], branch.pz[hit]);
-                degrader_momentums.push_back(mom);
-            } 
-        } else if ( counter == 1002 ) { 
-            // just before target
-            int trackID = branch.trkid[hit];
-            bool seen_it = is_in<int>(target_tracks_ids, trackID);
-            if (!seen_it) { 
-                // new particle, lets find what it's momentum in scint1 was
-                for(unsigned int i = 0; i < degrader_tracks_ids.size(); ++i) {
-                    if(degrader_tracks_ids[i] == trackID){
-                        double mom = length (branch.px[hit], branch.py[hit], branch.pz[hit]);
-                        hist->Fill(degrader_momentums[i],mom, pid_to_apid(pid));
-                        target_tracks_ids.push_back(trackID);
-                        break; // mission complete next hit!
-                    }
-                }
-            }
-        }
-    }
-}
-
-void preDeg_vs_preST_charged(const in_branch_struct& branch, const TH2* hist, const bool verbose){
+void preDeg_vs_preST_muons(const in_branch_struct& branch, const TH3* hist, const bool verbose){
     const unsigned int n_hits = branch.g_nhit;
 
     if (n_hits == 0) return;
@@ -203,7 +170,7 @@ void preDeg_vs_preST_charged(const in_branch_struct& branch, const TH2* hist, co
                 for(unsigned int i = 0; i < degrader_tracks_ids.size(); ++i) {
                     if(degrader_tracks_ids[i] == trackID){
                         double mom = length (branch.px[hit], branch.py[hit], branch.pz[hit]);
-                        hist->Fill(degrader_momentums[i],mom);
+                        hist->Fill(degrader_momentums[i],mom, convertPID(pid));
                         target_tracks_ids.push_back(trackID);
                         break; // mission complete next hit!
                     }

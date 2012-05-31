@@ -47,7 +47,7 @@ void SteppingAction::set_hit(int acounter, const char* aprocname, int atrkid, in
     if (f_root->g_nhit>=MAX_HIT) {
         return;
     }
-
+    
     int g_nhit = f_root->g_nhit;
     if (strcmp(aprocname,"msc")==0)                            {  f_root->procid[g_nhit]=1; } // multiple scattering
     else if (strcmp(aprocname,"Transportation")==0)            {  f_root->procid[g_nhit]=2; }
@@ -69,7 +69,7 @@ void SteppingAction::set_hit(int acounter, const char* aprocname, int atrkid, in
     else if (strcmp(aprocname,"NeutronInelastic")==0)          {  f_root->procid[g_nhit]=18; }
     else if (strcmp(aprocname,"CHIPSNuclearCaptureAtRest")==0) {  f_root->procid[g_nhit]=19; }
     else if (strcmp(aprocname,"PionMinusInelastic")==0)        {  f_root->procid[g_nhit]=20; }
-
+    
     
     f_root->counter[g_nhit] = acounter;
     f_root->trkid[g_nhit] = atrkid;
@@ -103,22 +103,20 @@ void SteppingAction::UserSteppingAction(const G4Step * aStep)
     // the next two values tell us if the particle is about to enter another volume
     // and what that volume is
     const G4String& nextvolname = nextvol->GetName();
-    const bool exiting_vol = (point1->GetStepStatus() == fGeomBoundary );
+    const bool pre_st = (point1->GetStepStatus() == fGeomBoundary) && 
+    (nextvolname == "target");
+    const bool pre_deg = (point1->GetStepStatus() == fGeomBoundary) && 
+    (nextvolname == "degrader"); 
     
-    int acounter = 0;
+    int acounter = 0; // main step
+    int bcounter = 0; // if this is a pre degrader or pre target step record extra info
     if     ( volname == "sci1" )     { acounter = 1; } 
     else if( volname == "target" )   { acounter = 2; } 
     else if( volname == "sci2" )     { acounter = 3; }
     else if( volname == "degrader" ) { acounter = 4; }
-    // record stuff specially if we're about to enter the degrader to ST
-    else if( exiting_vol && (nextvolname == "target") )   
-    { 
-        acounter = 1002; 
-    }
-    else if( exiting_vol && (nextvolname == "degrader") ) 
-    { 
-        acounter = 1004; 
-    }
+    // record stuff specially if we're about to enter the degrader to STif( exiting_vol && (nextvolname == "target") )   
+    else if (pre_st)  { bcounter = 1002; } // pre stopping target will likely not get called as scint 1 is there
+    else if (pre_deg) { bcounter = 1004; }
     else return;
     
     int parentid = track->GetParentID();
@@ -136,5 +134,11 @@ void SteppingAction::UserSteppingAction(const G4Step * aStep)
     const G4String& procname = point2->GetProcessDefinedStep()->GetProcessName();
     
     set_hit(acounter,procname.c_str(),trkid,parentid,pdgid,x,y,z,px,py,pz,kinetic,edep,tof);
+    // record hits just before degrader and stopping target
+    if (pre_st) {
+        set_hit(1002,procname.c_str(),trkid,parentid,pdgid,x,y,z,px,py,pz,kinetic,edep,tof);
+    } else if (pre_deg) {
+        set_hit(1004,procname.c_str(),trkid,parentid,pdgid,x,y,z,px,py,pz,kinetic,edep,tof);
+    }
 }
 

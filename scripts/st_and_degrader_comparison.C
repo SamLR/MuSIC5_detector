@@ -1,6 +1,6 @@
 #include "stopped_and_degrader_effect.C"
 
-void st_and_degrader_comparison(){         
+void st_and_degrader_comparison(){
     const unsigned int n_files = 16;
 
     const TString air_root = "Air_5mm"; // background comparison for scint 1

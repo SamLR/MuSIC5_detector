@@ -22,4 +22,4 @@
 
 /vis/scene/endOfEventAction accumulate
 
-/run/beamOn 50
+/run/beamOn 1
