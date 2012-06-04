@@ -5,7 +5,7 @@
 #include "stopped_and_degrader_effect.C"
 
 void stopped_counts(){
-    
+
     const unsigned int n_dz = 4;
     const TString file_roots[n_dz * n_dz] = {"1mm_1mm",  "1mm_5mm",  "1mm_10mm",  "1mm_15mm",
         "5mm_1mm",  "5mm_5mm",  "5mm_10mm",  "5mm_15mm",
@@ -25,13 +25,20 @@ void stopped_counts(){
     const TString img_suff = ".eps"; // save format
 
     unsigned int counts [n_dz][n_dz][n_func]; // the output from the loops will go here
-
+    for(unsigned int i = 0; i < n_dz; ++i) {
+        for(unsigned int j = 0; j < n_dz; ++j) {
+            for(unsigned int k = 0; k < n_func; ++k) {
+                counts [i][j][k] = 0; // make sure everything is initialised as it should be
+            }
+        }
+    }
+    
     TString out_file_name = dat_file_dir + save_file_root + in_file_suff;
     TFile* out_file = init_file(out_file_name, "RECREATE");
 
-    TH2F* stopped_muon_hist = init_2Dhist ("stopped_muons", 4, 1, 20, 4, 1, 20,
+    TH2F* stopped_muon_hist = init_2Dhist ("stopped_muons", 4, -2.5, 17.5, 4, -2.5, 17.5,
         "Degrader thickness (mm)", "Stopping target thickness (mm)"); // axis titles
-    TH2F* stopped_charged_hist = init_2Dhist ("stopped_charged_particles", 4, 1, 20, 4, 1, 20,
+    TH2F* stopped_charged_hist = init_2Dhist ("stopped_charged_particles", 4, -2.5, 17.5, 4, -2.5, 17.5,
         "Degrader thickness (mm)", "Stopping target thickness (mm)"); // axis titles
 
     for(unsigned int sti = 0; sti < n_dz; ++sti) {
@@ -44,41 +51,43 @@ void stopped_counts(){
             in_file = init_file(resolved_filename);
             in_branch_struct branch;
             in_tree = init_tree<in_branch_struct>(in_file, "t", branch, &set_in_branch_address);
-
+            cout << counts[degi][sti] << endl;
+            cout << counts[degi][sti][0] << endl;
             // loop over the trees counting the number of stopped muons & charged particles
             loop_entries<in_branch_struct, unsigned int>(in_tree, branch, counts[degi][sti], n_func, cuts, true);
             // loop_entries<in_branch_struct, TH1F>(in_tree, branch, hist_set, n_funcs, cuts, true);
+            cout << "count " << counts[degi][sti][0]<< endl;
             stopped_charged_hist->Fill(dZs[degi], dZs[sti], counts[degi][sti][0]);
             stopped_muon_hist->Fill(dZs[degi], dZs[sti], counts[degi][sti][1]);
         }
     }
     TCanvas* can_muon = new TCanvas("muons", "muons");
     stopped_muon_hist->Draw("COLZ");
-    
+
     TCanvas* can_charged = new TCanvas("charged", "charged");
     stopped_charged_hist->Draw("COLZ");
     // create histogram
-    
+
     out_file->Write();
 }
 
 
 typedef bool (*pid_check)(const int&);
-void stopped_pid_count(const in_branch_struct& branch, const int& count, pid_check check){
+void stopped_pid_count(const in_branch_struct& branch, const unsigned int& count, pid_check check){
     // Loop over all hits
        // 
+
     const unsigned int n_hits = branch.g_nhit;
 
     if (n_hits == 0) return;
-
     intvec scint1_track_ids;
     intvec scint2_track_ids;
 
     for(unsigned int hit = 0; hit < n_hits; ++hit) {
         int pid = branch.pdgid[hit];
-        bool charged = (*check)(pid);
+        bool correct_pid = (*check)(pid);
 
-        if ( !charged ) continue;
+        if ( !correct_pid ) continue;
 
         int counter = branch.counter[hit];
 
@@ -111,17 +120,17 @@ void stopped_pid_count(const in_branch_struct& branch, const int& count, pid_che
 }
 
 bool muon_check(const int& pid){
-    return (abs(pid)==13);
+    return (abs(pid)==13 || abs(pid)==11); // have to detect electrons as well
 }
 
 bool charged_check(const int& pid){
     return ( abs(pid)==11 || abs(pid)==13 || abs(pid)==211 || pid==2212 );
 }
 
-void stopped_muons_count(const in_branch_struct& branch, const int& count, const bool verbose ){
+void stopped_muons_count(const in_branch_struct& branch, const unsigned int& count, const bool verbose ){
     stopped_pid_count(branch, count, &muon_check);
 }
 
-void stopped_charged_count(const in_branch_struct& branch, const int& count, const bool verbose ){
+void stopped_charged_count(const in_branch_struct& branch, const unsigned int& count, const bool verbose ){
     stopped_pid_count(branch, count, &charged_check);
 }
