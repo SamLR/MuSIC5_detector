@@ -39,6 +39,7 @@
 #include "PrimaryGeneratorAction.hh"
 #include "EventAction.hh"
 #include "SteppingAction.hh"
+#include "PhysicsList.hh"
 
 #ifdef G4VIS_USE
 #include "G4VisExecutive.hh"
@@ -79,7 +80,9 @@ int main(int argc,char** argv)
     G4VUserDetectorConstruction* detector = new DetectorConstruction();
     runManager->SetUserInitialization(detector);
    //
-    G4VUserPhysicsList* physics = new QGSP_BERT();
+//    G4VUserPhysicsList* physics = new QGSP_BERT();
+    PhysicsList* physics = new PhysicsList();
+    
     runManager->SetUserInitialization(physics);
 
    // User Action classes
