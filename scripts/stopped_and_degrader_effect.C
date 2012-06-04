@@ -1,4 +1,5 @@
 #include "useful.C"
+#include "useful_inits.C"
 
 struct in_branch_struct {
     // structure as passed in from geant4
@@ -29,40 +30,31 @@ struct in_branch_struct {
     double tof[500];
 };
 
-void do_it_all(const unsigned int& n_files,
-    const TString& air_root,
-    const TString& file_prefix,
-    const TString& img_prefix,
-    const TString& save_root,
-    const TString* file_roots,
-    const unsigned int& n_funcs,
-    cut_func_ptr cuts,
-    cut_func_ptr air_cut,
-    const TString& file_suffix=".root",
-    const TString& img_suffix=".eps"
-){
-    const TString xtitle = "Momentum (MeV)";
-    const TString ytitle = "Count";
-    
-    TString out_file_name = file_prefix + save_root + file_suffix;
-    TFile* out_file = init_file(out_file_name, "RECREATE");
-    // array of function pointers to use
 
-    TH1F* hists [n_files][n_funcs]; // one for stopped, one for not
-    
-    // initialise a hist for no degrader
-    cout << "Histogram for Air "<< air_root << endl;
-    TH1F* air_hist = init_hist ("Air", 50, 0, 200, xtitle, ytitle);
-    TH1F* tmp_array [] = {air_hist};
-    TFile* in_file = init_file(( file_prefix + air_root + file_suffix ));
+void analyse1d(const unsigned int& n_files,
+    const TString& file_prefix,
+    const TString& save_file_name,
+    const TString* file_roots,
+    const TString* func_name_roots,
+    const unsigned int& n_funcs,
+    const TH1F* hists[n_files][n_funcs],
+    cut_func_ptr cuts,
+    const TString& file_suffix=".root",
+    const TString& img_suffix=".eps",
+    const TString xtitle = "Momentum (MeV)",
+    const TString ytitle = "Count",
+    const int n_bins = 50, 
+    const int x_min = 0, 
+    const int x_max = 200
+){
+    // root file to save things in
+    TString out_file_name = file_prefix + save_file_name + file_suffix;
+    TFile* out_file = init_file(out_file_name, "RECREATE");
+    // branch to address to
     in_branch_struct branch;
-    TTree* in_tree = init_tree<in_branch_struct>(in_file, "t", branch, &set_in_branch_address);
-    // cut_func_ptr air_cut [] = {&all_scint1_muons};
-    loop_entries<in_branch_struct, TH1F>(in_tree, branch, tmp_array, 1, air_cut, true);
-    
-    for(unsigned int file_no = 0; file_no < n_files; ++file_no) {
-        TH1F** hist_set = hists[file_no]; // alias to the pair of hists we want
         
+    for(unsigned int file_no = 0; file_no < n_files; ++file_no) {
+        TH1F** hist_set = hists[file_no]; // alias to the set of hists we want
         cout << endl<< "Starting file "<< file_roots[file_no] << endl;
         // munge the filename
         TString resolved_filename = file_prefix + file_roots[file_no] + file_suffix;
@@ -73,30 +65,16 @@ void do_it_all(const unsigned int& n_files,
         
         // create the histograms then fill them in the loop
         out_file->cd(); // make sure they're added to the save file
-        TString name1 = "stopped_"+file_roots[file_no]; // munge munge munge
-        TString name2 = "not_stopped_"+file_roots[file_no];
-        TString name3 = "compare_to_air_"+file_roots[file_no];
-        
-        // FIXME Fragile
-        hist_set[0] = init_1Dhist(name1, 50, 0, 200, xtitle, ytitle);
-        hist_set[1] = init_1Dhist(name2, 50, 0, 200, xtitle, ytitle);
-        hist_set[2] = init_1Dhist(name3, 50, 0, 200, xtitle, ytitle);
-        // loop-de-loop
-        loop_entries<in_branch_struct, TH1F>(in_tree, branch, hist_set, n_funcs, cuts, true);
-        
-        // make pretty pictures! 
-        TString h_title = "Muons stopped after " + file_roots[file_no];
-        TString img_location = img_prefix + file_roots[file_no] + "_stopped" + img_suffix;
-        draw_pretty_two_hists(hist_set[1], hist_set[0], h_title, 
-            "not stopped", "stopped", img_location);   
-            
-        h_title = "Comparison to Air of "+ file_roots[file_no];
-        img_location = img_prefix + file_roots[file_no] + "_post_degrader" + img_suffix;
-        draw_pretty_two_hists(air_hist, hist_set[2], h_title, 
-            "air", file_roots[file_no], img_location);
+        for(unsigned int func = 0; func < n_funcs; ++func) {
+            // initialise the histograms
+            TString name = func_name_roots[func] + file_roots[file_no];
+            hist_set[func] = init_1Dhist(name, n_bins, x_min, x_max, xtitle, ytitle);
+        }
+        // loop-de-loop        
+        loop_entries<in_branch_struct, TH1F*>(in_tree, branch, hist_set, n_funcs, cuts, true);
     }
-    out_file->Write();
-    
+    cout << "out_file not enabled. Uncomment it, please" << endl;
+    // out_file->Write();
     cout << "It... is done." << endl;
 }
 

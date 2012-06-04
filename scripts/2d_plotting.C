@@ -62,7 +62,7 @@ void do_it_all2D(const unsigned int& n_files,
             TString name = hist_names[i] + file_roots[file_no]; // munge munge munge
             hists[file_no][i] = init_2Dhist (name, 50, 0, 200,50, 0, 200, xtitle, ytitle);   
         }
-        loop_entries<in_branch_struct, TH2F>(in_tree, branch, hists[file_no], n_funcs, cuts, true);
+        loop_entries<in_branch_struct, TH2F*>(in_tree, branch, hists[file_no], n_funcs, cuts, true);
     }
     out_file->Write();
 
