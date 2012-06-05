@@ -1,35 +1,19 @@
-#include "stopped_and_degrader_effect.C"
+#include "comparisons_stopped_and_air.C"
 
-void ST_comparison(){
-    const unsigned int n_files = 3;
-    // const unsigned int n_files = 5;
+void st_comparison2(){
+    const unsigned int n_files = 6;
 
-    const TString air_root = "Air_5mm"; // background comparison for scint 1
-    const TString file_roots [n_files] = {"Aluminium_20mm",
-        "Aluminium_50mm",
-        "Aluminium_100mm"};
-        // const TString file_roots [n_files] = {"Aluminium_0.2mm",
-        //     "Aluminium_10mm",
-        //     "Aluminium_1mm",
-        //     "Aluminium_2mm",
-        //     "Aluminium_5mm"};
-        //     "Polystyrene_0.2mm",
-        //     "Polystyrene_10mm",
-        //     "Polystyrene_1mm",
-        //     "Polystyrene_2mm",
-        //     "Polystyrene_5mm"};
-    const TString file_prefix = "../../output/ST_optimisation/ST_optimisation_";
-    // const TString file_prefix = "../../output/archive/22-05-12_1810.9f4f5ac/ST_optimisation/ST_optimisation_";
-    const TString img_prefix = "../../../images/ST_optimisation/ST_optimisation_";
-    const TString save_root = "saved_hist_ST_old";
+    const TString file_roots [n_files] = {"Air_5mm",
+        "Aluminium_0.2mm",
+        "Aluminium_10mm",
+        "Aluminium_1mm",
+        "Aluminium_2mm",
+        "Aluminium_5mm"};
+
+    const TString file_prefix = "../../output/ST_optimisation/degrader_optimisation_";
+    const TString img_prefix = "../../../images/ST_optimisation/";
+
+    const TString save_file_name = "saved_hist_ST";
     
-    const unsigned int n_funcs = 3;
-    cut_func_ptr cuts[n_funcs] = {&stopped_muons,
-         &not_stopped_muons,
-         &all_scint1_muons};                     
-     cut_func_ptr air_cut[] = {&all_scint1_muons};
-         
-     do_it_all(n_files, air_root, file_prefix, img_prefix, 
-         save_root, file_roots, n_funcs, cuts, air_cut);
-     
+    comparisons_stopped_and_air(n_files, file_roots, file_prefix, img_prefix, save_file_name);
 }

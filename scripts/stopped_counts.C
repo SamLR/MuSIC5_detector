@@ -119,13 +119,6 @@ void stopped_pid_count(const in_branch_struct& branch, const unsigned int& count
     }
 }
 
-bool muon_check(const int& pid){
-    return (abs(pid)==13 || abs(pid)==11); // have to detect electrons as well
-}
-
-bool charged_check(const int& pid){
-    return ( abs(pid)==11 || abs(pid)==13 || abs(pid)==211 || pid==2212 );
-}
 
 void stopped_muons_count(const in_branch_struct& branch, const unsigned int& count, const bool verbose ){
     stopped_pid_count(branch, count, &muon_check);

@@ -13,20 +13,6 @@ thicknesses=( 0.2 1 2 5 10 ) # target thicknesses in mm
 materials=( "Aluminium" ) # & Polyethylene?
 # materials=( "Aluminium" "Polystyrene" ) # & Polyethylene?
 
-# locations etc
-outfile_suf="root" # '.' is added at location, mainly for readability
-macro_suf="mac"
-log_suf="log"
-
-root="../.."
-infile="$root/g4blout/monitor6_By-0T_cor.root"
-exedir="$root/build/Release"
-exe="$exedir/music" # usage: ./music <in.root> <out.root> [run.mac]
-outdir="$root/output/$runname"
-logdir="$outdir/log"
-archivedir="$root/output/archive"
-
-runlog="$logdir/$runname.$log_suf" # master log
 STMat="Aluminium"
 STThickness="1" 
 # STMat="Copper"
@@ -36,7 +22,7 @@ STThickness="1"
 # Actually do things!
 # ===========================================================================#
 
-source useful_bash.sh
+source common.sh
 
 # save any previous results
 archive_dir $outdir $archivedir

@@ -1,0 +1,177 @@
+
+#include "looping.C" // looping functions and some other hand stuff
+#include "inits.C" // initialise trees, files and histograms
+
+// only really useful with the MuSIC simulation but they may as well be somewhere
+struct in_branch_struct {
+    // tree structure as stored by MuSIC simulation
+    // note later elements are arrays max (filled) length given by g_nhit
+    int g_iev;
+    int in_event;
+    int in_trackID;
+    int in_pdg;
+    double in_x; 
+    double in_y; 
+    double in_z;
+    double in_px;
+    double in_py;
+    double in_pz;
+    double in_tof;
+    int g_nhit;
+    int procid[500];
+    int counter[500];
+    int trkid[500];
+    int parentid[500];
+    int pdgid[500];
+    double x[500];
+    double y[500];
+    double z[500];
+    double px[500];
+    double py[500];
+    double pz[500];
+    double edep[500];
+    double tof[500];
+};
+
+void set_in_branch_address(const in_branch_struct& branch, const TTree* tree) { 
+    // set the branches for MuSIC tree (called 't')
+    // uses the struct given above
+    tree->SetBranchAddress("iev",&branch.g_iev);
+    tree->SetBranchAddress("in_EventID",&branch.in_event);
+    tree->SetBranchAddress("in_TrackID",&branch.in_trackID);
+    tree->SetBranchAddress("in_PDGid",&branch.in_pdg);
+    tree->SetBranchAddress("in_x",&branch.in_x);
+    tree->SetBranchAddress("in_y",&branch.in_y);
+    tree->SetBranchAddress("in_z",&branch.in_z); 
+    tree->SetBranchAddress("in_Px",&branch.in_px); 
+    tree->SetBranchAddress("in_Py",&branch.in_py); 
+    tree->SetBranchAddress("in_Pz",&branch.in_pz); 
+    tree->SetBranchAddress("in_tof",&branch.in_tof); 
+
+    tree->SetBranchAddress("nhit",&branch.g_nhit);
+    tree->SetBranchAddress("procid",&branch.procid);
+    tree->SetBranchAddress("counter",&branch.counter);
+    tree->SetBranchAddress("trkid",&branch.trkid);
+    tree->SetBranchAddress("parentid",&branch.parentid);
+    tree->SetBranchAddress("pdgid",&branch.pdgid);
+    tree->SetBranchAddress("x",&branch.x);
+    tree->SetBranchAddress("y",&branch.y);
+    tree->SetBranchAddress("z",&branch.z);
+    tree->SetBranchAddress("px",&branch.px);
+    tree->SetBranchAddress("py",&branch.py);
+    tree->SetBranchAddress("pz",&branch.pz);
+    tree->SetBranchAddress("edep",&branch.edep);
+    tree->SetBranchAddress("tof",&branch.tof);
+}
+
+//==============================================================================
+// calculates sqrt(x*x + y*y + z*z)
+double length (const double& x, const double& y, const double& z){
+    return sqrt(x*x + y*y + z*z);
+}
+
+// overload for basic equals test
+template <class T> 
+bool is_in (const vector<T>& vec, const T& target){
+for(vector<T>::iterator iter = vec.begin(); iter < vec.end(); ++iter){
+    if ( (*iter)==target ) return true;
+}
+return false;
+}
+//==============================================================================
+// useful hack to select charged pids and group in a sane range (i.e not -211 -> 2212)
+const unsigned int pid_to_apid(const int inpid){
+    // convert a PID to one in a restricted range (for z plotting)
+    // ( e==11 || µ==13 || π==211 || p==2212 );
+    switch (inpid){
+        case  -11: return  1; // e+
+        case   11: return  2; // e-
+        case  -13: return 11; // µ+
+        case   13: return 12; // µ-
+        case  211: return 21; // π+
+        case -211: return 22; // π-
+        case 2212: return 21; // p
+        default: return 0;// shouldn't get called
+    }
+}
+
+typedef bool (*pid_cut)(const int& pid);
+bool muon_check(const int& pid){
+    // muons only
+    return (abs(pid)==13); 
+}
+
+bool stopped_muon_pid_check(const int& pid){
+    // muons or their decay daughters (electrons)
+    return  (abs(pid)==13 || abs(pid)==11); 
+}
+
+bool charged_check(const int& pid){
+    // all charged particles
+    return ( abs(pid)==11 || abs(pid)==13 || abs(pid)==211 || pid==2212 );
+}
+//==============================================================================
+
+// these are defaults for the following über function.
+// leading '_'s to avoid namespace collisions, at global because I'm lazy
+const int    _axis_bins_default [3] = {50,  50,  50};
+const double _axis_mins_default [3] = {0,   0,   0};
+const double _axis_maxs_default [3] = {200, 200, 200};
+
+const TString _axis_titles_default [3] = {"Momentum (MeV)", "Count", "Z"};
+
+// templated to allow use by (in theory) any object
+// in practice only pass in histograms
+// 
+
+template <class H>
+void fill_hists(const unsigned int& n_files,
+    const TString& file_prefix,
+    const TString& save_file_name,
+    const TString* file_roots,
+    const TString* func_name_roots,
+    const unsigned int& n_funcs,
+    const H* hists[n_files][n_funcs],
+    cut_func_ptr cuts,
+    const int hist_dimension,
+    const TString& file_suffix=".root",
+    const TString& img_suffix=".eps",
+    
+    const TString* axis_titles = _axis_titles_default,
+    const int    axis_bins [hist_dimension] = _axis_bins_default, 
+    const double axis_mins [hist_dimension] = _axis_mins_default,
+    const double axis_maxs [hist_dimension] = _axis_maxs_default
+){
+    // root file to save things in
+    TString out_file_name = file_prefix + save_file_name + file_suffix;
+    TFile* out_file = init_file(out_file_name, "RECREATE");
+    // branch to address to
+    in_branch_struct branch;
+        
+    for(unsigned int file_no = 0; file_no < n_files; ++file_no) {
+        H** hist_set = hists[file_no]; // alias to the set of hists we want
+        cout << endl<< "Starting file "<< file_roots[file_no] << endl;
+        
+        // munge the filename
+        TString resolved_filename = file_prefix + file_roots[file_no] + file_suffix;
+        
+        // open up and initialise things
+        TFile* in_file = init_file(resolved_filename);
+        TTree* in_tree = init_tree<in_branch_struct>(in_file, "t", branch, &set_in_branch_address);
+
+        // create the histograms then fill them in the loop
+        out_file->cd(); // make sure they're added to the save file
+        
+        for(unsigned int func = 0; func < n_funcs; ++func) {
+            // initialise the histograms
+            TString name = func_name_roots[func] + file_roots[file_no];
+            // hist_set[func] = init_1Dhist(name, n_bins, x_min, x_max, xtitle, ytitle);
+            hist_set[func] = init_hist<H>(name, axis_bins, axis_mins, axis_maxs, axis_titles, hist_dimension);
+        }
+        // loop-de-loop              
+        loop_entries<in_branch_struct, H*>(in_tree, branch, hist_set, n_funcs, cuts, true);
+    }
+    // cout << "out_file not enabled. Uncomment it, please" << endl;
+    out_file->Write();
+    cout << "It... is done." << endl;
+}

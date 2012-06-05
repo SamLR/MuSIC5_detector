@@ -1,17 +1,4 @@
-// a selection of generally useful root functions
-// calculates sqrt(x*x + y*y + z*z)
-double length (const double& x, const double& y, const double& z){
-    return sqrt(x*x + y*y + z*z);
-}
-
-// overload for basic equals test
-template <class T> 
-bool is_in (const vector<T>& vec, const T& target){
-for(vector<T>::iterator iter = vec.begin(); iter < vec.end(); ++iter){
-    if ( (*iter)==target ) return true;
-}
-return false;
-}
+// Loops over all the enteries in a tree and for each executes a function
 
 // this is the general shape of a 'cut function' 
 // it is intended to receive an 'in' object (normally a tree's branch)

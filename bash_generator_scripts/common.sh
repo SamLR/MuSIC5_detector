@@ -19,6 +19,23 @@ header="#\n\
 # Generated on:\t $(date)\n\
 #\n"
 
+# common locations etc
+# locations etc
+outfile_suf="root" # '.' is added at location, mainly for readability
+macro_suf="mac"
+log_suf="log"
+
+root="../.."
+infile="$root/g4blout/monitor6_By-0.04T_cor.root"
+exedir="$root/build/Release"
+exe="$exedir/music" # usage: ./music <in.root> <out.root> [run.mac]
+outdir="$root/output/$runname"
+logdir="$outdir/log"
+archivedir="$root/output/archive/"
+
+runlog="$logdir/$runname.$log_suf" # master log
+
+# useful functions
 archive_dir ()
 { # if the directory $1 exists create a dated & commit numbered archive (in $2), 
 # otherwise create the directorys

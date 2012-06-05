@@ -1,4 +1,6 @@
-// only really useful with the MuSIC simulation but they may as well be somewhere
+
+#include "useful_for_root/looping.C"
+
 struct in_branch_struct {
     // structure as passed in from geant4
     int g_iev;
@@ -27,6 +29,46 @@ struct in_branch_struct {
     double edep[500];
     double tof[500];
 };
+
+void do_it_all2D(const unsigned int& n_files,
+    const TString& file_prefix,
+    const TString& save_root,
+    const TString* file_roots,
+    const unsigned int& n_funcs,
+    cut_func_ptr cuts,
+    const TString* hist_names,
+    TH2F* hists[n_files][n_funcs],
+    const TString& file_suffix=".root",
+    const TString xtitle = "Momentum at degrader (MeV)",
+    const TString ytitle = "Momentum at stopping target (MeV)"
+){
+    TString out_file_name = file_prefix + save_root + file_suffix;
+    TFile* out_file = init_file(out_file_name, "RECREATE");
+    // array of function pointers to use
+
+    for(unsigned int file_no = 0; file_no < n_files; ++file_no) {
+        cout << endl<< "Starting file "<< file_roots[file_no] << endl;
+        // munge the filename
+        TString resolved_filename = file_prefix + file_roots[file_no] + file_suffix;
+        
+        // open up and initialise things
+        in_file = init_file(resolved_filename);
+        in_branch_struct branch;
+        in_tree = init_tree<in_branch_struct>(in_file, "t", branch, &set_in_branch_address);
+
+        // create the histograms then fill them in the loop
+        out_file->cd(); // make sure they're added to the save file
+        for(unsigned int i = 0; i < n_funcs; ++i) {
+            TString name = hist_names[i] + file_roots[file_no]; // munge munge munge
+            hists[file_no][i] = init_2Dhist (name, 50, 0, 200,50, 0, 200, xtitle, ytitle);   
+        }
+        loop_entries<in_branch_struct, TH2F*>(in_tree, branch, hists[file_no], n_funcs, cuts, true);
+    }
+    out_file->Write();
+
+    cout << "It... is done." << endl;
+}
+
 
 void set_in_branch_address(const in_branch_struct& branch, const TTree* tree) { 
     // assign the addresses of the various branchs
