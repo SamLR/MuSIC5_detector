@@ -61,7 +61,7 @@ const int __useful_default_colour_selection [] =  {1, 2, 4, 3, 6, 7, 8, 9};
 void draw_pretty_hists(const int& n_hists,
     const TH1** hist_array, 
     const TString title,
-    const TString img_save_location,
+    const TString img_save_location ="",
     const int colours* = __useful_default_colour_selection,
     const TString options = ""
 ) {
@@ -79,9 +79,19 @@ void draw_pretty_hists(const int& n_hists,
     leg->SetFillColor(0);
     leg->Draw();
 
-    can->SaveAs(img_save_location);
+    if (img_save_location != "") can->SaveAs(img_save_location);
 }
 
+void draw_pretty_hist(const TH1* hist, 
+    const TString title,
+    const TString img_save_location ="",
+    const TString options = ""
+) {
+    TCanvas* can = new TCanvas(title, title);
+    hist->SetTitle(title);
+    hist->Draw(options);
+    if (img_save_location != "" )can->SaveAs(img_save_location);
+}
 
 void create_boxy_legend(const TH1* hist, const TString legend_header, const int n_boxes, 
     const TString const* box_names, const int box_colors[n_boxes],
