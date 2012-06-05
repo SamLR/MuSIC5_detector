@@ -9,7 +9,7 @@
 # What's the name of this run?
 runname="st_and_degrader" 
 # what we want to generate
-thicknesses=( 1 5 10 15 ) # target thicknesses in mm
+thicknesses=( 1 2 5 8 10 12 15 ) # target thicknesses in mm
 STmat="Aluminium"
 
 degMat="Aluminium"
@@ -41,7 +41,7 @@ for DegZ in ${thicknesses[@]}; # loop over all entries in the array materials
 do
     for STz in ${thicknesses[@]}; 
     do
-        name="${runname}_st_${STz}mm_${DegZ}mm"
+        name="${runname}_st_${STz}mm_deg_${DegZ}mm"
         run_it $STmat $STz $degMat $DegZ $name
     done;
 done;
