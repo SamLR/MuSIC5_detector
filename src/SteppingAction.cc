@@ -42,7 +42,7 @@ SteppingAction::SteppingAction(Root* root)
 SteppingAction::~SteppingAction()
 {;}
 
-void SteppingAction::set_hit(int acounter, const char* aprocname, int atrkid, int aparentid, int apdgid, double ax, double ay, double az, double apx, double apy, double apz, double akinetic, double aedep, double atof)
+void SteppingAction::set_hit(bool first_step, bool last_step, int acounter, const char* aprocname, int atrkid, int aparentid, int apdgid, double ax, double ay, double az, double apx, double apy, double apz, double akinetic, double aedep, double atof)
 {
     if (f_root->g_nhit>=MAX_HIT) {
         return;
@@ -71,6 +71,8 @@ void SteppingAction::set_hit(int acounter, const char* aprocname, int atrkid, in
     else if (strcmp(aprocname,"PionMinusInelastic")==0)        {  f_root->procid[g_nhit]=20; }
     
     
+    f_root->first_step[g_nhit] = first_step;
+    f_root->last_step[g_nhit] = last_step;
     f_root->counter[g_nhit] = acounter;
     f_root->trkid[g_nhit] = atrkid;
     f_root->parentid[g_nhit] = aparentid;
@@ -100,26 +102,16 @@ void SteppingAction::UserSteppingAction(const G4Step * aStep)
     if (!nextvol) return; // if there is no next volume we're exiting the world
     
     const G4String& volname = point1->GetTouchableHandle()->GetVolume()->GetName();
-    // the next two values tell us if the particle is about to enter another volume
-    // and what that volume is
-    const G4String& nextvolname = nextvol->GetName();
-    const bool pre_st = (point1->GetStepStatus() == fGeomBoundary) && 
-        (nextvolname == "target");
-    const bool pre_deg = (point1->GetStepStatus() == fGeomBoundary) && 
-        (nextvolname == "degrader"); 
-    
     int acounter = 0; // main step
-    int bcounter = 0; // if this is a pre degrader or pre target step record extra info
     if     ( volname == "sci1" )     { acounter = 1; } 
     else if( volname == "target" )   { acounter = 2; } 
     else if( volname == "sci2" )     { acounter = 3; }
     else if( volname == "degrader" ) { acounter = 4; }
-    
+    else return; // not in a volume
     // record stuff specially if we're about to enter the degrader or st
-    if (pre_st)  { bcounter = 1002; } 
-    else if (pre_deg) { bcounter = 1004; }
     
-    if (!(acounter || bcounter)) return;
+    bool last_step  = (point2->GetStepStatus() == fGeomBoundary);
+    bool first_step = (point1->GetStepStatus() == fGeomBoundary);
     
     int parentid = track->GetParentID();
     int trkid = track->GetTrackID();
@@ -135,8 +127,6 @@ void SteppingAction::UserSteppingAction(const G4Step * aStep)
     double edep = aStep->GetTotalEnergyDeposit()/MeV;
     const G4String& procname = point2->GetProcessDefinedStep()->GetProcessName();
     
-    if (acounter) set_hit(acounter,procname.c_str(),trkid,parentid,pdgid,x,y,z,px,py,pz,kinetic,edep,tof);
-    // record hits just before degrader and stopping target
-    if (bcounter) set_hit(bcounter,procname.c_str(),trkid,parentid,pdgid,x,y,z,px,py,pz,kinetic,edep,tof);
+    set_hit(first_step, last_step, acounter,procname.c_str(),trkid,parentid,pdgid,x,y,z,px,py,pz,kinetic,edep,tof);
 }
 
