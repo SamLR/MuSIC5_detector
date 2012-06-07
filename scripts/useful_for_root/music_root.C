@@ -18,6 +18,8 @@ struct in_branch_struct {
     double in_pz;
     double in_tof;
     int g_nhit;
+    bool last_step[500];
+    bool first_step[500];
     int procid[500];
     int counter[500];
     int trkid[500];
@@ -90,6 +92,8 @@ void set_in_branch_address(const in_branch_struct& branch, const TTree* tree) {
     tree->SetBranchAddress("in_tof",&branch.in_tof); 
 
     tree->SetBranchAddress("nhit",&branch.g_nhit);
+    tree->SetBranchAddress("last_step",&branch.last_step);
+    tree->SetBranchAddress("first_step",&branch.first_step);
     tree->SetBranchAddress("procid",&branch.procid);
     tree->SetBranchAddress("counter",&branch.counter);
     tree->SetBranchAddress("trkid",&branch.trkid);
@@ -137,19 +141,40 @@ const unsigned int pid_to_apid(const int inpid){
     }
 }
 
-typedef bool (*pid_cut)(const int& pid);
-bool muon_only_check(const int& pid){
+typedef bool (*pid_cut)(const in_branch_struct&, const int&);
+bool muon_only_check(const in_branch_struct& branch, const int& hit){
     // muons only
-    return (abs(pid)==13); 
+    return (abs(branch.pdgid[hit])==13); 
 }
 
-bool stopped_muon_pid_check(const int& pid){
+bool mu_plus_only_check(const in_branch_struct& branch, const int& hit){
+    // muons only
+    return (branch.pdgid[hit]==-13); 
+}
+
+bool mu_minus_only_check(const in_branch_struct& branch, const int& hit){
+    // muons only
+    return (branch.pdgid[hit]==13); 
+}
+
+bool parent_muon_only_check(const in_branch_struct& branch, const int& hit){
+    // muons only
+    return (abs(branch.pdgid[hit])==13 && branch.parentid[hit]==0); 
+}
+
+bool first_muon_only_check_no_parent(const in_branch_struct& branch, const int& hit){
+    // muons only
+    return (abs(branch.pdgid[hit])==13 && (branch.first_step[hit]) && branch.parentid[hit]==0); 
+}
+
+bool stopped_muon_pid_check(const in_branch_struct& branch, const int& hit){
     // muons or their decay daughters (electrons)
-    return  (abs(pid)==13 || abs(pid)==11); 
+    return  (abs(branch.pdgid[hit])==13 || abs(branch.pdgid[hit])==11); 
 }
 
-bool charged_check(const int& pid){
+bool charged_check(const in_branch_struct& branch, const int& hit){
     // all charged particles
+    const int pid = branch.pdgid[hit];
     return ( abs(pid)==11 || abs(pid)==13 || abs(pid)==211 || pid==2212 );
 }
 //==============================================================================
@@ -184,11 +209,15 @@ void fill_hists(const unsigned int& n_files,
     const TString** axis_titles = _axis_titles_default,
     const int    axis_bins [n_funcs*3] = _axis_bins_default, 
     const double axis_mins [n_funcs*3] = _axis_mins_default,
-    const double axis_maxs [n_funcs*3] = _axis_maxs_default
+    const double axis_maxs [n_funcs*3] = _axis_maxs_default,
+    const bool& verbose = false,
+    const bool& testing = false
 ){
     // root file to save things in
-    TString out_file_name = file_prefix + save_file_name + file_suffix;
-    TFile* out_file = init_file(out_file_name, "RECREATE");
+    if (!testing){
+        TString out_file_name = file_prefix + save_file_name + file_suffix;
+        TFile* out_file = init_file(out_file_name, "RECREATE");
+    }
     // branch to address to
     in_branch_struct branch;
 
@@ -200,23 +229,24 @@ void fill_hists(const unsigned int& n_files,
         TString resolved_filename = file_prefix + file_roots[file_no] + file_suffix;
 
         // open up and initialise things
-        TFile* in_file = init_file(resolved_filename);
-        TTree* in_tree = init_tree<in_branch_struct>(in_file, "t", branch, &set_in_branch_address);
+        TFile* in_file = init_file(resolved_filename, "READ", verbose);
+        TTree* in_tree = init_tree<in_branch_struct>(in_file, "t", branch, &set_in_branch_address, verbose);
 
         // create the histograms then fill them in the loop
-        out_file->cd(); // make sure they're added to the save file
+        if (!testing) out_file->cd(); // make sure they're added to the save file
 
         for(unsigned int func = 0; func < n_funcs; ++func) {
             // initialise the histograms
             TString name = func_name_roots[func] + file_roots[file_no];
+            if(verbose) cout << "Making histogram " << name << endl;
             // hist_set[func] = init_1Dhist(name, n_bins, x_min, x_max, xtitle, ytitle);
             hist_set[func] = init_hist<H>(name, &(axis_bins[func*3]), 
                 &(axis_mins[func*3]), &(axis_maxs[func*3]), &(axis_titles[func*3]), hist_dimension);
         }
         // loop-de-loop              
-        loop_entries<in_branch_struct, H*>(in_tree, branch, hist_set, n_funcs, cuts, true);
+        loop_entries<in_branch_struct, H*>(in_tree, branch, hist_set, n_funcs, cuts, verbose, testing);
     }
     // cout << "out_file not enabled. Uncomment it, please" << endl;
-    out_file->Write();
+    if (!testing) out_file->Write();
     cout << "It... is done." << endl;
 }

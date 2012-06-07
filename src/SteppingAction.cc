@@ -87,6 +87,8 @@ void SteppingAction::set_hit(bool first_step, bool last_step, int acounter, cons
     f_root->edep[g_nhit] = aedep;
     f_root->tof[g_nhit] = atof;
     f_root->g_nhit++;
+    
+
 }
 
 void SteppingAction::UserSteppingAction(const G4Step * aStep)
