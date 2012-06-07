@@ -135,14 +135,6 @@ void deg_edep_muon(const in_branch_struct& branch, const TH1F* hist, const bool 
     edep_sum(branch, hist, eCN_degrader, &muon_only_check);
 }
 
-void deg_edep_muon_plus(const in_branch_struct& branch, const TH1F* hist, const bool verbose){
-    edep_sum(branch, hist, eCN_degrader, &mu_plus_only_check);
-}
-
-void deg_edep_muon_minus(const in_branch_struct& branch, const TH1F* hist, const bool verbose){
-    edep_sum(branch, hist, eCN_degrader, &mu_minus_only_check);
-}
-
 void mom_at(const in_branch_struct& branch, const TH1F* hist, 
     const int& wanted_counter, pid_cut* check_pid
 ){

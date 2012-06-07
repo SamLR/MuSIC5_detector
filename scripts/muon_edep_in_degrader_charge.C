@@ -9,7 +9,7 @@
 // These histograms are saved (to file_prefix/save_file_name), printed to screen
 // and saved as .eps files (in img_prefix)
 
-void edep_in_degrader(const int& n_files, // number of file roots
+void muon_edep_in_degrader_charge(const int& n_files, // number of file roots
     // basic elements of names differentiateing the files
     const TString* file_roots,                       
     // file prefix, mainly the directory but also any other common element
@@ -21,28 +21,24 @@ void edep_in_degrader(const int& n_files, // number of file roots
     // reduces the number of entries read and stops stuff getting saved
     const bool& testing = false       
 ){
-    const unsigned int n_funcs = 3; // mainly a simple check for arrays
+    const unsigned int n_funcs = 2; // mainly a simple check for arrays
 
     // prefixes for the histograms produced by the different functions 
-    const TString func_names[n_funcs] = {"edep_in_degrader_","pre_degrager_muon_mom_","post_degrader_muon_mom_"};
+    const TString func_names[n_funcs] = {"mu_plus_edep_in_degrader_","mu_minus_edep_in_degrader_"};
 
     // the functions applied to every hit
-    cut_func_ptr cuts[n_funcs] = {&deg_edep_muon, // energy deposited in the degrader
-            // &mom_at_pre_deg_muon,                       // momentums of muons pre degrader (special counter 1004)
-            // &mom_at_post_deg_muon};                     // momentums of all muons at scint1 (i.e. post degrader)
-            &mom_at_pre_deg_muon_parent,                       // momentums of muons pre degrader (special counter 1004)
-            &mom_at_post_deg_muon_parent};                     // momentums of all muons at scint1 (i.e. post degrader)
+    cut_func_ptr cuts[n_funcs] = {&deg_edep_muon_plus, // energy deposited in the degrader by µ+
+            &deg_edep_muon_minus};                     // energy deposited in the degrader by µ-
 
     TH1F* hists[n_files][n_funcs]; // array to hold the produced histograms
 
     // function that opens the files, uses the trees to fills the 1D histograms
     // based on the functions and then saves the histograms
     const TString axis_titles [n_funcs*3] = {"Energy (MeV)", "Count", "Z", 
-        "Momentum (MeV/c)", "Count", "Z",
-        "Momentum (MeV/c)", "Count", "Z"};
-    const int       bins [n_funcs*3] = {100, 100, 100,50,   50,  50,   50,  50,  50      };
-    const double    mins [n_funcs*3] = {0,   0,   0,  0,    0,   0,    0,   0,   0       };
-    const double    maxs [n_funcs*3] = {50,  50,  50, 200,  200,  200,200,  200,  200      };
+        "Energy (MeV)", "Count", "Z"};
+    const int       bins [n_funcs*3] = {100, 100, 100,100, 100, 100,};
+    const double    mins [n_funcs*3] = {0,   0,   0,  0,   0,   0,  };
+    const double    maxs [n_funcs*3] = {50,  50,  50, 50,  50,  50, };
     
     fill_hists<TH1F>(n_files, file_prefix, save_file_name, file_roots, 
         func_names, n_funcs, hists, cuts, 1, ".root", ".eps",
@@ -51,28 +47,16 @@ void edep_in_degrader(const int& n_files, // number of file roots
 
     // loop over all the file roots and draw the associated histograms
     for(unsigned int file = 0; file < n_files; ++file) {
-        // compare number of stopped and not stopped muons
-        TString img_location1;
+        // compare edep based on charge
+        TString img_location;
         if (testing){
             img_location = "";
-        } else {
-            img_location = img_prefix + file_roots[file] + "_edep.eps";
+        } else {        
+            img_location = img_prefix + file_roots[file] + "_charge_based_edep_comparison.eps";
         }
-
-        TString h_title = func_names[0]+file_roots[file];
-        draw_pretty_hist(hists[file][0], h_title, img_location1);
-
-        // compare the muons ast scint1 with those at scint 1 in file 0
-        TString img_location2;
-        if (testing){
-            img_location2 = "";
-        } else {
-            img_location2 = img_prefix + file_roots[file] + "_post_degrader.eps";
-        }
-        // TString img_location = "";
-        TString h_title2 = "momentum on either side of degrader"+file_roots[file];
-        draw_pretty_two_hists(hists[file][1], hists[file][2], h_title2, 
-            func_names[1], func_names[2], img_location2);
+        TString h_title = "energy deposited by positive & negative muons in a degrader file: st_"+file_roots[file];
+        draw_pretty_two_hists(hists[file][0], hists[file][1], h_title, 
+            func_names[0], func_names[1], img_location);
     }
 }
 
