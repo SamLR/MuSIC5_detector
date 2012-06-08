@@ -39,9 +39,7 @@ struct in_branch_struct {
 enum counter_names { eCN_scint1  = 1,    // scintillator 1
     eCN_target                   = 2,    // stopping target
     eCN_scint2                   = 3,    // scintillator 3
-    eCN_degrader                 = 4,    // degrader
-    eCN_pre_st                   = 1002, // just before stopping target (last step in scint 1)
-    eCN_pre_deg                  = 1004  // just before degrader
+    eCN_degrader                 = 4    // degrader
 };
 
 enum pid_names { ePID_pi_minus = -211, // will add neutrinos etc later
@@ -109,7 +107,6 @@ void set_in_branch_address(const in_branch_struct& branch, const TTree* tree) {
     tree->SetBranchAddress("tof",&branch.tof);
 }
 
-
 //==============================================================================
 // calculates sqrt(x*x + y*y + z*z)
 double length (const double& x, const double& y, const double& z){
@@ -126,57 +123,38 @@ bool is_in (const vector<T>& vec, const T& target){
 }
 //==============================================================================
 // useful hack to select charged pids and group in a sane range (i.e not -211 -> 2212)
-const unsigned int pid_to_apid(const int inpid){
+const unsigned int& pid_to_apid(const int& inpid){
     // convert a PID to one in a restricted range (for z plotting)
     // ( e==11 || µ==13 || π==211 || p==2212 );
     switch (inpid){
-        case ePID_positron  : return  1; 
-        case ePID_electron  : return  2; 
-        case ePID_muon_plus : return 11; 
-        case ePID_muon      : return 12; 
-        case ePID_pion      : return 21; 
-        case ePID_pi_minus  : return 22; 
-        case ePID_proton    : return 21; 
+        case ePID_positron  : return 1; 
+        case ePID_electron  : return 2; 
+        case ePID_muon_plus : return 3; 
+        case ePID_muon      : return 4; 
+        case ePID_pion      : return 5; 
+        case ePID_pi_minus  : return 6; 
+        case ePID_proton    : return 7; 
         default: return 0;// shouldn't get called
     }
 }
-
-typedef bool (*pid_cut)(const in_branch_struct&, const int&);
-bool muon_only_check(const in_branch_struct& branch, const int& hit){
-    // muons only
-    return (abs(branch.pdgid[hit])==13); 
+const TString get_name_from_apid(const int& apid){
+    switch(apid){
+        case 1:  return TString("positron"); 
+        case 2:  return TString("electron");  
+        case 3:  return TString("muon_plus");  
+        case 4:  return TString("muon_minus"); 
+        case 5:  return TString("pion_plus");  
+        case 6:  return TString("pion_minus"); 
+        case 7:  return TString("proton");     
+        case 0:  return TString("unknown");   
+        default: return TString("unknown");  
+    }
+}
+const TString get_name_from_pid(const int& pid){
+    const int& tmp = pid_to_apid(pid);
+    return get_name_from_alt_pid(tmp);
 }
 
-bool mu_plus_only_check(const in_branch_struct& branch, const int& hit){
-    // muons only
-    return (branch.pdgid[hit]==-13); 
-}
-
-bool mu_minus_only_check(const in_branch_struct& branch, const int& hit){
-    // muons only
-    return (branch.pdgid[hit]==13); 
-}
-
-bool parent_muon_only_check(const in_branch_struct& branch, const int& hit){
-    // muons only
-    return (abs(branch.pdgid[hit])==13 && branch.parentid[hit]==0); 
-}
-
-bool first_muon_only_check_no_parent(const in_branch_struct& branch, const int& hit){
-    // muons only
-    return (abs(branch.pdgid[hit])==13 && (branch.first_step[hit]) && branch.parentid[hit]==0); 
-}
-
-bool stopped_muon_pid_check(const in_branch_struct& branch, const int& hit){
-    // muons or their decay daughters (electrons)
-    return  (abs(branch.pdgid[hit])==13 || abs(branch.pdgid[hit])==11); 
-}
-
-bool charged_check(const in_branch_struct& branch, const int& hit){
-    // all charged particles
-    const int pid = branch.pdgid[hit];
-    return ( abs(pid)==11 || abs(pid)==13 || abs(pid)==211 || pid==2212 );
-}
 //==============================================================================
 
 // these are defaults for the following über function.
@@ -201,7 +179,7 @@ void fill_hists(const unsigned int& n_files,
     const TString* func_name_roots,
     const unsigned int& n_funcs,
     const H* hists[n_files][n_funcs],
-    cut_func_ptr cuts,
+    entry_fptr* cuts,
     const int hist_dimension,
     const TString& file_suffix=".root",
     const TString& img_suffix=".eps",
@@ -237,7 +215,7 @@ void fill_hists(const unsigned int& n_files,
 
         for(unsigned int func = 0; func < n_funcs; ++func) {
             // initialise the histograms
-            TString name = func_name_roots[func] + file_roots[file_no];
+            TString name = func_name_roots[func] +"_" + file_roots[file_no];
             if(verbose) cout << "Making histogram " << name << endl;
             // hist_set[func] = init_1Dhist(name, n_bins, x_min, x_max, xtitle, ytitle);
             hist_set[func] = init_hist<H>(name, &(axis_bins[func*3]), 

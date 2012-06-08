@@ -5,7 +5,7 @@
 // it is intended to receive an 'in' object (normally a tree's branch)
 // and an out object (either another tree or a histogram)
 // the bool is for verbose output if desired
-typedef void (*cut_func_ptr)(const S&, const T, const bool);
+typedef void (*entry_fptr)(const S&, const T, const bool);
 // loop enteries will loop over all the events in a tree reading from 
 // the in_obj_for_cut (normally a branch), applying the cut function and 
 // writing to the out_obj_for_cut
@@ -18,7 +18,7 @@ void loop_entries(
     const S& in_obj_for_cut,    // input object for cut
     const T* out_obj_for_cut,   // an array of objects size n_func for data to go to
     const unsigned int n_funcs, // how many functions are in the array
-    cut_func_ptr* cuts,         // array of function pointers for each loop
+    entry_fptr* cuts,         // array of function pointers for each loop
     const bool verbose,   // yay more info!
     const bool testing   // only run the first 1000 entries of a file
 )  {
