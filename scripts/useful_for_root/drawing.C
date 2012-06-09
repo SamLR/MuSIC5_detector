@@ -64,56 +64,71 @@ void draw_pretty_hists(const int& n_hists,
     const TString* leg_entries,
     const TString img_save_location ="",
     const int stats_opt=0, // 1002201 <- name, mean±er, rms±er & integral
-    const TString options = "",
+    const TString draw_opt = "",
     const int colours [n_hists] = __useful_default_colour_selection
 ) {
-    TCanvas* can = new TCanvas(title, title,1436,856); // these magic numbers make a maximised plot 
-    const float x1 = (stats_opt) ? 0.60:0.70;
+    TCanvas* can = NULL;
+    if (img_save_location == ""){
+        can = new TCanvas(title, title); // if it's not being saved make it small
+    } else {
+        can = new TCanvas(title, title,1436,856); // otherwise as big as possible, please! 
+    }
+    // set up the legend
+    const float x1 = (stats_opt) ? 0.60:0.70; // figure out where to put it 
     const float x2 = (stats_opt) ? 0.80:0.90;
-    const float y1 = 0.9 - 0.05*n_hists; 
+    const float y1 = 0.9 - 0.04*n_hists; 
     const float y2 = 0.90;
-
-    if (stats_opt) can->SetRightMargin((1.0 - x2));
     TLegend* leg = new TLegend(x1, y1, x2, y2);
+    // find the largest histogram (otherwise y range will be too small)
+    unsigned int max = 0;     
+    unsigned int first_hist = -1; // want to draw largest hist first               
+    for(unsigned int hist = 0; hist < n_hists; ++hist) {
+        const unsigned int current_max = hist_array[hist]->GetMaximum();
+        if(current_max > max){
+            max = current_max;
+            first_hist = hist;
+        }
+    }
 
+    if (stats_opt) {
+        can->SetRightMargin((1.0 - x2)); // make space on the right hand side for the stats boxes
+    } else {
+        hist_array[first_hist]->SetStats(false);// switch off stats for the first
+    }
+
+    hist_array[first_hist]->Draw();
+    
     for(unsigned int hist = 0; hist < n_hists; ++hist) {
         hist_array[hist]->SetLineWidth(2);// otherwise the lines are tiny
         hist_array[hist]->SetLineColor(colours[hist]); // mmmm colour!
-
-        // specifically set the legend to use the current title        
+                                             
+        // match the appropriate histogram to its title
         leg->AddEntry(hist_array[hist], leg_entries[hist]); 
         
-        if (stats_opt){
-            // if it's the first hist you just Draw(), otherwise Draw("sameS");
-            // need the extra 's' at the end and as part of the word, indicates
-            // to draw the stats boxes as well
-            TString draw_opt = (hist==0) ? options : ("sameS"+options);
-            hist_array[hist]->Draw(draw_opt);
-            
-            // position the stats boxes so that they're all visible
-            // leave a 0.01 gap between the stats boxes
-            // the +0.1 offset aligns with x-axis whilst 0.81 aligns with 
-            // top of draw frame whilst maintaining a 0.01 gap
+        // enable stats box drawing if required
+        const TString tmp_draw_opt = (stats_opt) ? "sameS"+draw_opt : "same"+draw_opt;
+        
+        if (hist != first_hist) hist_array[hist]->Draw(tmp_draw_opt);
+        
+        if (stats_opt){    
+            // histogram has to have been drawn before you can modify stats box        
+            // position the stats boxes so that they're all visible on the right hand side
             const float y1_stat = (0.81/n_hists)*hist + 0.1;
             const float y2_stat = (0.81/n_hists)*(hist+1) + 0.09; 
             const float x1_stat = x2+0.01; 
             const float x2_stat = 0.99; 
             // tidy up the stats box
             edit_stats_box(can, hist_array[hist], stats_opt, x1_stat, x2_stat, y1_stat, y2_stat);
-        } else {
-            // if it's the first hist you just Draw(), otherwise Draw("SAME");
-            TString draw_opt = (hist==0) ? options : ("SAME"+options);
-            // make sure no stats boxes are drawn
-            if (hist==0) hist_array[hist]->SetStats(false);
-            hist_array[hist]->Draw(draw_opt);
-        }
+        } 
     }
+
     // hack to set the title of the histogram (yet have a different entry for 
     // the first hist in the legend, if desired)
-    hist_array[0]->SetTitle(title);
+    hist_array[first_hist]->SetTitle(title);       
+    // make sure the y extent is enough to show everything
     leg->SetFillColor(0); // don't want grey backgrounds
     leg->Draw();
-
+    
     if (img_save_location != "") can->SaveAs(img_save_location);
 }
 

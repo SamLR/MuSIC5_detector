@@ -33,26 +33,26 @@ void pid_count_at_degrader(const int& n_files, // number of file roots
 
     // function that opens the files, uses the trees to fills the 1D histograms
     // based on the functions and then saves the histograms
-    const TString axis_titles [n_funcs*3] = {"PID", "count", "Z"};
-    const int       bins [n_funcs*3] = {   8,    8,    8}; // only 8 options pid 1-7 or 0, unknown
-    const double    mins [n_funcs*3] = {-0.5, -0.5, -0.5};  
-    const double    maxs [n_funcs*3] = { 7.5,  7.5,  7.5};  
+    const TString axis_titles [n_funcs*3] = {"Particle", "count", "Z"};
+    const int    bins [n_funcs*3] = {      __n_pids,       __n_pids,       __n_pids}; // only 8 options pid 1-7 or 0, unknown
+    const double mins [n_funcs*3] = {        -0.5,         -0.5,         -0.5};  
+    const double maxs [n_funcs*3] = { -0.5+__n_pids,  -0.5+__n_pids,  -0.5+__n_pids};  
 
     const int dimension = 1;
     fill_hists<TH1F>(n_files, file_prefix, save_file_name, file_roots, 
         func_names, n_funcs, hists, cuts, dimension, ".root", ".eps",
         axis_titles, bins, mins, maxs, testing, testing);
-        
-    const int n_particles = 8;
+
     // loop over all the file roots and draw the associated histograms
     for(unsigned int file = 0; file < n_files; ++file) {
-        for(unsigned int apid = 1; apid < n_particles; ++apid) {
-            TString bin_name = get_name_from_apid(apid);
-            hists[file][0]->GetXaxis()->SetBinLabel(apid, bin_name);
+        for(unsigned int apid = 0; apid < __n_pids; ++apid) {
+            const TString bin_name = get_name_from_apid(apid);
+            const int bin_number = hists[file][0]->FindBin(apid);
+            hists[file][0]->GetXaxis()->SetBinLabel(bin_number, bin_name);
         }
     }
-    TString title = "PID counts at scint 1 for various thickness degraders";
-    TString img_save_location = (testing) ?"": img_prefix + ".eps";
+    const TString title = "PID counts at scint 1 for various thickness degraders";
+    const TString img_save_location = (testing) ? "": img_prefix + ".eps";
     draw_pretty_hists(n_files,hists[0],title,file_roots,img_save_location);
 }
 void pid_count_at_scint1(const in_branch_struct& branch, const TH1F* hist, const bool verbose){

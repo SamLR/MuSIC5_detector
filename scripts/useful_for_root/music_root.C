@@ -42,11 +42,14 @@ enum counter_names { eCN_scint1  = 1,    // scintillator 1
     eCN_degrader                 = 4    // degrader
 };
 
+const unsigned int __n_pids = 9; // 0 -> 8
+
 enum pid_names { ePID_pi_minus = -211, // will add neutrinos etc later
     ePID_muon_plus             =  -13,
     ePID_positron              =  -11,
     ePID_electron              =   11, 
     ePID_muon                  =   13,
+    ePID_gamma                 =   22,
     ePID_pion                  =  211,
     ePID_proton                = 2212
 };
@@ -127,26 +130,28 @@ const unsigned int& pid_to_apid(const int& inpid){
     // convert a PID to one in a restricted range (for z plotting)
     // ( e==11 || µ==13 || π==211 || p==2212 );
     switch (inpid){
-        case ePID_positron  : return 1; 
-        case ePID_electron  : return 2; 
-        case ePID_muon_plus : return 3; 
-        case ePID_muon      : return 4; 
-        case ePID_pion      : return 5; 
-        case ePID_pi_minus  : return 6; 
-        case ePID_proton    : return 7; 
+        case ePID_gamma     : return 1; 
+        case ePID_positron  : return 2; 
+        case ePID_electron  : return 3; 
+        case ePID_muon_plus : return 4; 
+        case ePID_muon      : return 5; 
+        case ePID_pion      : return 6; 
+        case ePID_pi_minus  : return 7; 
+        case ePID_proton    : return 8;
         default: return 0;// shouldn't get called
     }
 }
 const TString get_name_from_apid(const int& apid){
-    switch(apid){
-        case 1:  return TString("positron"); 
-        case 2:  return TString("electron");  
-        case 3:  return TString("muon_plus");  
-        case 4:  return TString("muon_minus"); 
-        case 5:  return TString("pion_plus");  
-        case 6:  return TString("pion_minus"); 
-        case 7:  return TString("proton");     
-        case 0:  return TString("unknown");   
+    switch(apid){                                             
+        case 0:  return TString("misc neutral");             
+        case 1:  return TString("gamma");                     
+        case 2:  return TString("positron");                  
+        case 3:  return TString("electron");                  
+        case 4:  return TString("muon_plus");                 
+        case 5:  return TString("muon_minus");                
+        case 6:  return TString("pion_plus");                 
+        case 7:  return TString("pion_minus");                
+        case 8:  return TString("proton");                    
         default: return TString("unknown");  
     }
 }

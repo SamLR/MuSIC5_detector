@@ -102,7 +102,7 @@ void mom_at(const in_branch_struct& branch, const TH1F* hist, hit_cut_fptr* cut)
 
 // counts the incidence of each type of particle for hits that pass a cut
 // particles are numbered according to pid_to_apid from cuts.C
-void particle_type_counter(const in_branch_struct& branch, const TH1F* hist, hit_cut_fptr* cut, const int max_particles=8){
+void particle_type_counter(const in_branch_struct& branch, const TH1F* hist, hit_cut_fptr* cut, const int max_particles=__n_pids){
     const unsigned int n_hits = branch.g_nhit;
 
     if (n_hits == 0) return;

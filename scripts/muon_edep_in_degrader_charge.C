@@ -28,7 +28,7 @@ void muon_edep_in_degrader_charge(const int& n_files, // number of file roots
     const TString func_names[n_funcs] = {"mu_plus_edep_in_degrader_","mu_minus_edep_in_degrader_"};
 
     // the functions applied to every hit
-    cut_func_ptr cuts[n_funcs] = {&deg_edep_muon_plus, // energy deposited in the degrader by µ+
+    entry_fptr cuts[n_funcs] = {&deg_edep_muon_plus, // energy deposited in the degrader by µ+
             &deg_edep_muon_minus};                     // energy deposited in the degrader by µ-
 
     TH1F* hists[n_files][n_funcs]; // array to hold the produced histograms
