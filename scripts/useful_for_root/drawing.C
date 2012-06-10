@@ -111,6 +111,8 @@ void draw_pretty_hists(const int& n_hists,
         if (hist != first_hist) hist_array[hist]->Draw(tmp_draw_opt);
         
         if (stats_opt){    
+            // make sure that the name of on the stats box matches the legend entry
+            hist_array[hist]->SetName(leg_entries[hist]); 
             // histogram has to have been drawn before you can modify stats box        
             // position the stats boxes so that they're all visible on the right hand side
             const float y1_stat = (0.81/n_hists)*hist + 0.1;

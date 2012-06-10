@@ -187,7 +187,6 @@ void fill_hists(const unsigned int& n_files,
     entry_fptr* cuts,
     const int hist_dimension,
     const TString& file_suffix=".root",
-    const TString& img_suffix=".eps",
 
     const TString** axis_titles = _axis_titles_default,
     const int    axis_bins [n_funcs*3] = _axis_bins_default, 

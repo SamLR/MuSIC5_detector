@@ -93,7 +93,7 @@ void mom_at(const in_branch_struct& branch, const TH1F* hist, hit_cut_fptr* cut)
             if(!seen_it){
                 // new particle, record it and then make sure we don't see it again
                 seen_tracks.push_back(trackID);
-                double momentum = length (branch.px[hit], branch.py[hit], branch.pz[hit]);
+                const double momentum = length (branch.px[hit], branch.py[hit], branch.pz[hit]);
                 hist->Fill(momentum);
             } 
         } 
@@ -102,7 +102,9 @@ void mom_at(const in_branch_struct& branch, const TH1F* hist, hit_cut_fptr* cut)
 
 // counts the incidence of each type of particle for hits that pass a cut
 // particles are numbered according to pid_to_apid from cuts.C
-void particle_type_counter(const in_branch_struct& branch, const TH1F* hist, hit_cut_fptr* cut, const int max_particles=__n_pids){
+void particle_type_counter(const in_branch_struct& branch, const TH1F* hist, 
+    hit_cut_fptr* cut, const int max_particles=__n_pids
+){
     const unsigned int n_hits = branch.g_nhit;
 
     if (n_hits == 0) return;
@@ -130,8 +132,62 @@ void particle_type_counter(const in_branch_struct& branch, const TH1F* hist, hit
     // fill the histogram (want to plot the sum of the energy deposited in the
     // counter, not just the energy deposited in a step).
     for(unsigned int pid = 0; pid < max_particles; ++pid) {
-        hist->Fill(pid, altpid_counts[pid]); // fill each bin with weight equal to the number of times seen
+        // fill each bin with weight equal to the number of times seen
+        hist->Fill(pid, altpid_counts[pid]); 
     }
+}
+
+// applies two cuts and records momentum which passes cut1 (the first time) 
+// for tracks that subsequentially also pass cut2 (first time only)
+// if testing is true this will print any subsequent times cut2 is passed
+void record_momentum_at_cut1_if_also_cut2(const in_branch_struct& branch, 
+    const TH1F* hist, hit_cut_fptr* cut1, hit_cut_fptr* cut2, const bool testing=false
+){
+    const unsigned int n_hits = branch.g_nhit;
+
+    if (n_hits == 0) return;
+    
+    intvec cut1_tracks;
+    intvec cut2_tracks;
+    dblvec cut1_momentum;
+
+    for(unsigned int hit = 0; hit < n_hits; ++hit) {
+        const bool cut1_pass = (*cut1)(branch,hit);
+        const bool cut2_pass = (*cut2)(branch,hit);
+        const unsigned int trackID = branch.trkid[hit];
+        
+        if (cut1_pass) {
+            bool seen_it = is_in<int>(cut1_tracks, trackID);
+            if( !seen_it ){
+                // new track record it!
+                cut1_tracks.push_back(trackID);
+                double momentum = length (branch.px[hit], branch.py[hit], branch.pz[hit]);
+                cut1_momentum.push_back(momentum);
+            }
+        } else if (cut2_pass) {
+            bool seen_it = is_in<int>(cut2_tracks, trackID);
+            if( !seen_it ){
+                // new track record it!
+                cut2_tracks.push_back(trackID);
+                // go find its partner from cut1
+                for(unsigned int i = 0; i < cut1_tracks.size(); ++i) {
+                    if(cut1_tracks[i] == trackID){
+                        hist->Fill(cut1_momentum[i]);
+                    }
+                }
+            } else if (testing) {
+                cout << "same track has passed cut2 twice" << endl;
+            }
+        }
+    }
+}
+
+//==============================================================================
+// cut for muons decaying in the ST
+bool mu_decaying_in_ST(const in_branch_struct& branch, const int& hit) {
+    return ((branch.procid[hit]==ePN_Decay) 
+        && (branch.counter[hit]==eCN_target) 
+        && (abs(branch.pdgid[hit])==ePID_muon));
 }
 
 //==============================================================================
