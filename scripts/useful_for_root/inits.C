@@ -47,7 +47,7 @@ TH1F* init_1Dhist (const TString& name, // histogram name & title
 
 TH2F* init_2Dhist (const TString& name, // histogram name & title
     const int& n_x_bins, const double& x_low, const double& x_hi, // number of bins, min & max x
-    const int& n_y_bins, const double& y_low, const double& y_hi, // number of bins, min & may y
+    const int& n_y_bins, const double& y_low, const double& y_hi, // number of bins, min & max y
     const TString& xtitle, const TString& ytitle // axis titles
 ) {
     TH2F* hist = new TH2F(name, name, n_x_bins, x_low, x_hi, n_y_bins, y_low, y_hi); // fresh blood!

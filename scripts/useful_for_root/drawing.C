@@ -134,7 +134,7 @@ void draw_pretty_hists(const int& n_hists,
 }
 
 void draw_pretty_hist(const TH1* hist, 
-    const TString title,
+    const TString title = "",
     const TString img_save_location ="",
     const TString options = "",
     const int stat_opt=1,//1002201
@@ -142,12 +142,18 @@ void draw_pretty_hist(const TH1* hist,
     const double y1 = 0.70, const double y2 = 0.90
 ) {
     TCanvas* can = NULL;
-    if (img_save_location == ""){
-        can = new TCanvas(title, title); // if it's not being saved make it small
+    TString title_t;
+    if(title = "") {
+        title_t =hist->GetTitle();
     } else {
-        can = new TCanvas(title, title,1436,856); // otherwise as big as possible, please! 
+        title_t = title;
     }
-    hist->SetTitle(title);
+    if (img_save_location == ""){
+        can = new TCanvas(title_t, title_t); // if it's not being saved make it small
+    } else {
+        can = new TCanvas(title_t, title_t,1436,856); // otherwise as big as possible, please! 
+    }
+    hist->Settitle_t(title_t);
     hist->Draw(options);
     edit_stats_box(can, hist,stat_opt, x1, x2, y1, y2);
     can->Update();
