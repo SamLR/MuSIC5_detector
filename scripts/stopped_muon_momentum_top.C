@@ -1,10 +1,10 @@
 #include "stopped_muon_momentum.C"
 
 void stopped_muon_momentum_top(){
-    // const unsigned int n_files = 4;
+    const unsigned int n_files = 4;
     // const unsigned int n_files = 8;
     // const unsigned int n_files = 1;
-    const unsigned int n_files = 13;
+    // const unsigned int n_files = 13;
 
     // const TString file_roots [n_files] = {"st_1mm_deg_10mm"};
         // const TString file_roots [n_files] = {"Air_5mm",
@@ -20,19 +20,24 @@ void stopped_muon_momentum_top(){
         //     "st_1mm_deg_8mm" ,
         //     "st_1mm_deg_12mm"};  
 
-    const TString file_roots [n_files] = {"Air_5mm",
-        "Copper_0.2mm",
-        "Copper_1mm",
-        "Copper_2mm",
-        "Copper_5mm",
-        "Copper_8mm",  
-        "Copper_10mm",
-        "Magnesium_0.2mm",
-        "Magnesium_1mm",
+    const TString file_roots [n_files] = {"Copper_2mm",
+        "Copper_8mm",
         "Magnesium_2mm",
-        "Magnesium_5mm",
-        "Magnesium_8mm",
-        "Magnesium_10mm"};
+        "Magnesium_8mm"};    
+            // this is not a good idea - don't have enough colours and plot is unreadable
+            // const TString file_roots [n_files] = {"Air_5mm",
+            //     "Copper_0.2mm",
+            //     "Copper_1mm",
+            //     "Copper_2mm",
+            //     "Copper_5mm",
+            //     "Copper_8mm",  
+            //     "Copper_10mm",
+            //     "Magnesium_0.2mm",
+            //     "Magnesium_1mm",
+            //     "Magnesium_2mm",
+            //     "Magnesium_5mm",
+            //     "Magnesium_8mm",
+            //     "Magnesium_10mm"};
 
     const TString file_prefix = "../../output/ST_optimisation/ST_optimisation_";
     const TString img_prefix = "../../../images/ST_optimisation/init_mom_stopped_mu_";
