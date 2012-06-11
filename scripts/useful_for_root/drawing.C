@@ -9,7 +9,6 @@ void edit_stats_box(const TCanvas* can, const TH1* hist, const int options=10022
     stats_box->SetX2NDC(x2);
     stats_box->SetY1NDC(y1);
     stats_box->SetY2NDC(y2);
-    can->Update();
 }
 
 void draw_pretty_two_hists(const TH1* backHist, 
@@ -137,11 +136,21 @@ void draw_pretty_hists(const int& n_hists,
 void draw_pretty_hist(const TH1* hist, 
     const TString title,
     const TString img_save_location ="",
-    const TString options = ""
+    const TString options = "",
+    const int stat_opt=1,//1002201
+    const double x1 = 0.70, const double x2 = 0.90, 
+    const double y1 = 0.70, const double y2 = 0.90
 ) {
-    TCanvas* can = new TCanvas(title, title);
+    TCanvas* can = NULL;
+    if (img_save_location == ""){
+        can = new TCanvas(title, title); // if it's not being saved make it small
+    } else {
+        can = new TCanvas(title, title,1436,856); // otherwise as big as possible, please! 
+    }
     hist->SetTitle(title);
     hist->Draw(options);
+    edit_stats_box(can, hist,stat_opt, x1, x2, y1, y2);
+    can->Update();
     if (img_save_location != "" )can->SaveAs(img_save_location);
 }
 
