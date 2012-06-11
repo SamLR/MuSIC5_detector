@@ -8,9 +8,8 @@
 # What's the name of this run?
 runname="ST_optimisation" 
 # what we want to generate
-thicknesses=( 20 50 100 ) # target thicknesses in mm
-# thicknesses=( 0.2 1 2 5 10 ) # target thicknesses in mm
-materials=( "Aluminium" ) # & Polyethylene?
+thicknesses=( 0.2 1 2 5 8 10 ) # target thicknesses in mm
+materials=( "Copper" "Magnesium" ) # & Polyethylene?
 # materials=( "Aluminium" "Polystyrene" ) # & Polyethylene?
 
 degMat="Aluminium"
