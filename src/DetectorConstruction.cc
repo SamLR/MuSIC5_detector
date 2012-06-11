@@ -128,8 +128,8 @@ void DetectorConstruction::DefineMaterials()
 
 G4ThreeVector get_global_pos(double dist_from_coil8)
 {
-    double coil8_x = 776.3;
-    double coil8_z = 3420.1;
+    double coil8_x = (776.3)*mm;
+    double coil8_z = (3420.1)*mm;
     double glb_x = dist_from_coil8*sin(36.0*deg) + coil8_x;
     double glb_z = dist_from_coil8*cos(36.0*deg) + coil8_z;
     return G4ThreeVector(glb_x,0.0,glb_z);
@@ -167,18 +167,18 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
    // Detector Geometry
    //-------------------------------------------------------------------------
    // world 
-    double world_hx = 8000/2.0; // this is the max size of current field map
-    double world_hy = 8000/2.0;
-    double world_hz = 8000/2.0;
+    double world_hx = (8000/2.0)*mm; // this is the max size of current field map
+    double world_hy = (8000/2.0)*mm;
+    double world_hz = (8000/2.0)*mm;
     G4Box * solid_world = new G4Box("world",world_hx,world_hy,world_hz);
     f_logic_world = new G4LogicalVolume(solid_world,Air,"world",0,0,0);
     f_physi_world = new G4PVPlacement(0,G4ThreeVector(),f_logic_world,"world", 0,false,0);
 
     // position of scint1 WRT coil8
-    double coil8_to_scint1 = 440; 
+    double coil8_to_scint1 = 440*mm; 
 
-    double sci_hx = 450.0/2.0; // dimensions of both scintillators are the same in xy plane
-    double sci_hy = 450.0/2.0;
+    double sci_hx = (450.0/2.0)*mm; // dimensions of both scintillators are the same in xy plane
+    double sci_hy = (450.0/2.0)*mm;
     G4ThreeVector sci1_pos = get_global_pos(coil8_to_scint1);
     G4Box* solid_sci1 = new G4Box("sci1", sci_hx, sci_hy, f_scint1z/2.0);
     f_logic_sci1 = new G4LogicalVolume(solid_sci1,f_scint1Mat,"sci1",0,0,0);
@@ -186,8 +186,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
     //copper target (target) 
     double target_posZ = coil8_to_scint1 + (f_scint1z/2.0) + 3 + (f_targetZ/2.0); // '3' is thickness of separators
-    double target_hx = 450.0/2.0;
-    double target_hy = 450.0/2.0;
+    double target_hx = (450.0/2.0)*mm;
+    double target_hy = (450.0/2.0)*mm;
     G4ThreeVector target_pos = get_global_pos(target_posZ);
     G4Box* solid_target = new G4Box("target",target_hx,target_hy,f_targetZ/2.0);
     f_logic_target = new G4LogicalVolume(solid_target,f_targetMat,"target",0,0,0);
@@ -204,8 +204,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     // degrader
     // degrader is in front of scint 1
     double degrader_posz = coil8_to_scint1 - (f_scint1z/2.0) - 3 - (f_degraderZ/2.0);
-    double degrader_hx = 450.0/2.0;
-    double degrader_hy = 450.0/2.0;
+    double degrader_hx = (450.0/2.0)*mm;
+    double degrader_hy = (450.0/2.0)*mm;
     G4ThreeVector degrader_pos = get_global_pos(degrader_posz);
     G4Box* solid_degrader = new G4Box("degrader",degrader_hx,degrader_hy,f_degraderZ/2.0);
     f_logic_degrader = new G4LogicalVolume(solid_degrader,f_degraderMat,"degrader",0,0,0);
