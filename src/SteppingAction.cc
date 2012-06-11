@@ -120,9 +120,9 @@ void SteppingAction::UserSteppingAction(const G4Step * aStep)
     int pdgid  = track->GetDefinition()->GetPDGEncoding();
     double kinetic = track->GetKineticEnergy()/MeV;
     double tof = track->GetGlobalTime()/ns;
-    double x = track->GetPosition().x()/cm;
-    double y = track->GetPosition().y()/cm;
-    double z = track->GetPosition().z()/cm;
+    double x = track->GetPosition().x()/mm;
+    double y = track->GetPosition().y()/mm;
+    double z = track->GetPosition().z()/mm;
     double px = track->GetMomentum().x()/MeV;
     double py = track->GetMomentum().y()/MeV;
     double pz = track->GetMomentum().z()/MeV;
