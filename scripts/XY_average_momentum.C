@@ -38,9 +38,9 @@ void XY_average_momentum(const int& n_files, // number of file roots
         "position X (mm)", "position Y (mm)", "Summed Momentum (MeV/c)", // all charged
         "position X (mm)", "position Y (mm)", "muon count",  // count muons
         "position X (mm)", "position Y (mm)", "charged_count"}; // count charged
-    const int    bins [n_funcs*3] = {  50,  50, 50,  50,  50, 50,  50,  50, 50,  50,  50, 50}; 
-    const double mins [n_funcs*3] = {-200,-200,  0,-200,-200,  0,-200,-200,  0,-200,-200,  0};
-    const double maxs [n_funcs*3] = { 200, 200,200, 200, 200,200, 200, 200,200, 200, 200,200};  
+    const int    bins [n_funcs*3] = {  100,  100, 100,  100,  100, 100,  100,  100, 100,  100,  100, 100}; 
+    const double mins [n_funcs*3] = {  500, -500,   0,  500, -500,   0,  500, -500,   0,  500, -500,   0};
+    const double maxs [n_funcs*3] = { 1500,  500,2000, 1500,  500,2000, 1500,  500,2000, 1500,  500,2000};  
 
     const int dimension = 2;
     // function that opens the files, uses the trees to fills the 1D histograms
@@ -63,12 +63,12 @@ void XY_average_momentum(const int& n_files, // number of file roots
         //      4) number of charged particles
 
         derived_hists [file][0] = init_2Dhist ("XY distribution of average muon momentum",
-            50,-200, 200, 50, -200, 200, // number of bins, min & max for x then y
+            100, 500, 1500, 100, -500, 500, // number of bins, min & max for x then y
             "X Position (mm)", "Y Position (mm)");
         derived_hists [file][0]->Divide(hists[file][0], hists[file][2]);
 
         derived_hists [file][1] = init_2Dhist ("XY distribution of average momentum for charged particles",
-            50,-200, 200, 50, -200, 200, // number of bins, min & max for x then y
+            100, 500, 1500, 100, -500, 500,  // number of bins, min & max for x then y
             "X Position (mm)", "Y Position (mm)");
         derived_hists [file][1]->Divide(hists[file][1], hists[file][3]);
 

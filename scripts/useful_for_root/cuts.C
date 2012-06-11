@@ -255,7 +255,6 @@ void xy_sum_at(const in_branch_struct& branch,
             const double weight = (*get_weight)(branch, hit);
             const double x = branch.x[hit];
             const double y = branch.y[hit];
-            
             hist->Fill(x, y, weight);
         }
     }

@@ -188,7 +188,7 @@ void fill_hists(const unsigned int& n_files,
     const int hist_dimension,
     const TString& file_suffix=".root",
 
-    const TString** axis_titles = _axis_titles_default,
+    const TString* axis_titles = _axis_titles_default,
     const int    axis_bins [n_funcs*3] = _axis_bins_default, 
     const double axis_mins [n_funcs*3] = _axis_mins_default,
     const double axis_maxs [n_funcs*3] = _axis_maxs_default,
@@ -221,7 +221,7 @@ void fill_hists(const unsigned int& n_files,
             // initialise the histograms
             TString name = func_name_roots[func] +"_" + file_roots[file_no];
             if(verbose) cout << "Making histogram " << name << endl;
-            // hist_set[func] = init_1Dhist(name, n_bins, x_min, x_max, xtitle, ytitle);
+            
             hist_set[func] = init_hist<H>(name, &(axis_bins[func*3]), 
                 &(axis_mins[func*3]), &(axis_maxs[func*3]), &(axis_titles[func*3]), hist_dimension);
         }
