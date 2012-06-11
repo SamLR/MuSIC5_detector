@@ -9,7 +9,7 @@
 // These histograms are saved (to file_prefix/save_file_name), printed to screen
 // and saved as .eps files (in img_prefix)
 
-void momentum_by_pid_at_degrader(const int& n_files, // number of file roots
+void momentum_post_degrader_by_pid(const int& n_files, // number of file roots
     // basic elements of names differentiateing the files
     const TString* file_roots,                       
     // file prefix, mainly the directory but also any other common element

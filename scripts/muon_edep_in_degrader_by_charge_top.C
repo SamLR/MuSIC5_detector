@@ -1,6 +1,6 @@
 #include "muon_edep_in_degrader_charge.C"
 
-void edep_by_charge_for_degraders(){
+void  muon_edep_in_degrader_by_charge_top(){
     const unsigned int n_files = 7;
 
     const TString file_roots [n_files] = {"1mm_deg_1mm" ,
@@ -16,7 +16,7 @@ void edep_by_charge_for_degraders(){
     // const TString save_file_name = "";
     const TString save_file_name = "saved_hist_charged_based_muon_edep";
 
-    muon_edep_in_degrader_charge(n_files, file_roots, file_prefix, img_prefix, save_file_name);
+    muon_edep_in_degrader_by_charge(n_files, file_roots, file_prefix, img_prefix, save_file_name);
 }
 
 

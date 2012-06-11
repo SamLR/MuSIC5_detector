@@ -1,6 +1,6 @@
 #include "comparisons_stopped_and_air.C"
 
-void degrader_comparison2(){
+void degrader_comparison(){
     const unsigned int n_files = 6;
 
     const TString file_roots [n_files] = {"Air_5mm",

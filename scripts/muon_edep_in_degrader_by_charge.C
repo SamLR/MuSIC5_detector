@@ -10,7 +10,7 @@
 // These histograms are saved (to file_prefix/save_file_name), printed to screen
 // and saved as .eps files (in img_prefix)
 
-void muon_edep_in_degrader_charge(const int& n_files, // number of file roots
+void muon_edep_in_degrader_by_charge(const int& n_files, // number of file roots
     // basic elements of names differentiateing the files
     const TString* file_roots,                       
     // file prefix, mainly the directory but also any other common element

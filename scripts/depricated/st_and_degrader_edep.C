@@ -59,7 +59,7 @@ void st_and_degrader_edep(){
     // const TString save_file_name = "";
     const TString save_file_name = "saved_hist";
 
-    edep_in_degrader(n_files, file_roots, file_prefix, img_prefix, save_file_name);
+    edep_in_degrader(n_files, file_roots, file_prefix, img_prefix, save_file_name, true);
 }
 
 
