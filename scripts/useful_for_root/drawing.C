@@ -143,7 +143,7 @@ void draw_pretty_hist(const TH1* hist,
 ) {
     TCanvas* can = NULL;
     TString title_t;
-    if(title = "") {
+    if(title == "") {
         title_t =hist->GetTitle();
     } else {
         title_t = title;
@@ -153,7 +153,7 @@ void draw_pretty_hist(const TH1* hist,
     } else {
         can = new TCanvas(title_t, title_t,1436,856); // otherwise as big as possible, please! 
     }
-    hist->Settitle_t(title_t);
+    hist->SetTitle(title_t);
     hist->Draw(options);
     edit_stats_box(can, hist,stat_opt, x1, x2, y1, y2);
     can->Update();

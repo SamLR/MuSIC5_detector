@@ -252,7 +252,7 @@ void xy_sum_at(const in_branch_struct& branch,
                                             
         if(cut_pass){
             // if it passes the cut: plot it!
-            const double weight = get_weight(branch, hit);
+            const double weight = (*get_weight)(branch, hit);
             const double x = branch.x[hit];
             const double y = branch.y[hit];
             
