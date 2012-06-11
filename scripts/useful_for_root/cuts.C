@@ -184,48 +184,6 @@ void record_momentum_at_cut1_if_also_cut2(const in_branch_struct& branch,
 
 // record the initial momentum of a particle that passes cut1 and plot it 
 // against the energy depositied by a matching track that passes cut2
-void momentum_vs_edep_at(const in_branch_struct& branch, 
-    const TH2F* hist, hit_cut_fptr* cut1, hit_cut_fptr* cut2, const bool testing=false
-){
-    const unsigned int n_hits = branch.g_nhit;
-
-    if (n_hits == 0) return;
-
-    intvec seen_tracks;
-    dblvec edep_vec; // keeps the running total of edep 
-    dblvec mom_vec; // stores the initial momentum
-
-    for(unsigned int hit = 0; hit < n_hits; ++hit) {
-        const bool cut1_pass = (*cut1)(branch,hit);
-        const bool cut2_pass = (*cut2)(branch,hit);
-        const unsigned int trackID = branch.trkid[hit];
-
-        bool seen_it = is_in<int>(seen_tracks, trackID);
-
-        if (cut1_pass && !seen_it) {
-                // new track record it!
-            seen_tracks.push_back(trackID);
-            double momentum = length (branch.px[hit], branch.py[hit], branch.pz[hit]);
-            mom_vec.push_back(momentum);            
-            edep_vec.push_back(branch.edep[hit]);
-            
-        } else if (cut2_pass && seen_it) {
-                // go find its partner from cut1
-            for(unsigned int i = 0; i < seen_tracks.size(); ++i) {
-                if(seen_tracks[i]==trackID){
-                    edep_vec[i] += branch.edep[hit];
-                }
-            }
-        } 
-    }
-    
-    for(unsigned int track = 0; track < mom_vec.size(); ++track) {
-        hist->Fill(mom_vec[track], edep_vec[track]);
-    }
-}
-
-// record the initial momentum of a particle that passes cut1 and plot it 
-// against the energy depositied by a matching track that passes cut2
 void momentum_vs_edep_at2(const in_branch_struct& branch, 
     const TH2F* hist, hit_cut_fptr* cut1, hit_cut_fptr* cut2, const bool testing=false
 ){
@@ -276,6 +234,60 @@ void momentum_vs_edep_at2(const in_branch_struct& branch,
         hist->Fill(mom_array[i], edep_array[i]);
     }
 }
+
+// record the initial momentum of a particle that passes cut1 and plot it 
+// against the energy depositied by a matching track that passes cut2
+// void momentum_vs_edep_at2(const in_branch_struct& branch, 
+//     const TH2F* hist, hit_cut_fptr* cut1, hit_cut_fptr* cut2, const bool testing=false
+// ){
+//     const unsigned int n_hits = branch.g_nhit;
+// 
+//     if (n_hits == 0) return;
+// 
+//     int current_index = 0; // keeps track of the last filled position
+//     int seen_tracks [n_hits];
+//     double edep_array [n_hits]; // keeps the running total of edep 
+//     double mom_array [n_hits]; // stores the initial momentum
+// 
+//     for(unsigned int hit = 0; hit < n_hits; ++hit) {
+//         const bool cut1_pass = (*cut1)(branch,hit);
+//         const bool cut2_pass = (*cut2)(branch,hit);
+//         const int trackID = branch.trkid[hit];
+//         bool seen_it = false;
+//         
+//         if ( (!cut1_pass) && (!cut2_pass) )  continue;
+//         
+//         // create a pointer to the array that loops whilst it's less than the 
+//         // maximum currently filled position
+//         for(int* track = seen_tracks; track < &(seen_tracks[current_index]); ++track) {
+//             if ( cut2_pass && (*track) == trackID) {
+//                 // it's passed the second cut and we've already seen it
+//                 seen_it = true;
+//                 
+//                 // the difference of two pointers is the number of elements
+//                 // of the given type (i.e. int) that would fit between them
+//                 int index = (track - seen_tracks); 
+//                 edep_array[index] += branch.edep[hit];
+//             } else if ( (*track) == trackID ) {
+//                 // we've already seen it
+//                 seen_it = true;
+//             }
+//         }
+//         // if it's not been found add it 
+//         if (cut1_pass && !seen_it) {
+//                 // new track record it!
+//             seen_tracks[current_index]    = trackID;
+//             double momentum           = length (branch.px[hit], branch.py[hit], branch.pz[hit]);
+//             mom_array[current_index]  = momentum;
+//             edep_array[current_index] = branch.edep[hit];  
+//             ++current_index;
+//         } 
+//     }
+//     for(unsigned int i = 0; i < current_index; ++i) {
+//         hist->Fill(mom_array[i], edep_array[i]);
+//     }
+// }
+//   
 
 //==============================================================================
 // cut for muons decaying in the ST

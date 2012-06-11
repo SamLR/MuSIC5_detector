@@ -56,8 +56,7 @@ void edep_vs_p0(const int& n_files, // number of file roots
     }
 }
 void momentum_vs_edep_at_deg(const in_branch_struct& branch, const TH2F* hist, const bool verbose){
-    momentum_vs_edep_at2(branch, hist, &first_deg_muon, &muon_deg, verbose);
-    // momentum_vs_edep_at(branch, hist, &first_deg_muon, &muon_deg, verbose);
+    momentum_vs_edep_at(branch, hist, &first_deg_muon, &muon_deg, verbose);
 }
 
 
