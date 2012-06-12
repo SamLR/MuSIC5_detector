@@ -24,7 +24,7 @@ void stopped_muon_momentum(const int& n_files, // number of file roots
     const unsigned int n_funcs = 1; // mainly a simple check for arrays
 
     // prefixes for the histograms produced by the different functions 
-    const TString func_names[n_funcs] = {"Stopped_muons'_initial_momentum"};
+    const TString func_names[n_funcs] = {"Stopped_muons_initial_momentum"};
 
     // the functions applied to every hit
     entry_fptr cuts[n_funcs] = {&stopped_in_ST_mom_in_deg};
@@ -52,6 +52,7 @@ void stopped_muon_momentum(const int& n_files, // number of file roots
         img_save_location = img_prefix + ".eps";
     }
     TString h_title = "Initial momentum for stopped muons with varying thicknesses of degrader";
+        // TString h_title = "Initial momentum for stopped muons with varying stopping targets";
     draw_pretty_hists(n_files, hists, h_title, file_roots,img_save_location,1002201);
 
 }
