@@ -9,7 +9,7 @@ void XY_average_momentum_top(){
     const TString img_prefix = "../../../images/ST_optimisation/pre_degrader";
     const TString save_file_name = "predegrader_xy_plots";
 
-    XY_average_momentum(n_files, file_roots, file_prefix, img_prefix, save_file_name);
+    XY_average_momentum(n_files, file_roots, file_prefix, img_prefix, save_file_name, true);
 }
 
 
