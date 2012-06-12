@@ -9,11 +9,11 @@
 # What's the name of this run?
 runname="st_and_degrader" 
 # what we want to generate
-thicknesses=( 1 2 5 8 10 12 15 ) # target thicknesses in mm
-STmat="Aluminium"
+STthicknesses=( 1 2 ) # target thicknesses in mm
+STmats=( "Copper" "Magnesium" )
 
 degMat="Aluminium"
-degThickness="1"
+degThickness=( 1 2 5 8 10 12 ) 
 
 # ===========================================================================#
 # Actually do things!
@@ -22,8 +22,8 @@ degThickness="1"
 source common.sh
 
 # save any previous results
-archive_dir $outdir $archivedir
-archive_dir $logdir $archivedir
+# archive_dir $outdir $archivedir
+# archive_dir $logdir $archivedir
 
 # add the header to the runlog
 echo -e $header"# File: $runlog \n" > $runlog
@@ -33,15 +33,17 @@ echo "\`ls -l $exedir\` results in:" >> $runlog
 ls -l $exedir >> $runlog 
 echo -e "************************\n" >> $runlog
 
-echo "Make a basis simulation (1mm Al degrader, no ST)"  | tee -a $runlog 
-run_it Air 5 $degMat $degThickness "${runname}_Air_5mm"
-echo "Moving to the main loop " | tee -a $runlog 
 # generate the macros & run the program
-for DegZ in ${thicknesses[@]}; # loop over all entries in the array materials
+for DegZ in ${degThickness[@]}; # loop over all entries in the array materials
 do
-    for STz in ${thicknesses[@]}; 
+    for STz in ${STthicknesses[@]}; 
     do
-        name="${runname}_st_${STz}mm_deg_${DegZ}mm"
-        run_it $STmat $STz $degMat $DegZ $name
+        for STmat in ${STmats[@]};
+        do
+            name="${runname}_st_${STmat}_${STz}mm_deg_${DegZ}mm"
+            echo $DegZ $STz $STmat " => " $name
+            run_it $STmat $STz $degMat $DegZ $name
+            echo 
+        done;
     done;
 done;
