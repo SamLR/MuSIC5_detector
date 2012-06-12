@@ -40,7 +40,7 @@ void pid_counter_at_post_degrader(const int& n_files, // number of file roots
 
     const int dimension = 1;
     fill_hists<TH1F>(n_files, file_prefix, save_file_name, file_roots, 
-        func_names, n_funcs, hists, cuts, dimension, ".root", ".eps",
+        func_names, n_funcs, hists, cuts, dimension, ".root",
         axis_titles, bins, mins, maxs, testing, testing);
 
     // loop over all the file roots and draw the associated histograms

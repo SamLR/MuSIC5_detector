@@ -42,7 +42,7 @@ void muon_edep_in_degrader_by_charge(const int& n_files, // number of file roots
     const double    maxs [n_funcs*3] = {50,  50,  50, 50,  50,  50, };
     
     fill_hists<TH1F>(n_files, file_prefix, save_file_name, file_roots, 
-        func_names, n_funcs, hists, cuts, 1, ".root", ".eps",
+        func_names, n_funcs, hists, cuts, 1, ".root",
         axis_titles, bins, mins, maxs, testing, testing);
 
 
