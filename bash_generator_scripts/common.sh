@@ -54,6 +54,16 @@ archive_dir ()
     fi
 }
 
+make_file_name()
+{
+    # $1 = runname
+    # $2 = stopping target material
+    # $3 = stopping target thickness
+    # $4 = degrader material
+    # $5 = degrader thickness
+    name="${1}_st_${2}_${3}mm_deg_${4}_${5}mm"
+}
+
 make_macro () 
 { # $1 ST material, $2 ST thickness, $3 DegMat $4 DegThickness $5 this filename
     bulk="\
@@ -77,6 +87,7 @@ $header\
 "
     echo -e $bulk
 }
+
 run_it()
 { # $1 = STmaterial, $2 = STthickness, $3 = DegMaterial $4 = DegThickness $5 = filename
     prefix="$5"
@@ -91,7 +102,9 @@ run_it()
     cmd="( $execmd >> $logfile ) 2>&1 | tee -a $logfile $runlog"
     echo "Running command:" >> $runlog
     echo $cmd >> $runlog
-    eval $cmd
+    if [[ -z $testing ]]; then
+        eval $cmd
+    fi
     # this will also go to stdout
     echo "$5 run complete" | tee -a $runlog 
     echo -e "************************\n" >> $runlog
