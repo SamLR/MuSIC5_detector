@@ -36,6 +36,7 @@ class G4Material;
 class G4Element;
 class Field;
 class DetectorConstructionMessenger;
+class G4UserLimits;
 
 class DetectorConstruction : public G4VUserDetectorConstruction
 {
@@ -112,6 +113,12 @@ private:
     G4Material* Mylar;
     G4Material* Polystyrene;
     G4Material* Polyethylene;
+    
+    // limits on step length in various materials
+    G4UserLimits* f_scint1_limit;
+    G4UserLimits* f_scint2_limit;
+    G4UserLimits* f_deg_limit;
+    G4UserLimits* f_st_limit;
 };
 
 #endif

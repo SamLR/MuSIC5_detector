@@ -79,16 +79,17 @@ void draw_pretty_hists(const int& n_hists,
     const float y2 = 0.90;
     TLegend* leg = new TLegend(x1, y1, x2, y2);
     // find the largest histogram (otherwise y range will be too small)
-    unsigned int max = 0;     
-    unsigned int first_hist = -1; // want to draw largest hist first               
+    int max = -1;     
+    int first_hist = -1; // want to draw largest hist first               
+    
     for(unsigned int hist = 0; hist < n_hists; ++hist) {
-        const unsigned int current_max = hist_array[hist]->GetMaximum();
+        const int current_max = hist_array[hist]->GetMaximum();
         if(current_max > max){
             max = current_max;
             first_hist = hist;
         }
     }
-
+    
     if (stats_opt) {
         can->SetRightMargin((1.0 - x2)); // make space on the right hand side for the stats boxes
     } else {
@@ -137,10 +138,10 @@ void draw_pretty_hist(const TH1* hist,
     const TString title = "",
     const TString img_save_location ="",
     const TString options = "",
-    const int stat_opt=1,//1002201
+    const int stat_opt=1002201,
     const double x1 = 0.70, const double x2 = 0.90, 
     const double y1 = 0.70, const double y2 = 0.90
-) {
+) {    
     TCanvas* can = NULL;
     TString title_t;
     if(title == "") {

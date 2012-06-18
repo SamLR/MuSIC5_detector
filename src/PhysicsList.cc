@@ -16,6 +16,8 @@
 #include "G4HadronElasticPhysicsHP.hh" 
 #include "G4QStoppingPhysics.hh" 
 #include "G4IonPhysics.hh" 
+// included to add specific settings
+#include "G4MuIonisation.hh"
 
 
 PhysicsList::PhysicsList() {
@@ -25,7 +27,7 @@ PhysicsList::PhysicsList() {
 
 void PhysicsList::init(){
     this->defaultCutValue = 50*um;
-    this->RegisterPhysics(new G4EmStandardPhysics_option3());
+    this->RegisterPhysics(new G4EmStandardPhysics_option3());    
     this->RegisterPhysics(new HadronPhysicsQGSP_BERT_HP());
     this->RegisterPhysics(new G4EmExtraPhysics());
     this->RegisterPhysics(new G4DecayPhysics());

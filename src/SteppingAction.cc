@@ -115,6 +115,7 @@ void SteppingAction::UserSteppingAction(const G4Step * aStep)
     bool last_step  = (point2->GetStepStatus() == fGeomBoundary);
     bool first_step = (point1->GetStepStatus() == fGeomBoundary);
     
+    
     int parentid = track->GetParentID();
     int trkid = track->GetTrackID();
     int pdgid  = track->GetDefinition()->GetPDGEncoding();

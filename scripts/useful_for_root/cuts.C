@@ -33,8 +33,10 @@ void edep_sum(const in_branch_struct& branch, const TH1F* hist, hit_cut_fptr* cu
 
     if (n_hits == 0) return;
 
-    dblvec edeps;
-    intvec seen_tracks;
+    int current_index = 0;
+    double edeps[n_hits];
+    int seen_tracks[n_hits];
+    int index_counter[n_hits];
 
     for(unsigned int hit = 0; hit < n_hits; ++hit) {
         bool cut_pass = (*cut)(branch,hit);
@@ -44,21 +46,24 @@ void edep_sum(const in_branch_struct& branch, const TH1F* hist, hit_cut_fptr* cu
             // otherwise add its edep to the correct value
             const int trackID = branch.trkid[hit];
             const double edep = branch.edep[hit];
-            bool seen_it = is_in(seen_tracks, trackID);
-
-            if(seen_it){
-                // find and increment the edep value
-                // insert for loop
-                for(unsigned int i = 0; i < seen_tracks.size(); ++i) {
-                    if(seen_tracks[i] == trackID){
-                        edeps[i] += edep;
-                    }
+            bool seen_it = false;
+            
+            for(int* track = seen_tracks; track < &(seen_tracks[current_index]); ++track) {
+                if (*track == trackID) {
+                    seen_it = true;
+                    int index = (track - seen_tracks);
+                    edeps[index] += edep;
+                    ++index_counter[index];
                 }
-            } else {
+            }
+
+            if (!seen_it){
                 // new track add it to the vectors
                 // trackID & edep should have same index
-                seen_tracks.push_back(trackID);
-                edeps.push_back(edep);
+                seen_tracks[current_index] = trackID;
+                edeps[current_index] = edep;
+                index_counter[current_index] = 1;
+                ++current_index;
             }
         } 
     }
@@ -66,11 +71,78 @@ void edep_sum(const in_branch_struct& branch, const TH1F* hist, hit_cut_fptr* cu
     // Now that all the various track's deposited energies have been read,
     // fill the histogram (want to plot the sum of the energy deposited in the
     // counter, not just the energy deposited in a step).
-    if (edeps.size() == 0) return; // nothing to be filled
-    dblvec::iterator iter = edeps.begin();
-
-    for(iter; iter < edeps.end(); ++iter) hist->Fill( (*iter) ); 
+    if (current_index == 0) return; // nothing to be filled
+    
+    for(unsigned int i = 0; i < current_index; ++i) {
+        hist->Fill( edeps[i] );
+    }
 }
+
+// sum the energy of tracks passing some cut, only include those tracks that 
+// pass some other cut
+void edep_sum_flagged(const in_branch_struct& branch, const TH1F* hist, 
+hit_cut_fptr* cut1, hit_cut_fptr* flag_cut, bool verbose){
+    const unsigned int n_hits = branch.g_nhit;
+
+    if (n_hits == 0) return;
+
+    int current_index = 0;
+    double edeps[n_hits];
+    int seen_tracks[n_hits];
+    bool flagged_tracks[n_hits];
+
+    for(unsigned int hit = 0; hit < n_hits; ++hit) {
+        flagged_tracks[hit] = false;
+        bool cut_pass1 = (*cut1)(branch,hit);
+        bool flag_pass = (*flag_cut)(branch,hit);
+
+        const int trackID = branch.trkid[hit];
+        if (cut_pass1) {
+            // if it's new add it to the track & edep vectors
+            // otherwise add its edep to the correct value
+            const double edep = branch.edep[hit];
+            bool seen_it = false;
+            
+            for(int* track = seen_tracks; track < &(track[current_index]); ++track) {
+                if (*track == trackID) {
+                    seen_it = true;
+                    int index = (track - seen_tracks);
+                    edeps[index] += edep;
+                    break;
+                }
+            }
+
+            if (!seen_it){
+                // new track add it to the vectors
+                // trackID & edep should have same index
+                seen_tracks[current_index] = trackID;
+                edeps[current_index] = edep;
+                ++current_index;
+            }
+        } else if (flag_pass) {
+            // passed the flag cut; find the track and flag it
+            for(int* track = seen_tracks; track < &(seen_tracks[current_index]); ++track) {
+                if (*track == trackID) {
+                    int index = (track - seen_tracks);
+                    flagged_tracks[index] = true;
+                    break;
+                }
+            }
+        }
+    }
+
+    // Now that all the various track's deposited energies have been read,
+    // fill the histogram (want to plot the sum of the energy deposited in the
+    // counter, not just the energy deposited in a step).
+    if (current_index == 0) return; // nothing to be filled
+
+    for(unsigned int i = 0; i < current_index; ++i) {
+        if(flagged_tracks[i]){
+            hist->Fill( edeps[i] );
+        }
+    }
+}
+
 
 // Plots the momentum of tracks that pass some cut
 // NB this will plot the momentum for each track only once: the first time 
@@ -260,6 +332,87 @@ void xy_sum_at(const in_branch_struct& branch,
     }
 }      
 
+// plots the difference in time between seeing a parent particle and seeing 
+// its daughter. Parent cut determines particles that may decay (e.g. muon 
+// in scint1) whilst daughter determines possible decay products 
+// (e.g. electrons in the target) daughter cuts are in addition to 
+// the particle having a parentid that matches the track id of a seen parent
+void tof_parent_daughter(const in_branch_struct& branch, 
+    const TH1F* hist, hit_cut_fptr* parent_cut, hit_cut_fptr* child_cut, 
+    const bool testing=false
+){
+    const unsigned int n_hits = branch.g_nhit;
+
+    if (n_hits == 0) return;
+    
+    intvec seen_parents;
+    intvec seen_child;
+    dblvec parent_times;
+    
+    for(unsigned int hit = 0; hit < n_hits; ++hit) {
+        const bool pass_parent = (*parent_cut)(branch,hit);      
+        const bool pass_child = (*child_cut)(branch,hit);      
+        const int trackID = branch.trkid[hit];    
+        
+        const bool old_parent = is_in (seen_parents, trackID);
+        const bool old_child = is_in (seen_child, trackID);
+        
+        if (pass_parent && !old_parent){
+            // hooray new parent track!
+            seen_parents.push_back(trackID);
+            parent_times.push_back(branch.tof[hit]);
+        }
+        
+        if (pass_child && !old_child){
+            // hooray new child track 
+            seen_child.push_back(trackID);
+            for(unsigned int id = 0; id < seen_parents.size(); ++id) {
+                if(seen_parents[id] == branch.parentid[hit]){
+                    // yay we've seen the child's parent
+                    
+                    double dt = branch.tof[hit] - parent_times[id];
+                    hist->Fill(dt);
+                }
+            }
+        }
+    }
+}      
+
+// record tofs based on a single cut, the first pass counts as the start
+// all subsequent passes are stops. Tracks are only counted once
+// min_dt thresholds the first hit only
+void tof_single(const in_branch_struct& branch, 
+    const TH1F* hist, hit_cut_fptr* cut, const double min_dt, const bool testing=false
+){
+    const unsigned int n_hits = branch.g_nhit;
+
+    if (n_hits == 0) return;
+
+    intvec seen_tracks;
+    dblvec times;
+
+    for(unsigned int hit = 0; hit < n_hits; ++hit) {
+        const bool pass_cut = cut(branch, hit);
+        if (!pass_cut) continue;
+
+        const bool seen_it = is_in(seen_tracks, branch.trkid[hit]);
+        if (seen_it) {
+            continue;
+        } else {
+            times.push_back(branch.tof[hit]);
+        }
+    }
+    
+    sort(times.begin(), times.end());
+    dblvec::iterator iter = times.begin();
+    double prev_time = -min_dt;
+    double t0 = 0;
+    for(; iter<times.end(); ++iter) {
+        
+    }
+}
+
+
 //==============================================================================
 // Weight functions
 
@@ -281,6 +434,36 @@ bool mu_decaying_in_ST(const in_branch_struct& branch, const int& hit) {
     return ((branch.procid[hit]==ePN_Decay) 
         && (branch.counter[hit]==eCN_target) 
         && (abs(branch.pdgid[hit])==ePID_muon));
+}
+
+// muons in the scint
+bool muon_scint1(const in_branch_struct& branch, const int& hit){
+    return ((abs(branch.pdgid[hit]) == ePID_muon) && (branch.counter[hit]==eCN_scint1));
+}
+
+bool muon_scint2(const in_branch_struct& branch, const int& hit){
+    return ((abs(branch.pdgid[hit]) == ePID_muon) && (branch.counter[hit]==eCN_scint2));
+}
+
+
+// cut looking for the decay products of stopped muon decays
+bool e_first_in_scint1_or_2(const in_branch_struct& branch, const int& hit) {
+    return ( ((branch.counter[hit]==eCN_scint1) || (branch.counter[hit]==eCN_scint2))
+        && (abs(branch.pdgid[hit])==ePID_electron)
+        && branch.first_step[hit]);
+    
+}
+
+bool e_or_mu_first_in_scint1_or_2(const in_branch_struct& branch, const int& hit) {
+    return ( ((branch.counter[hit]==eCN_scint1) || (branch.counter[hit]==eCN_scint2))
+        && ((abs(branch.pdgid[hit])==ePID_electron) || (abs(branch.pdgid[hit])==ePID_muon))
+        && branch.first_step[hit]);
+}
+
+bool first_scint1_mu_or_pi(const in_branch_struct& branch, const int& hit){
+    return (branch.first_step[hit] 
+        && ((abs(branch.pdgid[hit]) == ePID_muon) || (abs(branch.pdgid[hit]) == ePID_pion)) 
+        && (branch.counter[hit]==eCN_scint1));
 }
 
 //==============================================================================

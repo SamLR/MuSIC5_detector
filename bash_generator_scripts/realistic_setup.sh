@@ -7,7 +7,7 @@
 # vary both ST thickness and degrader thickness
 
 # What's the name of this run?
-runname="realistic" 
+runname="realistic_inc_scint" 
 # What type of targets to use
 # the strings will expand at the function call to fill 2 arguments
 # i.e. target material & thickness (also note form of loop 

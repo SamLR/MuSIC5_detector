@@ -48,21 +48,23 @@
 #include "G4PhysicalVolumeStore.hh"
 #include "G4GeometryManager.hh"
 #include "G4RunManager.hh"
+#include "G4UserLimits.hh"
 
 
 #include <string.h>
 
 DetectorConstruction::DetectorConstruction()
-    :f_myField(0), f_updated(false),
-    f_fname_sol("../../fieldmap/MuSIC5_detector/fieldmap_solenoid.txt"), 
-    f_fname_dip("../../fieldmap/MuSIC5_detector/fieldmap_dipole.txt"),
-    f_dip_polarity(1.0),
-    f_scint1z(3.5*mm), f_scint2z (3.5*mm), f_degraderZ(1*mm), f_targetZ(6*mm) 
-{
+:f_myField(0), f_updated(false),
+f_fname_sol("../../fieldmap/MuSIC5_detector/fieldmap_solenoid.txt"), 
+f_fname_dip("../../fieldmap/MuSIC5_detector/fieldmap_dipole.txt"),
+f_dip_polarity(1.0),
+f_scint1z(0.5*mm), f_scint2z (3.5*mm), f_degraderZ(1*mm), f_targetZ(6*mm),
+f_scint1_limit (0), f_scint2_limit(0), f_deg_limit(0), f_st_limit(0) {
+        
     f_messenger = new DetectorConstructionMessenger(this);
     DefineMaterials();
-    f_scint1Mat   = G4Material::GetMaterial("Air"); 
-    f_scint2Mat   = G4Material::GetMaterial("Air");
+    f_scint1Mat   = G4Material::GetMaterial("Scintillator"); 
+    f_scint2Mat   = G4Material::GetMaterial("Scintillator");
     f_degraderMat = G4Material::GetMaterial("Polystyrene");
     f_targetMat   = G4Material::GetMaterial("Copper");
 }
@@ -81,6 +83,10 @@ DetectorConstruction::~DetectorConstruction()
     delete Mylar;
     delete Polystyrene;
     delete Polyethylene;
+    delete f_scint1_limit;
+    delete f_scint2_limit;
+    delete f_deg_limit;
+    delete f_st_limit;
 }
 
 void DetectorConstruction::DefineMaterials()
@@ -101,6 +107,7 @@ void DetectorConstruction::DefineMaterials()
     Cu = new G4Material("Copper",    z=29.0, a= 63.546*g/mole, density= 8.94 *g/cm3);
 
 // mixtures and compounds
+// possibly Polyvinyltoluene. See pg322 of Mokhov (2001) for calculated stopping power
     Scint = new G4Material("Scintillator", density= 1.032*g/cm3, ncomponents=2);
     Scint->AddElement(C, natoms=9);
     Scint->AddElement(H, natoms=10);
@@ -199,6 +206,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     G4ThreeVector sci2_pos = get_global_pos(scint2_posz);
     G4Box* solid_sci2 = new G4Box("sci2", sci_hx, sci_hy, f_scint2z/2.0);
     f_logic_sci2 = new G4LogicalVolume(solid_sci2,f_scint2Mat,"sci2",0,0,0);
+    
     f_physi_sci2 = new G4PVPlacement(G4Transform3D(rot_36,sci2_pos),f_logic_sci2,"sci2", f_logic_world,false,0);
 
     // degrader
@@ -210,6 +218,25 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     G4Box* solid_degrader = new G4Box("degrader",degrader_hx,degrader_hy,f_degraderZ/2.0);
     f_logic_degrader = new G4LogicalVolume(solid_degrader,f_degraderMat,"degrader",0,0,0);
     f_physi_degrader = new G4PVPlacement(G4Transform3D(rot_36,degrader_pos),f_logic_degrader,"degrader", f_logic_world,false,0);
+    
+// the limits on step size in the interesting volumes to be 1/10 z
+    double scint1_limit = 0.1 * f_scint1z;
+    double scint2_limit = 0.1 * f_scint2z;
+    double st_limit = 0.1 * f_targetZ;
+    double deg_limit = 0.1 * f_degraderZ;
+    
+    f_scint1_limit = new G4UserLimits(scint1_limit);
+    f_logic_sci1->SetUserLimits(f_scint1_limit);
+    
+    f_scint2_limit = new G4UserLimits(scint2_limit);
+    f_logic_sci2->SetUserLimits(f_scint2_limit);
+    
+    f_st_limit = new G4UserLimits(st_limit);
+    f_logic_target->SetUserLimits(f_st_limit);
+    
+    f_deg_limit = new G4UserLimits(deg_limit);
+    f_logic_degrader->SetUserLimits(f_deg_limit);
+    
 
     return f_physi_world;
 }

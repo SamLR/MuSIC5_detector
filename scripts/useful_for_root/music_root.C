@@ -124,6 +124,7 @@ bool is_in (const vector<T>& vec, const T& target){
     }
     return false;
 }
+
 //==============================================================================
 // useful hack to select charged pids and group in a sane range (i.e not -211 -> 2212)
 const unsigned int& pid_to_apid(const int& inpid){
@@ -227,6 +228,7 @@ void fill_hists(const unsigned int& n_files,
         }
         // loop-de-loop              
         loop_entries<in_branch_struct, H*>(in_tree, branch, hist_set, n_funcs, cuts, verbose, testing);
+        delete in_tree;
     }
     // cout << "out_file not enabled. Uncomment it, please" << endl;
     if (!testing) out_file->Write();
