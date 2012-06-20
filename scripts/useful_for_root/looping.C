@@ -26,7 +26,7 @@ void loop_entries(
     unsigned int n_entries = -1;
 
     if (testing) {
-        const unsigned int n_entries = 500;
+        const unsigned int n_entries = 100;
         cout << endl;
         cout << "WARNING testing mode enabled! Only "<<n_entries<<" entries will be read" << endl;
         cout << endl;

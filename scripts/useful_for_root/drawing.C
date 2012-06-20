@@ -80,7 +80,7 @@ void draw_pretty_hists(const int& n_hists,
     TLegend* leg = new TLegend(x1, y1, x2, y2);
     // find the largest histogram (otherwise y range will be too small)
     int max = -1;     
-    int first_hist = -1; // want to draw largest hist first               
+    int first_hist = 0; // want to draw largest hist first               
     
     for(unsigned int hist = 0; hist < n_hists; ++hist) {
         const int current_max = hist_array[hist]->GetMaximum();
@@ -122,11 +122,12 @@ void draw_pretty_hists(const int& n_hists,
             // tidy up the stats box
             edit_stats_box(can, hist_array[hist], stats_opt, x1_stat, x2_stat, y1_stat, y2_stat);
         } 
-    }
+    }    
 
     // hack to set the title of the histogram (yet have a different entry for 
     // the first hist in the legend, if desired)
     hist_array[first_hist]->SetTitle(title);       
+    
     // make sure the y extent is enough to show everything
     leg->SetFillColor(0); // don't want grey backgrounds
     leg->Draw();

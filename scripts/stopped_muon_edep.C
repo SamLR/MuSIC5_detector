@@ -19,20 +19,24 @@ void stopped_muon_edep(const int& n_files, // number of file roots
     // reduces the number of entries read and stops stuff getting saved
     const bool& testing = false       
 ){               
-    const unsigned int n_funcs = 2; // mainly a simple check for arrays
+    const unsigned int n_funcs = 4; // mainly a simple check for arrays
 
     // prefixes for the histograms produced by the different functions 
-    const TString func_names[n_funcs] = {"Stopped_muon_edep_in_scint1", "Stopped_muon_edep_in_scint2"};
+    const TString func_names[n_funcs] = {"all_muon_edep_in_scint1", "all_muon_edep_in_scint2",
+        "Stopped_muon_edep_in_scint1", "Stopped_muon_edep_in_scint2"};
 
     // the functions applied to every hit
-    entry_fptr cuts[n_funcs] = {&edep_in_scint1_of_stopped_muons, &edep_in_scint2_of_stopped_muons};
+    entry_fptr cuts[n_funcs] = {&edep_in_scint1_of_muons,
+         &edep_in_scint2_of_muons,
+         &edep_in_scint1_of_stopped_muons,
+         &edep_in_scint2_of_stopped_muons};
 
     TH1F* hists[n_files][n_funcs]; // array to hold the produced histograms
 
     const TString axis_titles [n_funcs*3] = {"Edep (MeV)", "count", "Z","Edep (MeV)", "count", "Z"};
-    const int    bins [n_funcs*3] = { 100, 100, 100, 100, 100, 100}; 
-    const double mins [n_funcs*3] = {   0,   0,   0,   0,   0,   0};
-    const double maxs [n_funcs*3] = {  50,  50,  50,0.05,0.05,0.05};  
+    const int    bins [n_funcs*3] = { 100, 100, 100,100, 100, 100,100, 100, 100,100, 100, 100};//  100, 100, 100}; 
+    const double mins [n_funcs*3] = {   0,   0,   0,  0,   0,   0,  0,   0,   0,  0,   0,   0};//    0,   0,   0};
+    const double maxs [n_funcs*3] = {  50,  50,  50, 50,  50,  50, 50,  50,  50, 50,  50,  50};// 0.05,0.05,0.05};  
 
     const int dimension = 1;
     // function that opens the files, uses the trees to fills the 1D histograms
@@ -43,37 +47,43 @@ void stopped_muon_edep(const int& n_files, // number of file roots
 
     // loop over all the file roots and draw the associated histograms
         // compare the momentum distributions based on PID
-    TString img_save_location1;
-    TString img_save_location2;
-    if (testing){
-        img_save_location1 = "";
-        img_save_location2 = "";
-    } else {
-        img_save_location1 = img_prefix + "scint1.eps";
-        img_save_location2 = img_prefix + "scint2.eps";
-    }
+
     TH1F* a_hists[n_funcs][n_files];
-    
     for(unsigned int file = 0; file < n_files; ++file) {
         for(unsigned int func = 0; func < n_funcs; ++func) {
             a_hists[func][file] = hists[file][func];
         }
     }
-    TString h_title1 = "Energy deposited by muons in scint1 with a " + st_name +" target and varying thicknesses of degrader";
-    draw_pretty_hists(n_files, a_hists[0], h_title1, file_roots,img_save_location1,1002201);
-    TString h_title2 = "Energy deposited by muons in scint2 with a " + st_name +" target and varying thicknesses of degrader";
-    draw_pretty_hists(n_files, a_hists[1], h_title2, file_roots,img_save_location2,1002201);
-
+    
+    for(unsigned int i = 0; i < n_funcs; ++i) {
+        TString img_save_location;
+        if (testing){
+            img_save_location = "";
+        } else {
+            img_save_location = img_prefix + func_names[i];
+        }
+        
+        TString title = func_names[i] +" "+ st_name;
+        
+        cout << title << endl;
+        draw_pretty_hists(n_files, a_hists[i], title, file_roots, img_save_location,1002201);
+    }
 }
+
+void edep_in_scint1_of_muons(const in_branch_struct& branch, const TH1F* hist, const bool verbose){
+    edep_sum(branch, hist, &muon_scint1);
+}
+
+void edep_in_scint2_of_muons(const in_branch_struct& branch, const TH1F* hist, const bool verbose){
+    edep_sum(branch, hist, &muon_scint2);
+}
+
 void edep_in_scint1_of_stopped_muons(const in_branch_struct& branch, const TH1F* hist, const bool verbose){
-    edep_sum(branch, hist, &muon_deg);
-    // edep_sum(branch, hist, &muon_scint);
-    // edep_sum_flagged(branch, hist, &muon_scint1, &mu_decaying_in_ST,verbose);
+    edep_sum_flagged(branch, hist, &muon_scint1, &mu_decaying_in_ST,verbose);
 }
 
 void edep_in_scint2_of_stopped_muons(const in_branch_struct& branch, const TH1F* hist, const bool verbose){
-    edep_sum(branch, hist, &muon_scint2);
-    // edep_sum_flagged(branch, hist, &muon_scint2, &mu_decaying_in_ST,verbose);
+    edep_sum_flagged(branch, hist, &muon_scint2, &mu_decaying_in_ST,verbose);
 }
 
 
