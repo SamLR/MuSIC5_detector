@@ -7,15 +7,19 @@
 # vary both ST thickness and degrader thickness
 
 # What's the name of this run?
-runname="final" 
+# runname="final" 
+runname="final_alt" 
 # What type of targets to use
 # the strings will expand at the function call to fill 2 arguments
 # i.e. target material & thickness (also note form of loop 
 # using `for i in "${thickness[@]}" to expand properly)
-targets=( "Copper 0.5" ) 
+# targets=( "Copper 0.5" ) 
+targets=( "Magnesium 0.25" "Magnesium 0.50" "Magnesium 0.75" "Magnesium 1" "Magnesium 1.25" "Magnesium 1.5" ) 
 
-degMat="Aluminium"
-degThickness=( 0.5 1 5 8 12 ) 
+degMat="Air"
+degThickness=( 0 ) 
+# degMat="Aluminium"
+# degThickness=( 0.5 1 5 8 12 ) 
 
 # ===========================================================================#
 # Actually do things!
