@@ -224,12 +224,11 @@ void record_momentum_at_cut1_if_also_cut2(const in_branch_struct& branch,
     intvec cut1_tracks;
     intvec cut2_tracks;
     dblvec cut1_momentum;
-
+	
     for(unsigned int hit = 0; hit < n_hits; ++hit) {
         const bool cut1_pass = (*cut1)(branch,hit);
         const bool cut2_pass = (*cut2)(branch,hit);
         const unsigned int trackID = branch.trkid[hit];
-        
         if (cut1_pass) {
             bool seen_it = is_in<int>(cut1_tracks, trackID);
             if( !seen_it ){

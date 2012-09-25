@@ -59,7 +59,7 @@ void stopped_muon_momentum(const int& n_files, // number of file roots
 
 }
 void stopped_in_ST_mom_in_deg(const in_branch_struct& branch, const TH1F* hist, const bool verbose){
-    record_momentum_at_cut1_if_also_cut2(branch, hist, &muon_deg, &mu_decaying_in_ST, verbose);
+    record_momentum_at_cut1_if_also_cut2(branch, hist, &first_scint1_muon, &mu_decaying_in_ST, verbose);
 }
 
 

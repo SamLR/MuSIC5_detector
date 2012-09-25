@@ -14,7 +14,7 @@ runname="final_alt"
 # i.e. target material & thickness (also note form of loop 
 # using `for i in "${thickness[@]}" to expand properly)
 # targets=( "Copper 0.5" ) 
-targets=( "Magnesium 0.25" "Magnesium 0.50" "Magnesium 0.75" "Magnesium 1" "Magnesium 1.25" "Magnesium 1.5" ) 
+targets=( "Magnesium 2.5" "Magnesium 5" "Magnesium 7.5" "Magnesium 10" "Magnesium 12.5" "Magnesium 15" ) 
 
 degMat="Air"
 degThickness=( 0 ) 
