@@ -57,6 +57,7 @@ void quick_stopped_muon_mom() {
 			
 			for(unsigned int hit = 0; hit < branch.n_hits; ++hit) {
 				// Method 2 (1st try commented below)
+				
 			}
 		}
 		cout << "File done" << endl;	
