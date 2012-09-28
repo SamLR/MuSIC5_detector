@@ -70,7 +70,6 @@ void SteppingAction::set_hit(bool first_step, bool last_step, int acounter, cons
     else if (strcmp(aprocname,"CHIPSNuclearCaptureAtRest")==0) {  f_root->procid[g_nhit]=19; }
     else if (strcmp(aprocname,"PionMinusInelastic")==0)        {  f_root->procid[g_nhit]=20; }
     
-    
     f_root->first_step[g_nhit] = first_step;
     f_root->last_step[g_nhit] = last_step;
     f_root->counter[g_nhit] = acounter;
@@ -87,8 +86,6 @@ void SteppingAction::set_hit(bool first_step, bool last_step, int acounter, cons
     f_root->edep[g_nhit] = aedep;
     f_root->tof[g_nhit] = atof;
     f_root->g_nhit++;
-    
-
 }
 
 void SteppingAction::UserSteppingAction(const G4Step * aStep)
@@ -103,18 +100,22 @@ void SteppingAction::UserSteppingAction(const G4Step * aStep)
     
     if (!nextvol) return; // if there is no next volume we're exiting the world
     
+    bool last_step  = (point2->GetStepStatus() == fGeomBoundary);
+    bool first_step = (point1->GetStepStatus() == fGeomBoundary);
     const G4String& volname = point1->GetTouchableHandle()->GetVolume()->GetName();
+    
+    bool entering_scint1 = last_step &&
+        (point2->GetTouchableHandle()->GetVolume()->GetName() == "degrader") &&
+        (volname == "world");
+    
     int acounter = 0; // main step
     if     ( volname == "sci1" )     { acounter = 1; } 
     else if( volname == "target" )   { acounter = 2; } 
     else if( volname == "sci2" )     { acounter = 3; }
     else if( volname == "degrader" ) { acounter = 4; }
+    else if( entering_scint1 )       { acounter = 5; }
     else return; // not in a volume
     // record stuff specially if we're about to enter the degrader or st
-    
-    bool last_step  = (point2->GetStepStatus() == fGeomBoundary);
-    bool first_step = (point1->GetStepStatus() == fGeomBoundary);
-    
     
     int parentid = track->GetParentID();
     int trkid = track->GetTrackID();

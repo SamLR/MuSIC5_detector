@@ -42,7 +42,7 @@ do
         do
             name="${runname}_st_${STmat}_${STz}mm_deg_${DegZ}mm"
             echo $DegZ $STz $STmat " => " $name
-            run_it $STmat $STz $degMat $DegZ $name
+            # run_it $STmat $STz $degMat $DegZ $name
             echo 
         done;
     done;

@@ -7,19 +7,19 @@
 # vary both ST thickness and degrader thickness
 
 # What's the name of this run?
-# runname="final" 
-runname="final_alt" 
+runname="final" 
+# runname="final_alt" 
 # What type of targets to use
 # the strings will expand at the function call to fill 2 arguments
 # i.e. target material & thickness (also note form of loop 
 # using `for i in "${thickness[@]}" to expand properly)
-# targets=( "Copper 0.5" ) 
-targets=( "Magnesium 2.5" "Magnesium 5" "Magnesium 7.5" "Magnesium 10" "Magnesium 12.5" "Magnesium 15" ) 
+targets=( "Copper 0.5" ) 
+# targets=( "Magnesium 2.5" "Magnesium 5" "Magnesium 7.5" "Magnesium 10" "Magnesium 12.5" "Magnesium 15" ) 
 
-degMat="Air"
-degThickness=( 0 ) 
-# degMat="Aluminium"
-# degThickness=( 0.5 1 5 8 12 ) 
+# degMat="Air"
+# degThickness=( 0 ) 
+# degMat=( "Aluminium" )
+degThickness=( "Air 5" "Aluminium 0.5" "Aluminium 1" "Aluminium 5" "Aluminium 8" "Aluminium 12" ) 
 
 # ===========================================================================#
 # Actually do things!
@@ -43,11 +43,11 @@ ls -l $exedir >> $runlog
 echo -e "************************\n" >> $runlog
 
 # generate the macros & run the program
-for DegZ in ${degThickness[@]}; # loop over all entries in the array materials
+for DegZ in "${degThickness[@]}"; # loop over all entries in the array materials
 do
     for ST in "${targets[@]}" # "s make bash treat the strings as elements
     do
-        make_file_name $runname $ST "Al" $DegZ
+        make_file_name $runname $ST $DegZ
         echo $DegZ $ST " => " $name
         if [[ -z $testing ]]; then
             run_it $ST $degMat $DegZ $name
