@@ -19,7 +19,7 @@ void momentum_post_degrader_by_pid_top(){
     // const TString save_file_name = "";
     const TString save_file_name = "saved_hist_pid_vs_mom_vs_deg";
 
-    momentum_post_degrader_by_pid(n_files, file_roots, file_prefix, img_prefix, save_file_name, true);
+    momentum_post_degrader_by_pid(n_files, file_roots, file_prefix, img_prefix, save_file_name);
 }
 
 

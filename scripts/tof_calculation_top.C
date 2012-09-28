@@ -17,7 +17,7 @@ void tof_calculation_top(){
     const TString img_prefix = "../../../images/st_and_degrader/tof_";
     const TString save_file_name = "tof_measurements";
 
-    tof_calculation(n_files, file_roots, file_prefix, img_prefix, save_file_name);
+    tof_calculation(n_files, file_roots, file_prefix, img_prefix, save_file_name, true);
 }
 
 

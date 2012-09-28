@@ -344,35 +344,59 @@ void tof_parent_daughter(const in_branch_struct& branch,
 
     if (n_hits == 0) return;
     
-    intvec seen_parents;
-    intvec seen_child;
-    dblvec parent_times;
-    
+    // intvec seen_parents;
+    // intvec seen_child;
+    // dblvec parent_times;
+	int seen_parent [500];
+	int seen_child  [500];
+	double parent_times  [500];
+	int n_parent = 0;
+	int n_child  = 0;
     for(unsigned int hit = 0; hit < n_hits; ++hit) {
-        const bool pass_parent = (*parent_cut)(branch,hit);      
-        const bool pass_child = (*child_cut)(branch,hit);      
+        const bool pass_parent = (*parent_cut)(branch, hit);      
+        const bool pass_child = (*child_cut)(branch, hit);    
+
+		if (!pass_child || !pass_parent) continue;		
         const int trackID = branch.trkid[hit];    
-        
-        const bool old_parent = is_in (seen_parents, trackID);
-        const bool old_child = is_in (seen_child, trackID);
+
+        // const bool old_parent = is_in (seen_parents, trackID);
+        // const bool old_child = is_in (seen_child, trackID);
+		bool old_parent = false;
+		bool old_child  = false;
+		for(int* parent_id_ptr = seen_parent; parent_id_ptr < seen_parent[n_parent]; ++parent_id_ptr) {
+			old_parent = (*parent_id_ptr == trackID);
+		}
+		for(int* child_id_ptr = seen_child; child_id_ptr < seen_child[n_child]; ++child_id_ptr) {
+			old_child = (*child_id_ptr == trackID);
+		}
         
         if (pass_parent && !old_parent){
             // hooray new parent track!
-            seen_parents.push_back(trackID);
-            parent_times.push_back(branch.tof[hit]);
+            // seen_parents.push_back(trackID);
+            // parent_times.push_back(branch.tof[hit]);
+			seen_parent[n_parent++] = trackID;
+			parent_times[n_parent] = branch.tof[hit];
         }
         
         if (pass_child && !old_child){
             // hooray new child track 
-            seen_child.push_back(trackID);
-            for(unsigned int id = 0; id < seen_parents.size(); ++id) {
-                if(seen_parents[id] == branch.parentid[hit]){
-                    // yay we've seen the child's parent
-                    
-                    double dt = branch.tof[hit] - parent_times[id];
-                    hist->Fill(dt);
-                }
-            }
+            // seen_child.push_back(trackID);
+			seen_child[n_child++] = trackID;
+			for(int index = 0; index < n_parent; ++index) {
+				if(seen_parent[index] == branch.parentid[hit]) {
+					// seen the child's parent!
+					double dt = branch.tof[hit] - parent_times[index];
+					hist->Fill(dt);
+				}
+			}
+            // for(unsigned int id = 0; id < seen_parents.size(); ++id) {
+            //     if(seen_parents[id] == branch.parentid[hit]){
+            //         // yay we've seen the child's parent
+            //         
+            //         double dt = branch.tof[hit] - parent_times[id];
+            //         hist->Fill(dt);
+            //     }
+            // }
         }
     }
 }      

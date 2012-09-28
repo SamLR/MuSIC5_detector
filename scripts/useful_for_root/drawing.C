@@ -57,10 +57,10 @@ void draw_pretty_two_hists(const TH1* backHist,
 
 // the stupidly long variable name is to try and stop namespace collisions @ global
 const int __useful_default_colour_selection [] =  {1, 2, 4, 3, 6, 7, 8, 9};
-void draw_pretty_hists(const int& n_hists,
-    const TH1** hist_array, 
-    const TString title,
-    const TString* leg_entries,
+void draw_pretty_hists(const int& n_hists, 
+    const TH1** hist_array,   
+    const TString title,         // title for the entire plot
+    const TString* leg_entries,  // titles for each legend entry
     const TString img_save_location ="",
     const int stats_opt=0, // 1002201 <- name, mean±er, rms±er & integral
     const TString draw_opt = "",
@@ -142,7 +142,7 @@ void draw_pretty_hist(const TH1* hist,
     const int stat_opt=1002201,
     const double x1 = 0.70, const double x2 = 0.90, 
     const double y1 = 0.70, const double y2 = 0.90
-) {    
+) {
     TCanvas* can = NULL;
     TString title_t;
     if(title == "") {
