@@ -126,7 +126,7 @@ void quick_stopped_muon_mom() {
 	}
 
 	TString title = "Stopped muon momentum";
-	TString save_location = "../../../images/final_analysis/stopped_muon_momentum.svg";
+	TString save_location = "images/stopped_muon_momentum.svg";
 	// 1002201 is the magic number for stats
 	draw_pretty_hists(n_files,hists,title,file_roots, save_location,1002201);
 }

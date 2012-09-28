@@ -19,7 +19,6 @@ root/
 WD/
 *.d
 *.so
-images/
 .DS_Store
 log
 er.log

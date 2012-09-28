@@ -68,7 +68,7 @@ void quick_muon_momentum() {
 		hists[hist]->Draw();
 	}
 	TString title = "Muon momentum for different degraders at the "+counter_name;
-	TString save_location = "../../../images/final_analysis/muon_momentum_at_"+counter_name+".svg";
+	TString save_location = "images/muon_momentum_at_"+counter_name+".svg";
 	draw_pretty_hists(n_files,hists,title,file_roots, save_location,1002201);
 }
 
