@@ -1,0 +1,887 @@
+<?xml version="1.0" standalone="no"?>
+<svg width="567" height="328" viewBox="0 0 567 328" xmlns="http://www.w3.org/2000/svg">
+<title>
+images/muon_decay_times.svg
+</title>
+<desc>
+Creator: ROOT Version 5.32/00
+CreationDate: Tue Oct  2 21:44:10 2012</desc>
+<defs>
+</defs>
+<rect x="0" y="0" width="567" height="328" fill="white"/>
+<rect x="57" y="33" width="397" height="262" fill="white"/>
+<rect x="57" y="33" width="397" height="262" fill="none" stroke="black"/>
+<rect x="57" y="33" width="397" height="262" fill="white"/>
+<rect x="57" y="33" width="397" height="262" fill="none" stroke="black"/>
+<path d="M57,45v 250v -75v 75v -50v 50v -25v 25v -100v 100v -100v 100v -75v 50v -50v 75v -75v 25v -25h 1v 75v -50v 50v -50v 25v -125v 150v -100v 100v -100v 75v -25v 25v -25v 25v -25v 50v -25v 25v -50v 25v -25v 50v -75v 75v -50v 25v -25v 50v -100v
+ 100h 1v -75v 50v -50v 50v -50v 75v -75v 75v -75v 75v -75v 75v -50v 25v -25v 50v -75v 50v -25v 50v -25v 25v -75v 50v -75v 100v -50v 50v -50v 50v -25h 1v -25v 50v -50v 50v -75v 75v -50v 25v -25v 25v -25v 50v -50v 50v -100v 50v -25v 75v -100v 100v -25v
+ 25v -50v 50v -75v 75v -50v 50v -50v 50v -75v 50v -50h 1v 75v -50v 50v -50v 50v -75v 75v -75v 50v -25v 50v -100v 100v -75v 75v -100v 75v -25v 50v -25v 25v -25v 25v -50v 50v -25v 25v -50v 25v -50v 75v -75h 1v 75v -25v 25v -25v 25v -75v 75v -75v 50v
+ -50v 50v -25v 50v -50v 25v -25v 50v -100v 100v -25v 25v -50v 50v -75v 75v -75v 75v -75v 75v -50h 1v 50v -75v 75v -100v 100v -50v 50v -75v 75v -25v 25v -50v 50v -50v 50v -25v 25v -50v 50v -50v 25v -25v 25v -25v 25v -25v 50v -50v 50v -75v 75v -25h 1v
+ 25v -75v 75v -50v 50v -75v 75v -50v 25v -75v 100v -50v 50v -50v 50v -75v 50v -25v 50v -100v 100v -50v 50v -25v 25v -25h 1v 25v -50v 50v -75v 50v -75v 75v -50v 75v -50v 50v -50v 50v -50v 50v -50v 50v -25v 25v -50v 50v -50v 50v -125v 125v -75v 50v
+ -50v 75v -50v 50h 1v -25v 25v -50v 25v -75v 100v -50v 50v -50v 50v -50v 50v -50v 50v -50v 50v -25v 25v -125v 100v -50v 50v -25v 50v -75v 50v -25v 50v -50v 50h 1v -50v 50v -50v 50v -75v 75v -75v 50v -50v 75v -50v 50v -50v 50v -125v 125v -50v 50v -75v
+ 75v -25v 25v -75v 75v -75v 75h 1v -25v 25v -25v 25v -25v 25v -100v 100v -25v 25v -50v 25v -25v 50v -25v 25v -75v 75v -25v 25v -75v 75v -50v 25v -25v 25v -25v 50v -50h 1v -50v 75v -25v 25v -75v 100v -75v 25v -25v 75v -50v 50v -50v 50v -25v 25v -75v
+ 75v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 25h 1v 25v -25v 25v -50v 50v -50v 50v -100v 100v -25v 25v -50v 50v -75v 75v -75v 75v -75v 50v -25v 50v -25v 25v -50v 25h 1v 25v -75v 50v -50v 75v -50v 50v -50v 50v -75v 75v -25v 25v -50v
+ 25v -25v 50v -25v 25v -50v 50v -25v 25v -25h 1v 25v -100v 100v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -100v 100v -50v 50v -25v 25v -25v 25v -25v 25v -50v 25v -25v 50v -50v 50v -50v 50v -50h 1v 50v -75v 75v -50v 50v -50v 50v -100v 100v -25v 25v
+ -50v 50v -50v 25v -50v 75v -25v 25v -50v 25v -25v 50v -25h 1v -50v 75v -75v 75v -50v 25v -25v 25v -25v 50v -50v 50v -50v 50v -50v 50v -25v 25v -25v 25v -100v 100v -75v 50h 1v -50v 50v -50v 75v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -50v 50v
+ -50v 50v -25v 25v -25v 25v -75v 75v -50v 50v -50v 50v -25h 1v 25v -50v 50v -75v 50v -25v 50v -100v 100v -75v 75v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -75v 75v -50v 25h 1v -25v 50v -25v 25v -100v 75v -100v 100v -25v 25v -50v 75v -25v
+ 25v -75v 75v -25v 25v -75v 75v -25v 25v -50v 50v -50v 50v -50h 1v 50v -50v 50v -25v 25v -75v 50v -25v 25v -50v 75v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -100v 100v -150v 150v -50h 1v -25v 75v -50v 50v -25v 25v -25v 25v -25v 25v -50v
+ 50v -50v 50v -25v 25v -25v 25v -50v 50v -75v 75v -75v 75v -50v 25h 1v -25v 50v -75v 75v -25v 25v -75v 75v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50v -75v 75v -25v 25v -25h 1v 25v -75v 75v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v
+ 25v -125v 125v -25v 25v -75v 75v -25h 1v 25v -25v 25v -50v 50v -75v 75v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -50v 50v -50v 50v -25v 25v -50v 50h 1v -25v 25v -25v 25v -125v 125v -50v 50v -75v 25v -25v 75v -25v 25v -50v 50v -75v 75v -25v 25v
+ -50v 50v -50v 50v -25v 25v -50v 25v -25h 1v 50v -50v 25v -75v 75v -50v 50v -25v 50v -25v 25v -75v 75v -50v 50v -50v 25v -25v 50v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25h 1v -75v 50v -25v 50v -25v 25v -25v 25v -25v 25v -75v 75v -50v 50v -25v 25v
+ -50v 50v -50v 50v -50v 50v -25v 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -100v 100v -25v 25v -25v 25v -50v 50v -50v 50v -75v 50v -50v 75v -25v 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -50v 50v -50v
+ 50v -25v 25v -50v 50v -25h 1v -25v 50v -25v 25v -25v 25v -75v 75v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25h 1v -25v 50v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -50v 50v -50v 50v -25v
+ 25v -50v 50v -25v 25h 1v -50v 50v -25v 25v -50v 25v -25v 50v -50v 50v -75v 75v -25v 25v -25v 25v -75v 75v -25h 1v 25v -75v 75v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -75v 75v -25v 25v -50v 50v -25v 25v -50v 50v -50v 50v -25h 1v -25v
+ 50v -25v 25v -25v 25v -25v 25v -50v 25v -50v 75v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25h 1v 25v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -75h 1v 75v -25v 25v -50v 50v -25v 25v -50v 50v -50v
+ 50v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -75v 75v -25v 25h 1v -50v 50v -50v 50v -25v 25v -50v 50v -50v 50v -25v 25v -50v 50v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -50v 50v -25v 25v -50v 50v -25v
+ 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -50v 50h 1v -25v 25v -25v 25v -50v 50v -50v 50v -50v 50v -25v
+ 25v -50v 50v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -50v 25v -25v 50v -25v 25v -25v 25v -25v
+ 25v -25v 25h 1v -50v 50v -25v 25v -75v 75v -50v 50v -50v 50v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -75v 75v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -25v
+ 25v -25v 25v -50v 50v -75v 75v -25v 25v -50v 50h 1v -50v 50v -25v 25v -25v 25v -75v 75v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -75h 1v 75v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v
+ 25v -25v 25v -25h 1v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -50v 25h 1v 25v -25v 25v -25v 25v -50v 50v -50v 50v -50v 50v -100v 100v -50v 50v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v
+ -25v 25v -50v 50h 1v -25v 25v -75v 75v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25h 1v -25v 50v -50v 50v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -25h 1v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -75v 75h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v
+ -25v 25v -25v 25v -50v 50v -75v 75v -25v 25v -25h 1v 25v -50v 50v -25v 25v -25v 25v -50v 50v -50v 50v -50v 50v -50v 50v -25v 25v -50v 50h 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50h
+ 1v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -75v 75v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v -50v 50v -25v 25v -25v
+ 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -75v 75v -75v 75v -25v 25v -25v 25v -25v 25v -25h 1v 25v
+ -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25h 1v 25v -75v 75v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v
+ -75v 75v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -75v 75h
+ 1v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -50h 1v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25h 1v -50v 50v -25v 25v -50v 50v -50v 50v
+ -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50v -25v
+ 25v -25v 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -50v 50v -50h 1v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -75v 75v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -75v 75v -25v 25v -25v 25h 1v -25v 25v -50v 50v
+ -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50h 1v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v
+ -25v 25v -25v 25v -25v 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v
+ -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50h 1v -75v 75v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v
+ -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25h 1v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v -25v 25v -25v
+ 25v -25v 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v
+ 50h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v
+ -25v 25h 1v -25v 25v -25v 25v -25v 25v -50v 50v -50v 50h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v
+ -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v
+ -25v 25h 1v -25v 25v -25v 25v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v
+ -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v
+ -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v
+ -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 2v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25v
+ -25v 25v -25v 25v -25v 25h 1v -25v 25h 2v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25h 2v -50v 50v -25v 25h 1v -25v 25h 2v -25v 25h 1v -25v 25v -50v 50h 1v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25h 1v 25v -25v 25v -25v 25v
+ -25v 25h 1v -25v 25h 2v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 2v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v
+ -25v 25h 1v -25v 25v -25v 25h 1v -25v 25h 2v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25h 2v -25v 25v
+ -25v 25v -25v 25h 1v -25v 25v -25v 25h 2v -25v 25v -25v 25h 2v -25v 25v -25v 25h 2v -25v 25h 2v -25v 25h 4v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 4v -25v 25h 3v -25v 25h 1v -25v 25h 2v -25v 25h 2v
+ -25v 25v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25h 2v -25v 25h 15v -25v 25h 6v -25v 25h 2v -25v 25h 3v -25v 25h 1v -25v 25v -25h 1v 25h 3v -25v 25h 13v -25v 25h 2v -25v 25h 2v -25v 25h 6v -25v 25h 10v -25v 25h 19v
+ -25v 25h 17v -25v 25h 3v -25v 25h 19v -25v 25h 51" fill="none" stroke="black" stroke-width="2"/>
+<rect x="459" y="254" width="102" height="41" fill="white"/>
+<path d="M459,295h 102" fill="none" stroke="black"/>
+<path d="M561,295v -41" fill="none" stroke="black"/>
+<path d="M561,254h -102" fill="none" stroke="black"/>
+<path d="M459,254v 41" fill="none" stroke="black"/>
+<text x="492" y="261" fill="black" font-size="9" font-family="Helvetica">
+Air_5mm
+</text>
+<path d="M459,264h 102" fill="none" stroke="black"/>
+<text x="464" y="273" fill="black" font-size="9" font-family="Helvetica">
+Mean  
+</text>
+<text x="529" y="273" fill="black" font-size="9" font-family="Helvetica">
+  38.77
+</text>
+<text x="525" y="273" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="496" y="273" fill="black" font-size="9" font-family="Helvetica">
+   2212 
+</text>
+<text x="464" y="283" fill="black" font-size="9" font-family="Helvetica">
+RMS   
+</text>
+<text x="531" y="283" fill="black" font-size="9" font-family="Helvetica">
+  27.41
+</text>
+<text x="526" y="283" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="497" y="283" fill="black" font-size="9" font-family="Helvetica">
+   2222 
+</text>
+<text x="464" y="292" fill="black" font-size="9" font-family="Helvetica">
+Integral 
+</text>
+<text x="529" y="293" fill="black" font-size="9" font-family="Helvetica">
+   3286
+</text>
+<path d="M57,295h 397" fill="none" stroke="black"/>
+<text x="384" y="317" fill="black" font-size="11" font-family="Helvetica">
+Delta time (ns)
+</text>
+<path d="M96,288v 7" fill="none" stroke="black"/>
+<path d="M106,292v 3" fill="none" stroke="black"/>
+<path d="M116,292v 3" fill="none" stroke="black"/>
+<path d="M126,292v 3" fill="none" stroke="black"/>
+<path d="M136,288v 7" fill="none" stroke="black"/>
+<path d="M146,292v 3" fill="none" stroke="black"/>
+<path d="M156,292v 3" fill="none" stroke="black"/>
+<path d="M166,292v 3" fill="none" stroke="black"/>
+<path d="M176,288v 7" fill="none" stroke="black"/>
+<path d="M186,292v 3" fill="none" stroke="black"/>
+<path d="M196,292v 3" fill="none" stroke="black"/>
+<path d="M205,292v 3" fill="none" stroke="black"/>
+<path d="M215,288v 7" fill="none" stroke="black"/>
+<path d="M225,292v 3" fill="none" stroke="black"/>
+<path d="M235,292v 3" fill="none" stroke="black"/>
+<path d="M245,292v 3" fill="none" stroke="black"/>
+<path d="M255,288v 7" fill="none" stroke="black"/>
+<path d="M265,292v 3" fill="none" stroke="black"/>
+<path d="M275,292v 3" fill="none" stroke="black"/>
+<path d="M285,292v 3" fill="none" stroke="black"/>
+<path d="M295,288v 7" fill="none" stroke="black"/>
+<path d="M305,292v 3" fill="none" stroke="black"/>
+<path d="M315,292v 3" fill="none" stroke="black"/>
+<path d="M325,292v 3" fill="none" stroke="black"/>
+<path d="M334,288v 7" fill="none" stroke="black"/>
+<path d="M344,292v 3" fill="none" stroke="black"/>
+<path d="M354,292v 3" fill="none" stroke="black"/>
+<path d="M364,292v 3" fill="none" stroke="black"/>
+<path d="M374,288v 7" fill="none" stroke="black"/>
+<path d="M384,292v 3" fill="none" stroke="black"/>
+<path d="M394,292v 3" fill="none" stroke="black"/>
+<path d="M404,292v 3" fill="none" stroke="black"/>
+<path d="M414,288v 7" fill="none" stroke="black"/>
+<path d="M424,292v 3" fill="none" stroke="black"/>
+<path d="M434,292v 3" fill="none" stroke="black"/>
+<path d="M444,292v 3" fill="none" stroke="black"/>
+<path d="M454,288v 7" fill="none" stroke="black"/>
+<path d="M96,288v 7" fill="none" stroke="black"/>
+<path d="M86,292v 3" fill="none" stroke="black"/>
+<path d="M77,292v 3" fill="none" stroke="black"/>
+<path d="M67,292v 3" fill="none" stroke="black"/>
+<path d="M454,288v 7" fill="none" stroke="black"/>
+<text x="84" y="306" fill="black" font-size="11" font-family="Helvetica">
+2000
+</text>
+<text x="124" y="306" fill="black" font-size="11" font-family="Helvetica">
+4000
+</text>
+<text x="164" y="306" fill="black" font-size="11" font-family="Helvetica">
+6000
+</text>
+<text x="203" y="306" fill="black" font-size="11" font-family="Helvetica">
+8000
+</text>
+<text x="240" y="306" fill="black" font-size="11" font-family="Helvetica">
+10000
+</text>
+<text x="280" y="306" fill="black" font-size="11" font-family="Helvetica">
+12000
+</text>
+<text x="319" y="306" fill="black" font-size="11" font-family="Helvetica">
+14000
+</text>
+<text x="359" y="306" fill="black" font-size="11" font-family="Helvetica">
+16000
+</text>
+<text x="399" y="306" fill="black" font-size="11" font-family="Helvetica">
+18000
+</text>
+<text x="439" y="306" fill="black" font-size="11" font-family="Helvetica">
+20000
+</text>
+<path d="M57,295v -262" fill="none" stroke="black"/>
+<g transform="rotate(-90,29,61)">
+<text x="29" y="61" fill="black" font-size="11" font-family="Helvetica">
+Count
+</text>
+</g>
+<path d="M70,295h -13" fill="none" stroke="black"/>
+<path d="M63,283h -6" fill="none" stroke="black"/>
+<path d="M63,270h -6" fill="none" stroke="black"/>
+<path d="M63,258h -6" fill="none" stroke="black"/>
+<path d="M70,245h -13" fill="none" stroke="black"/>
+<path d="M63,233h -6" fill="none" stroke="black"/>
+<path d="M63,220h -6" fill="none" stroke="black"/>
+<path d="M63,208h -6" fill="none" stroke="black"/>
+<path d="M70,195h -13" fill="none" stroke="black"/>
+<path d="M63,183h -6" fill="none" stroke="black"/>
+<path d="M63,170h -6" fill="none" stroke="black"/>
+<path d="M63,158h -6" fill="none" stroke="black"/>
+<path d="M70,145h -13" fill="none" stroke="black"/>
+<path d="M63,133h -6" fill="none" stroke="black"/>
+<path d="M63,120h -6" fill="none" stroke="black"/>
+<path d="M63,108h -6" fill="none" stroke="black"/>
+<path d="M70,95h -13" fill="none" stroke="black"/>
+<path d="M63,83h -6" fill="none" stroke="black"/>
+<path d="M63,70h -6" fill="none" stroke="black"/>
+<path d="M63,58h -6" fill="none" stroke="black"/>
+<path d="M70,45h -13" fill="none" stroke="black"/>
+<path d="M70,45h -13" fill="none" stroke="black"/>
+<path d="M63,33h -6" fill="none" stroke="black"/>
+<text x="48" y="299" fill="black" font-size="11" font-family="Helvetica">
+0
+</text>
+<text x="48" y="250" fill="black" font-size="11" font-family="Helvetica">
+2
+</text>
+<text x="48" y="199" fill="black" font-size="11" font-family="Helvetica">
+4
+</text>
+<text x="48" y="149" fill="black" font-size="11" font-family="Helvetica">
+6
+</text>
+<text x="48" y="99" fill="black" font-size="11" font-family="Helvetica">
+8
+</text>
+<text x="42" y="49" fill="black" font-size="11" font-family="Helvetica">
+10
+</text>
+<rect x="459" y="254" width="102" height="41" fill="white"/>
+<path d="M459,295h 102" fill="none" stroke="black"/>
+<path d="M561,295v -41" fill="none" stroke="black"/>
+<path d="M561,254h -102" fill="none" stroke="black"/>
+<path d="M459,254v 41" fill="none" stroke="black"/>
+<text x="492" y="261" fill="black" font-size="9" font-family="Helvetica">
+Air_5mm
+</text>
+<path d="M459,264h 102" fill="none" stroke="black"/>
+<text x="464" y="273" fill="black" font-size="9" font-family="Helvetica">
+Mean  
+</text>
+<text x="529" y="273" fill="black" font-size="9" font-family="Helvetica">
+  38.77
+</text>
+<text x="525" y="273" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="496" y="273" fill="black" font-size="9" font-family="Helvetica">
+   2212 
+</text>
+<text x="464" y="283" fill="black" font-size="9" font-family="Helvetica">
+RMS   
+</text>
+<text x="531" y="283" fill="black" font-size="9" font-family="Helvetica">
+  27.41
+</text>
+<text x="526" y="283" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="497" y="283" fill="black" font-size="9" font-family="Helvetica">
+   2222 
+</text>
+<text x="464" y="292" fill="black" font-size="9" font-family="Helvetica">
+Integral 
+</text>
+<text x="529" y="293" fill="black" font-size="9" font-family="Helvetica">
+   3286
+</text>
+<text x="160" y="16" fill="black" font-size="15" font-family="Helvetica">
+Muon decay times
+</text>
+<path d="M57,70v 225v -75v 75v -75v 75v -50v 25v -25v 50v -50v 25v -25v 50v -100v 100v -50v 25h 1v -25v 25v -50v 75v -100v 100v -50v 50v -75v 75v -50v 50v -50v 50v -50v 50v -50v 50v -50v 25v -25v 25v -25v 50v -75v 75v -25v 25v -25v 25v -25h 1v -25v
+ 50v -25v 25v -50v 50v -100v 100v -25v 25v -25v 25v -25v 25v -50v 25v -25v 25v -25v 50v -50v 25v -50v 75v -75v 75v -50v 50h 1v -75v 75v -50v 50v -25v 25v -25v 25v -75v 75v -25v 25v -50v 50v -75v 75v -25v 25v -50v 50v -100v 100v -50v 50v -50v 50v -50v
+ 50v -25v 25v -25h 1v -25v 50v -50v 50v -25v 25v -75v 75v -100v 100v -50v 25v -25v 50v -25v 25v -75v 50v -25v 50v -25v 25v -25v 25v -50v 50v -50v 50v -50v 50h 1v -50v 50v -50v 50v -75v 75v -75v 75v -25v 25v -25v 25v -50v 50v -25v 25v -150v 150v -125v
+ 125h 1v -50v 50v -75v 75v -25v 25v -100v 100v -50v 50v -25v 25v -50v 50v -75v 75v -50v 50v -25v 25v -75v 75v -25v 25v -25v 25v -50v 50v -25v 25v -50v 25h 1v 25v -50v 50v -25v 25v -50v 50v -25v 25v -75v 75v -25v 25v -125v 125v -25v 25v -25v 25v -50v
+ 50v -25v 25v -25v 25v -50h 1v 25v -50v 75v -25v 25v -25v 25v -25v 25v -50v 25v -25v 50v -75v 75v -75v 75v -75v 75v -50v 50v -50v 50v -50v 50v -25v 25v -25v 25v -50h 1v 50v -75v 75v -25v 25v -25v 25v -50v 50v -25v 25v -50v 25v -25v 25v -25v 50v -50v
+ 50v -50v 50v -50v 50v -50v 50v -25v 25v -25v 25v -50h 1v 50v -50v 50v -50v 50v -75v 75v -25v 25v -75v 75v -75v 75v -50v 50v -50v 50v -50v 50v -25v 25v -50v 50v -25v 25v -50v 50h 1v -75v 75v -50v 50v -50v 50v -25v 25v -50v 50v -125v 100v -25v 50v
+ -50v 50v -25v 25v -50v 50v -25h 1v -25v 25v -25v 50v -50v 50v -50v 50v -100v 100v -75v 75v -75v 75v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -50h 1v 50v -25v 25v -25v 25v -50v 50v -75v 75v -25v 25v -25v 25v
+ -50v 50v -25v 25v -75v 75v -50v 50v -25h 1v 25v -150v 150v -50v 50v -25v 25v -50v 50v -50v 25v -25v 50v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25h 1v -25v 25v -75v 75v -25v 25v -50v 50v -75v 75v -50v 50v -50v 50v -50v 50v -75v
+ 75v -50v 50v -75v 75v -75v 75v -25v 25h 1v -50v 50v -50v 50v -50v 50v -25v 25v -50v 50v -25v 25v -50v 50v -75v 50v -25v 50v -25v 25v -50v 50v -75v 75v -75v 75v -75v 75h 1v -25v 25v -50v 50v -25v 25v -50v 50v -75v 75v -25v 25v -50v 50v -25v 25v -25v
+ 25v -25v 25v -75v 75v -75h 1v 75v -25v 25v -25v 25v -50v 50v -50v 50v -50v 50v -25v 25v -50v 25v -50v 75v -25v 25v -100v 100v -50v 50h 1v -25v 25v -25v 25v -25v 25v -50v 50v -50v 50v -75v 75v -50v 25v -25v 50v -25v 25v -75v 75v -25v 25v -75v 75v
+ -25v 25v -25h 1v 25v -25v 25v -25v 25v -50v 50v -25v 25v -100v 100v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -75v 75v -25v 25v -25v
+ 25v -25v 25v -25v 25v -25h 1v -25v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -50v 25v -25v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -50v 50v -50v 50v -50v 50v -50v 50v -25v 25v -50v 50v -25v 25v -50v 50v -100h 1v
+ 100v -75v 75v -25v 25v -50v 50v -50v 50v -25v 25v -50v 50v -50v 50v -25v 25h 1v -50v 50v -50v 50v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -50v 50v -50v 50v -50v 50v -25v 25v -25v 25v -75v 50h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v
+ -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50v -50v 50v -50v 50v -75v 75v -50v 50v -75v 75v -25v 25v -25v 25v -25v 25v -50v 50h 1v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25h 1v -50v 50v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25h 1v 25v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -75v 75v -25v 25v -25v 25v
+ -25v 25v -75v 75h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -75v 75v -50v 50v -25v 25v -25v 25h 1v -75v 75v -50v 50v -50v 50v -25v 25v -25v 25v -50v 50v -75v 75v -25v 25v -25v 25v -50v 50v -25v 25v -50h 1v 50v -50v 50v -25v
+ 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50h 1v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50v -25v
+ 25v -25v 25v -25v 25h 1v -25v 25v -50v 50v -25v 25v -100v 100v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -75v 75v -50v 50v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v
+ -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -50v 50v -50v 50v -25v 25v -25v 25v -50v 50v
+ -25v 25v -25v 25v -25v 25v -50v 50v -25v 25h 1v -50v 50v -75v 75v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -100v 100h 1v -25v 25v -25v 25v -75v 75v -25v 25v -50v 50v -25v 25v -25v 25v -50v 50v -75v 75h 1v -50v 50v -25v
+ 25v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v
+ 25v -25v 25v -75v 75v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -50h 1v 50v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v
+ 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -50v 50v -50v 50h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v
+ -50v 50v -50v 50v -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v
+ 25v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v
+ 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v
+ -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -50v 25h 1v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50h 1v -25v 25v
+ -25v 25v -50v 50v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v
+ 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -75v 75v -50v 50v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v
+ 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50h 1v -50v 50v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -50v 50v -25v
+ 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -75v 75v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v
+ 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25h 1v
+ -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25h 1v 25v -25v 25v -25v 25v -100v 100v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v
+ 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v -25v 25v
+ -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -50v 50v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v
+ -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v
+ 25v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25h 1v -25v 25v -25v 25v -25v 25h 2v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v
+ -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25h
+ 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 2v -25v 25h 1v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25h 2v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25h 1v 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25v
+ -25v 25h 1v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25h 2v -25v 25h 1v -25v 25h 1v -25v
+ 25v -25v 25h 2v -25v 25v -25v 25v -25v 25h 1v -25v 25h 3v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25h 2v -25v 25v -25v 25h 2v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v
+ 25h 3v -25v 25h 1v -25v 25h 1v -25v 25h 2v -25v 25v -25v 25v -25v 25h 5v -25v 25h 1v -25v 25h 4v -25v 25h 5v -25v 25h 3v -25v 25h 8v -25v 25h 1v -25v 25h 2v -25v 25h 4v -25v 25h 6v -25v 25h 6v -25v 25h 1v -25v 25h 3v -25v 25h 6v -25v 25h 9v -25v 25h
+ 14v -25v 25h 3v -25v 25h 36v -25v 25h 5v -25v 25h 89" fill="none" stroke="#ff0000" stroke-width="2"/>
+<rect x="459" y="210" width="102" height="41" fill="white"/>
+<path d="M459,251h 102" fill="none" stroke="black"/>
+<path d="M561,251v -41" fill="none" stroke="black"/>
+<path d="M561,210h -102" fill="none" stroke="black"/>
+<path d="M459,210v 41" fill="none" stroke="black"/>
+<text x="474" y="217" fill="black" font-size="9" font-family="Helvetica">
+Aluminium_0.5mm
+</text>
+<path d="M459,220h 102" fill="none" stroke="black"/>
+<text x="464" y="228" fill="black" font-size="9" font-family="Helvetica">
+Mean  
+</text>
+<text x="529" y="228" fill="black" font-size="9" font-family="Helvetica">
+  43.78
+</text>
+<text x="525" y="228" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="496" y="228" fill="black" font-size="9" font-family="Helvetica">
+   2118 
+</text>
+<text x="464" y="239" fill="black" font-size="9" font-family="Helvetica">
+RMS   
+</text>
+<text x="529" y="239" fill="black" font-size="9" font-family="Helvetica">
+  30.95
+</text>
+<text x="525" y="239" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="496" y="239" fill="black" font-size="9" font-family="Helvetica">
+   2106 
+</text>
+<text x="464" y="248" fill="black" font-size="9" font-family="Helvetica">
+Integral 
+</text>
+<text x="529" y="249" fill="black" font-size="9" font-family="Helvetica">
+   2314
+</text>
+<rect x="459" y="210" width="102" height="41" fill="white"/>
+<path d="M459,251h 102" fill="none" stroke="black"/>
+<path d="M561,251v -41" fill="none" stroke="black"/>
+<path d="M561,210h -102" fill="none" stroke="black"/>
+<path d="M459,210v 41" fill="none" stroke="black"/>
+<text x="474" y="217" fill="black" font-size="9" font-family="Helvetica">
+Aluminium_0.5mm
+</text>
+<path d="M459,220h 102" fill="none" stroke="black"/>
+<text x="464" y="228" fill="black" font-size="9" font-family="Helvetica">
+Mean  
+</text>
+<text x="529" y="228" fill="black" font-size="9" font-family="Helvetica">
+  43.78
+</text>
+<text x="525" y="228" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="496" y="228" fill="black" font-size="9" font-family="Helvetica">
+   2118 
+</text>
+<text x="464" y="239" fill="black" font-size="9" font-family="Helvetica">
+RMS   
+</text>
+<text x="529" y="239" fill="black" font-size="9" font-family="Helvetica">
+  30.95
+</text>
+<text x="525" y="239" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="496" y="239" fill="black" font-size="9" font-family="Helvetica">
+   2106 
+</text>
+<text x="464" y="248" fill="black" font-size="9" font-family="Helvetica">
+Integral 
+</text>
+<text x="529" y="249" fill="black" font-size="9" font-family="Helvetica">
+   2314
+</text>
+<path d="M57,45v 225v -25v 50v -75v 75v -50v 50v -50v 50v -75v 75v -25v 25v -50v 50v -25v 25v -50v 50v -25h 1v 25v -50v 50v -50v 50v -75v 75v -25v 25v -50v 50v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -75v 75v -25v 25v -25h 1v
+ 25v -50v 50v -25v 25v -50v 50v -50v 50v -100v 100v -50v 50v -25v 25v -25v 25v -100v 100v -50v 50v -50v 50v -25v 25v -25v 25v -50v 50h 1v -25v 25v -50v 50v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -50v 25v -50v 75v -25v 25v -75v 75v -25v 25v -25v
+ 25v -75v 75v -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50v -75v 75v -50v 50v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -75v 50v -50v 50v -50v 75h 1v -25v 25v -50v 50v -75v 75v -50v 25v -25v 50v -25v 25v -75v 50v -25v
+ 50v -50v 50v -50v 50v -50v 50v -25v 25v -25v 25v -50v 50h 1v -50v 50v -50v 50v -75v 75v -75v 75v -25v 25v -75v 75v -75v 75v -25v 25v -50v 50v -50v 50v -25v 25v -50h 1v 50v -50v 50v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v
+ 25v -50v 50v -50v 50v -50v 50v -50v 50v -100v 100v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -50v 25v -50v 75v -25v 25v -25v 25v -25v 25v -100v 100v -25v 25v -25v 25v -25h 1v 25v -75v 75v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50v
+ -50v 50v -50v 50v -25v 25v -75h 1v 75v -50v 25v -50v 75v -25v 25v -25v 25v -75v 75v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -50v 50v -50v 50v -25v 25h 1v -50v 50v -50v 50v -75v 75v -25v 25v -75v 75v -50v 50v -25v 25v -25v 25v
+ -25v 25v -25v 25v -25v 25v -50v 50v -25v 25h 1v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -75v 75v -25v 25v -50v 50v -50v 50h 1v -25v 25v -25v 25v -50v 50v -50v 25v -25v 50v -25v 25v -75v 75v -75v 75v -50v 50v -75v 75v
+ -75h 1v 75v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 25v -25v 50v -25v 25v -25v 25h 1v -75v 75v -25v 25v -25v 25v -25v 25v -50v 25v -25v 50v -50v 25v -25v 50v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v
+ -25v 25h 1v -50v 25v -50v 75v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -100v 100v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -100v 100v -50v 50v -25v 25v -25v 25v -75v 50v -75v 100v -75v 50v -25v 50v -25v
+ 25h 1v -25v 25v -25v 25v -75v 75v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50h 1v -25v 25v -75v 75v -50v 50v -50v 50v -100v 100v -50v 50v -25v 25v -50v 50v -25v 25v -50v 50v -50v 50v -50v 50v -25v 25v -50v 50v
+ -25v 25h 1v -25v 25v -50v 50v -100v 100v -50v 50v -25v 25v -50v 25v -50v 75v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v
+ 25v -25v 25v -25h 1v 25v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -75v 75v -50v 50v -50v 50v -25v 25v -50v 50v -75h 1v 75v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -75v 75v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -75v 75v -25v
+ 25h 1v -25v 25v -50v 50v -75v 75v -25v 25v -25v 25v -50v 50v -25v 25v -75v 75v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -50v 50v -50v 50v -25v 25v -25v 25v -75v 75v -75v 75v -50v 50v -25v 25v -75v 75v -25h 1v -25v
+ 50v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -50v 50v -50v 25h 1v 25v -100v 100v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -50v 50v -50v 50v -25v 25v -25v 25v -50v 50h 1v -75v 75v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v
+ -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -75v 75v -25v 25v -50v 50h 1v -25v 25v -50v 25v -25v 50v -50v 50v -50v 50v -75v 75v -25v 25v
+ -25v 25v -75v 75v -50v 50v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25h 1v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -75v 50v -75v 100v -25v 25v -25v 25v -75v 75v
+ -25v 25v -25v 25h 1v -25v 25v -25v 25v -75v 75v -25v 25v -50v 50v -50v 50v -25v 25v -50v 50v -25v 25v -75v 50h 1v 25v -50v 50v -50v 50v -50v 50v -25v 25v -75v 75v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25h 1v
+ -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25h 1v -50v 50v -75v 75v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -75v 75v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -75v 75v -25v 25v
+ -25v 25v -25v 25v -25h 1v 25v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50h 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -50v
+ 50v -25h 1v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -50v 50v -50v 50v -50v 50v -25v 25v -50v 50v -25v 25v -25h 1v 25v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v
+ -50v 50v -25v 25v -25v 25v -75v 75v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50h 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -50v 50v -25h 1v
+ 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25h 1v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v
+ 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50h 1v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v
+ -25v 25h 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v
+ 25v -25v 25v -25v 25v -25v 25v -25v 25v -75v 75h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -75v 75v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v
+ -50v 50v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25h 1v -25v 25v -25v
+ 25v -25v 25v -25v 25v -75v 75v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v
+ 25v -50v 50h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50h
+ 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v
+ -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v
+ -25v 25v -100v 100h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v
+ 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v
+ 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -50v 50v -75v 75v -25h 1v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v
+ 25h 1v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v
+ -25v 25v -50v 50v -25v 25h 1v -25v 25h 1v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v
+ -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v
+ 25v -25v 25v -25v 25h 2v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v -25v 25v -50v 50h 1v -25v 25h 2v -25v 25v -25v 25h 3v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25h 1v 25v -25v 25h 1v -25v 25v
+ -25v 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25v -25h 1v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -50v 50h 4v -25v 25v -25v 25h 1v
+ -25v 25h 1v -25v 25v -25v 25h 2v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25h 3v -25v 25h 2v -25v 25h 5v -25v 25h 1v -25v 25v -25v 25h 5v -25v 25v -25v
+ 25h 1v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25h 2v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25h 2v -25v 25h 2v -25v 25h 2v -25v 25h 1v -25v 25h 1v -25v 25h 3v -25v 25h 1v -25v 25h 1v -25v 25h 2v -25v 25h 2v -25v 25h 1v
+ -25v 25v -25v 25h 1v -25v 25h 1v -25v 25h 3v -25v 25h 2v -25v 25h 2v -25v 25h 1v -25v 25h 15v -25v 25h 1v -25v 25h 9v -25v 25h 1v -25v 25h 4v -25v 25h 13v -25v 25h 1v -25v 25v -25v 25h 11v -25v 25h 6v -25v 25h 3v -25v 25h 4v -25v 25h 122"
+ fill="none" stroke="#0000ff" stroke-width="2"/>
+<rect x="459" y="166" width="102" height="41" fill="white"/>
+<path d="M459,207h 102" fill="none" stroke="black"/>
+<path d="M561,207v -41" fill="none" stroke="black"/>
+<path d="M561,166h -102" fill="none" stroke="black"/>
+<path d="M459,166v 41" fill="none" stroke="black"/>
+<text x="477" y="173" fill="black" font-size="9" font-family="Helvetica">
+Aluminium_1mm
+</text>
+<path d="M459,176h 102" fill="none" stroke="black"/>
+<text x="464" y="184" fill="black" font-size="9" font-family="Helvetica">
+Mean  
+</text>
+<text x="529" y="184" fill="black" font-size="9" font-family="Helvetica">
+  46.18
+</text>
+<text x="525" y="184" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="496" y="184" fill="black" font-size="9" font-family="Helvetica">
+   2144 
+</text>
+<text x="464" y="195" fill="black" font-size="9" font-family="Helvetica">
+RMS   
+</text>
+<text x="529" y="194" fill="black" font-size="9" font-family="Helvetica">
+  32.65
+</text>
+<text x="525" y="194" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="496" y="194" fill="black" font-size="9" font-family="Helvetica">
+   2095 
+</text>
+<text x="464" y="204" fill="black" font-size="9" font-family="Helvetica">
+Integral 
+</text>
+<text x="529" y="204" fill="black" font-size="9" font-family="Helvetica">
+   2059
+</text>
+<rect x="459" y="166" width="102" height="41" fill="white"/>
+<path d="M459,207h 102" fill="none" stroke="black"/>
+<path d="M561,207v -41" fill="none" stroke="black"/>
+<path d="M561,166h -102" fill="none" stroke="black"/>
+<path d="M459,166v 41" fill="none" stroke="black"/>
+<text x="477" y="173" fill="black" font-size="9" font-family="Helvetica">
+Aluminium_1mm
+</text>
+<path d="M459,176h 102" fill="none" stroke="black"/>
+<text x="464" y="184" fill="black" font-size="9" font-family="Helvetica">
+Mean  
+</text>
+<text x="529" y="184" fill="black" font-size="9" font-family="Helvetica">
+  46.18
+</text>
+<text x="525" y="184" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="496" y="184" fill="black" font-size="9" font-family="Helvetica">
+   2144 
+</text>
+<text x="464" y="195" fill="black" font-size="9" font-family="Helvetica">
+RMS   
+</text>
+<text x="529" y="194" fill="black" font-size="9" font-family="Helvetica">
+  32.65
+</text>
+<text x="525" y="194" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="496" y="194" fill="black" font-size="9" font-family="Helvetica">
+   2095 
+</text>
+<text x="464" y="204" fill="black" font-size="9" font-family="Helvetica">
+Integral 
+</text>
+<text x="529" y="204" fill="black" font-size="9" font-family="Helvetica">
+   2059
+</text>
+<path d="M57,145v 125v -50v 50v -25v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -75v 75v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v
+ 25v -25v 25v -50v 50v -50v 50v -50v 50v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -75v 75v -100v 100v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -50h 1v 50v -25v 25v -50v 25v -25v 50v
+ -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -100v 100v -75v 75v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25h 1v -75v 75v -50v 50v -25v 25v -100v 75v -25v 50v -25v 25v -50v 50v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v
+ -50v 50h 1v -50v 50v -25v 25v -50v 50v -50v 25v -25v 50v -25v 25v -25v 25v -50v 50v -75v 75v -50v 50v -75h 1v 75v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -50h 1v 50v -25v
+ 25v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -75v 75v -25v 25v -50v 50h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -50v 50v -25v 25v -25v 25v -50v 50v -25v
+ 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50v -25h 1v 25v -50v 50v -50v 50v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -75v 75v -50v 50v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v
+ 50v -25v 25v -100v 100v -25v 25v -50v 50v -50v 50v -50v 50v -25h 1v 25v -25v 25v -50v 25v -25v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25h 1v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -75v 75v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -50h 1v 50v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50v -50v 50h
+ 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -50v 50h 1v -50v
+ 50v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -75v 75v -25v 25v -50v 50v -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25h 1v 25v -25v 25v -50v 50v -25v 25v -75v
+ 75v -50v 50v -25v 25v -25h 1v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50h 1v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -50h 1v 50v -25v 25v -25v 25v
+ -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -50h 1v 50v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v
+ -25v 25v -25v 25h 1v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v
+ -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v
+ -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h
+ 1v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25h 1v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v
+ -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v
+ 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50h 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25h 1v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -50v 50v -50v 50v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v
+ 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25h 1v
+ -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v
+ 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v
+ 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v
+ 25v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v 25v -50v 50h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v
+ 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v
+ -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v -25v 25v -25v
+ 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25h 1v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v
+ 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h
+ 1v -25v 25h 1v -25v 25v -25v 25v -25v 25h 2v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25v -25v
+ 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25h 2v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v
+ 25v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25h 2v -25v 25h 2v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25v
+ -25v 25h 1v -25v 25h 1v -25v 25v -25v 25v -25v 25h 2v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 2v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 3v -25v 25v -25v 25h 3v -25v 25v -25v 25h 1v -25v 25h 5v -25v 25h 3v -25v 25v -25v 25h
+ 3v -50v 50v -25h 1v 25h 2v -25v 25h 1v -25v 25h 2v -25v 25h 4v -25v 25h 2v -25v 25h 1v -25v 25h 7v -25v 25h 2v -25v 25h 7v -25v 25h 1v -25v 25h 2v -25v 25h 2v -25h 1v 25v -25v 25h 4v -25v 25h 10v -25v 25h 2v -25v 25h 5v -25v 25h 4v -25v 25h 1v -25v
+ 25h 8v -25v 25h 11v -25v 25h 7v -25v 25h 109v -25v 25h 29v -25v 25h 6" fill="none" stroke="#00ff00" stroke-width="2"/>
+<rect x="459" y="121" width="102" height="41" fill="white"/>
+<path d="M459,162h 102" fill="none" stroke="black"/>
+<path d="M561,162v -41" fill="none" stroke="black"/>
+<path d="M561,121h -102" fill="none" stroke="black"/>
+<path d="M459,121v 41" fill="none" stroke="black"/>
+<text x="477" y="129" fill="black" font-size="9" font-family="Helvetica">
+Aluminium_5mm
+</text>
+<path d="M459,132h 102" fill="none" stroke="black"/>
+<text x="464" y="140" fill="black" font-size="9" font-family="Helvetica">
+Mean  
+</text>
+<text x="529" y="140" fill="black" font-size="9" font-family="Helvetica">
+  55.88
+</text>
+<text x="525" y="140" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="496" y="140" fill="black" font-size="9" font-family="Helvetica">
+   2138 
+</text>
+<text x="464" y="151" fill="black" font-size="9" font-family="Helvetica">
+RMS   
+</text>
+<text x="529" y="150" fill="black" font-size="9" font-family="Helvetica">
+  39.52
+</text>
+<text x="525" y="150" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="496" y="150" fill="black" font-size="9" font-family="Helvetica">
+   2126 
+</text>
+<text x="464" y="159" fill="black" font-size="9" font-family="Helvetica">
+Integral 
+</text>
+<text x="529" y="160" fill="black" font-size="9" font-family="Helvetica">
+   1448
+</text>
+<rect x="459" y="121" width="102" height="41" fill="white"/>
+<path d="M459,162h 102" fill="none" stroke="black"/>
+<path d="M561,162v -41" fill="none" stroke="black"/>
+<path d="M561,121h -102" fill="none" stroke="black"/>
+<path d="M459,121v 41" fill="none" stroke="black"/>
+<text x="477" y="129" fill="black" font-size="9" font-family="Helvetica">
+Aluminium_5mm
+</text>
+<path d="M459,132h 102" fill="none" stroke="black"/>
+<text x="464" y="140" fill="black" font-size="9" font-family="Helvetica">
+Mean  
+</text>
+<text x="529" y="140" fill="black" font-size="9" font-family="Helvetica">
+  55.88
+</text>
+<text x="525" y="140" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="496" y="140" fill="black" font-size="9" font-family="Helvetica">
+   2138 
+</text>
+<text x="464" y="151" fill="black" font-size="9" font-family="Helvetica">
+RMS   
+</text>
+<text x="529" y="150" fill="black" font-size="9" font-family="Helvetica">
+  39.52
+</text>
+<text x="525" y="150" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="496" y="150" fill="black" font-size="9" font-family="Helvetica">
+   2126 
+</text>
+<text x="464" y="159" fill="black" font-size="9" font-family="Helvetica">
+Integral 
+</text>
+<text x="529" y="160" fill="black" font-size="9" font-family="Helvetica">
+   1448
+</text>
+<path d="M57,145v 150v -25v 25v -25v 25v -75v 75v -50v 50v -25v 25v -25v 25v -75v 75v -25v 25v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25h 1v
+ 25v -75v 75v -75v 75v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v -50v 25v -25v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50h 1v -50v 50v -25v
+ 25v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v
+ 25v -50v 50v -50v 50v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50h 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v
+ 50v -25v 25v -50v 50v -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50v -25h 1v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -75v 75v -25v 25v -50v
+ 50v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -50v 50v -75v 75v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25h 1v 25v -25v 25v -100v 100v
+ -50v 50v -50v 50v -50v 50v -25v 25v -25v 25v -50v 50v -25h 1v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v
+ 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v
+ 25v -25v 25v -50v 50v -50v 50v -25v 25v -50h 1v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v
+ 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v
+ -25v 25v -50v 50h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v
+ 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v
+ 25v -25h 1v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50h 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v
+ 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v
+ -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -50v 50h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v
+ -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -75v 75h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v
+ -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v
+ 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v
+ -25v 25h 1v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v
+ 25v -50v 50h 1v -25v 25v -25v 25v -50v 50h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25h 1v -50v 50v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v
+ -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 4v
+ -25v 25v -25v 25v -25v 25h 2v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 2v -25v 25v -25v 25h 2v -25v 25h 1v -25v 25h 2v -25v 25v -25v 25h 2v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25h 1v 25v -25v 25v
+ -25v 25h 2v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25h 2v -25v 25v -25v 25v -25v 25v -25v 25h 2v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25h 4v -25v 25v -25v 25h 2v -25v 25h 4v
+ -25v 25h 1v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25h 2v -25v 25h 2v -25v 25h 1v -25v 25h 3v -25v 25h 1v -25v 25h 4v -25v 25h 3v -25v 25h 3v -25v 25v -25v 25h 4v -25v 25h 1v -25v 25h 5v -25v 25h 4v -25v 25h 3v -25v 25h 3v -25v 25h 4v -25v 25h 2v
+ -25v 25h 3v -25v 25h 10v -25v 25h 2v -25v 25h 1v -25v 25h 2v -25v 25h 1v -25v 25h 15v -25v 25h 14v -25v 25h 25v -25v 25h 2v -25v 25h 2v -25v 25h 7v -25v 25h 18v -25v 25h 13v -25v 25h 40v -25v 25h 7v -25v 25h 45" fill="none" stroke="#ff00ff"
+ stroke-width="2"/>
+<rect x="459" y="77" width="102" height="41" fill="white"/>
+<path d="M459,118h 102" fill="none" stroke="black"/>
+<path d="M561,118v -41" fill="none" stroke="black"/>
+<path d="M561,77h -102" fill="none" stroke="black"/>
+<path d="M459,77v 41" fill="none" stroke="black"/>
+<text x="477" y="85" fill="black" font-size="9" font-family="Helvetica">
+Aluminium_8mm
+</text>
+<path d="M459,87h 102" fill="none" stroke="black"/>
+<text x="464" y="96" fill="black" font-size="9" font-family="Helvetica">
+Mean  
+</text>
+<text x="534" y="96" fill="black" font-size="9" font-family="Helvetica">
+     69
+</text>
+<text x="529" y="96" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="501" y="96" fill="black" font-size="9" font-family="Helvetica">
+   2114 
+</text>
+<text x="464" y="106" fill="black" font-size="9" font-family="Helvetica">
+RMS   
+</text>
+<text x="529" y="106" fill="black" font-size="9" font-family="Helvetica">
+  48.79
+</text>
+<text x="525" y="106" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="496" y="106" fill="black" font-size="9" font-family="Helvetica">
+   2254 
+</text>
+<text x="464" y="115" fill="black" font-size="9" font-family="Helvetica">
+Integral 
+</text>
+<text x="529" y="116" fill="black" font-size="9" font-family="Helvetica">
+   1067
+</text>
+<rect x="459" y="77" width="102" height="41" fill="white"/>
+<path d="M459,118h 102" fill="none" stroke="black"/>
+<path d="M561,118v -41" fill="none" stroke="black"/>
+<path d="M561,77h -102" fill="none" stroke="black"/>
+<path d="M459,77v 41" fill="none" stroke="black"/>
+<text x="477" y="85" fill="black" font-size="9" font-family="Helvetica">
+Aluminium_8mm
+</text>
+<path d="M459,87h 102" fill="none" stroke="black"/>
+<text x="464" y="96" fill="black" font-size="9" font-family="Helvetica">
+Mean  
+</text>
+<text x="534" y="96" fill="black" font-size="9" font-family="Helvetica">
+     69
+</text>
+<text x="529" y="96" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="501" y="96" fill="black" font-size="9" font-family="Helvetica">
+   2114 
+</text>
+<text x="464" y="106" fill="black" font-size="9" font-family="Helvetica">
+RMS   
+</text>
+<text x="529" y="106" fill="black" font-size="9" font-family="Helvetica">
+  48.79
+</text>
+<text x="525" y="106" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="496" y="106" fill="black" font-size="9" font-family="Helvetica">
+   2254 
+</text>
+<text x="464" y="115" fill="black" font-size="9" font-family="Helvetica">
+Integral 
+</text>
+<text x="529" y="116" fill="black" font-size="9" font-family="Helvetica">
+   1067
+</text>
+<path d="M57,245v 50v -50v 50v -50v 50v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25v -25h 1v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25h 1v -25v 25v -50v 50v -50v 50v -50v 50v -25v 25v -25v 25v -25v
+ 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -75v 75v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v
+ -25v 25v -50v 50v -50h 1v 50v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v
+ 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -75v 75v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25h 1v -25v 25v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -75v 75v -25v 25v -25v 25v -50v 50h 1v
+ -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50h 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v
+ -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25h 1v 25v -25v 25v -25v 25v -75v 75v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -50v 50v -25v 25v -25v 25h 1v
+ -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v
+ -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -50v 50h 1v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v
+ 25h 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v
+ 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v
+ 25v -50v 50v -25v 25v -25h 1v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v
+ -25v 25v -25v 25h 1v -25v 25v -50v 50v -25v 25h 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -50v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -50v 50h 1v
+ -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50h 1v 50v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25v -25v 25v -25v 25h 1v
+ -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -50v 50h 1v -75v 75v -25v 25v -25v 25v -50v 50v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v
+ -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v
+ -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 2v -25v 25v -25v 25v -25v 25h 1v -25v 25v -50v 50v -25v 25v -50v 50v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -50v 50h 1v -25v 25h 1v
+ -25v 25h 1v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25h 1v 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25h 2v -25v 25v -25v 25h 1v -25v
+ 25v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25h 1v 25v -25v 25h 1v
+ -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25h 2v -25v 25v -25v 25h 1v -25v 25v -25v
+ 25h 1v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25v -25v 25v -25v 25h 2v -25v 25h 3v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25h 2v -25v 25v -25v 25v -25v 25h 2v -25v 25v -25v 25h 2v -25v 25h 1v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25h 6v -25v
+ 25h 1v -25v 25h 1v -25v 25h 1v -25v 25h 2v -25v 25h 1v -25v 25v -25v 25v -25v 25h 1v -25v 25h 1v -25v 25v -25v 25h 5v -25v 25v -25v 25h 2v -25v 25h 1v -25v 25h 4v -25v 25h 8v -25v 25h 8v -25v 25v -25v 25h 1v -25v 25h 2v -25v 25v -25v 25h 8v -25v 25h
+ 8v -25v 25h 1v -25v 25h 7v -25v 25h 2v -25v 25h 16v -25v 25h 36v -25v 25h 22v -25v 25h 120" fill="none" stroke="#00ffff" stroke-width="2"/>
+<rect x="459" y="33" width="102" height="41" fill="white"/>
+<path d="M459,74h 102" fill="none" stroke="black"/>
+<path d="M561,74v -41" fill="none" stroke="black"/>
+<path d="M561,33h -102" fill="none" stroke="black"/>
+<path d="M459,33v 41" fill="none" stroke="black"/>
+<text x="475" y="40" fill="black" font-size="9" font-family="Helvetica">
+Aluminium_12mm
+</text>
+<path d="M459,43h 102" fill="none" stroke="black"/>
+<text x="464" y="51" fill="black" font-size="9" font-family="Helvetica">
+Entries 
+</text>
+<text x="535" y="52" fill="black" font-size="9" font-family="Helvetica">
+ 1221
+</text>
+<text x="464" y="62" fill="black" font-size="9" font-family="Helvetica">
+Mean  
+</text>
+<text x="529" y="62" fill="black" font-size="9" font-family="Helvetica">
+   2176
+</text>
+<text x="464" y="72" fill="black" font-size="9" font-family="Helvetica">
+RMS   
+</text>
+<text x="529" y="72" fill="black" font-size="9" font-family="Helvetica">
+   2060
+</text>
+<rect x="459" y="33" width="102" height="41" fill="white"/>
+<path d="M459,74h 102" fill="none" stroke="black"/>
+<path d="M561,74v -41" fill="none" stroke="black"/>
+<path d="M561,33h -102" fill="none" stroke="black"/>
+<path d="M459,33v 41" fill="none" stroke="black"/>
+<text x="475" y="40" fill="black" font-size="9" font-family="Helvetica">
+Aluminium_12mm
+</text>
+<path d="M459,43h 102" fill="none" stroke="black"/>
+<text x="464" y="51" fill="black" font-size="9" font-family="Helvetica">
+Mean  
+</text>
+<text x="529" y="51" fill="black" font-size="9" font-family="Helvetica">
+  74.53
+</text>
+<text x="525" y="51" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="496" y="51" fill="black" font-size="9" font-family="Helvetica">
+   2176 
+</text>
+<text x="464" y="62" fill="black" font-size="9" font-family="Helvetica">
+RMS   
+</text>
+<text x="532" y="62" fill="black" font-size="9" font-family="Helvetica">
+   52.7
+</text>
+<text x="527" y="62" fill="black" font-size="9" font-family="Times">
+&#0177;
+</text>
+<text x="498" y="62" fill="black" font-size="9" font-family="Helvetica">
+   2060 
+</text>
+<text x="464" y="71" fill="black" font-size="9" font-family="Helvetica">
+Integral 
+</text>
+<text x="532" y="72" fill="black" font-size="9" font-family="Helvetica">
+    764
+</text>
+<rect x="340" y="33" width="114" height="79" fill="white"/>
+<path d="M340,112h 114" fill="none" stroke="black"/>
+<path d="M454,112v -79" fill="none" stroke="black"/>
+<path d="M454,33h -114" fill="none" stroke="black"/>
+<path d="M340,33v 79" fill="none" stroke="black"/>
+<text x="368" y="42" fill="black" font-size="8" font-family="Helvetica" font-weight="bold">
+Air_5mm
+</text>
+<path d="M344,44h 20v -9h -20z" fill="white"/>
+<path d="M344,40h 20" fill="none" stroke="black" stroke-width="2"/>
+<g stroke="black" stroke-width="2" fill="none">
+<line x1="353" y1="40" x2="354" y2="40"/>
+</g>
+<text x="368" y="55" fill="black" font-size="8" font-family="Helvetica" font-weight="bold">
+Aluminium_0.5mm
+</text>
+<path d="M344,57h 20v -9h -20z" fill="white"/>
+<path d="M344,53h 20" fill="none" stroke="#ff0000" stroke-width="2"/>
+<g stroke="black" stroke-width="2" fill="none">
+<line x1="353" y1="53" x2="354" y2="53"/>
+</g>
+<text x="368" y="68" fill="black" font-size="8" font-family="Helvetica" font-weight="bold">
+Aluminium_1mm
+</text>
+<path d="M344,70h 20v -9h -20z" fill="white"/>
+<path d="M344,66h 20" fill="none" stroke="#0000ff" stroke-width="2"/>
+<g stroke="black" stroke-width="2" fill="none">
+<line x1="353" y1="66" x2="354" y2="66"/>
+</g>
+<text x="368" y="81" fill="black" font-size="8" font-family="Helvetica" font-weight="bold">
+Aluminium_5mm
+</text>
+<path d="M344,83h 20v -9h -20z" fill="white"/>
+<path d="M344,79h 20" fill="none" stroke="#00ff00" stroke-width="2"/>
+<g stroke="black" stroke-width="2" fill="none">
+<line x1="353" y1="79" x2="354" y2="79"/>
+</g>
+<text x="368" y="94" fill="black" font-size="8" font-family="Helvetica" font-weight="bold">
+Aluminium_8mm
+</text>
+<path d="M344,97h 20v -10h -20z" fill="white"/>
+<path d="M344,92h 20" fill="none" stroke="#ff00ff" stroke-width="2"/>
+<g stroke="black" stroke-width="2" fill="none">
+<line x1="353" y1="92" x2="354" y2="92"/>
+</g>
+<text x="368" y="107" fill="black" font-size="8" font-family="Helvetica" font-weight="bold">
+Aluminium_12mm
+</text>
+<path d="M344,110h 20v -9h -20z" fill="white"/>
+<path d="M344,105h 20" fill="none" stroke="#00ffff" stroke-width="2"/>
+<g stroke="black" stroke-width="2" fill="none">
+<line x1="353" y1="105" x2="354" y2="105"/>
+</g></svg>

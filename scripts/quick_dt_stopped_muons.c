@@ -25,7 +25,13 @@ void quick_dt_stopped_muons() {
 
 	const TString prefix = "../../output/final/final_st_Copper_0.5mm_deg_";
 	const TString suffix = ".root";
-
+    
+    const TString out_file_root = "dt_hists";
+    
+    // create the out file in the local dir
+    const TString out_file_name = out_file_root + suffix;
+    TFile* out_file = new TFile(out_file_name, "RECREATE");
+    
 	TH1F* hists [n_files];
 
 	for(unsigned int file = 0; file < n_files; ++file) {
@@ -35,6 +41,8 @@ void quick_dt_stopped_muons() {
 		TTree* in_tree = (TTree*) in_file->Get("t");
 		in_branch branch; 
 		set_addresses(branch, in_tree);
+		// make sure the histograms are saved in the out file
+        out_file->cd();
 		hists[file] = make_hist(file_roots[file]);
 		const int n_entries = in_tree->GetEntries();
 		cout << "Found "<< n_entries<<" entries"<<endl;
@@ -95,18 +103,22 @@ void quick_dt_stopped_muons() {
 		}
 		cout << "File done" << endl;	
 	}
-
-	TCanvas* canvases [n_files];
-
-	for(unsigned int hist = 0; hist < n_files; ++hist) {
-		canvases[hist] = new TCanvas(file_roots[hist],file_roots[hist]);
-		hists[hist]->Draw();
-	}
-
-	TString title = "Stopped muon momentum";
-	TString save_location = "images/stopped_muon_momentum.svg";
+    
+    out_file->Write();
+    
+	TString title = "Muon decay times";
+	TString save_location = "images/muon_decay_times.svg";
 	// 1002201 is the magic number for stats
 	draw_pretty_hists(n_files,hists,title,file_roots, save_location,1002201);
+	
+	for(unsigned int hist = 0; hist < n_files; ++hist) {
+		hists[hist]->Rebin(100);
+	}
+	
+	TString title2 = "Muon decay times (100ns bins)";
+	TString save_location2 = "images/muon_decay_times_rebin.svg";
+	// 1002201 is the magic number for stats
+	draw_pretty_hists(n_files,hists,title2,file_roots, save_location2,1002201);
 }
 
 void set_addresses(const in_branch& branch, const TTree* tree) {
@@ -121,7 +133,7 @@ void set_addresses(const in_branch& branch, const TTree* tree) {
 
 TH1F* make_hist(const TString file_root) {
 	TString name = "Muon_momentum_with_"+file_root;
-	TH1F* res = new TH1F(name,name, 200, 0, 20000);
+	TH1F* res = new TH1F(name,name, 20000, 1, 20001);
 	res->GetXaxis()->SetTitle("Delta time (ns)");
 	res->GetYaxis()->SetTitle("Count");
 	return res;
