@@ -1,0 +1,873 @@
+<?xml version="1.0" standalone="no"?>
+<svg width="567" height="328" viewBox="0 0 567 328" xmlns="http://www.w3.org/2000/svg">
+<title>
+/Users/samcook/code/MuSIC/simulation/MuSIC_5_detector_sim/MuSIC5/MuSIC5_detector/scripts/images/hep_g4bl_vs_kuno_group_output_xz_orig.svg
+</title>
+<desc>
+Creator: ROOT Version 5.32/00
+CreationDate: Mon Oct  1 18:14:35 2012</desc>
+<defs>
+</defs>
+<rect x="0" y="0" width="567" height="328" fill="white"/>
+<rect x="6" y="3" width="272" height="322" fill="white"/>
+<rect x="33" y="36" width="218" height="257" fill="white"/>
+<rect x="33" y="36" width="218" height="257" fill="none" stroke="black"/>
+<rect x="33" y="36" width="218" height="257" fill="white"/>
+<rect x="33" y="36" width="218" height="257" fill="none" stroke="black"/>
+<rect x="55" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="56" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="57" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="58" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="59" y="162" width="1" height="1" fill="#3300ff"/>
+<rect x="60" y="162" width="1" height="1" fill="#3300ff"/>
+<rect x="61" y="162" width="1" height="1" fill="#3300ff"/>
+<rect x="62" y="162" width="1" height="1" fill="#3300ff"/>
+<rect x="63" y="162" width="1" height="1" fill="#3300ff"/>
+<rect x="64" y="162" width="2" height="1" fill="#3300ff"/>
+<rect x="66" y="162" width="1" height="1" fill="#3300ff"/>
+<rect x="67" y="162" width="1" height="1" fill="#3300ff"/>
+<rect x="68" y="162" width="1" height="1" fill="#3300ff"/>
+<rect x="69" y="162" width="1" height="1" fill="#0014ff"/>
+<rect x="70" y="162" width="1" height="1" fill="#0014ff"/>
+<rect x="71" y="162" width="1" height="1" fill="#0014ff"/>
+<rect x="72" y="162" width="1" height="1" fill="#0014ff"/>
+<rect x="73" y="162" width="1" height="1" fill="#0014ff"/>
+<rect x="74" y="162" width="1" height="1" fill="#0014ff"/>
+<rect x="75" y="162" width="1" height="1" fill="#0014ff"/>
+<rect x="76" y="162" width="2" height="1" fill="#0014ff"/>
+<rect x="78" y="162" width="1" height="1" fill="#0014ff"/>
+<rect x="79" y="162" width="1" height="1" fill="#0014ff"/>
+<rect x="80" y="162" width="1" height="1" fill="#0014ff"/>
+<rect x="81" y="162" width="1" height="1" fill="#0014ff"/>
+<rect x="82" y="162" width="1" height="1" fill="#0014ff"/>
+<rect x="83" y="162" width="1" height="1" fill="#0014ff"/>
+<rect x="84" y="162" width="1" height="1" fill="#0044ff"/>
+<rect x="85" y="162" width="1" height="1" fill="#0044ff"/>
+<rect x="86" y="162" width="1" height="1" fill="#0044ff"/>
+<rect x="87" y="162" width="1" height="1" fill="#0044ff"/>
+<rect x="88" y="162" width="1" height="1" fill="#0044ff"/>
+<rect x="89" y="162" width="2" height="1" fill="#0044ff"/>
+<rect x="91" y="162" width="1" height="1" fill="#0044ff"/>
+<rect x="92" y="162" width="1" height="1" fill="#0044ff"/>
+<rect x="93" y="162" width="1" height="1" fill="#0044ff"/>
+<rect x="94" y="162" width="1" height="1" fill="#0044ff"/>
+<rect x="95" y="162" width="1" height="1" fill="#0044ff"/>
+<rect x="96" y="162" width="1" height="1" fill="#0044ff"/>
+<rect x="97" y="162" width="1" height="1" fill="#0044ff"/>
+<rect x="98" y="162" width="1" height="1" fill="#008bff"/>
+<rect x="99" y="162" width="1" height="1" fill="#008bff"/>
+<rect x="100" y="162" width="1" height="1" fill="#008bff"/>
+<rect x="101" y="162" width="2" height="1" fill="#008bff"/>
+<rect x="103" y="162" width="1" height="1" fill="#008bff"/>
+<rect x="104" y="162" width="1" height="1" fill="#008bff"/>
+<rect x="105" y="162" width="1" height="1" fill="#008bff"/>
+<rect x="106" y="162" width="1" height="1" fill="#008bff"/>
+<rect x="107" y="162" width="1" height="1" fill="#008bff"/>
+<rect x="108" y="162" width="1" height="1" fill="#008bff"/>
+<rect x="109" y="162" width="1" height="1" fill="#008bff"/>
+<rect x="110" y="162" width="1" height="1" fill="#008bff"/>
+<rect x="111" y="162" width="1" height="1" fill="#008bff"/>
+<rect x="112" y="162" width="1" height="1" fill="#00bbff"/>
+<rect x="113" y="162" width="2" height="1" fill="#008bff"/>
+<rect x="115" y="162" width="1" height="1" fill="#00bbff"/>
+<rect x="116" y="162" width="1" height="1" fill="#00bbff"/>
+<rect x="117" y="162" width="1" height="1" fill="#00bbff"/>
+<rect x="118" y="162" width="1" height="1" fill="#00bbff"/>
+<rect x="119" y="162" width="1" height="1" fill="#00bbff"/>
+<rect x="120" y="162" width="1" height="1" fill="#00bbff"/>
+<rect x="121" y="162" width="1" height="1" fill="#00bbff"/>
+<rect x="122" y="162" width="1" height="1" fill="#00bbff"/>
+<rect x="123" y="162" width="1" height="1" fill="#00bbff"/>
+<rect x="124" y="162" width="1" height="1" fill="#00fffb"/>
+<rect x="125" y="162" width="1" height="1" fill="#00fffb"/>
+<rect x="126" y="162" width="2" height="1" fill="#00fffb"/>
+<rect x="128" y="162" width="1" height="1" fill="#00fffb"/>
+<rect x="129" y="162" width="1" height="1" fill="#00fffb"/>
+<rect x="130" y="162" width="1" height="1" fill="#00fffb"/>
+<rect x="131" y="162" width="1" height="1" fill="#00ffcc"/>
+<rect x="132" y="162" width="1" height="1" fill="#00ffcc"/>
+<rect x="133" y="162" width="1" height="1" fill="#00ff84"/>
+<rect x="134" y="162" width="1" height="1" fill="#00ff0d"/>
+<rect x="135" y="162" width="1" height="1" fill="#ffa600"/>
+<rect x="136" y="162" width="1" height="1" fill="#ff0000"/>
+<rect x="137" y="162" width="1" height="1" fill="#ff7700"/>
+<rect x="138" y="162" width="2" height="1" fill="#ff7700"/>
+<rect x="140" y="162" width="1" height="1" fill="#ff7700"/>
+<rect x="141" y="162" width="1" height="1" fill="#ffee00"/>
+<rect x="142" y="162" width="1" height="1" fill="#e0ff00"/>
+<rect x="143" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="144" y="162" width="1" height="1" fill="#22ff00"/>
+<rect x="145" y="162" width="1" height="1" fill="#00ff0d"/>
+<rect x="146" y="162" width="1" height="1" fill="#00ff55"/>
+<rect x="147" y="162" width="1" height="1" fill="#00ff55"/>
+<rect x="148" y="162" width="1" height="1" fill="#00ff55"/>
+<rect x="149" y="162" width="1" height="1" fill="#00ff55"/>
+<rect x="150" y="162" width="2" height="1" fill="#00ff55"/>
+<rect x="152" y="162" width="1" height="1" fill="#00ff55"/>
+<rect x="153" y="162" width="1" height="1" fill="#00ff55"/>
+<rect x="154" y="162" width="1" height="1" fill="#00ff55"/>
+<rect x="155" y="162" width="1" height="1" fill="#00ff0d"/>
+<rect x="156" y="162" width="1" height="1" fill="#00ff0d"/>
+<rect x="157" y="162" width="1" height="1" fill="#00ff0d"/>
+<rect x="158" y="162" width="1" height="1" fill="#00ff0d"/>
+<rect x="159" y="162" width="1" height="1" fill="#22ff00"/>
+<rect x="160" y="162" width="1" height="1" fill="#22ff00"/>
+<rect x="161" y="162" width="1" height="1" fill="#22ff00"/>
+<rect x="162" y="162" width="2" height="1" fill="#69ff00"/>
+<rect x="164" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="165" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="166" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="167" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="168" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="169" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="170" y="162" width="1" height="1" fill="#99ff00"/>
+<rect x="171" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="172" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="173" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="174" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="175" y="162" width="2" height="1" fill="#69ff00"/>
+<rect x="177" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="178" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="179" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="180" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="181" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="182" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="183" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="184" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="185" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="186" y="162" width="1" height="1" fill="#22ff00"/>
+<rect x="187" y="162" width="2" height="1" fill="#22ff00"/>
+<rect x="189" y="162" width="1" height="1" fill="#22ff00"/>
+<rect x="190" y="162" width="1" height="1" fill="#22ff00"/>
+<rect x="191" y="162" width="1" height="1" fill="#22ff00"/>
+<rect x="192" y="162" width="1" height="1" fill="#22ff00"/>
+<rect x="193" y="162" width="1" height="1" fill="#22ff00"/>
+<rect x="194" y="162" width="1" height="1" fill="#00ff0d"/>
+<rect x="195" y="162" width="1" height="1" fill="#00ff0d"/>
+<rect x="196" y="162" width="1" height="1" fill="#00ff0d"/>
+<rect x="197" y="162" width="1" height="1" fill="#00ff0d"/>
+<rect x="198" y="162" width="1" height="1" fill="#00ff0d"/>
+<rect x="199" y="162" width="2" height="1" fill="#00ff0d"/>
+<rect x="201" y="162" width="1" height="1" fill="#00ff55"/>
+<rect x="202" y="162" width="1" height="1" fill="#00ff55"/>
+<rect x="203" y="162" width="1" height="1" fill="#00ff55"/>
+<rect x="204" y="162" width="1" height="1" fill="#00ff55"/>
+<rect x="205" y="162" width="1" height="1" fill="#00ff55"/>
+<rect x="206" y="162" width="1" height="1" fill="#00ff84"/>
+<rect x="207" y="162" width="1" height="1" fill="#00ff84"/>
+<rect x="208" y="162" width="1" height="1" fill="#00ff84"/>
+<rect x="209" y="162" width="1" height="1" fill="#00ff84"/>
+<rect x="210" y="162" width="1" height="1" fill="#00ff84"/>
+<rect x="211" y="162" width="1" height="1" fill="#00ffcc"/>
+<rect x="212" y="162" width="2" height="1" fill="#00ffcc"/>
+<rect x="214" y="162" width="1" height="1" fill="#00ffcc"/>
+<rect x="215" y="162" width="1" height="1" fill="#00fffb"/>
+<rect x="216" y="162" width="1" height="1" fill="#00fffb"/>
+<rect x="217" y="162" width="1" height="1" fill="#00fffb"/>
+<rect x="218" y="162" width="1" height="1" fill="#00fffb"/>
+<rect x="219" y="162" width="1" height="1" fill="#00bbff"/>
+<rect x="220" y="162" width="1" height="1" fill="#00bbff"/>
+<rect x="221" y="162" width="1" height="1" fill="#008bff"/>
+<rect x="222" y="162" width="1" height="1" fill="#008bff"/>
+<rect x="223" y="162" width="1" height="1" fill="#008bff"/>
+<rect x="224" y="162" width="2" height="1" fill="#0044ff"/>
+<rect x="226" y="162" width="1" height="1" fill="#0044ff"/>
+<rect x="227" y="162" width="1" height="1" fill="#0014ff"/>
+<rect x="228" y="162" width="1" height="1" fill="#3300ff"/>
+<rect x="113" y="160" width="2" height="2" fill="#6200ff"/>
+<rect x="121" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="122" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="125" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="126" y="160" width="2" height="2" fill="#6200ff"/>
+<rect x="129" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="130" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="131" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="132" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="133" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="134" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="135" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="136" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="137" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="138" y="160" width="2" height="2" fill="#6200ff"/>
+<rect x="140" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="141" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="142" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="143" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="144" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="145" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="146" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="147" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="148" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="149" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="150" y="160" width="2" height="2" fill="#6200ff"/>
+<rect x="152" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="153" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="155" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="156" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="157" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="158" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="160" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="161" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="162" y="160" width="2" height="2" fill="#6200ff"/>
+<rect x="164" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="166" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="169" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="170" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="172" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="181" y="160" width="1" height="2" fill="#6200ff"/>
+<rect x="183" y="160" width="1" height="2" fill="#6200ff"/>
+<path d="M33,293h 218" fill="none" stroke="black"/>
+<path d="M33,285v 8" fill="none" stroke="black"/>
+<path d="M37,289v 4" fill="none" stroke="black"/>
+<path d="M42,289v 4" fill="none" stroke="black"/>
+<path d="M46,289v 4" fill="none" stroke="black"/>
+<path d="M50,289v 4" fill="none" stroke="black"/>
+<path d="M55,285v 8" fill="none" stroke="black"/>
+<path d="M59,289v 4" fill="none" stroke="black"/>
+<path d="M63,289v 4" fill="none" stroke="black"/>
+<path d="M68,289v 4" fill="none" stroke="black"/>
+<path d="M72,289v 4" fill="none" stroke="black"/>
+<path d="M76,285v 8" fill="none" stroke="black"/>
+<path d="M81,289v 4" fill="none" stroke="black"/>
+<path d="M85,289v 4" fill="none" stroke="black"/>
+<path d="M89,289v 4" fill="none" stroke="black"/>
+<path d="M94,289v 4" fill="none" stroke="black"/>
+<path d="M98,285v 8" fill="none" stroke="black"/>
+<path d="M103,289v 4" fill="none" stroke="black"/>
+<path d="M107,289v 4" fill="none" stroke="black"/>
+<path d="M111,289v 4" fill="none" stroke="black"/>
+<path d="M116,289v 4" fill="none" stroke="black"/>
+<path d="M120,285v 8" fill="none" stroke="black"/>
+<path d="M124,289v 4" fill="none" stroke="black"/>
+<path d="M129,289v 4" fill="none" stroke="black"/>
+<path d="M133,289v 4" fill="none" stroke="black"/>
+<path d="M137,289v 4" fill="none" stroke="black"/>
+<path d="M142,285v 8" fill="none" stroke="black"/>
+<path d="M146,289v 4" fill="none" stroke="black"/>
+<path d="M150,289v 4" fill="none" stroke="black"/>
+<path d="M155,289v 4" fill="none" stroke="black"/>
+<path d="M159,289v 4" fill="none" stroke="black"/>
+<path d="M164,285v 8" fill="none" stroke="black"/>
+<path d="M168,289v 4" fill="none" stroke="black"/>
+<path d="M172,289v 4" fill="none" stroke="black"/>
+<path d="M177,289v 4" fill="none" stroke="black"/>
+<path d="M181,289v 4" fill="none" stroke="black"/>
+<path d="M185,285v 8" fill="none" stroke="black"/>
+<path d="M190,289v 4" fill="none" stroke="black"/>
+<path d="M194,289v 4" fill="none" stroke="black"/>
+<path d="M198,289v 4" fill="none" stroke="black"/>
+<path d="M203,289v 4" fill="none" stroke="black"/>
+<path d="M207,285v 8" fill="none" stroke="black"/>
+<path d="M211,289v 4" fill="none" stroke="black"/>
+<path d="M216,289v 4" fill="none" stroke="black"/>
+<path d="M220,289v 4" fill="none" stroke="black"/>
+<path d="M224,289v 4" fill="none" stroke="black"/>
+<path d="M229,285v 8" fill="none" stroke="black"/>
+<path d="M233,289v 4" fill="none" stroke="black"/>
+<path d="M238,289v 4" fill="none" stroke="black"/>
+<path d="M242,289v 4" fill="none" stroke="black"/>
+<path d="M246,289v 4" fill="none" stroke="black"/>
+<path d="M251,285v 8" fill="none" stroke="black"/>
+<text x="22" y="303" fill="black" font-size="9" font-family="Helvetica">
+-2500
+</text>
+<text x="44" y="303" fill="black" font-size="9" font-family="Helvetica">
+-2000
+</text>
+<text x="65" y="303" fill="black" font-size="9" font-family="Helvetica">
+-1500
+</text>
+<text x="87" y="303" fill="black" font-size="9" font-family="Helvetica">
+-1000
+</text>
+<text x="111" y="303" fill="black" font-size="9" font-family="Helvetica">
+-500
+</text>
+<text x="139" y="303" fill="black" font-size="9" font-family="Helvetica">
+0
+</text>
+<text x="156" y="303" fill="black" font-size="9" font-family="Helvetica">
+500
+</text>
+<text x="175" y="303" fill="black" font-size="9" font-family="Helvetica">
+1000
+</text>
+<text x="197" y="303" fill="black" font-size="9" font-family="Helvetica">
+1500
+</text>
+<text x="219" y="303" fill="black" font-size="9" font-family="Helvetica">
+2000
+</text>
+<text x="241" y="303" fill="black" font-size="9" font-family="Helvetica">
+2500
+</text>
+<path d="M33,293v -257" fill="none" stroke="black"/>
+<path d="M39,293h -6" fill="none" stroke="black"/>
+<path d="M36,286h -3" fill="none" stroke="black"/>
+<path d="M36,280h -3" fill="none" stroke="black"/>
+<path d="M36,273h -3" fill="none" stroke="black"/>
+<path d="M39,267h -6" fill="none" stroke="black"/>
+<path d="M36,260h -3" fill="none" stroke="black"/>
+<path d="M36,254h -3" fill="none" stroke="black"/>
+<path d="M36,248h -3" fill="none" stroke="black"/>
+<path d="M39,241h -6" fill="none" stroke="black"/>
+<path d="M36,235h -3" fill="none" stroke="black"/>
+<path d="M36,228h -3" fill="none" stroke="black"/>
+<path d="M36,222h -3" fill="none" stroke="black"/>
+<path d="M39,215h -6" fill="none" stroke="black"/>
+<path d="M36,209h -3" fill="none" stroke="black"/>
+<path d="M36,203h -3" fill="none" stroke="black"/>
+<path d="M36,196h -3" fill="none" stroke="black"/>
+<path d="M39,190h -6" fill="none" stroke="black"/>
+<path d="M36,183h -3" fill="none" stroke="black"/>
+<path d="M36,177h -3" fill="none" stroke="black"/>
+<path d="M36,171h -3" fill="none" stroke="black"/>
+<path d="M39,164h -6" fill="none" stroke="black"/>
+<path d="M36,158h -3" fill="none" stroke="black"/>
+<path d="M36,151h -3" fill="none" stroke="black"/>
+<path d="M36,145h -3" fill="none" stroke="black"/>
+<path d="M39,138h -6" fill="none" stroke="black"/>
+<path d="M36,132h -3" fill="none" stroke="black"/>
+<path d="M36,126h -3" fill="none" stroke="black"/>
+<path d="M36,119h -3" fill="none" stroke="black"/>
+<path d="M39,113h -6" fill="none" stroke="black"/>
+<path d="M36,106h -3" fill="none" stroke="black"/>
+<path d="M36,100h -3" fill="none" stroke="black"/>
+<path d="M36,93h -3" fill="none" stroke="black"/>
+<path d="M39,87h -6" fill="none" stroke="black"/>
+<path d="M36,81h -3" fill="none" stroke="black"/>
+<path d="M36,74h -3" fill="none" stroke="black"/>
+<path d="M36,68h -3" fill="none" stroke="black"/>
+<path d="M39,61h -6" fill="none" stroke="black"/>
+<path d="M36,55h -3" fill="none" stroke="black"/>
+<path d="M36,48h -3" fill="none" stroke="black"/>
+<path d="M36,42h -3" fill="none" stroke="black"/>
+<path d="M39,36h -6" fill="none" stroke="black"/>
+<text x="12" y="296" fill="black" font-size="9" font-family="Helvetica">
+3800
+</text>
+<text x="12" y="270" fill="black" font-size="9" font-family="Helvetica">
+3820
+</text>
+<text x="12" y="244" fill="black" font-size="9" font-family="Helvetica">
+3840
+</text>
+<text x="12" y="218" fill="black" font-size="9" font-family="Helvetica">
+3860
+</text>
+<text x="12" y="193" fill="black" font-size="9" font-family="Helvetica">
+3880
+</text>
+<text x="12" y="167" fill="black" font-size="9" font-family="Helvetica">
+3900
+</text>
+<text x="12" y="142" fill="black" font-size="9" font-family="Helvetica">
+3920
+</text>
+<text x="12" y="116" fill="black" font-size="9" font-family="Helvetica">
+3940
+</text>
+<text x="12" y="90" fill="black" font-size="9" font-family="Helvetica">
+3960
+</text>
+<text x="12" y="64" fill="black" font-size="9" font-family="Helvetica">
+3980
+</text>
+<text x="12" y="39" fill="black" font-size="9" font-family="Helvetica">
+4000
+</text>
+<rect x="218" y="24" width="54" height="77" fill="white"/>
+<path d="M218,101h 54" fill="none" stroke="black"/>
+<path d="M272,101v -77" fill="none" stroke="black"/>
+<path d="M272,24h -54" fill="none" stroke="black"/>
+<path d="M218,24v 77" fill="none" stroke="black"/>
+<text x="221" y="31" fill="black" font-size="2" font-family="Helvetica">
+../../g4blout/from_hep/out_36_rotate.root_xz_positions
+</text>
+<path d="M218,37h 54" fill="none" stroke="black"/>
+<text x="221" y="46" fill="black" font-size="6" font-family="Helvetica">
+Entries 
+</text>
+<text x="243" y="46" fill="black" font-size="6" font-family="Helvetica">
+ 4279604
+</text>
+<text x="221" y="59" fill="black" font-size="6" font-family="Helvetica">
+Mean x 
+</text>
+<text x="250" y="59" fill="black" font-size="6" font-family="Helvetica">
+  391.8
+</text>
+<text x="221" y="71" fill="black" font-size="6" font-family="Helvetica">
+Mean y 
+</text>
+<text x="251" y="71" fill="black" font-size="6" font-family="Helvetica">
+   3901
+</text>
+<text x="221" y="85" fill="black" font-size="6" font-family="Helvetica">
+RMS x 
+</text>
+<text x="250" y="85" fill="black" font-size="6" font-family="Helvetica">
+  875.5
+</text>
+<text x="221" y="97" fill="black" font-size="6" font-family="Helvetica">
+RMS y 
+</text>
+<text x="245" y="97" fill="black" font-size="6" font-family="Helvetica">
+ 0.01857
+</text>
+<rect x="252" y="280" width="12" height="13" fill="#6200ff"/>
+<rect x="252" y="267" width="12" height="13" fill="#3300ff"/>
+<rect x="252" y="254" width="12" height="13" fill="#0014ff"/>
+<rect x="252" y="241" width="12" height="13" fill="#0044ff"/>
+<rect x="252" y="228" width="12" height="13" fill="#008bff"/>
+<rect x="252" y="215" width="12" height="13" fill="#00bbff"/>
+<rect x="252" y="203" width="12" height="12" fill="#00fffb"/>
+<rect x="252" y="190" width="12" height="13" fill="#00ffcc"/>
+<rect x="252" y="177" width="12" height="13" fill="#00ff84"/>
+<rect x="252" y="164" width="12" height="13" fill="#00ff55"/>
+<rect x="252" y="151" width="12" height="13" fill="#00ff0d"/>
+<rect x="252" y="138" width="12" height="13" fill="#22ff00"/>
+<rect x="252" y="126" width="12" height="12" fill="#69ff00"/>
+<rect x="252" y="113" width="12" height="13" fill="#99ff00"/>
+<rect x="252" y="100" width="12" height="13" fill="#e0ff00"/>
+<rect x="252" y="87" width="12" height="13" fill="#ffee00"/>
+<rect x="252" y="74" width="12" height="13" fill="#ffa600"/>
+<rect x="252" y="61" width="12" height="13" fill="#ff7700"/>
+<rect x="252" y="48" width="12" height="13" fill="#ff2f00"/>
+<rect x="252" y="36" width="12" height="12" fill="#ff0000"/>
+<path d="M264,293v -257" fill="none" stroke="black"/>
+<path d="M258,293h 6" fill="none" stroke="black"/>
+<path d="M258,257h 6" fill="none" stroke="black"/>
+<path d="M258,221h 6" fill="none" stroke="black"/>
+<path d="M258,185h 6" fill="none" stroke="black"/>
+<path d="M258,150h 6" fill="none" stroke="black"/>
+<path d="M258,114h 6" fill="none" stroke="black"/>
+<path d="M258,78h 6" fill="none" stroke="black"/>
+<path d="M258,42h 6" fill="none" stroke="black"/>
+<path d="M258,42h 6" fill="none" stroke="black"/>
+<text x="265" y="296" fill="black" font-size="9" font-family="Helvetica">
+0
+</text>
+<text x="265" y="260" fill="black" font-size="9" font-family="Helvetica">
+10000
+</text>
+<text x="265" y="224" fill="black" font-size="9" font-family="Helvetica">
+20000
+</text>
+<text x="265" y="188" fill="black" font-size="9" font-family="Helvetica">
+30000
+</text>
+<text x="265" y="153" fill="black" font-size="9" font-family="Helvetica">
+40000
+</text>
+<text x="265" y="117" fill="black" font-size="9" font-family="Helvetica">
+50000
+</text>
+<text x="265" y="81" fill="black" font-size="9" font-family="Helvetica">
+60000
+</text>
+<text x="265" y="45" fill="black" font-size="9" font-family="Helvetica">
+70000
+</text>
+<rect x="218" y="24" width="54" height="77" fill="white"/>
+<path d="M218,101h 54" fill="none" stroke="black"/>
+<path d="M272,101v -77" fill="none" stroke="black"/>
+<path d="M272,24h -54" fill="none" stroke="black"/>
+<path d="M218,24v 77" fill="none" stroke="black"/>
+<text x="221" y="31" fill="black" font-size="2" font-family="Helvetica">
+../../g4blout/from_hep/out_36_rotate.root_xz_positions
+</text>
+<path d="M218,37h 54" fill="none" stroke="black"/>
+<text x="221" y="46" fill="black" font-size="6" font-family="Helvetica">
+Entries 
+</text>
+<text x="243" y="46" fill="black" font-size="6" font-family="Helvetica">
+ 4279604
+</text>
+<text x="221" y="59" fill="black" font-size="6" font-family="Helvetica">
+Mean x 
+</text>
+<text x="250" y="59" fill="black" font-size="6" font-family="Helvetica">
+  391.8
+</text>
+<text x="221" y="71" fill="black" font-size="6" font-family="Helvetica">
+Mean y 
+</text>
+<text x="251" y="71" fill="black" font-size="6" font-family="Helvetica">
+   3901
+</text>
+<text x="221" y="85" fill="black" font-size="6" font-family="Helvetica">
+RMS x 
+</text>
+<text x="250" y="85" fill="black" font-size="6" font-family="Helvetica">
+  875.5
+</text>
+<text x="221" y="97" fill="black" font-size="6" font-family="Helvetica">
+RMS y 
+</text>
+<text x="245" y="97" fill="black" font-size="6" font-family="Helvetica">
+ 0.01857
+</text>
+<text x="56" y="16" fill="black" font-size="7" font-family="Helvetica">
+../../g4blout/from_hep/out_36_rotate.root_xz_positions
+</text>
+<rect x="289" y="3" width="272" height="322" fill="white"/>
+<rect x="316" y="36" width="218" height="257" fill="white"/>
+<rect x="316" y="36" width="218" height="257" fill="none" stroke="black"/>
+<rect x="316" y="36" width="218" height="257" fill="white"/>
+<rect x="316" y="36" width="218" height="257" fill="none" stroke="black"/>
+<rect x="341" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="352" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="353" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="364" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="365" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="370" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="372" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="373" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="374" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="388" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="390" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="393" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="396" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="405" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="412" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="414" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="415" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="416" y="162" width="2" height="1" fill="#3300ff"/>
+<rect x="418" y="162" width="1" height="1" fill="#00ffcc"/>
+<rect x="419" y="162" width="1" height="1" fill="#69ff00"/>
+<rect x="420" y="162" width="1" height="1" fill="#ffa600"/>
+<rect x="421" y="162" width="1" height="1" fill="#ff0000"/>
+<rect x="422" y="162" width="1" height="1" fill="#ff0000"/>
+<rect x="423" y="162" width="1" height="1" fill="#ff0000"/>
+<rect x="424" y="162" width="1" height="1" fill="#ffa600"/>
+<rect x="425" y="162" width="1" height="1" fill="#99ff00"/>
+<rect x="426" y="162" width="1" height="1" fill="#22ff00"/>
+<rect x="427" y="162" width="1" height="1" fill="#00ffcc"/>
+<rect x="428" y="162" width="2" height="1" fill="#00bbff"/>
+<rect x="430" y="162" width="1" height="1" fill="#0044ff"/>
+<rect x="431" y="162" width="1" height="1" fill="#3300ff"/>
+<rect x="432" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="433" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="436" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="437" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="443" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="449" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="450" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="452" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="460" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="463" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="464" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="467" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="469" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="471" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="472" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="475" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="476" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="477" y="162" width="2" height="1" fill="#6200ff"/>
+<rect x="481" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="483" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="484" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="486" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="488" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="492" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="493" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="494" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="500" y="162" width="1" height="1" fill="#6200ff"/>
+<rect x="502" y="162" width="2" height="1" fill="#6200ff"/>
+<rect x="508" y="162" width="1" height="1" fill="#6200ff"/>
+<path d="M316,293h 218" fill="none" stroke="black"/>
+<path d="M316,285v 8" fill="none" stroke="black"/>
+<path d="M321,289v 4" fill="none" stroke="black"/>
+<path d="M325,289v 4" fill="none" stroke="black"/>
+<path d="M329,289v 4" fill="none" stroke="black"/>
+<path d="M334,289v 4" fill="none" stroke="black"/>
+<path d="M338,285v 8" fill="none" stroke="black"/>
+<path d="M342,289v 4" fill="none" stroke="black"/>
+<path d="M347,289v 4" fill="none" stroke="black"/>
+<path d="M351,289v 4" fill="none" stroke="black"/>
+<path d="M356,289v 4" fill="none" stroke="black"/>
+<path d="M360,285v 8" fill="none" stroke="black"/>
+<path d="M364,289v 4" fill="none" stroke="black"/>
+<path d="M369,289v 4" fill="none" stroke="black"/>
+<path d="M373,289v 4" fill="none" stroke="black"/>
+<path d="M377,289v 4" fill="none" stroke="black"/>
+<path d="M382,285v 8" fill="none" stroke="black"/>
+<path d="M386,289v 4" fill="none" stroke="black"/>
+<path d="M390,289v 4" fill="none" stroke="black"/>
+<path d="M395,289v 4" fill="none" stroke="black"/>
+<path d="M399,289v 4" fill="none" stroke="black"/>
+<path d="M403,285v 8" fill="none" stroke="black"/>
+<path d="M408,289v 4" fill="none" stroke="black"/>
+<path d="M412,289v 4" fill="none" stroke="black"/>
+<path d="M416,289v 4" fill="none" stroke="black"/>
+<path d="M421,289v 4" fill="none" stroke="black"/>
+<path d="M425,285v 8" fill="none" stroke="black"/>
+<path d="M430,289v 4" fill="none" stroke="black"/>
+<path d="M434,289v 4" fill="none" stroke="black"/>
+<path d="M438,289v 4" fill="none" stroke="black"/>
+<path d="M443,289v 4" fill="none" stroke="black"/>
+<path d="M447,285v 8" fill="none" stroke="black"/>
+<path d="M451,289v 4" fill="none" stroke="black"/>
+<path d="M456,289v 4" fill="none" stroke="black"/>
+<path d="M460,289v 4" fill="none" stroke="black"/>
+<path d="M464,289v 4" fill="none" stroke="black"/>
+<path d="M469,285v 8" fill="none" stroke="black"/>
+<path d="M473,289v 4" fill="none" stroke="black"/>
+<path d="M477,289v 4" fill="none" stroke="black"/>
+<path d="M482,289v 4" fill="none" stroke="black"/>
+<path d="M486,289v 4" fill="none" stroke="black"/>
+<path d="M491,285v 8" fill="none" stroke="black"/>
+<path d="M495,289v 4" fill="none" stroke="black"/>
+<path d="M499,289v 4" fill="none" stroke="black"/>
+<path d="M504,289v 4" fill="none" stroke="black"/>
+<path d="M508,289v 4" fill="none" stroke="black"/>
+<path d="M512,285v 8" fill="none" stroke="black"/>
+<path d="M517,289v 4" fill="none" stroke="black"/>
+<path d="M521,289v 4" fill="none" stroke="black"/>
+<path d="M525,289v 4" fill="none" stroke="black"/>
+<path d="M530,289v 4" fill="none" stroke="black"/>
+<path d="M534,285v 8" fill="none" stroke="black"/>
+<text x="305" y="303" fill="black" font-size="9" font-family="Helvetica">
+-2500
+</text>
+<text x="327" y="303" fill="black" font-size="9" font-family="Helvetica">
+-2000
+</text>
+<text x="349" y="303" fill="black" font-size="9" font-family="Helvetica">
+-1500
+</text>
+<text x="371" y="303" fill="black" font-size="9" font-family="Helvetica">
+-1000
+</text>
+<text x="395" y="303" fill="black" font-size="9" font-family="Helvetica">
+-500
+</text>
+<text x="423" y="303" fill="black" font-size="9" font-family="Helvetica">
+0
+</text>
+<text x="439" y="303" fill="black" font-size="9" font-family="Helvetica">
+500
+</text>
+<text x="459" y="303" fill="black" font-size="9" font-family="Helvetica">
+1000
+</text>
+<text x="481" y="303" fill="black" font-size="9" font-family="Helvetica">
+1500
+</text>
+<text x="502" y="303" fill="black" font-size="9" font-family="Helvetica">
+2000
+</text>
+<text x="524" y="303" fill="black" font-size="9" font-family="Helvetica">
+2500
+</text>
+<path d="M316,293v -257" fill="none" stroke="black"/>
+<path d="M323,293h -7" fill="none" stroke="black"/>
+<path d="M320,286h -4" fill="none" stroke="black"/>
+<path d="M320,280h -4" fill="none" stroke="black"/>
+<path d="M320,273h -4" fill="none" stroke="black"/>
+<path d="M323,267h -7" fill="none" stroke="black"/>
+<path d="M320,260h -4" fill="none" stroke="black"/>
+<path d="M320,254h -4" fill="none" stroke="black"/>
+<path d="M320,248h -4" fill="none" stroke="black"/>
+<path d="M323,241h -7" fill="none" stroke="black"/>
+<path d="M320,235h -4" fill="none" stroke="black"/>
+<path d="M320,228h -4" fill="none" stroke="black"/>
+<path d="M320,222h -4" fill="none" stroke="black"/>
+<path d="M323,215h -7" fill="none" stroke="black"/>
+<path d="M320,209h -4" fill="none" stroke="black"/>
+<path d="M320,203h -4" fill="none" stroke="black"/>
+<path d="M320,196h -4" fill="none" stroke="black"/>
+<path d="M323,190h -7" fill="none" stroke="black"/>
+<path d="M320,183h -4" fill="none" stroke="black"/>
+<path d="M320,177h -4" fill="none" stroke="black"/>
+<path d="M320,171h -4" fill="none" stroke="black"/>
+<path d="M323,164h -7" fill="none" stroke="black"/>
+<path d="M320,158h -4" fill="none" stroke="black"/>
+<path d="M320,151h -4" fill="none" stroke="black"/>
+<path d="M320,145h -4" fill="none" stroke="black"/>
+<path d="M323,138h -7" fill="none" stroke="black"/>
+<path d="M320,132h -4" fill="none" stroke="black"/>
+<path d="M320,126h -4" fill="none" stroke="black"/>
+<path d="M320,119h -4" fill="none" stroke="black"/>
+<path d="M323,113h -7" fill="none" stroke="black"/>
+<path d="M320,106h -4" fill="none" stroke="black"/>
+<path d="M320,100h -4" fill="none" stroke="black"/>
+<path d="M320,93h -4" fill="none" stroke="black"/>
+<path d="M323,87h -7" fill="none" stroke="black"/>
+<path d="M320,81h -4" fill="none" stroke="black"/>
+<path d="M320,74h -4" fill="none" stroke="black"/>
+<path d="M320,68h -4" fill="none" stroke="black"/>
+<path d="M323,61h -7" fill="none" stroke="black"/>
+<path d="M320,55h -4" fill="none" stroke="black"/>
+<path d="M320,48h -4" fill="none" stroke="black"/>
+<path d="M320,42h -4" fill="none" stroke="black"/>
+<path d="M323,36h -7" fill="none" stroke="black"/>
+<text x="296" y="296" fill="black" font-size="9" font-family="Helvetica">
+3800
+</text>
+<text x="296" y="270" fill="black" font-size="9" font-family="Helvetica">
+3820
+</text>
+<text x="296" y="244" fill="black" font-size="9" font-family="Helvetica">
+3840
+</text>
+<text x="296" y="218" fill="black" font-size="9" font-family="Helvetica">
+3860
+</text>
+<text x="296" y="193" fill="black" font-size="9" font-family="Helvetica">
+3880
+</text>
+<text x="296" y="167" fill="black" font-size="9" font-family="Helvetica">
+3900
+</text>
+<text x="296" y="142" fill="black" font-size="9" font-family="Helvetica">
+3920
+</text>
+<text x="296" y="116" fill="black" font-size="9" font-family="Helvetica">
+3940
+</text>
+<text x="296" y="90" fill="black" font-size="9" font-family="Helvetica">
+3960
+</text>
+<text x="296" y="64" fill="black" font-size="9" font-family="Helvetica">
+3980
+</text>
+<text x="296" y="39" fill="black" font-size="9" font-family="Helvetica">
+4000
+</text>
+<rect x="501" y="24" width="55" height="77" fill="white"/>
+<path d="M501,101h 55" fill="none" stroke="black"/>
+<path d="M556,101v -77" fill="none" stroke="black"/>
+<path d="M556,24h -55" fill="none" stroke="black"/>
+<path d="M501,24v 77" fill="none" stroke="black"/>
+<text x="505" y="31" fill="black" font-size="2" font-family="Helvetica">
+../../g4blout/monitor6_By+0.04T_cor.root_xz_positions
+</text>
+<path d="M501,37h 55" fill="none" stroke="black"/>
+<text x="504" y="46" fill="black" font-size="6" font-family="Helvetica">
+Entries 
+</text>
+<text x="534" y="46" fill="black" font-size="6" font-family="Helvetica">
+ 11274
+</text>
+<text x="504" y="59" fill="black" font-size="6" font-family="Helvetica">
+Mean x 
+</text>
+<text x="533" y="59" fill="black" font-size="6" font-family="Helvetica">
+ -40.18
+</text>
+<text x="504" y="71" fill="black" font-size="6" font-family="Helvetica">
+Mean y 
+</text>
+<text x="534" y="71" fill="black" font-size="6" font-family="Helvetica">
+   3901
+</text>
+<text x="504" y="85" fill="black" font-size="6" font-family="Helvetica">
+RMS x 
+</text>
+<text x="534" y="85" fill="black" font-size="6" font-family="Helvetica">
+  107.8
+</text>
+<text x="504" y="97" fill="black" font-size="6" font-family="Helvetica">
+RMS y 
+</text>
+<text x="525" y="97" fill="black" font-size="6" font-family="Helvetica">
+ 0.001268
+</text>
+<rect x="535" y="280" width="13" height="13" fill="#6200ff"/>
+<rect x="535" y="267" width="13" height="13" fill="#3300ff"/>
+<rect x="535" y="254" width="13" height="13" fill="#0014ff"/>
+<rect x="535" y="241" width="13" height="13" fill="#0044ff"/>
+<rect x="535" y="228" width="13" height="13" fill="#008bff"/>
+<rect x="535" y="215" width="13" height="13" fill="#00bbff"/>
+<rect x="535" y="203" width="13" height="12" fill="#00fffb"/>
+<rect x="535" y="190" width="13" height="13" fill="#00ffcc"/>
+<rect x="535" y="177" width="13" height="13" fill="#00ff84"/>
+<rect x="535" y="164" width="13" height="13" fill="#00ff55"/>
+<rect x="535" y="151" width="13" height="13" fill="#00ff0d"/>
+<rect x="535" y="138" width="13" height="13" fill="#22ff00"/>
+<rect x="535" y="126" width="13" height="12" fill="#69ff00"/>
+<rect x="535" y="113" width="13" height="13" fill="#99ff00"/>
+<rect x="535" y="100" width="13" height="13" fill="#e0ff00"/>
+<rect x="535" y="87" width="13" height="13" fill="#ffee00"/>
+<rect x="535" y="74" width="13" height="13" fill="#ffa600"/>
+<rect x="535" y="61" width="13" height="13" fill="#ff7700"/>
+<rect x="535" y="48" width="13" height="13" fill="#ff2f00"/>
+<rect x="535" y="36" width="13" height="12" fill="#ff0000"/>
+<path d="M548,293v -257" fill="none" stroke="black"/>
+<path d="M541,293h 7" fill="none" stroke="black"/>
+<path d="M541,257h 7" fill="none" stroke="black"/>
+<path d="M541,221h 7" fill="none" stroke="black"/>
+<path d="M541,185h 7" fill="none" stroke="black"/>
+<path d="M541,149h 7" fill="none" stroke="black"/>
+<path d="M541,113h 7" fill="none" stroke="black"/>
+<path d="M541,78h 7" fill="none" stroke="black"/>
+<path d="M541,42h 7" fill="none" stroke="black"/>
+<path d="M541,42h 7" fill="none" stroke="black"/>
+<text x="549" y="296" fill="black" font-size="9" font-family="Helvetica">
+0
+</text>
+<text x="549" y="260" fill="black" font-size="9" font-family="Helvetica">
+200
+</text>
+<text x="549" y="224" fill="black" font-size="9" font-family="Helvetica">
+400
+</text>
+<text x="549" y="188" fill="black" font-size="9" font-family="Helvetica">
+600
+</text>
+<text x="549" y="152" fill="black" font-size="9" font-family="Helvetica">
+800
+</text>
+<text x="549" y="116" fill="black" font-size="9" font-family="Helvetica">
+1000
+</text>
+<text x="549" y="81" fill="black" font-size="9" font-family="Helvetica">
+1200
+</text>
+<text x="549" y="45" fill="black" font-size="9" font-family="Helvetica">
+1400
+</text>
+<rect x="501" y="24" width="55" height="77" fill="white"/>
+<path d="M501,101h 55" fill="none" stroke="black"/>
+<path d="M556,101v -77" fill="none" stroke="black"/>
+<path d="M556,24h -55" fill="none" stroke="black"/>
+<path d="M501,24v 77" fill="none" stroke="black"/>
+<text x="505" y="31" fill="black" font-size="2" font-family="Helvetica">
+../../g4blout/monitor6_By+0.04T_cor.root_xz_positions
+</text>
+<path d="M501,37h 55" fill="none" stroke="black"/>
+<text x="504" y="46" fill="black" font-size="6" font-family="Helvetica">
+Entries 
+</text>
+<text x="534" y="46" fill="black" font-size="6" font-family="Helvetica">
+ 11274
+</text>
+<text x="504" y="59" fill="black" font-size="6" font-family="Helvetica">
+Mean x 
+</text>
+<text x="533" y="59" fill="black" font-size="6" font-family="Helvetica">
+ -40.18
+</text>
+<text x="504" y="71" fill="black" font-size="6" font-family="Helvetica">
+Mean y 
+</text>
+<text x="534" y="71" fill="black" font-size="6" font-family="Helvetica">
+   3901
+</text>
+<text x="504" y="85" fill="black" font-size="6" font-family="Helvetica">
+RMS x 
+</text>
+<text x="534" y="85" fill="black" font-size="6" font-family="Helvetica">
+  107.8
+</text>
+<text x="504" y="97" fill="black" font-size="6" font-family="Helvetica">
+RMS y 
+</text>
+<text x="525" y="97" fill="black" font-size="6" font-family="Helvetica">
+ 0.001268
+</text>
+<text x="335" y="16" fill="black" font-size="7" font-family="Helvetica">
+../../g4blout/monitor6_By+0.04T_cor.root_xz_positions
+</text></svg>
