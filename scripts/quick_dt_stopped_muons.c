@@ -33,6 +33,9 @@ void quick_dt_stopped_muons() {
     TFile* out_file = new TFile(out_file_name, "RECREATE");
     
 	TH1F* hists [n_files];
+	
+    int integrals[n_files]; // use this to get the number of stopped muons for each set up
+    int counts[n_files]; // use this to get the number of stopped muons for each set up
 
 	for(unsigned int file = 0; file < n_files; ++file) {
 		TString file_name = prefix + file_roots[file] + suffix;
@@ -50,12 +53,19 @@ void quick_dt_stopped_muons() {
 		for(unsigned int entry = 0; entry < n_entries; ++entry) {
 			in_tree->GetEntry(entry);
 
-			int muon_ids_scint1 [500];	  // muons that have 'triggered'
-			int electron_ids [500];		  // don't double count
-			double muon_time_at_scint1[500]; // what we're actually going to plot
+            const int max_index = 500;
+			int muon_ids_scint1 [max_index];	  // muons that have 'triggered'
+			int electron_ids [max_index];		  // don't double count
+			double muon_time_at_scint1[max_index]; // what we're actually going to plot
 			// index bounds; don't want to loop over 500 zeros
 			int n_seen_muons = 0;  
 			int n_seen_electrons = 0;
+			
+			for(unsigned int i = 0; i < max_index; ++i) {
+                muon_ids_scint1[i]     = -1;
+                electron_ids[i]        = -1;
+                muon_time_at_scint1[i] = -1.0;
+            }
 
 			for(unsigned int hit = 0; hit < branch.n_hits; ++hit) {
 				// is it a muon in scint 1? 
@@ -84,8 +94,8 @@ void quick_dt_stopped_muons() {
 					}
 				} else if (abs(pid) == 11) {
 					// electron/positron stuff
-					if ((counter == 1 || counter == 3) &&  first_step) {
-						// first step in scint 1 or 2	
+					if (counter == 3 &&  first_step) {// in realistic set up we only use scint 2
+						// first step in scint 2	
 						const int e_index = get_index(electron_ids, n_seen_electrons, id);
 						if (e_index == -1) {
 							// new electron!
@@ -101,24 +111,32 @@ void quick_dt_stopped_muons() {
 				}
 			}
 		}
-		cout << "File done" << endl;	
+	    // 'GetEntries()' includes over & under flow bins, integral only includes the bounds
+        integrals[file] = hists[file]->Integral();
+        counts[file] = hists[file]->GetEntries();
+		cout << "File done, "<< integrals[file] << " stopped muons." << endl;	
 	}
     
     out_file->Write();
     
-	TString title = "Muon decay times";
-	TString save_location = "images/muon_decay_times.svg";
-	// 1002201 is the magic number for stats
-	draw_pretty_hists(n_files,hists,title,file_roots, save_location,1002201);
+    
+    // TString title = "Muon decay times";
+    // TString save_location = "images/muon_decay_times.svg";
+    // // 1002201 is the magic number for stats
+    // draw_pretty_hists(n_files,hists,title,file_roots, save_location,1002201);
 	
-	for(unsigned int hist = 0; hist < n_files; ++hist) {
-		hists[hist]->Rebin(100);
+    printf("%16s %5s %5s %5s\n","Filename","int", "count","Eff");
+	for(unsigned int file = 0; file < n_files; ++file) {
+		hists[file]->Rebin(100);
+        const float eff = 100.0*integrals[file]/14321.0;
+        // char name [file_roots[file].]
+        printf ("%16s %5i %5i %5.1f%%\n",file_roots[file].Data(), integrals[file], counts[file], eff);
 	}
 	
-	TString title2 = "Muon decay times (100ns bins)";
-	TString save_location2 = "images/muon_decay_times_rebin.svg";
-	// 1002201 is the magic number for stats
-	draw_pretty_hists(n_files,hists,title2,file_roots, save_location2,1002201);
+    TString title2 = "Muon decay times (100ns bins)";
+    TString save_location2 = "images/muon_decay_times_rebin.svg";
+    // 1002201 is the magic number for stats
+    draw_pretty_hists(n_files,hists,title2,file_roots, save_location2,1112201);//1002201);
 }
 
 void set_addresses(const in_branch& branch, const TTree* tree) {
