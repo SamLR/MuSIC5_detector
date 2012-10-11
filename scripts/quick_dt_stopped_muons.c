@@ -23,13 +23,13 @@ void quick_dt_stopped_muons() {
 		"Aluminium_8mm",
 		"Aluminium_12mm" };
 
-	const TString prefix = "../../output/final/final_st_Copper_0.5mm_deg_";
+    const TString abs_path = "~/code/MuSIC/simulation/MuSIC_5_detector_sim/MuSIC5/MuSIC5_detector/scripts/";
+	const TString prefix = abs_path+"../../output/final/final_st_Copper_0.5mm_deg_";
 	const TString suffix = ".root";
-    
     const TString out_file_root = "dt_hists";
     
     // create the out file in the local dir
-    const TString out_file_name = out_file_root + suffix;
+    const TString out_file_name = abs_path+out_file_root + suffix;
     TFile* out_file = new TFile(out_file_name, "RECREATE");
     
 	TH1F* hists [n_files];
