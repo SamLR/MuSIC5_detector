@@ -5,7 +5,7 @@ images/muon_decay_times_rebin.svg
 </title>
 <desc>
 Creator: ROOT Version 5.32/00
-CreationDate: Thu Oct 11 13:58:59 2012</desc>
+CreationDate: Thu Oct 18 12:48:44 2012</desc>
 <defs>
 </defs>
 <rect x="0" y="0" width="567" height="328" fill="white"/>
@@ -279,7 +279,7 @@ Integral
 <text x="538" y="294" fill="black" font-size="6" font-family="Helvetica">
    1732
 </text>
-<text x="169" y="16" fill="black" font-size="15" font-family="Helvetica">
+<text x="159" y="16" fill="black" font-size="16" font-family="Helvetica">
 Muon decay times (100ns bins)
 </text>
 <path d="M57,91h 2v 59h 2v -14h 2v 51h 2v -11h 2v -37h 2v 46h 2v -12h 2v 3h 2v 31h 2v 14h 2v -8h 3v -14h 2v 42h 2v -3h 2v -5h 2v 14h 2v -20h 2v 20h 2v -6h 2v -14h 2v 17h 2v -6h 2v 29h 2v -3h 2v -14h 2v 8h 2v 15h 2v -26h 2v 8h 2v 6h 2v -3h 2v 3h 2v 6h

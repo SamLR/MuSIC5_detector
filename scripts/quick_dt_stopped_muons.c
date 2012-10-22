@@ -34,8 +34,9 @@ void quick_dt_stopped_muons() {
     
 	TH1F* hists [n_files];
 	
-    int integrals[n_files]; // use this to get the number of stopped muons for each set up
-    int counts[n_files]; // use this to get the number of stopped muons for each set up
+    int integrals[n_files];  // integral of stopped muon hist (i.e. no under/overflow)
+    int counts[n_files];     // number of entries in the stopped muon hist
+    int init_muons[n_files]; // the number of input muons from g4bl.
 
 	for(unsigned int file = 0; file < n_files; ++file) {
 		TString file_name = prefix + file_roots[file] + suffix;
@@ -48,7 +49,9 @@ void quick_dt_stopped_muons() {
         out_file->cd();
 		hists[file] = make_hist(file_roots[file]);
 		const int n_entries = in_tree->GetEntries();
-		cout << "Found "<< n_entries<<" entries"<<endl;
+        init_muons[file] = in_tree->GetEntries("abs(in_PDGid)==13");
+		cout << "Found "<< n_entries<<" entries";
+        cout << " including "<< init_muons[file] <<" muons"<<endl;
 
 		for(unsigned int entry = 0; entry < n_entries; ++entry) {
 			in_tree->GetEntry(entry);
@@ -125,12 +128,12 @@ void quick_dt_stopped_muons() {
     // // 1002201 is the magic number for stats
     // draw_pretty_hists(n_files,hists,title,file_roots, save_location,1002201);
 	
-    printf("%16s %5s %5s %5s\n","Filename","int", "count","Eff");
+    printf("%16s %5s %5s %5s %5s\n","Filename","int", "count", "mu in","eff");
 	for(unsigned int file = 0; file < n_files; ++file) {
 		hists[file]->Rebin(100);
-        const float eff = 100.0*integrals[file]/14321.0;
-        // char name [file_roots[file].]
-        printf ("%16s %5i %5i %5.1f%%\n",file_roots[file].Data(), integrals[file], counts[file], eff);
+        const float eff = 100.0*integrals[file]/((float)init_muons[file]);
+        printf ("%16s %5i %5i %5i %5.1f%%\n",file_roots[file].Data(), 
+                integrals[file], counts[file], init_muons[file], eff);
 	}
 	
     TString title2 = "Muon decay times (100ns bins)";
@@ -150,7 +153,7 @@ void set_addresses(const in_branch& branch, const TTree* tree) {
 }
 
 TH1F* make_hist(const TString file_root) {
-	TString name = "Muon_momentum_with_"+file_root;
+	TString name = "parent-daughter_dts_for_"+file_root;
 	TH1F* res = new TH1F(name,name, 20000, 1, 20001);
 	res->GetXaxis()->SetTitle("Delta time (ns)");
 	res->GetYaxis()->SetTitle("Count");
