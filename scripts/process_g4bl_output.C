@@ -1,3 +1,15 @@
+// 
+// Sam Cook Sept 2012
+//
+// Process a g4bl music output file for use in the geant4 music sim
+// 
+// Processing invloves 3 steps:
+//  1. Ignore any EventIDs >= 900,000,000; the g4bl RNG only guarantees 
+//      randomness for seeds 0-900m
+//  2. Ignore any PDGid > 1m; these seem to be errors created by g4bl
+//  3. Rotate the output through 36degrees in the xz plane to match Bfield
+//
+
 #include <iostream>
 
 #include "TFile.h"
@@ -42,8 +54,12 @@ void set_in_branch_addresses  (TTree* tree, const in_branch& branch);
 void set_out_branch_addresses (TTree* tree, const out_branch& branch);
 void process_in_branch_to_out(const in_branch& in, out_branch& out, const double* cos_sin_x);
 
-void rotate_xz() {
+void process_g4bl_output() {
     const double theta_deg = 36.0;
+    // Which PDGid to ignore
+    const float pdgid_thrs = 1e6;
+    // When to stop processing
+    const float event_id_thrs = 9e8.0; 
 
     const TString in_filename  = "out.root";
     const TString out_filename = "out_36_rotate.root";
@@ -67,13 +83,33 @@ void rotate_xz() {
     const double cos_sin_x [2] = {cos(theta_rad), sin(theta_rad)};
 
     const int n_entries_in = in_tree->GetEntries();
+    const int tenth = static_cast<int>(n_entries_in/10);
+    
+    int skip_count = 0;
+    int fill_count = 0;
+    
     for(int in_entry = 0; in_entry < n_entries_in; ++in_entry) {
         in_tree->GetEntry(in_entry);
+        // skip unknown particles
+        if (in_data.EventID >= event_id_thrs) {
+            printf("Event: %.0f; breaking (thrs: %.0f)", 
+                    in_data.EventID, event_id_thrs);
+            break;
+        }
+        if (in_data.PDGid >= pdgid_thrs) {
+            ++skip_count;
+            continue; 
+        }
         process_in_branch_to_out(in_data, out_data, cos_sin_x);
         out_tree->Fill();
+        ++fill_count;
+        if (in_entry%tenth == 0) printf("Entry %i\n", in_entry);
     }
+    const int saved_particles = out_tree->GetEntries();
     out_file->Write();
     out_file->Close();
+    printf("%i particles saved (filled: %i), %i skipped.\n", saved_particles, 
+            fill_count, skip_count);
 }
 
 void process_in_branch_to_out(const in_branch& in, out_branch& out, const double* cos_sin_x){
