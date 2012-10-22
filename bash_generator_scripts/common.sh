@@ -26,7 +26,8 @@ macro_suf="mac"
 log_suf="log"
 
 root="../.."
-infile="$root/g4blout/monitor6_By-0.04T_cor.root"
+# infile="$root/g4blout/monitor6_By-0.04T_cor.root"
+infile="$root/g4blout/from_hep_1Bn/out_36_rotate.root"
 exedir="$root/build/Release"
 exe="$exedir/music" # usage: ./music <in.root> <out.root> [run.mac]
 outdir="$root/output/$runname"
