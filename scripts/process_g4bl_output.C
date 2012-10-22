@@ -92,7 +92,7 @@ void process_g4bl_output() {
         in_tree->GetEntry(in_entry);
         // skip unknown particles
         if (in_data.EventID >= event_id_thrs) {
-            printf("Event: %.0f; breaking (thrs: %.0f)", 
+            printf("Braking at event: %.0f (thrs: %.0f)\n", 
                     in_data.EventID, event_id_thrs);
             break;
         }
