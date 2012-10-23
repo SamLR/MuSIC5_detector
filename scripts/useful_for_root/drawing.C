@@ -1,4 +1,10 @@
-void edit_stats_box(const TCanvas* can, const TH1* hist, const int options=1002201,
+#include "TH1F.h"
+#include "TCanvas.h"
+#include "TROOT.h"
+#include "TPaveStats.h"
+#include "TLegend.h"
+
+void edit_stats_box(TCanvas* can, const TH1* hist, const int options=1002201,
     const double x1 = 0.55, const double x2 = 0.70, 
     const double y1 = 0.10, const double y2 = 0.37
 ){
@@ -11,9 +17,7 @@ void edit_stats_box(const TCanvas* can, const TH1* hist, const int options=10022
     stats_box->SetY2NDC(y2);
 }
 
-void draw_pretty_two_hists(const TH1* backHist, 
-    const TH1* frontHist, 
-    const TString title,
+void draw_pretty_two_hists(TH1* backHist, TH1* frontHist, const TString title,
     const TString backTitle,
     const TString frontTitle,
     // if no location is given nothing is saved
@@ -30,7 +34,6 @@ void draw_pretty_two_hists(const TH1* backHist,
     const double legX1 = 0.44,   const double legX2 = 0.64 ,
     const double legY1 = 0.75,   const double legY2 = 0.9
 ) {
-    cout << title << endl;
     TCanvas* can = new TCanvas(title, title);
     backHist->SetTitle(title);
     backHist->Draw(options);
@@ -50,15 +53,13 @@ void draw_pretty_two_hists(const TH1* backHist,
     leg->Draw();
 
     if(img_save_location!="") {
-        cout << "Saving image to " << img_save_location << endl;
         can->SaveAs(img_save_location);
     }
 }
 
 // the stupidly long variable name is to try and stop namespace collisions @ global
 const int __useful_default_colour_selection [] =  {1, 2, 4, 3, 6, 7, 8, 9};
-void draw_pretty_hists(const int& n_hists, 
-    const TH1** hist_array,   
+void draw_pretty_hists(const int& n_hists, TH1F** hist_array,   
     const TString title,         // title for the entire plot
     const TString* leg_entries,  // titles for each legend entry
     const TString img_save_location ="",
@@ -82,7 +83,7 @@ void draw_pretty_hists(const int& n_hists,
     int max = -1;     
     int first_hist = 0; // want to draw largest hist first               
     
-    for(unsigned int hist = 0; hist < n_hists; ++hist) {
+    for(int hist = 0; hist < n_hists; ++hist) {
         const int current_max = hist_array[hist]->GetMaximum();
         if(current_max > max){
             max = current_max;
@@ -98,7 +99,7 @@ void draw_pretty_hists(const int& n_hists,
 
     hist_array[first_hist]->Draw();
     
-    for(unsigned int hist = 0; hist < n_hists; ++hist) {
+    for(int hist = 0; hist < n_hists; ++hist) {
         hist_array[hist]->SetLineWidth(2);// otherwise the lines are tiny
         hist_array[hist]->SetLineColor(colours[hist]); // mmmm colour!
                                              
@@ -110,7 +111,7 @@ void draw_pretty_hists(const int& n_hists,
         
         if (hist != first_hist) hist_array[hist]->Draw(tmp_draw_opt);
         
-        if (stats_opt){    
+        if (stats_opt){
             // make sure that the name of on the stats box matches the legend entry
             hist_array[hist]->SetName(leg_entries[hist]); 
             // histogram has to have been drawn before you can modify stats box        
@@ -135,8 +136,7 @@ void draw_pretty_hists(const int& n_hists,
     if (img_save_location != "") can->SaveAs(img_save_location);
 }
 
-void draw_pretty_hist(const TH1* hist, 
-    const TString title = "",
+void draw_pretty_hist(TH1* hist, const TString title = "",
     const TString img_save_location ="",
     const TString options = "",
     const int stat_opt=1002201,
@@ -162,7 +162,7 @@ void draw_pretty_hist(const TH1* hist,
     if (img_save_location != "" )can->SaveAs(img_save_location);
 }
 
-void create_boxy_legend(const TH1* hist, const TString legend_header, const int n_boxes, 
+void create_boxy_legend(const TString legend_header, const int n_boxes, 
     const TString const* box_names, const int box_colors[n_boxes],
     const float x1 = 0.15, const float x2 = 0.45, 
     const float y1 = 0.60, const float y2 = 0.90  
@@ -170,13 +170,12 @@ void create_boxy_legend(const TH1* hist, const TString legend_header, const int 
     TLegend* leg = new TLegend(x1,y1,x2,y2);
     leg->SetHeader(legend_header);
     leg->SetFillColor(0);
-    TBox* boxes[n_boxes] = new TBox*[n_boxes]; //allocate the memory
-    for(unsigned int i = 0; i < n_boxes; ++i) {
+    // TBox* boxes[n_boxes] = new TBox*[n_boxes]; //allocate the memory
+    TBox* boxes[n_boxes];
+    for(int i = 0; i < n_boxes; ++i) {
         boxes[i] = new TBox(0.0, 0.0, 0.0, 0.0);
         boxes[i]->SetFillColor(box_colors[i]);
         leg->AddEntry(boxes[i], box_names[i],"F");
     }
     leg->Draw();
 }
-
-
