@@ -50,8 +50,8 @@ struct out_branch{
     double Pz_new;  
 };
 
-void set_in_branch_addresses  (TTree* tree, const in_branch& branch);
-void set_out_branch_addresses (TTree* tree, const out_branch& branch);
+void set_in_branch_addresses  (TTree* tree, in_branch& branch);
+void set_out_branch_addresses (TTree* tree, out_branch& branch);
 void process_in_branch_to_out(const in_branch& in, out_branch& out, const double* cos_sin_x);
 
 void process_g4bl_output() {
@@ -59,7 +59,7 @@ void process_g4bl_output() {
     // Which PDGid to ignore
     const float pdgid_thrs = 1e6;
     // When to stop processing
-    const float event_id_thrs = 9e8.0; 
+    const float event_id_thrs = 9e8; 
 
     const TString in_filename  = "out.root";
     const TString out_filename = "out_36_rotate.root";
@@ -127,8 +127,14 @@ void process_in_branch_to_out(const in_branch& in, out_branch& out, const double
 
     // x = x cos + z sin
     // z = z cos - x sin
-    const double x_new = in.x * cos_sin_x[0] + in.z * cos_sin_x[1];
-    const double z_new = in.z * cos_sin_x[0] - in.x * cos_sin_x[1];
+    // const double x_new = in.x * cos_sin_x[0] + in.z * cos_sin_x[1];
+    // const double z_new = in.z * cos_sin_x[0] - in.x * cos_sin_x[1]; // 776.3, 315
+    const double alpha = 1460.0;
+    const double beta  = 370.0;
+    const double x = in.x - alpha;
+    const double z = in.z - beta;
+    const double x_new = x * cos_sin_x[0] + z * cos_sin_x[1];
+    const double z_new = z * cos_sin_x[0] - x * cos_sin_x[1];
     const double Px_new = in.Px * cos_sin_x[0] + in.Pz * cos_sin_x[1];
     const double Pz_new = in.Pz * cos_sin_x[0] - in.Px * cos_sin_x[1];
 

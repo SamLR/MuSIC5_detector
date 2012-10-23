@@ -1,0 +1,12 @@
+means 
+	g4bl
+		x->x_new = 0-> 895
+		z->z_new = 3901->3711
+	sim
+		x_new = 1080 (g4bl+150)
+		z_new = 4041 (g4bl+355)
+
+
+x' = (x+a) cos (36) + (z+b) sin (36)
+z' = (z+b) cos (36) - (x+a) sin (36)
+
