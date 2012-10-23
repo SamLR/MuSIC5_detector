@@ -95,21 +95,21 @@ void make_inclusive_dt_hists() {
 				// remember parents can also be daughters!
 				if (counter == 1 && first_step) {
 					// first step in scint 1 now a triggering muon
-					const int index = get_index(parent_ids_scint1, n_seen_muons, id);
+					const int index = get_index(parent_ids_scint1, n_seen_parent, id);
 					if (index == -1) {
 							// new muon, log it!
-						parent_ids_scint1[n_seen_muons] = id;
-						time_at_scint1[n_seen_muons++] = branch.tof[hit];
+						parent_ids_scint1[n_seen_parent] = id;
+						time_at_scint1[n_seen_parent++] = branch.tof[hit];
 					} 
 				}
 					// electron/positron stuff
 				if (counter == 3 && first_step && (id != 0)) {
 					// first step in scint 2
-					const int index = get_index(chid_ids, n_seen_electrons, id);
+					const int index = get_index(chid_ids, n_seen_child, id);
 					if (index == -1) {
 						// new child particle!
-						chid_ids[n_seen_electrons++] = id; // log it!
-						const int parent_index = get_index(parent_ids_scint1, n_seen_muons, branch.parentid[hit]);
+						chid_ids[n_seen_child++] = id; // log it!
+						const int parent_index = get_index(parent_ids_scint1, n_seen_parent, branch.parentid[hit]);
 						// have we seen its parent?
 						if (parent_index != -1) {
 							const double dt = branch.tof[hit] - time_at_scint1[parent_index];
