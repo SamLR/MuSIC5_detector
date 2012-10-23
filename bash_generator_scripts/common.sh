@@ -100,7 +100,9 @@ run_it()
     echo $macfile " generated" >> $runlog
     execmd="$exe $infile $outfile $macfile"
     # for an explanation of the below command see doit.sh
-    cmd="( $execmd >> $logfile ) 2>&1 | tee -a $logfile $runlog"
+    # cmd="( $execmd >> $logfile ) 2>&1 | tee -a $logfile $runlog"
+    # Log errors but sink everything else
+    cmd="$execmd > /dev/null 2> $logfile "
     echo "Running command:" >> $runlog
     echo $cmd >> $runlog
     if [[ -z $testing ]]; then
