@@ -1,3 +1,9 @@
+#include "TFile.h"
+#include "TTree.h"
+#include "TH1.h"
+#include "TH1F.h"
+
+#include <iostream>
 #include "useful_for_root/drawing.C"
 
 struct in_branch {
@@ -10,18 +16,20 @@ struct in_branch {
 	double tof[500];
 };
 
-void set_addresses(const in_branch& mom, const TTree* tree);
-TH1F* make_hist(const TString* file_root);
-const int get_index(const int* array, const int length, const int target);
+using namespace std;
+
+void set_addresses(TTree* tree, in_branch& branch);
+TH1F* make_hist(const TString file_root);
+int get_index(const int* array, const int length, const int target);
 
 void quick_dt_stopped_muons() {
-	const int n_files = 6;
+	const int n_files = 4;
 	const TString file_roots [n_files] = { "Air_5mm",
 		"Aluminium_0.5mm",
 		"Aluminium_1mm",
-		"Aluminium_5mm",
-		"Aluminium_8mm",
-		"Aluminium_12mm" };
+        "Aluminium_5mm" };
+        // "Aluminium_8mm",
+        // "Aluminium_12mm" };
 
     const TString abs_path = "~/code/MuSIC/simulation/MuSIC_5_detector_sim/MuSIC5/MuSIC5_detector/scripts/";
 	const TString prefix = abs_path+"../../output/final/final_st_Copper_0.5mm_deg_";
@@ -44,7 +52,7 @@ void quick_dt_stopped_muons() {
 		TFile* in_file = new TFile (file_name, "READ");
 		TTree* in_tree = (TTree*) in_file->Get("t");
 		in_branch branch; 
-		set_addresses(branch, in_tree);
+		set_addresses(in_tree, branch);
 		// make sure the histograms are saved in the out file
         out_file->cd();
 		hists[file] = make_hist(file_roots[file]);
@@ -53,7 +61,7 @@ void quick_dt_stopped_muons() {
 		cout << "Found "<< n_entries<<" entries";
         cout << " including "<< init_muons[file] <<" muons"<<endl;
 
-		for(unsigned int entry = 0; entry < n_entries; ++entry) {
+		for(int entry = 0; entry < n_entries; ++entry) {
 			in_tree->GetEntry(entry);
 
             const int max_index = 500;
@@ -64,19 +72,19 @@ void quick_dt_stopped_muons() {
 			int n_seen_muons = 0;  
 			int n_seen_electrons = 0;
 			
-			for(unsigned int i = 0; i < max_index; ++i) {
+			for(int i = 0; i < max_index; ++i) {
                 muon_ids_scint1[i]     = -1;
                 electron_ids[i]        = -1;
                 muon_time_at_scint1[i] = -1.0;
             }
 
-			for(unsigned int hit = 0; hit < branch.n_hits; ++hit) {
+			for(int hit = 0; hit < branch.n_hits; ++hit) {
 				// is it a muon in scint 1? 
 				//	 first step?
 				//	 add id to appropriate array
 				//	 record time
 				//	 ++ n_seen_scint1
-				// is it an electron in scint 1 or 2
+				// is it an electron in scint 2 (only used downstream scint for e)
 				//	 first step
 				//	 is its parent id in the scint1 array (and hence from target)
 				//	 plot dt
@@ -142,7 +150,7 @@ void quick_dt_stopped_muons() {
     draw_pretty_hists(n_files,hists,title2,file_roots, save_location2,1112201);//1002201);
 }
 
-void set_addresses(const in_branch& branch, const TTree* tree) {
+void set_addresses(TTree* tree, in_branch& branch) {
 	tree->SetBranchAddress("nhit",&branch.n_hits);
 	tree->SetBranchAddress("trkid",&branch.id);
 	tree->SetBranchAddress("pdgid", &branch.pdgid);
@@ -153,22 +161,14 @@ void set_addresses(const in_branch& branch, const TTree* tree) {
 }
 
 TH1F* make_hist(const TString file_root) {
-	TString name = "parent-daughter_dts_for_"+file_root;
+	TString name = "muon_dts_for_"+file_root;
 	TH1F* res = new TH1F(name,name, 20000, 1, 20001);
 	res->GetXaxis()->SetTitle("Delta time (ns)");
 	res->GetYaxis()->SetTitle("Count");
 	return res;
 }
 
-const double get_momentum(const in_branch& branch, const int hit){
-	const double px = branch.px[hit];
-	const double py = branch.py[hit];
-	const double pz = branch.pz[hit];
-
-	return sqrt(px*px + py*py + pz*pz);
-}
-
-const int get_index(const int* array, const int length, const int target) {
+int get_index(const int* array, const int length, const int target) {
 	for(int index = 0; index < length; ++index) {
 		if (array[index] == target) {
 			return index;
