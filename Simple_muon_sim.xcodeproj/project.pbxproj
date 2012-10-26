@@ -1,0 +1,215 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5DC9BD5E163AD1BF00FD09EC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC9BD5D163AD1BF00FD09EC /* main.cpp */; };
+		5DC9BD60163AD1BF00FD09EC /* Simple_muon_sim.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5DC9BD5F163AD1BF00FD09EC /* Simple_muon_sim.1 */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5DC9BD57163AD1BF00FD09EC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				5DC9BD60163AD1BF00FD09EC /* Simple_muon_sim.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		5DC9BD59163AD1BF00FD09EC /* Simple_muon_sim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Simple_muon_sim; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DC9BD5D163AD1BF00FD09EC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		5DC9BD5F163AD1BF00FD09EC /* Simple_muon_sim.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Simple_muon_sim.1; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5DC9BD56163AD1BF00FD09EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5DC9BD4E163AD1BF00FD09EC = {
+			isa = PBXGroup;
+			children = (
+				5DC9BD5C163AD1BF00FD09EC /* Simple_muon_sim */,
+				5DC9BD5A163AD1BF00FD09EC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5DC9BD5A163AD1BF00FD09EC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5DC9BD59163AD1BF00FD09EC /* Simple_muon_sim */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5DC9BD5C163AD1BF00FD09EC /* Simple_muon_sim */ = {
+			isa = PBXGroup;
+			children = (
+				5DC9BD5D163AD1BF00FD09EC /* main.cpp */,
+				5DC9BD5F163AD1BF00FD09EC /* Simple_muon_sim.1 */,
+			);
+			path = Simple_muon_sim;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5DC9BD58163AD1BF00FD09EC /* Simple_muon_sim */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5DC9BD63163AD1BF00FD09EC /* Build configuration list for PBXNativeTarget "Simple_muon_sim" */;
+			buildPhases = (
+				5DC9BD55163AD1BF00FD09EC /* Sources */,
+				5DC9BD56163AD1BF00FD09EC /* Frameworks */,
+				5DC9BD57163AD1BF00FD09EC /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Simple_muon_sim;
+			productName = Simple_muon_sim;
+			productReference = 5DC9BD59163AD1BF00FD09EC /* Simple_muon_sim */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5DC9BD50163AD1BF00FD09EC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Sam Cook";
+			};
+			buildConfigurationList = 5DC9BD53163AD1BF00FD09EC /* Build configuration list for PBXProject "Simple_muon_sim" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5DC9BD4E163AD1BF00FD09EC;
+			productRefGroup = 5DC9BD5A163AD1BF00FD09EC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5DC9BD58163AD1BF00FD09EC /* Simple_muon_sim */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5DC9BD55163AD1BF00FD09EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5DC9BD5E163AD1BF00FD09EC /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5DC9BD61163AD1BF00FD09EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		5DC9BD62163AD1BF00FD09EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		5DC9BD64163AD1BF00FD09EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		5DC9BD65163AD1BF00FD09EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5DC9BD53163AD1BF00FD09EC /* Build configuration list for PBXProject "Simple_muon_sim" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5DC9BD61163AD1BF00FD09EC /* Debug */,
+				5DC9BD62163AD1BF00FD09EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5DC9BD63163AD1BF00FD09EC /* Build configuration list for PBXNativeTarget "Simple_muon_sim" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5DC9BD64163AD1BF00FD09EC /* Debug */,
+				5DC9BD65163AD1BF00FD09EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5DC9BD50163AD1BF00FD09EC /* Project object */;
+}
