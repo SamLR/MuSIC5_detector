@@ -13,6 +13,7 @@
 		5D2F2296163EDC7C00958E16 /* libCore.so in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D2F2293163EDC7C00958E16 /* libCore.so */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5D2F2297163EDC7C00958E16 /* libRIO.so in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D2F2294163EDC7C00958E16 /* libRIO.so */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5D2F2298163EDC7C00958E16 /* libTree.so in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D2F2295163EDC7C00958E16 /* libTree.so */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5D2F229D163F055400958E16 /* DetectorConstructionMessenger.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D2F229C163F055400958E16 /* DetectorConstructionMessenger.cc */; };
 		5DC9BD94163AD77100FD09EC /* Simple_muon_sim.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5DC9BD8F163AD77100FD09EC /* Simple_muon_sim.cc */; };
 		5DD44AB9163DBB3D0097D467 /* libG4analysis.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD44A98163DBB3D0097D467 /* libG4analysis.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5DD44ABA163DBB3D0097D467 /* libG4clhep.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD44A99163DBB3D0097D467 /* libG4clhep.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -73,6 +74,8 @@
 		5D2F2293163EDC7C00958E16 /* libCore.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCore.so; path = /Applications/ROOT/root/lib/libCore.so; sourceTree = "<absolute>"; };
 		5D2F2294163EDC7C00958E16 /* libRIO.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libRIO.so; path = /Applications/ROOT/root/lib/libRIO.so; sourceTree = "<absolute>"; };
 		5D2F2295163EDC7C00958E16 /* libTree.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libTree.so; path = /Applications/ROOT/root/lib/libTree.so; sourceTree = "<absolute>"; };
+		5D2F229C163F055400958E16 /* DetectorConstructionMessenger.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DetectorConstructionMessenger.cc; sourceTree = "<group>"; };
+		5D2F229E163F056400958E16 /* DetectorConstructionMessenger.hh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DetectorConstructionMessenger.hh; sourceTree = "<group>"; };
 		5DC9BD59163AD1BF00FD09EC /* Simple_muon_sim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Simple_muon_sim; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC9BD5F163AD1BF00FD09EC /* Simple_muon_sim.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Simple_muon_sim.1; sourceTree = "<group>"; };
 		5DC9BD8B163AD77100FD09EC /* DetectorConstruction.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DetectorConstruction.hh; sourceTree = "<group>"; };
@@ -198,6 +201,7 @@
 			children = (
 				5DC9BD8B163AD77100FD09EC /* DetectorConstruction.hh */,
 				5DC9BD8D163AD77100FD09EC /* PrimaryGeneratorAction.hh */,
+				5D2F229E163F056400958E16 /* DetectorConstructionMessenger.hh */,
 				5DD44AF1163DC7210097D467 /* PhysicsList.hh */,
 				5D2F2290163EB4D500958E16 /* EventAction.hh */,
 				5D2F2291163EB4D500958E16 /* Root.hh */,
@@ -210,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				5DD44AE6163DBFCB0097D467 /* DetectorConstruction.cc */,
+				5D2F229C163F055400958E16 /* DetectorConstructionMessenger.cc */,
 				5D2F228A163EB4C600958E16 /* EventAction.cc */,
 				5D2F228B163EB4C600958E16 /* Root.cc */,
 				5D2F228C163EB4C600958E16 /* SteppingAction.cc */,
@@ -320,6 +325,7 @@
 				5D2F228D163EB4C600958E16 /* EventAction.cc in Sources */,
 				5D2F228E163EB4C600958E16 /* Root.cc in Sources */,
 				5D2F228F163EB4C600958E16 /* SteppingAction.cc in Sources */,
+				5D2F229D163F055400958E16 /* DetectorConstructionMessenger.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

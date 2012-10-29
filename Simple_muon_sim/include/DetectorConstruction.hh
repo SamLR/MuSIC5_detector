@@ -33,31 +33,44 @@
 
 class G4LogicalVolume;
 class G4VPhysicalVolume;
+class G4Material;
 
 #include "G4VUserDetectorConstruction.hh"
+#include "G4String.hh"
 
 class DetectorConstruction : public G4VUserDetectorConstruction
 {
   public:
-
     DetectorConstruction();
     ~DetectorConstruction();
 
     G4VPhysicalVolume* Construct();
+    
+    void SetTargetX(G4double thickness);
+    void SetTargetMat(G4String new_material);
+    void UpdateGeometry();
 
   private:
+    // macro-able settings
+    //
+    G4double separation;
+    G4double st_x;
+    G4Material* st_mat;
+    G4String mat_name;
     
     // Logical volumes
     //
     G4LogicalVolume* expHall_log;
     G4LogicalVolume* scint1_log;
     G4LogicalVolume* scint2_log;
-
+    G4LogicalVolume* st_log;
+    
     // Physical volumes
     //
     G4VPhysicalVolume* expHall_phys;
     G4VPhysicalVolume* scint1_phys;
     G4VPhysicalVolume* scint2_phys;
+    G4VPhysicalVolume* st_phys;
 };
 
 #endif

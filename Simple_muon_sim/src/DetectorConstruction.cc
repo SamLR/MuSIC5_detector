@@ -28,23 +28,34 @@
 // GEANT4 tag $Name: not supported by cvs2svn $
 //
 
+#include <limits>
+
 #include "DetectorConstruction.hh"
 
-//#include "G4Material.hh"
 #include "G4NistManager.hh"
 #include "G4Box.hh"
 #include "G4Tubs.hh"
 #include "G4LogicalVolume.hh"
 #include "G4ThreeVector.hh"
 #include "G4PVPlacement.hh"
+#include "G4GeometryManager.hh"
+#include "G4PhysicalVolumeStore.hh"
+#include "G4LogicalVolumeStore.hh"
+#include "G4SolidStore.hh"
+#include "G4RunManager.hh"
 #include "globals.hh"
 
 DetectorConstruction::DetectorConstruction()
-    :expHall_log(0), expHall_phys(0), scint1_log(0), scint1_phys(0),
-    scint2_log(0), scint2_phys(0)
+    :separation(10*mm), st_x(0.0*mm), st_mat(0), mat_name(""),
+    expHall_log(0),  scint1_log(0),  scint2_log(0), st_log(0),
+    expHall_phys(0), scint1_phys(0), scint2_phys(0), st_phys(0)
 {;}
 
 DetectorConstruction::~DetectorConstruction() {
+    if (st_log != NULL) {
+        delete st_log;
+        delete st_phys;
+    }
     delete scint1_phys;
     delete scint2_phys;
     delete scint1_log;
@@ -79,8 +90,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct() {
     G4double scint_z = 100*mm;
     G4Box* scint_box = new G4Box("scint_box", scint_x/2, scint_y/2, scint_z/2);
     
-    G4double separation = 10*mm;
-    G4double x_pos = scint_x/2 + separation/2;
+    G4double x_pos = scint_x/2 + separation/2 + st_x/2;
 
     scint1_log = new G4LogicalVolume(scint_box, Air, "scint1");
     G4ThreeVector scint1_pos(x_pos, 0, 0);
@@ -89,7 +99,41 @@ G4VPhysicalVolume* DetectorConstruction::Construct() {
     scint2_log = new G4LogicalVolume(scint_box, Air, "scint2");
     G4ThreeVector scint2_pos(-x_pos, 0, 0);
     scint2_phys = new G4PVPlacement(0, scint2_pos, scint2_log, "scint2_p", expHall_log, false, 0);
+    
+    if (st_x > std::numeric_limits<G4double>::epsilon() && mat_name != "") {
+        // Check if the value not is (reasonably) equal to zero
+        G4Box* st_box = new G4Box("st_box", st_x/2, scint_y/2, scint_z/2);
+        st_mat = material_manager->FindOrBuildMaterial(mat_name);
+        
+        G4ThreeVector st_pos(0.0, 0.0, 0.0);
+        st_log = new G4LogicalVolume(st_box, st_mat, "st");
+        st_phys = new G4PVPlacement(0, st_pos, st_log, "st_p", expHall_log, false, 0);
+    } else {
+        st_mat = NULL;
+        st_log = NULL;
+        st_phys = NULL;
+    }
 
     return expHall_phys;
 }
 
+void DetectorConstruction::SetTargetMat(G4String new_material) {
+    mat_name = new_material;
+}
+
+void DetectorConstruction::SetTargetX(G4double thickness) {
+    st_x = thickness;
+}
+
+void DetectorConstruction::UpdateGeometry() {
+    // clean-up previous geometry
+    G4GeometryManager::GetInstance()->OpenGeometry();
+    
+    G4PhysicalVolumeStore::GetInstance()->Clean();
+    G4LogicalVolumeStore::GetInstance()->Clean();
+    G4SolidStore::GetInstance()->Clean();
+    
+    //define new one
+    G4RunManager::GetRunManager()->DefineWorldVolume(Construct());
+    G4RunManager::GetRunManager()->GeometryHasBeenModified();
+}
