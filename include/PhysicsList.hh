@@ -12,9 +12,9 @@
 #include "G4VModularPhysicsList.hh"
 #include "globals.hh"
 
-class G4VPhysicsConstructor;
-class StepMax;
-class PhysicsListMessenger;
+//class G4VPhysicsConstructor;
+//class StepMax;
+//class PhysicsListMessenger;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
