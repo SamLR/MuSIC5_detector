@@ -40,12 +40,17 @@
 #include "globals.hh"
 
 DetectorConstruction::DetectorConstruction()
-    :experimentalHall_log(0), experimentalHall_phys(0)
+    :expHall_log(0), expHall_phys(0), scint1_log(0), scint1_phys(0),
+    scint2_log(0), scint2_phys(0)
 {;}
 
 DetectorConstruction::~DetectorConstruction() {
-    delete experimentalHall_phys;
-    delete experimentalHall_log;
+    delete scint1_phys;
+    delete scint2_phys;
+    delete scint1_log;
+    delete scint2_log;
+    delete expHall_phys;
+    delete expHall_log;
 }
 
 G4VPhysicalVolume* DetectorConstruction::Construct() {
@@ -65,13 +70,26 @@ G4VPhysicalVolume* DetectorConstruction::Construct() {
     G4double expHall_x = 1.0*m;
     G4double expHall_y = 1.0*m;
     G4double expHall_z = 1.0*m;
-    G4Box* experimentalHall_box
-    = new G4Box("expHall_box",expHall_x,expHall_y,expHall_z);
-    experimentalHall_log = new G4LogicalVolume(experimentalHall_box,
-                                               Air,"expHall_log",0,0,0);
-    experimentalHall_phys = new G4PVPlacement(0,G4ThreeVector(),
-                                              experimentalHall_log,"expHall",0,false,0);
+    G4Box* expHall_box = new G4Box("expHall_box",expHall_x,expHall_y,expHall_z);
+    expHall_log = new G4LogicalVolume(expHall_box, Air, "expHall_log");
+    expHall_phys = new G4PVPlacement(0,G4ThreeVector(), expHall_log,"expHall",0,false,0);
     
-    return experimentalHall_phys;
+    G4double scint_x = 10*mm;
+    G4double scint_y = 100*mm;
+    G4double scint_z = 100*mm;
+    G4Box* scint_box = new G4Box("scint_box", scint_x/2, scint_y/2, scint_z/2);
+    
+    G4double separation = 10*mm;
+    G4double x_pos = scint_x/2 + separation/2;
+
+    scint1_log = new G4LogicalVolume(scint_box, Air, "scint1");
+    G4ThreeVector scint1_pos(x_pos, 0, 0);
+    scint1_phys = new G4PVPlacement(0, scint1_pos, scint1_log, "scint1_p", expHall_log, false, 0);
+
+    scint2_log = new G4LogicalVolume(scint_box, Air, "scint2");
+    G4ThreeVector scint2_pos(-x_pos, 0, 0);
+    scint2_phys = new G4PVPlacement(0, scint2_pos, scint2_log, "scint2_p", expHall_log, false, 0);
+
+    return expHall_phys;
 }
 

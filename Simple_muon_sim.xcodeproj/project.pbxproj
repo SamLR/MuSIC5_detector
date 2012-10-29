@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D2F228D163EB4C600958E16 /* EventAction.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D2F228A163EB4C600958E16 /* EventAction.cc */; };
+		5D2F228E163EB4C600958E16 /* Root.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D2F228B163EB4C600958E16 /* Root.cc */; };
+		5D2F228F163EB4C600958E16 /* SteppingAction.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D2F228C163EB4C600958E16 /* SteppingAction.cc */; };
+		5D2F2296163EDC7C00958E16 /* libCore.so in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D2F2293163EDC7C00958E16 /* libCore.so */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5D2F2297163EDC7C00958E16 /* libRIO.so in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D2F2294163EDC7C00958E16 /* libRIO.so */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5D2F2298163EDC7C00958E16 /* libTree.so in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D2F2295163EDC7C00958E16 /* libTree.so */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5DC9BD94163AD77100FD09EC /* Simple_muon_sim.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5DC9BD8F163AD77100FD09EC /* Simple_muon_sim.cc */; };
 		5DD44AB9163DBB3D0097D467 /* libG4analysis.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD44A98163DBB3D0097D467 /* libG4analysis.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5DD44ABA163DBB3D0097D467 /* libG4clhep.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD44A99163DBB3D0097D467 /* libG4clhep.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -58,6 +64,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5D2F228A163EB4C600958E16 /* EventAction.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EventAction.cc; sourceTree = "<group>"; };
+		5D2F228B163EB4C600958E16 /* Root.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Root.cc; sourceTree = "<group>"; };
+		5D2F228C163EB4C600958E16 /* SteppingAction.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SteppingAction.cc; sourceTree = "<group>"; };
+		5D2F2290163EB4D500958E16 /* EventAction.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EventAction.hh; sourceTree = "<group>"; };
+		5D2F2291163EB4D500958E16 /* Root.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Root.hh; sourceTree = "<group>"; };
+		5D2F2292163EB4D500958E16 /* SteppingAction.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SteppingAction.hh; sourceTree = "<group>"; };
+		5D2F2293163EDC7C00958E16 /* libCore.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCore.so; path = /Applications/ROOT/root/lib/libCore.so; sourceTree = "<absolute>"; };
+		5D2F2294163EDC7C00958E16 /* libRIO.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libRIO.so; path = /Applications/ROOT/root/lib/libRIO.so; sourceTree = "<absolute>"; };
+		5D2F2295163EDC7C00958E16 /* libTree.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libTree.so; path = /Applications/ROOT/root/lib/libTree.so; sourceTree = "<absolute>"; };
 		5DC9BD59163AD1BF00FD09EC /* Simple_muon_sim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Simple_muon_sim; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC9BD5F163AD1BF00FD09EC /* Simple_muon_sim.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Simple_muon_sim.1; sourceTree = "<group>"; };
 		5DC9BD8B163AD77100FD09EC /* DetectorConstruction.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DetectorConstruction.hh; sourceTree = "<group>"; };
@@ -108,6 +123,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D2F2296163EDC7C00958E16 /* libCore.so in Frameworks */,
+				5D2F2297163EDC7C00958E16 /* libRIO.so in Frameworks */,
+				5D2F2298163EDC7C00958E16 /* libTree.so in Frameworks */,
 				5DD44AED163DC29C0097D467 /* libG4processes.dylib in Frameworks */,
 				5DD44AB9163DBB3D0097D467 /* libG4analysis.dylib in Frameworks */,
 				5DD44ABA163DBB3D0097D467 /* libG4clhep.dylib in Frameworks */,
@@ -181,6 +199,9 @@
 				5DC9BD8B163AD77100FD09EC /* DetectorConstruction.hh */,
 				5DC9BD8D163AD77100FD09EC /* PrimaryGeneratorAction.hh */,
 				5DD44AF1163DC7210097D467 /* PhysicsList.hh */,
+				5D2F2290163EB4D500958E16 /* EventAction.hh */,
+				5D2F2291163EB4D500958E16 /* Root.hh */,
+				5D2F2292163EB4D500958E16 /* SteppingAction.hh */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -189,6 +210,9 @@
 			isa = PBXGroup;
 			children = (
 				5DD44AE6163DBFCB0097D467 /* DetectorConstruction.cc */,
+				5D2F228A163EB4C600958E16 /* EventAction.cc */,
+				5D2F228B163EB4C600958E16 /* Root.cc */,
+				5D2F228C163EB4C600958E16 /* SteppingAction.cc */,
 				5DD44AE7163DBFCB0097D467 /* PhysicsList.cc */,
 				5DD44AE8163DBFCB0097D467 /* PrimaryGeneratorAction.cc */,
 			);
@@ -198,6 +222,9 @@
 		5DD44ADA163DBB5A0097D467 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				5D2F2293163EDC7C00958E16 /* libCore.so */,
+				5D2F2294163EDC7C00958E16 /* libRIO.so */,
+				5D2F2295163EDC7C00958E16 /* libTree.so */,
 				5DD44ADD163DBDF00097D467 /* libCLHEP-2.1.2.0.dylib */,
 				5DD44A98163DBB3D0097D467 /* libG4analysis.dylib */,
 				5DD44A99163DBB3D0097D467 /* libG4clhep.dylib */,
@@ -290,6 +317,9 @@
 				5DD44AE9163DBFCB0097D467 /* DetectorConstruction.cc in Sources */,
 				5DD44AEA163DBFCB0097D467 /* PhysicsList.cc in Sources */,
 				5DD44AEB163DBFCB0097D467 /* PrimaryGeneratorAction.cc in Sources */,
+				5D2F228D163EB4C600958E16 /* EventAction.cc in Sources */,
+				5D2F228E163EB4C600958E16 /* Root.cc in Sources */,
+				5D2F228F163EB4C600958E16 /* SteppingAction.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,12 +331,12 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -323,11 +353,15 @@
 					"/usr/local/include/Geant4/**",
 					"/usr/local/include/CLHEP/**",
 				);
-				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/Applications/ROOT/root/lib,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "/usr/local/include/Geant4/** /usr/local/include/CLHEP/** /Applications/ROOT/root/include";
 			};
 			name = Debug;
 		};
@@ -336,13 +370,13 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -352,20 +386,30 @@
 					"/usr/local/include/Geant4/**",
 					"/usr/local/include/CLHEP/**",
 				);
-				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/Applications/ROOT/root/lib,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = "";
 				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "/usr/local/include/Geant4/** /usr/local/include/CLHEP/** /Applications/ROOT/root/include";
 			};
 			name = Release;
 		};
 		5DC9BD64163AD1BF00FD09EC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = "";
-				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/ROOT/root/lib\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "/usr/local/include/Geant4/** /usr/local/include/CLHEP/**";
+				USER_HEADER_SEARCH_PATHS = "$(inherited)";
 				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
@@ -373,10 +417,16 @@
 		5DC9BD65163AD1BF00FD09EC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = "";
-				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/ROOT/root/lib\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "/usr/local/include/Geant4/** /usr/local/include/CLHEP/**";
+				USER_HEADER_SEARCH_PATHS = "$(inherited)";
 				VALID_ARCHS = x86_64;
 			};
 			name = Release;

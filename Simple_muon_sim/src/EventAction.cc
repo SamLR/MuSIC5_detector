@@ -23,41 +23,31 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-//
-// $Id: PrimaryGeneratorAction.cc,v 1.6 2006-06-29 17:47:23 gunter Exp $
-// GEANT4 tag $Name: not supported by cvs2svn $
-//
 
-#include "PrimaryGeneratorAction.hh"
+#include "EventAction.hh"
 
 #include "G4Event.hh"
-#include "G4ParticleGun.hh"
-#include "G4ParticleTable.hh"
-#include "G4ParticleDefinition.hh"
-#include "globals.hh"
+#include "G4EventManager.hh"
+#include "G4HCofThisEvent.hh"
+#include "G4VHitsCollection.hh"
+#include "G4TrajectoryContainer.hh"
+#include "G4Trajectory.hh"
+#include "G4VVisManager.hh"
+#include "G4SDManager.hh"
+#include "G4UImanager.hh"
+#include "G4ios.hh"
 
-PrimaryGeneratorAction::PrimaryGeneratorAction()
-{
-    G4int n_particle = 1;
-    G4ParticleGun* fParticleGun = new G4ParticleGun(n_particle);
-    G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-    G4String particleName("mu+");
-    G4ParticleDefinition* particle = particleTable->FindParticle(particleName);
-    fParticleGun->SetParticleDefinition(particle);
-    fParticleGun->SetParticleMomentumDirection(G4ThreeVector(1.,0.,0.));
-    fParticleGun->SetParticleEnergy(45.*MeV);
-    fParticleGun->SetParticlePosition(G4ThreeVector(-20.*cm,0.*cm,0.*cm));
-    particleGun = fParticleGun;
+#include "root.hh"
+
+EventAction::EventAction(Root* root): f_root(root) { ; }
+EventAction::~EventAction() {;}
+
+
+void EventAction::BeginOfEventAction(const G4Event* event) {
+    f_root->g_nhit=0;
 }
 
-PrimaryGeneratorAction::~PrimaryGeneratorAction()
-{
-    delete particleGun;
+void EventAction::EndOfEventAction(const G4Event* event) {
+    f_root->tree_out->Fill();
 }
-
-void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
-{
-    particleGun->GeneratePrimaryVertex(anEvent);
-}
-
 

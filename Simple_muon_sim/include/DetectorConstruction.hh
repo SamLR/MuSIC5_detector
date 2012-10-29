@@ -49,11 +49,15 @@ class DetectorConstruction : public G4VUserDetectorConstruction
     
     // Logical volumes
     //
-    G4LogicalVolume* experimentalHall_log;
+    G4LogicalVolume* expHall_log;
+    G4LogicalVolume* scint1_log;
+    G4LogicalVolume* scint2_log;
 
     // Physical volumes
     //
-    G4VPhysicalVolume* experimentalHall_phys;
+    G4VPhysicalVolume* expHall_phys;
+    G4VPhysicalVolume* scint1_phys;
+    G4VPhysicalVolume* scint2_phys;
 };
 
 #endif

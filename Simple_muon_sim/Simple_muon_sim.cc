@@ -34,10 +34,14 @@
 
 #include "G4RunManager.hh"
 #include "G4UImanager.hh"
+#include "TString.h"
 
 #include "DetectorConstruction.hh"
 #include "PhysicsList.hh"
 #include "PrimaryGeneratorAction.hh"
+#include "Root.hh"
+#include "SteppingAction.hh"
+#include "EventAction.hh"
 
 int main()
 {
@@ -58,6 +62,16 @@ int main()
     //
     PrimaryGeneratorAction* gen_action = new PrimaryGeneratorAction;
     runManager->SetUserAction(gen_action);
+    
+    
+    // Make the root object and set the stepping & event actions
+    TString root_file_name = TString("out.root");
+    Root* root = new Root(root_file_name);
+    EventAction* event = new EventAction(root);
+    runManager->SetUserAction(event);
+    
+    SteppingAction* step = new SteppingAction(root);
+    runManager->SetUserAction(step);
     
     // Initialize G4 kernel
     //
@@ -81,6 +95,7 @@ int main()
     //                 owned and deleted by the run manager, so they should not
     //                 be deleted in the main() program !
     //
+    delete root;
     delete runManager;
     
     return 0;
