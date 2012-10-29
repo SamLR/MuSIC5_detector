@@ -1,0 +1,5 @@
+/Simple_muon_sim/targetX 5.00 mm
+/Simple_muon_sim/targetMat G4_AIR
+/Simple_muon_sim/update
+
+/run/beamOn 100

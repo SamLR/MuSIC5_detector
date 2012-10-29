@@ -34,6 +34,7 @@
 class G4LogicalVolume;
 class G4VPhysicalVolume;
 class G4Material;
+class DetectorConstructionMessenger;
 
 #include "G4VUserDetectorConstruction.hh"
 #include "G4String.hh"
@@ -57,6 +58,7 @@ class DetectorConstruction : public G4VUserDetectorConstruction
     G4double st_x;
     G4Material* st_mat;
     G4String mat_name;
+    DetectorConstructionMessenger* messenger;
     
     // Logical volumes
     //

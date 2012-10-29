@@ -76,6 +76,7 @@
 		5D2F2295163EDC7C00958E16 /* libTree.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libTree.so; path = /Applications/ROOT/root/lib/libTree.so; sourceTree = "<absolute>"; };
 		5D2F229C163F055400958E16 /* DetectorConstructionMessenger.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DetectorConstructionMessenger.cc; sourceTree = "<group>"; };
 		5D2F229E163F056400958E16 /* DetectorConstructionMessenger.hh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DetectorConstructionMessenger.hh; sourceTree = "<group>"; };
+		5D2F22A3163F0F4600958E16 /* run.mac */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = run.mac; sourceTree = "<group>"; };
 		5DC9BD59163AD1BF00FD09EC /* Simple_muon_sim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Simple_muon_sim; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC9BD5F163AD1BF00FD09EC /* Simple_muon_sim.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Simple_muon_sim.1; sourceTree = "<group>"; };
 		5DC9BD8B163AD77100FD09EC /* DetectorConstruction.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DetectorConstruction.hh; sourceTree = "<group>"; };
@@ -190,6 +191,7 @@
 				5DC9BD8A163AD77100FD09EC /* include */,
 				5DC9BD8E163AD77100FD09EC /* README */,
 				5DC9BD8F163AD77100FD09EC /* Simple_muon_sim.cc */,
+				5D2F22A3163F0F4600958E16 /* run.mac */,
 				5DC9BD90163AD77100FD09EC /* src */,
 				5DC9BD5F163AD1BF00FD09EC /* Simple_muon_sim.1 */,
 			);

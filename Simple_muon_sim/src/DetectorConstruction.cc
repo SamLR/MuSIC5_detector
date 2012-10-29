@@ -31,6 +31,7 @@
 #include <limits>
 
 #include "DetectorConstruction.hh"
+#include "DetectorConstructionMessenger.hh"
 
 #include "G4NistManager.hh"
 #include "G4Box.hh"
@@ -46,10 +47,12 @@
 #include "globals.hh"
 
 DetectorConstruction::DetectorConstruction()
-    :separation(10*mm), st_x(0.0*mm), st_mat(0), mat_name(""),
+    :separation(10*mm), st_x(0.0*mm), st_mat(0), mat_name(""), messenger(0),
     expHall_log(0),  scint1_log(0),  scint2_log(0), st_log(0),
     expHall_phys(0), scint1_phys(0), scint2_phys(0), st_phys(0)
-{;}
+{
+    messenger = new DetectorConstructionMessenger(this);
+}
 
 DetectorConstruction::~DetectorConstruction() {
     if (st_log != NULL) {
@@ -104,7 +107,10 @@ G4VPhysicalVolume* DetectorConstruction::Construct() {
         // Check if the value not is (reasonably) equal to zero
         G4Box* st_box = new G4Box("st_box", st_x/2, scint_y/2, scint_z/2);
         st_mat = material_manager->FindOrBuildMaterial(mat_name);
-        
+        if (!st_mat) {
+            G4cerr << "Material: "<<mat_name<<" not found. Check for it's existance in the Geant4 NIST materials database"<<G4endl;
+            exit(1);
+        }
         G4ThreeVector st_pos(0.0, 0.0, 0.0);
         st_log = new G4LogicalVolume(st_box, st_mat, "st");
         st_phys = new G4PVPlacement(0, st_pos, st_log, "st_p", expHall_log, false, 0);

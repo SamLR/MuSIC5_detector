@@ -43,8 +43,28 @@
 #include "SteppingAction.hh"
 #include "EventAction.hh"
 
-int main()
-{
+#ifdef G4VIS_USE
+#include "G4VisExecutive.hh"
+#endif
+
+#ifdef G4UI_USE
+#include "G4UIExecutive.hh"
+#endif
+
+
+int main(int argc,char** argv) {
+    
+    if (argc<3) {
+        G4cout << "usage: " << argv[0] << " <out.root> [vis.mac]"<<G4endl;
+        if (argc == 2){
+            G4cout << "Received argument: "<< argv[1] << G4endl;
+        }
+        exit(1);
+    }
+    G4bool batch_mode = (argc==3);
+    G4String out_root_name = G4String(argv[1]);
+    G4String macro_name = batch_mode ? G4String(argv[2]) : G4String("");
+    
     // Construct the default run manager
     //
     G4RunManager* runManager = new G4RunManager;
@@ -65,8 +85,7 @@ int main()
     
     
     // Make the root object and set the stepping & event actions
-    TString root_file_name = TString("out.root");
-    Root* root = new Root(root_file_name);
+    Root* root = new Root(out_root_name);
     EventAction* event = new EventAction(root);
     runManager->SetUserAction(event);
     
@@ -77,24 +96,39 @@ int main()
     //
     runManager->Initialize();
     
-    // Get the pointer to the UI manager and set verbosities
-    //
-    G4UImanager* UI = G4UImanager::GetUIpointer();
-    UI->ApplyCommand("/run/verbose 1");
-    UI->ApplyCommand("/event/verbose 1");
-    UI->ApplyCommand("/tracking/verbose 1");
+#ifdef G4VIS_USE
+    G4VisManager* visManager = new G4VisExecutive;
+    visManager->Initialize();
+#endif
+
+    //get the pointer to the User Interface manager
+    G4UImanager* UImanager = G4UImanager::GetUIpointer();
     
-    // Start a run
-    //
-    G4int numberOfEvent = 3;
-    runManager->BeamOn(numberOfEvent);
-    
+    if (batch_mode) {
+        G4String command  = "/control/execute ";
+        G4String filename = macro_name;
+        UImanager->ApplyCommand(command+filename);
+    } else {        // interactive mode : define UI session
+#ifdef G4UI_USE
+        G4UIExecutive * ui = new G4UIExecutive(argc,argv);
+    #ifdef G4VIS_USE
+        UImanager->ApplyCommand("/control/execute vis.mac");
+    #endif
+        ui->SessionStart();
+        delete ui;
+#endif
+    }
+
     // Job termination
     //
     // Free the store: user actions, physics_list and detector_description are
     //                 owned and deleted by the run manager, so they should not
     //                 be deleted in the main() program !
     //
+    
+#ifdef G4VIS_USE
+    delete visManager;
+#endif
     delete root;
     delete runManager;
     

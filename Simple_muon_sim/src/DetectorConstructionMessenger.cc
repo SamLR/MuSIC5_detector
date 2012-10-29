@@ -33,21 +33,21 @@ DetectorConstructionMessenger::~DetectorConstructionMessenger() {
 void DetectorConstructionMessenger::init()
 {
     // set up control the structure
-    UIdirectory_m = new G4UIdirectory("/MuSIC_Detector/");
+    UIdirectory_m = new G4UIdirectory("/Simple_muon_sim/");
     UIdirectory_m->SetGuidance("Specifies options for the Detector");
     
     // target thickness & material
-    targetThickness_m = new G4UIcmdWithADoubleAndUnit("/MuSIC_Detector/targetZ", this);
+    targetThickness_m = new G4UIcmdWithADoubleAndUnit("/Simple_muon_sim/targetX", this);
     targetThickness_m->SetGuidance("Thickness of the target");
-    targetThickness_m->SetParameterName("targetZ", true);
-    targetThickness_m->SetDefaultValue(10.0);
+    targetThickness_m->SetParameterName("targetX", true);
+    targetThickness_m->SetDefaultValue(0.0);
     targetThickness_m->SetDefaultUnit("mm");
     
-    targetMaterial_m = new G4UIcmdWithAString("/MuSIC_Detector/targetMat", this);
+    targetMaterial_m = new G4UIcmdWithAString("/Simple_muon_sim/targetMat", this);
     targetMaterial_m->SetGuidance("Set the material to make the target from");
-    targetMaterial_m->SetDefaultValue("Cu");
+    targetMaterial_m->SetDefaultValue("Air");
     
-    updateCmd_m = new G4UIcommand("/MuSIC_Detector/update",this);
+    updateCmd_m = new G4UIcommand("/Simple_muon_sim/update",this);
     updateCmd_m->SetGuidance("Update the detector geometry with changed values.");
     updateCmd_m->SetGuidance("Must be run before beamOn if detector has been changed.");
 }
