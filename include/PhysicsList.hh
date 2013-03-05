@@ -26,6 +26,7 @@ public:
     
 private:
     void init();
+    void SetCuts();
 };
 
 

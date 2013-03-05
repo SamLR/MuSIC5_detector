@@ -1,4 +1,8 @@
+#include <iostream>
 #include "useful_for_root/drawing.C"
+#include "TROOT.h"
+#include "TFile.h"
+#include "TTree.h"
 
 struct in_branch {
     int n_hits;
@@ -12,26 +16,29 @@ struct in_branch {
     double pz[500];
 };
 
-void set_addresses(const in_branch& mom, const TTree* tree);
-TH1F* make_hist(const TString* file_root);
-const double get_momentum(const in_branch& branch, const int hit);
-const int get_index(const int* array, const int length, const int target);
+void set_addresses(in_branch& mom, TTree* tree);
+TH1F* make_hist(const TString file_root);
+double get_momentum(const in_branch& branch, const int hit);
+int get_index(const int* array, const int length, const int target);
 
 void quick_stopped_muon_mom() {
-    const int n_files = 6;
+    const int n_files = 4;
     const TString file_roots [n_files] = { "Air_5mm",
         "Aluminium_0.5mm",
         "Aluminium_1mm",
-        "Aluminium_5mm",
-        "Aluminium_8mm",
-        "Aluminium_12mm" };
-
-    const TString prefix = "../../output/final/final_st_Copper_0.5mm_deg_";
+        "Aluminium_5mm"};
+    const TString prefix = "../../output/final_900M/final_st_Copper_0.5mm_deg_";
     const TString suffix = ".root";
 
     TH1F* hists [n_files];
     int integrals [n_files];
     int counts [n_files];
+    
+    
+    for(int file = 0; file < n_files; ++file) {
+        counts[file] = 0;
+        integrals[file] = 0;
+    }
     for(unsigned int file = 0; file < n_files; ++file) {
         TString file_name = prefix + file_roots[file] + suffix;
         cout << "Opening: "<<file_name<<endl;
@@ -144,10 +151,10 @@ void quick_stopped_muon_mom() {
     TString title = "Stopped muon momentum";
     TString save_location = "images/stopped_muon_momentum.svg";
     // 1002201 is the magic number for stats
-    draw_pretty_hists(n_files,hists,title,file_roots, save_location,1112201);//1002201);
+    draw_pretty_hists(n_files,hists,title,file_roots, save_location,1112201);
 }
 
-void set_addresses(const in_branch& branch, const TTree* tree) {
+void set_addresses(in_branch& branch, TTree* tree) {
     tree->SetBranchAddress("nhit",&branch.n_hits);
     tree->SetBranchAddress("trkid",&branch.id);
     tree->SetBranchAddress("pdgid", &branch.pdgid);
@@ -160,14 +167,14 @@ void set_addresses(const in_branch& branch, const TTree* tree) {
 }
 
 TH1F* make_hist(const TString file_root) {
-    TString name = "Muon_momentum_with_"+file_root;
+    TString name = TString("Muon_momentum_with_")+file_root;
     TH1F* res = new TH1F(name,name, 50, 0, 200);
     res->GetXaxis()->SetTitle("Momentum (MeV/c)");
     res->GetYaxis()->SetTitle("Count");
     return res;
 }
 
-const double get_momentum(const in_branch& branch, const int hit){
+double get_momentum(const in_branch& branch, const int hit){
     const double px = branch.px[hit];
     const double py = branch.py[hit];
     const double pz = branch.pz[hit];
@@ -175,7 +182,7 @@ const double get_momentum(const in_branch& branch, const int hit){
     return sqrt(px*px + py*py + pz*pz);
 }
 
-const int get_index(const int* array, const int length, const int target) {
+int get_index(const int* array, const int length, const int target) {
     for(int index = 0; index < length; ++index) {
         if (array[index] == target) {
             return index;

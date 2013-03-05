@@ -127,7 +127,7 @@ void draw_pretty_hists(const int& n_hists, TH1F** hist_array,
 
     // hack to set the title of the histogram (yet have a different entry for 
     // the first hist in the legend, if desired)
-    hist_array[first_hist]->SetTitle(title);       
+    hist_array[first_hist]->SetTitle(title);
     
     // make sure the y extent is enough to show everything
     leg->SetFillColor(0); // don't want grey backgrounds

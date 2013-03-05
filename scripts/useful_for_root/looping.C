@@ -36,9 +36,10 @@ void loop_entries(
 
     if(verbose) cout << "Tree loaded. "<< n_entries << " entries found." << endl;
 
-    for(unsigned int entry = 0; entry < n_entries; ++entry) { 
+    const int tenth = n_entries/10;
+    for(int entry = 0; entry < n_entries; ++entry) { 
         // loop over each entry and see if it passes the cuts
-        if(entry%1000==0) cout << "Entry: " << entry<< endl;
+        if(entry%tenth==0) cout << "Entry: " << entry<< endl;
         in_tree->GetEntry(entry);
         for(unsigned int func = 0; func < n_funcs; ++func) {
                 // Dark voodoo! loop over the array of function pointers

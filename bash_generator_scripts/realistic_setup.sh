@@ -22,6 +22,20 @@ targets=( "Copper 0.5" )
 degThickness=( "Air 5" "Aluminium 0.5" "Aluminium 1" "Aluminium 5" "Aluminium 8" "Aluminium 12" ) 
 
 # ===========================================================================#
+# Set environment variables
+# ===========================================================================#
+
+export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:/usr/local/lib"
+export G4ABLADATA="/usr/local/share/Geant4-9.5.0/data/G4ABLA3.0"
+export G4LEVELGAMMADATA="/usr/local/share/Geant4-9.5.0/data/PhotonEvaporation2.2"
+export G4LEDATA="/usr/local/share/Geant4-9.5.0/data/G4EMLOW6.23"
+export G4NEUTRONHPDATA="/usr/local/share/Geant4-9.5.0/data/G4NDL4.0"
+export G4NEUTRONXSDATA="/usr/local/share/Geant4-9.5.0/data/G4NEUTRONXS1.1"
+export G4PIIDATA="/usr/local/share/Geant4-9.5.0/data/G4PII1.3"
+export G4RADIOACTIVEDATA="/usr/local/share/Geant4-9.5.0/data/RadioactiveDecay3.4"
+export G4REALSURFACEDATA="/usr/local/share/Geant4-9.5.0/data/RealSurface1.0"
+
+# ===========================================================================#
 # Actually do things!
 # ===========================================================================#
 

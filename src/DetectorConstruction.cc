@@ -184,10 +184,11 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     // position of scint1 WRT coil8
     double coil8_to_scint1 = 440*mm; 
 
-    double sci_hx = (450.0/2.0)*mm; // dimensions of both scintillators are the same in xy plane
-    double sci_hy = (450.0/2.0)*mm;
+    double sci_hx = (380.0/2.0)*mm;  // both scintillators are the same width
+    double sci1_hy = (240.0/2.0)*mm; // upstream counter 8x30mm strips
+    double sci2_hy = (250.0/2.0)*mm; // Downstream counter is 5x50mm strips
     G4ThreeVector sci1_pos = get_global_pos(coil8_to_scint1);
-    G4Box* solid_sci1 = new G4Box("sci1", sci_hx, sci_hy, f_scint1z/2.0);
+    G4Box* solid_sci1 = new G4Box("sci1", sci_hx, sci1_hy, f_scint1z/2.0);
     f_logic_sci1 = new G4LogicalVolume(solid_sci1,f_scint1Mat,"sci1",0,0,0);
     f_physi_sci1 = new G4PVPlacement(G4Transform3D(rot_36,sci1_pos),f_logic_sci1,"sci1", f_logic_world,false,0);
 
@@ -204,7 +205,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
    // dimensions are the same as scint 1 (other than thickness)
     double scint2_posz = target_posZ + 3 + (f_scint2z/2.0);
     G4ThreeVector sci2_pos = get_global_pos(scint2_posz);
-    G4Box* solid_sci2 = new G4Box("sci2", sci_hx, sci_hy, f_scint2z/2.0);
+    G4Box* solid_sci2 = new G4Box("sci2", sci_hx, sci2_hy, f_scint2z/2.0);
     f_logic_sci2 = new G4LogicalVolume(solid_sci2,f_scint2Mat,"sci2",0,0,0);
     
     f_physi_sci2 = new G4PVPlacement(G4Transform3D(rot_36,sci2_pos),f_logic_sci2,"sci2", f_logic_world,false,0);

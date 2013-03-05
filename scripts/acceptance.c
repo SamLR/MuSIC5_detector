@@ -2,9 +2,9 @@
 #include "TTree.h"
 #include "TH1.h"
 #include "TH1F.h"
+#include "TMath.h"
 
 #include <iostream>
-#include "useful_for_root/drawing.C"
 
 struct in_branch {
 	int n_hits;
@@ -19,43 +19,40 @@ struct in_branch {
 using namespace std;
 
 void set_addresses(TTree* tree, in_branch& branch);
-TH1F* make_hist(const TString file_root);
 int get_index(const int* array, const int length, const int target);
 
-void quick_dt_stopped_muons() {
-	const int n_files = 4;
-	const TString file_roots [n_files] = { "Air_5mm",
-		"Aluminium_0.5mm",
-		"Aluminium_1mm",
+void acceptance() {
+    const int n_files = 4;
+    // const int n_files = 1;
+    const TString file_roots [n_files] = { "Air_5mm",
+        "Aluminium_0.5mm",
+        "Aluminium_1mm",
         "Aluminium_5mm" };
-        // "Aluminium_8mm",
-        // "Aluminium_12mm" };
 
-    const TString abs_path = "~/code/MuSIC/simulation/MuSIC_5_detector_sim/MuSIC5/MuSIC5_detector/scripts/";
-	const TString prefix = abs_path+"../../output/final/final_st_Copper_0.5mm_deg_";
+    // const TString prefix = "../../output/final_900M/final_st_Copper_0.5mm_deg_";
+	const TString prefix = "../../output/final/final_st_Copper_0.5mm_deg_";
 	const TString suffix = ".root";
     const TString out_file_root = "dt_hists";
-    
-    // create the out file in the local dir
-    const TString out_file_name = abs_path+out_file_root + suffix;
-    TFile* out_file = new TFile(out_file_name, "RECREATE");
-    
-	TH1F* hists [n_files];
 	
-    int integrals[n_files];  // integral of stopped muon hist (i.e. no under/overflow)
-    int counts[n_files];     // number of entries in the stopped muon hist
-    int init_muons[n_files]; // the number of input muons from g4bl.
+    unsigned int counts[n_files];     // number of muons making the cuts
+    unsigned int counts_no_cut[n_files];     // number of muons making the cuts
+    unsigned int init_muons[n_files]; // the number of input muons from g4bl.
+    
+    for(int file = 0; file < n_files; ++file) {
+        counts_no_cut[file] = 0;
+        counts[file] = 0;
+        init_muons[file] = 0;
+    }
 
 	for(unsigned int file = 0; file < n_files; ++file) {
+
 		TString file_name = prefix + file_roots[file] + suffix;
 		cout << "Opening: "<<file_name<<endl;
 		TFile* in_file = new TFile (file_name, "READ");
 		TTree* in_tree = (TTree*) in_file->Get("t");
 		in_branch branch; 
 		set_addresses(in_tree, branch);
-		// make sure the histograms are saved in the out file
-        out_file->cd();
-		hists[file] = make_hist(file_roots[file]);
+		
 		const int n_entries = in_tree->GetEntries();
         init_muons[file] = in_tree->GetEntries("abs(in_PDGid)==13");
 		cout << "Found "<< n_entries<<" entries";
@@ -87,7 +84,7 @@ void quick_dt_stopped_muons() {
 				// is it an electron in scint 2 (only used downstream scint for e)
 				//	 first step
 				//	 is its parent id in the scint1 array (and hence from target)
-				//	 plot dt
+				//	 dt >50 ns? 
 				const int pid = branch.pdgid[hit];
 				const int counter = branch.counter[hit];
 				const int id = branch.id[hit];
@@ -105,7 +102,7 @@ void quick_dt_stopped_muons() {
 					}
 				} else if (abs(pid) == 11) {
 					// electron/positron stuff
-					if (counter == 3 &&  first_step) {// in realistic set up we only use scint 2
+					if (counter == 3 &&  first_step) {
 						// first step in scint 2	
 						const int e_index = get_index(electron_ids, n_seen_electrons, id);
 						if (e_index == -1) {
@@ -115,39 +112,33 @@ void quick_dt_stopped_muons() {
 							// have we seen its parent?
 							if (parent_index != -1) {
 								const double dt = branch.tof[hit] - muon_time_at_scint1[parent_index];
-								hists[file]->Fill(dt);
+                                ++counts_no_cut[file];
+                                if (dt > 50){
+                                    ++counts[file];
+                                }
 							}
 						}
 					}
 				}
 			}
 		}
-	    // 'GetEntries()' includes over & under flow bins, integral only includes the bounds
-        integrals[file] = hists[file]->Integral();
-        counts[file] = hists[file]->GetEntries();
-		cout << "File done, "<< integrals[file] << " stopped muons." << endl;	
 	}
-    
-    out_file->Write();
-    
-    
-    // TString title = "Muon decay times";
-    // TString save_location = "images/muon_decay_times.svg";
-    // // 1002201 is the magic number for stats
-    // draw_pretty_hists(n_files,hists,title,file_roots, save_location,1002201);
-	
-    printf("%16s %5s %5s %5s %5s\n","Filename","int", "count", "mu in","eff");
+    printf("%16s %5s %5s %5s %5s %5s %5s %7s\n","Filename","int", "er", "mu in", "er", "acc %%", "er", "pre-cut");
     for(unsigned int file = 0; file < n_files; ++file) {
-		hists[file]->Rebin(100);
-        const float eff = 100.0*integrals[file]/((float)init_muons[file]);
-        printf ("%16s %5i %5i %5i %5.1f%%\n",file_roots[file].Data(), 
-                integrals[file], counts[file], init_muons[file], eff);
+        const float count    = static_cast<float>(counts[file]);
+        const float count_er = sqrt(count);
+        const float count_frac_er = count_er/count;
+        
+        const float init     = static_cast<float>(init_muons[file]);
+        const float init_er  = sqrt(init);
+        const float init_frac_er = init_er/init;
+        
+        const float acc = 100.0*count/init;
+        const float acc_er = acc * sqrt(count_frac_er*count_frac_er + init_frac_er*init_frac_er);
+        
+        printf ("%16s %5i %5.1f %5i %5.1f %5.1f %5.1f %7i\n",file_roots[file].Data(), 
+                counts[file], count_er, init_muons[file], init_er, acc, acc_er, counts_no_cut[file]);
 	}
-	
-    // TString title2 = "Muon decay times (100ns bins)";
-    // TString save_location2 = "images/muon_decay_times_rebin.svg";
-    // // 1002201 is the magic number for stats
-    // draw_pretty_hists(n_files,hists,title2,file_roots, save_location2,1112201);//1002201);
 }
 
 void set_addresses(TTree* tree, in_branch& branch) {
@@ -158,14 +149,6 @@ void set_addresses(TTree* tree, in_branch& branch) {
 	tree->SetBranchAddress("parentid", &branch.parentid);
 	tree->SetBranchAddress("first_step", &branch.first_step);
 	tree->SetBranchAddress("tof", &branch.tof);
-}
-
-TH1F* make_hist(const TString file_root) {
-	TString name = "muon_dts_for_"+file_root;
-	TH1F* res = new TH1F(name,name, 20000, 1, 20001);
-	res->GetXaxis()->SetTitle("Delta time (ns)");
-	res->GetYaxis()->SetTitle("Count");
-	return res;
 }
 
 int get_index(const int* array, const int length, const int target) {

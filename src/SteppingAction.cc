@@ -97,23 +97,24 @@ void SteppingAction::UserSteppingAction(const G4Step * aStep)
     if (point2==NULL || point1==NULL) return;
     
     const G4VPhysicalVolume* nextvol = point2->GetTouchableHandle()->GetVolume();
+    const G4VPhysicalVolume* thisvol = point1->GetTouchableHandle()->GetVolume();
     
     if (!nextvol) return; // if there is no next volume we're exiting the world
     
     bool last_step  = (point2->GetStepStatus() == fGeomBoundary);
     bool first_step = (point1->GetStepStatus() == fGeomBoundary);
-    const G4String& volname = point1->GetTouchableHandle()->GetVolume()->GetName();
+    const G4String& volname = thisvol->GetName();
     
-    bool entering_scint1 = last_step &&
-        (point2->GetTouchableHandle()->GetVolume()->GetName() == "degrader") &&
-        (volname == "world");
+    bool entering_degrader = last_step && 
+                            (nextvol->GetName() == "degrader") && 
+                            (volname == "world");
     
     int acounter = 0; // main step
     if     ( volname == "sci1" )     { acounter = 1; } 
     else if( volname == "target" )   { acounter = 2; } 
     else if( volname == "sci2" )     { acounter = 3; }
     else if( volname == "degrader" ) { acounter = 4; }
-    else if( entering_scint1 )       { acounter = 5; }
+    else if( entering_degrader )     { acounter = 5; }
     else return; // not in a volume
     // record stuff specially if we're about to enter the degrader or st
     

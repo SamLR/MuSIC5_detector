@@ -35,3 +35,7 @@ void PhysicsList::init(){
     this->RegisterPhysics(new G4QStoppingPhysics());
     this->RegisterPhysics(new G4IonPhysics());
 }
+
+void PhysicsList::SetCuts(){
+    ;
+}

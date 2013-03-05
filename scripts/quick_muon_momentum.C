@@ -1,4 +1,17 @@
+#include <iostream>
+
+#include "TROOT.h"
+#include "TFile.h"
+#include "TTree.h"
+#include "TBranch.h"
+#include "TString.h"
+#include "TH1F.h"
+#include "TCanvas.h"
+
+
 #include "useful_for_root/drawing.C"
+
+using namespace std; // because I'm a terrible person
 
 struct in_branch {
 	int n_hits;
@@ -10,9 +23,9 @@ struct in_branch {
 	double pz[500];
 };
 
-void set_addresses(const in_branch& mom, const TTree* tree);
-TH1F* make_hist(const TString* file_root);
-const double get_momentum(const in_branch& branch, const int hit);
+void set_addresses(TTree* tree, in_branch& mom);
+TH1F* make_hist(const TString file_root);
+double get_momentum(const in_branch& branch, const int hit);
 TString get_counter_name(const int counter);
 
 void quick_muon_momentum() {
@@ -22,18 +35,18 @@ void quick_muon_momentum() {
 	const int counter = 5;
 	const TString counter_name = get_counter_name(counter);
 	cout << "Generating muon momentums at counter: "<< counter_name << " id: "<< counter << endl;
-	const int n_files = 6;
+    // const int n_files = 6;
+	const int n_files = 1;
 	const TString file_roots [n_files] = {
-		"Air_5mm",
-		"Aluminium_0.5mm",
-		"Aluminium_1mm",
-		"Aluminium_5mm",
-		"Aluminium_8mm",
-		"Aluminium_12mm"
+		"Air_5mm"//,
+        // "Aluminium_0.5mm",
+        // "Aluminium_1mm",
+        // "Aluminium_5mm",
+        // "Aluminium_8mm",
+        // "Aluminium_12mm"
 	};
 	const TString prefix = "../../output/final/final_st_Copper_0.5mm_deg_";
 	const TString suffix = ".root";
-	
 	TH1F* hists [n_files];
 	
 	for(unsigned int file = 0; file < n_files; ++file) {
@@ -42,7 +55,7 @@ void quick_muon_momentum() {
 		TFile* in_file = new TFile (file_name, "READ");
 		TTree* in_tree = (TTree*) in_file->Get("t");
 		in_branch branch; 
-		set_addresses(branch, in_tree);
+		set_addresses(in_tree, branch);
 		hists[file] = make_hist(file_roots[file]);
 		const int n_entries = in_tree->GetEntries();
 		cout << "Found "<< n_entries<<" entries"<<endl;
@@ -68,11 +81,11 @@ void quick_muon_momentum() {
 		hists[hist]->Draw();
 	}
 	TString title = "Muon momentum for different degraders at the "+counter_name;
-	TString save_location = "images/muon_momentum_at_"+counter_name+".svg";
+    TString save_location = "images/muon_momentum_at_"+counter_name+".svg";
 	draw_pretty_hists(n_files,hists,title,file_roots, save_location,1002201);
 }
 
-void set_addresses(const in_branch& branch, const TTree* tree) {
+void set_addresses(TTree* tree, in_branch& branch) {
 	tree->SetBranchAddress("nhit",&branch.n_hits);
 	tree->SetBranchAddress("pdgid", &branch.pdgid);
     tree->SetBranchAddress("counter", &branch.counter);
@@ -90,7 +103,7 @@ TH1F* make_hist(const TString file_root) {
 	return res;
 }
 
-const double get_momentum(const in_branch& branch, const int hit){
+double get_momentum(const in_branch& branch, const int hit){
 	const double px = branch.px[hit];
 	const double py = branch.py[hit];
 	const double pz = branch.pz[hit];
