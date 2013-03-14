@@ -123,11 +123,181 @@ void DetectorConstruction::DefineMaterials()
 
     Polyethylene = new G4Material("Polyethylene",density= 0.94*g/cm3, ncomponents=2);
     Polyethylene -> AddElement(H,0.14);
-    Polyethylene -> AddElement(C,0.86);
 
+    Polyethylene -> AddElement(C,0.86);
     Polystyrene = new G4Material("Polystyrene", density= 1.03*g/cm3, 2);
     Polystyrene->AddElement(C, 8);
     Polystyrene->AddElement(H, 8);
+
+// EJ-212 Scintillator material
+    // Values from http://www.eljentechnology.com/index.php/joomla-overview/what-is-new-in-1-5/64-ej-212
+    // and from http://www.eljentechnology.com/images/stories/Technical_Information/Physical%20Constant%20of%20Plastic%20Scintillators.pdf
+    
+    // Define the material and its composition
+    EJ212 = new G4Material("EJ-212", density=1.023*g/cm3, ncomponents=2);
+    EJ212->AddElement(H, 0.5243407708);
+    EJ212->AddElement(C, 0.4756592292);
+    
+    
+    // Add the material's optical properties
+    const G4int n_ej212_entries = 26;
+    
+    // All the properties are stored as key/value pairs. The keys are photon
+    // energies (not wavelengths!) the values are the property for that energy
+    G4double ej212_photon_energies[n_ej212_entries] =
+       {2.38*eV, 2.41*eV, 2.43*eV, 2.45*eV, 2.48*eV, 2.50*eV, 2.53*eV, 2.55*eV,
+        2.58*eV, 2.61*eV, 2.64*eV, 2.66*eV, 2.69*eV, 2.72*eV, 2.75*eV, 2.78*eV,
+        2.82*eV, 2.85*eV, 2.88*eV, 2.92*eV, 2.93*eV, 2.95*eV, 2.99*eV, 3.02*eV,
+        3.06*eV, 3.10*eV};
+    
+    // For scintillation you define the relative amplitudes of each photon
+    // energy in the emission spectrum. This is normalised to 1.
+    G4double ej212_emission_spectrum [n_ej212_entries] =
+       {0.005, 0.010, 0.020, 0.050, 0.095, 0.100, 0.100, 0.080, 0.070, 0.070,
+        0.067, 0.055, 0.045, 0.036, 0.031, 0.027, 0.023, 0.020, 0.018, 0.016,
+        0.014, 0.012, 0.010, 0.009, 0.008, 0.007};
+    
+    // Refractive index; this is static for most photon energies.
+    G4double ej212_refractive_index [n_ej212_entries] =
+        {1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58,
+         1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58,
+         1.58, 1.58, 1.58, 1.58};
+    
+    // Absorption/Attenuation length (distance for signal to drop to 1/e intial)
+    G4double ej212_absorption_length [n_ej212_entries] =
+        {250*cm, 250*cm, 250*cm, 250*cm, 250*cm, 250*cm, 250*cm, 250*cm, 250*cm,
+         250*cm, 250*cm, 250*cm, 250*cm, 250*cm, 250*cm, 250*cm, 250*cm, 250*cm,
+         250*cm, 250*cm, 250*cm, 250*cm, 250*cm, 250*cm, 250*cm, 250*cm};
+    
+    G4MaterialPropertiesTable* ej212_MPT = new G4MaterialPropertiesTable();
+    ej212_MPT->AddProperty("RINDEX",                // The property name
+                           ej212_photon_energies,   // photon energies (keys)
+                           ej212_refractive_index,  // value for that photon energy
+                           n_ej212_entries);        // number of key/value pairs
+    
+    // Add the scintillation emission spectrum (normalised to 1)
+    ej212_MPT->AddProperty("FASTCOMPONENT",
+                           ej212_photon_energies,
+                           ej212_emission_spectrum,
+                           n_ej212_entries);
+
+    // Specify the absorption lengths
+    ej212_MPT->AddProperty("ABSLENGTH",
+                           ej212_photon_energies,
+                           ej212_absorption_length,
+                           n_ej212_entries);
+
+    // How many photons / MeV / Step, this is assumed to be linear
+    ej212_MPT->AddConstProperty("SCINTILLATIONYIELD", 10000.0/MeV);
+    // Scale the variance of the number of photons / MeV / Step (e.g. due to
+    // doping of the material and/or Fano factor)
+    ej212_MPT->AddConstProperty("RESOLUTIONSCALE", 1.0);
+    // If EJ-212 had a 
+    ej212_MPT->AddConstProperty("YIELDRATIO", 1.0);
+    // The time constant for the time evolution of the number of scintillation
+    // photons (i.e. tau in the formula 'A*exp(-t/tau)' )
+    ej212_MPT->AddConstProperty("FASTTIMECONSTANT", 2.4*ns);
+    // There is also a 'FASTSCINTILLATIONRISETIME' that accounts for the rise
+    // time of the scintillator but given that for EJ-212 this is 0.9ns
+    // it will be ignored.
+    
+    // Set the material table
+    EJ212->SetMaterialPropertiesTable(ej212_MPT);
+
+// BCF-91A Wavelength Shifting Fibre
+    BCF91A_core = new G4Material("BCF-91A_core", density=1.05*g/cm3, ncomponents=2);
+    BCF91A_core->AddElement(C, 0.5015511892);
+    BCF91A_core->AddElement(H, 0.4984488108);
+    
+    // BCF-91A values are taken from
+    // http://www-zeuthen.desy.de/lcdet/Feb_05_WS/talks/rd_lcdet_sim.pdf
+    // Based on work by Hugh Gallager for MINOS (not locatable) 
+    const G4int n_bcf91a_core_absorption_photons = 42;
+    // Specify the photon energies that we will be defining properties for
+    G4double bcf91a_core_abs_photons[n_bcf91a_core_absorption_photons] =
+        {3.539*eV, 3.477*eV, 3.340*eV, 3.321*eV, 3.291*eV, 3.214*eV, 3.162*eV,
+         3.129*eV, 3.091*eV, 3.086*eV, 3.049*eV, 3.008*eV, 2.982*eV, 2.958*eV,
+         2.928*eV, 2.905*eV, 2.895*eV, 2.890*eV, 2.858*eV, 2.813*eV, 2.774*eV,
+         2.765*eV, 2.752*eV, 2.748*eV, 2.739*eV, 2.735*eV, 2.731*eV, 2.723*eV,
+         2.719*eV, 2.698*eV, 2.674*eV, 2.626*eV, 2.610*eV, 2.583*eV, 2.556*eV,
+         2.530*eV, 2.505*eV, 2.480*eV, 2.455*eV, 2.431*eV, 2.407*eV, 2.384*eV};
+    // Absorptions are dealt with as lengths...
+    G4double bcf91a_core_abs_lengths [n_bcf91a_core_absorption_photons] =
+        { 0.28*cm,  0.28*cm,   0.26*cm,   0.25*cm,   0.24*cm,   0.21*cm,
+          0.19*cm,  0.16*cm,   0.13*cm,   0.13*cm,   0.14*cm,   0.11*cm,
+          0.08*cm,  0.05*cm,   0.02*cm,   0.05*cm,   0.08*cm,   0.10*cm,
+          0.13*cm,  0.10*cm,   0.08*cm,   0.07*cm,   0.08*cm,   0.11*cm,
+          0.13*cm,  0.16*cm,   0.19*cm,   0.21*cm,   0.24*cm,   0.27*cm,
+          0.30*cm,  2.69*cm,   3.49*cm,   3.99*cm,   5.00*cm,  11.60*cm,
+         21.60*cm, 33.10*cm, 175.00*cm, 393.00*cm, 617.00*cm, 794.00*cm};
+        //todo convert absorption spectrum to lengths (hooray!)
+    
+    const G4int n_bcf91a_core_emission_photons = 24;
+    G4double bcf91a_core_emission_photons [n_bcf91a_core_emission_photons] =
+        {2.69*eV, 2.67*eV, 2.66*eV, 2.64*eV, 2.63*eV, 2.61*eV, 2.58*eV,
+         2.56*eV, 2.55*eV, 2.53*eV, 2.50*eV, 2.48*eV, 2.46*eV, 2.45*eV,
+         2.44*eV, 2.43*eV, 2.41*eV, 2.37*eV, 2.33*eV, 2.25*eV, 2.24*eV,
+         2.19*eV, 2.15*eV, 2.08*eV};
+    // Specify the normalised emission spectrum
+    G4double bcf91a_core_emission_spectrum [n_bcf91a_core_emission_photons] =
+        {0.00, 0.02, 0.09, 0.20, 0.29, 0.40, 0.59, 0.70, 0.80, 0.89, 1.00, 0.96,
+         0.88, 0.79, 0.69, 0.59, 0.50, 0.40, 0.31, 0.22, 0.19, 0.10, 0.06, 0.00};
+    
+    // Refractive index. This is constant so set at extremes of
+    // absorption/emission spectrum and the middle.
+    const G4int n_bcf91a_core_rindex_photons = 3;
+    G4double bcf91a_core_rindex_photons [n_bcf91a_core_rindex_photons] =
+        {2.07*eV, 2.62*eV, 3.55*eV};
+    G4double bcf91a_core_rindex [n_bcf91a_core_rindex_photons] =
+        {1.60, 1.60, 1.60};
+    
+    G4MaterialPropertiesTable* bcf91a_core_MPT = new G4MaterialPropertiesTable();
+    bcf91a_core_MPT->AddProperty("WLSABSLENGTH", // The WLS absorption spectrum
+                            bcf91a_core_abs_photons,
+                            bcf91a_core_abs_lengths,
+                            n_bcf91a_core_absorption_photons);
+    bcf91a_core_MPT->AddProperty("WLSCOMPONENT", // WLS emission spectrum
+                            bcf91a_core_emission_photons,
+                            bcf91a_core_emission_spectrum,
+                            n_bcf91a_core_emission_photons);
+    bcf91a_core_MPT->AddProperty("RINDEX",  // The core refractive index
+                            bcf91a_core_rindex_photons,
+                            bcf91a_core_rindex,
+                            n_bcf91a_core_rindex_photons);
+    // Decay time
+    bcf91a_core_MPT->AddConstProperty("WLSTIMECONSTANT", 12.0*ns);
+    
+    BCF91A_core->SetMaterialPropertiesTable(bcf91a_core_MPT);
+    
+    // Set up the material for the WLS Fibre's acrylic cladding. This is assumed
+    // to be the same as the core except with a different refractive index
+    // and not WLS or scintillating (absorption length set to very long)
+    BCF91A_clad = new G4Material("BCF-91A_clad", density=1.05*g/cm3,ncomponents=3);
+    BCF91A_clad->AddElement(C, 5);
+    BCF91A_clad->AddElement(H, 8);
+    BCF91A_clad->AddElement(O, 2);
+    
+    const G4int n_bcf91a_clad_photons = 3;
+    G4double bcf91a_clad_photons[n_bcf91a_clad_photons] =
+        {2.07*eV, 2.62*eV, 3.55*eV};
+    // The refractive index is constant for wavelengths
+    G4double bcf91a_clad_rindex[n_bcf91a_clad_photons] =
+        {1.49, 1.49, 1.49};
+    // Assume the absorption length of the cladding is constant and large
+    G4double bcf91a_clad_abs_length[n_bcf91a_clad_photons] =
+        {3.5*m, 3.5*m, 3.5*m};
+    
+    G4MaterialPropertiesTable* bcf91a_clad_MPT = new G4MaterialPropertiesTable();
+    bcf91a_clad_MPT->AddProperty("RINDEX",
+                                 bcf91a_clad_photons,
+                                 bcf91a_clad_rindex,
+                                 n_bcf91a_clad_photons);
+    bcf91a_clad_MPT->AddProperty("ABSLENGTH",
+                                 bcf91a_clad_photons,
+                                 bcf91a_clad_abs_length,
+                                 n_bcf91a_clad_photons);
+    
+    BCF91A_clad->SetMaterialPropertiesTable(bcf91a_clad_MPT);
 // print table
 //
     G4cout << *(G4Material::GetMaterialTable()) << G4endl;

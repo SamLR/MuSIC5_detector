@@ -109,10 +109,14 @@ private:
 
       // compounds & mixtures
     G4Material* Air;
-    G4Material* Scint;      
+    G4Material* Scint;  // Generic scintillator
     G4Material* Mylar;
     G4Material* Polystyrene;
     G4Material* Polyethylene;
+    // Specific optical materials
+    G4Material* EJ212; // Scintillator
+    G4Material* BCF91A_core; // The Wavelength shifting fibre
+    G4Material* BCF91A_clad; // Fibre's cladding
     
     // limits on step length in various materials
     G4UserLimits* f_scint1_limit;
