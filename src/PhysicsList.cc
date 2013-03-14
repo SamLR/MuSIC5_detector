@@ -16,6 +16,7 @@
 #include "G4HadronElasticPhysicsHP.hh" 
 #include "G4QStoppingPhysics.hh" 
 #include "G4IonPhysics.hh" 
+#include "G4OpticalPhysics.hh"
 // included to add specific settings
 #include "G4MuIonisation.hh"
 
@@ -34,6 +35,7 @@ void PhysicsList::init(){
     this->RegisterPhysics(new G4HadronElasticPhysicsHP());
     this->RegisterPhysics(new G4QStoppingPhysics());
     this->RegisterPhysics(new G4IonPhysics());
+    this->RegisterPhysics(new G4OpticalPhysics());
 }
 
 void PhysicsList::SetCuts(){
