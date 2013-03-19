@@ -42,7 +42,9 @@ class SteppingAction : public G4UserSteppingAction
 
   private:
     Root* f_root;
-void set_hit(bool first_step, bool last_step, int acounter, const char* aprocname, int atrkid, int aparentid, int apdgid, double ax, double ay, double az, double apx, double apy, double apz, double akinetic, double aedep, double atof);
+
+    void truth_hit(const G4Step*);
+    void mppc_hit(const G4Step*);
 };
 
 #endif

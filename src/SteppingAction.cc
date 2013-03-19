@@ -36,102 +36,189 @@
 
 #include "root.hh"
 
+// helper function at end of file
+int get_process_id(const G4String &process_name);
+bool is_charged(const int pdg_id);
+
 SteppingAction::SteppingAction(Root* root)
 { f_root = root;}
 
 SteppingAction::~SteppingAction()
 {;}
 
-void SteppingAction::set_hit(bool first_step, bool last_step, int acounter, const char* aprocname, int atrkid, int aparentid, int apdgid, double ax, double ay, double az, double apx, double apy, double apz, double akinetic, double aedep, double atof)
+void SteppingAction::UserSteppingAction(const G4Step * aStep)
 {
-    if (f_root->g_nhit>=MAX_HIT) {
-        return;
+    G4Track * track = aStep->GetTrack();
+    
+    if (track->GetDefinition()->GetPDGEncoding() == 0)
+    { // Optical photons == 0, gamma == 22 (op != gamma)
+        if (f_root->mppc_hits >= MAX_HIT)
+        {
+            // Check we've not filled ROOT
+            G4cerr << "SteppingAction Error: MAX_HIT reached for MPPC" << G4endl;
+            return;
+        }
+        mppc_hit(aStep);
+        
+    } else if ( is_charged(track->GetDefinition()->GetPDGEncoding()) )
+    {
+        // The particles we're interested in are those that will scintillate
+        // i.e. charged particles. We'll assume that none have |charge| < 0.1
+        
+        if (f_root->g_nhit >= MAX_HIT)
+        {
+            // Check we've not filled ROOT
+            G4cerr << "SteppingAction Error: MAX_HIT reached for truth" << G4endl;
+            return;
+        }
+        
+        truth_hit(aStep);
     }
+}
+
+void SteppingAction::truth_hit(const G4Step* aStep)
+{
+    G4Track* track = aStep->GetTrack();
     
-    int g_nhit = f_root->g_nhit;
-    if (strcmp(aprocname,"msc")==0)                            {  f_root->procid[g_nhit]=1; } // multiple scattering
-    else if (strcmp(aprocname,"Transportation")==0)            {  f_root->procid[g_nhit]=2; }
-    else if (strcmp(aprocname,"eIoni")==0)                     {  f_root->procid[g_nhit]=3; }
-    else if (strcmp(aprocname,"eBrem")==0)                     {  f_root->procid[g_nhit]=4; }
-    else if (strcmp(aprocname,"CoulombScat")==0)               {  f_root->procid[g_nhit]=5; }
-    else if (strcmp(aprocname,"phot")==0)                      {  f_root->procid[g_nhit]=6; } // photo electric effect
-    else if (strcmp(aprocname,"compt")==0)                     {  f_root->procid[g_nhit]=7; }
-    else if (strcmp(aprocname,"muMsc")==0)                     {  f_root->procid[g_nhit]=8; }
-    else if (strcmp(aprocname,"muIoni")==0)                    {  f_root->procid[g_nhit]=9; }
-    else if (strcmp(aprocname,"Decay")==0)                     {  f_root->procid[g_nhit]=10; }
-    else if (strcmp(aprocname,"hIoni")==0)                     {  f_root->procid[g_nhit]=11; }
-    else if (strcmp(aprocname,"annihil")==0)                   {  f_root->procid[g_nhit]=12; }
-    else if (strcmp(aprocname,"conv")==0)                      {  f_root->procid[g_nhit]=13; }
-    else if (strcmp(aprocname,"ionIoni")==0)                   {  f_root->procid[g_nhit]=14; }
-    else if (strcmp(aprocname,"muMinusCaptureAtRest")==0)      {  f_root->procid[g_nhit]=15; }
-    else if (strcmp(aprocname,"hadElastic")==0)                {  f_root->procid[g_nhit]=16; }
-    else if (strcmp(aprocname,"PionPlusInelastic")==0)         {  f_root->procid[g_nhit]=17; }
-    else if (strcmp(aprocname,"NeutronInelastic")==0)          {  f_root->procid[g_nhit]=18; }
-    else if (strcmp(aprocname,"CHIPSNuclearCaptureAtRest")==0) {  f_root->procid[g_nhit]=19; }
-    else if (strcmp(aprocname,"PionMinusInelastic")==0)        {  f_root->procid[g_nhit]=20; }
+    G4StepPoint* pre_point  = aStep->GetPreStepPoint();
+    G4StepPoint* post_point = aStep->GetPostStepPoint();
     
+    if (post_point==NULL || pre_point==NULL) return; // Something's gone wrong
+    
+    // Are we entering or exiting a volume?
+    bool last_step  = (post_point->GetStepStatus() == fGeomBoundary);
+    bool first_step = (pre_point->GetStepStatus()  == fGeomBoundary);
+    
+    // ASSUMPTION Record only first and last steps. Need to remove double
+    // counts in analysis but this means we should catch particles born inside
+    // a volume and exit. We have a problem with partices that exist wholey
+    // within a volume but this shouldn't be a problem
+    if (!first_step || !last_step) return;
+    
+    // Find out where we are
+    const G4VPhysicalVolume* next_phys_vol = post_point->GetTouchableHandle()
+                                              ->GetVolume();
+    const G4VPhysicalVolume* this_phys_vol = pre_point->GetTouchableHandle()
+                                              ->GetVolume();
+    
+    // No physical volume => entering/exiting world and will segfault when
+    // asked for logical volume
+    if (!next_phys_vol || !this_phys_vol) return;
+    
+    const G4LogicalVolume* next_log_vol = next_phys_vol->GetLogicalVolume();
+    const G4LogicalVolume* this_log_vol = this_phys_vol->GetLogicalVolume();
+    
+    const G4String& this_log_vol_name = this_log_vol->GetName();
+    
+    // Record before we enter the degrader (used as beam profile)
+    bool entering_degrader = last_step                               &&
+                             (next_log_vol->GetName() == "degrader") &&
+                             (this_log_vol_name       == "world");
+    
+    int counter_id = 0; // default 'bad' value
+    
+    if     ( this_log_vol_name == "u_scint_log" ) { counter_id = 1; }
+    else if( this_log_vol_name == "target"      ) { counter_id = 2; }
+    else if( this_log_vol_name == "d_scint_log" ) { counter_id = 3; }
+    else if( this_log_vol_name == "degrader"    ) { counter_id = 4; }
+    else if( entering_degrader                  ) { counter_id = 5; }
+    else return; // not in a volume we're interested in
+    
+    // The array value to write to
+    const int g_nhit = f_root->g_nhit;
+    // Process name
+    const G4String process_name = post_point->GetProcessDefinedStep()->GetProcessName();
+    
+    // Record directly into the root class. This is horrible code.
+    
+    // Information about this step (entering, exiting, where, what etc.)
     f_root->first_step[g_nhit] = first_step;
-    f_root->last_step[g_nhit] = last_step;
-    f_root->counter[g_nhit] = acounter;
-    f_root->trkid[g_nhit] = atrkid;
-    f_root->parentid[g_nhit] = aparentid;
-    f_root->pdgid[g_nhit] = apdgid;
-    f_root->x[g_nhit] = ax;
-    f_root->y[g_nhit] = ay;
-    f_root->z[g_nhit] = az;
-    f_root->px[g_nhit] = apx;
-    f_root->py[g_nhit] = apy;
-    f_root->pz[g_nhit] = apz;
-    f_root->kinetic[g_nhit] = akinetic;
-    f_root->edep[g_nhit] = aedep;
-    f_root->tof[g_nhit] = atof;
+    f_root->last_step [g_nhit] = last_step;
+    f_root->procid    [g_nhit] = get_process_id(process_name);
+    f_root->counter   [g_nhit] = counter_id;
+    f_root->trkid     [g_nhit] = track->GetTrackID();
+    f_root->parentid  [g_nhit] = track->GetParentID();
+    f_root->pdgid     [g_nhit] = track->GetDefinition()->GetPDGEncoding();
+    // Position
+    f_root->x  [g_nhit] = track->GetPosition().x()/mm;
+    f_root->y  [g_nhit] = track->GetPosition().y()/mm;
+    f_root->z  [g_nhit] = track->GetPosition().z()/mm;
+    // Momentum
+    f_root->px [g_nhit] = track->GetMomentum().x()/MeV;
+    f_root->py [g_nhit] = track->GetMomentum().y()/MeV;
+    f_root->pz [g_nhit] = track->GetMomentum().z()/MeV;
+    // Kinetic energy
+    f_root->kinetic [g_nhit] = track->GetKineticEnergy()/MeV;
+    // Energy deposited
+    f_root->edep [g_nhit]    = aStep->GetTotalEnergyDeposit()/MeV;
+    // How long (in simulated time) since the start of the event?
+    f_root->tof [g_nhit]     = track->GetGlobalTime()/ns;
+    // Increment the recorder pointer
     f_root->g_nhit++;
 }
 
-void SteppingAction::UserSteppingAction(const G4Step * aStep)
-{ 
+void SteppingAction::mppc_hit(const G4Step* aStep)
+{
+    // Check if this is the first step in a volume?
+    const G4StepPoint* pre_point = aStep->GetPreStepPoint();
+    const bool first_step        = (pre_point->GetStepStatus() == fGeomBoundary);
+    
+    if (not first_step) return;
+    
+    // Now check that we're in an MPPC
+    const G4VPhysicalVolume* this_vol = pre_point->GetTouchableHandle()->GetVolume();
+    const G4String log_vol_name       = this_vol->GetLogicalVolume()->GetName();
+    
+    if (log_vol_name != "mppc_log") return;
+    
+    // Log the info
     G4Track * track = aStep->GetTrack();
-    G4StepPoint* point1 = aStep->GetPreStepPoint();
-    G4StepPoint* point2 = aStep->GetPostStepPoint();
     
-    if (point2==NULL || point1==NULL) return;
+    const int hit_n = f_root->mppc_hits;
     
-    const G4VPhysicalVolume* nextvol = point2->GetTouchableHandle()->GetVolume();
-    const G4VPhysicalVolume* thisvol = point1->GetTouchableHandle()->GetVolume();
-    
-    if (!nextvol) return; // if there is no next volume we're exiting the world
-    
-    bool last_step  = (point2->GetStepStatus() == fGeomBoundary);
-    bool first_step = (point1->GetStepStatus() == fGeomBoundary);
-    const G4String& volname = thisvol->GetName();
-    
-    bool entering_degrader = last_step && 
-                            (nextvol->GetName() == "degrader") && 
-                            (volname == "world");
-    
-    int acounter = 0; // main step
-    if     ( volname == "sci1" )     { acounter = 1; } 
-    else if( volname == "target" )   { acounter = 2; } 
-    else if( volname == "sci2" )     { acounter = 3; }
-    else if( volname == "degrader" ) { acounter = 4; }
-    else if( entering_degrader )     { acounter = 5; }
-    else return; // not in a volume
-    // record stuff specially if we're about to enter the degrader or st
-    
-    int parentid = track->GetParentID();
-    int trkid = track->GetTrackID();
-    int pdgid  = track->GetDefinition()->GetPDGEncoding();
-    double kinetic = track->GetKineticEnergy()/MeV;
-    double tof = track->GetGlobalTime()/ns;
-    double x = track->GetPosition().x()/mm;
-    double y = track->GetPosition().y()/mm;
-    double z = track->GetPosition().z()/mm;
-    double px = track->GetMomentum().x()/MeV;
-    double py = track->GetMomentum().y()/MeV;
-    double pz = track->GetMomentum().z()/MeV;
-    double edep = aStep->GetTotalEnergyDeposit()/MeV;
-    const G4String& procname = point2->GetProcessDefinedStep()->GetProcessName();
-    
-    set_hit(first_step, last_step, acounter,procname.c_str(),trkid,parentid,pdgid,x,y,z,px,py,pz,kinetic,edep,tof);
+    f_root->mppc_x    [hit_n] = track->GetPosition().x()/mm;
+    f_root->mppc_y    [hit_n] = track->GetPosition().y()/mm;
+    f_root->mppc_z    [hit_n] = track->GetPosition().z()/mm;
+    f_root->mppc_time [hit_n] = track->GetGlobalTime()/ns;
+    f_root->mppc_hits++;
 }
 
+int get_process_id(const G4String &process_name)
+{
+    if      ( process_name == "msc" )                       { return 1; } // multiple scattering
+    else if ( process_name == "Transportation" )            { return 2; }
+    else if ( process_name == "eIoni" )                     { return 3; }
+    else if ( process_name == "eBrem" )                     { return 4; }
+    else if ( process_name == "CoulombScat" )               { return 5; }
+    else if ( process_name == "phot" )                      { return 6; } // photo electric effect
+    else if ( process_name == "compt" )                     { return 7; }
+    else if ( process_name == "muMsc" )                     { return 8; }
+    else if ( process_name == "muIoni" )                    { return 9; }
+    else if ( process_name == "Decay" )                     { return 10; }
+    else if ( process_name == "hIoni" )                     { return 11; }
+    else if ( process_name == "annihil" )                   { return 12; }
+    else if ( process_name == "conv" )                      { return 13; }
+    else if ( process_name == "ionIoni" )                   { return 14; }
+    else if ( process_name == "muMinusCaptureAtRest" )      { return 15; }
+    else if ( process_name == "hadElastic" )                { return 16; }
+    else if ( process_name == "PionPlusInelastic" )         { return 17; }
+    else if ( process_name == "NeutronInelastic" )          { return 18; }
+    else if ( process_name == "CHIPSNuclearCaptureAtRest" ) { return 19; }
+    else if ( process_name == "PionMinusInelastic" )        { return 20; }
+    else { return  0; } // Error!
+}
+
+bool is_charged(const int pdg_id)
+{
+    switch (pdg_id) {
+        case -211:  return true; // pi-
+        case -13:   return true; // mu+
+        case -11:   return true; // e+
+        case  11:   return true; // e-
+        case  13:   return true; // mu-
+        case  211:  return true; // pi+
+        case  2212: return true; // proton
+            
+        default: return false;   // ignore everything else
+    }
+}

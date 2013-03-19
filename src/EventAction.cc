@@ -45,14 +45,16 @@ EventAction::~EventAction() {;}
 
 void EventAction::BeginOfEventAction(const G4Event* event)
 {
-    //printf("#### iev %d\n",event->GetEventID());
-    f_root->g_nhit=0;
+    // Reset the counters for the event
+    f_root->g_nhit    = 0;
+    f_root->mppc_hits = 0;
 }
 
-void EventAction::EndOfEventAction(const G4Event* evt)
+void EventAction::EndOfEventAction(const G4Event* event)
 {
-    f_root->tree_out->Fill();
-//    int iev = evt->GetEventID();
-//    if (iev%1000==0) fprintf(stderr,"iev %d\n",iev);
+    // Fill the tree with the data from this event
+    printf("here I am");
+    f_root->truth_tree_out->Fill();
+    f_root->mppc_tree_out->Fill();
 }
 
