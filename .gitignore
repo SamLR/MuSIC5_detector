@@ -25,3 +25,5 @@ er.log
 quick_test.C
 test.C
 *.png
+*.heprep
+*.gdd
