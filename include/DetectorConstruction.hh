@@ -51,15 +51,11 @@ public:
     void SetSolFieldName(G4String newFile);
     void SetDipFieldName(G4String newFile);
 
-    void SetScint1z  (const double &newVal) {f_scint1z = newVal;   f_updated = true;};
-    void SetScint2z  (const double &newVal) {f_scint2z = newVal;   f_updated = true;};
-    void SetDegraderZ(const double &newVal) {f_degraderZ = newVal; f_updated = true;};
-    void SetTargetZ  (const double &newVal) {f_targetZ = newVal;   f_updated = true;};
+    void SetDegraderZ(const double &newVal) {f_degraderZ = (newVal/2.0); f_updated = true;};
+    void SetTargetZ  (const double &newVal) {f_targetZ = (newVal/2.0);   f_updated = true;};
 
     // these need some amount of checking
     void SetPolarity(double);
-    void SetScint1Mat(G4String);
-    void SetScint2Mat(G4String);
     void SetDegraderMat(G4String);
     void SetTargetMat(G4String);
     void UpdateGeometry();
@@ -74,9 +70,6 @@ private:
     G4String f_fname_sol; // solenoid fieldmap
     G4String f_fname_dip; // dipole fieldmap
     double f_dip_polarity; // dipole polarity & scaling
-    
-    double f_scint1z; // scintillator thickness
-    double f_scint2z;
 
     double f_degraderZ; // degreader thickness
     double f_targetZ; // degreader thickness
@@ -88,18 +81,6 @@ private:
     
     G4LogicalVolume*   f_logic_world; // world volume
     G4VPhysicalVolume* f_physi_world;
-    
-    G4LogicalVolume*   f_logic_sci1; // scint 1 & 2
-    G4VPhysicalVolume* f_physi_sci1;
-                                   
-    G4LogicalVolume*   f_logic_sci2;
-    G4VPhysicalVolume* f_physi_sci2;
-    
-    G4LogicalVolume*   f_logic_target; // target
-    G4VPhysicalVolume* f_physi_target;
-    
-    G4LogicalVolume*   f_logic_degrader; // degrader
-    G4VPhysicalVolume* f_physi_degrader;
     
       // pure elements
     G4Material* Pb;

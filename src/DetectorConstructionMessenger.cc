@@ -13,9 +13,7 @@
 DetectorConstructionMessenger::DetectorConstructionMessenger(DetectorConstruction* dc)
 : detConstructor_m(dc), updateCmd_m(NULL), UIdirectory_m(NULL),  
 dipolePolarityStrength_m(NULL), solenoidFileName_m(NULL), dipoleFileName_m(NULL), 
-scint1Material_m(NULL),  scint2Material_m(NULL),
-degraderMaterial_m(NULL), targetMaterial_m(NULL),  
-scint1Thickness_m(NULL),  scint2Thickness_m(NULL),
+degraderMaterial_m(NULL), targetMaterial_m(NULL),
 degraderThickness_m(NULL), targetThickness_m(NULL)
 {
     init();
@@ -27,13 +25,9 @@ DetectorConstructionMessenger::~DetectorConstructionMessenger()
     delete UIdirectory_m; 
     delete dipolePolarityStrength_m;
     delete solenoidFileName_m;
-    delete dipoleFileName_m;  
-    delete scint1Material_m;  
-    delete scint2Material_m;  
+    delete dipoleFileName_m;
     delete degraderMaterial_m;
     delete targetMaterial_m;  
-    delete scint1Thickness_m; 
-    delete scint2Thickness_m; 
     delete degraderThickness_m;
     delete targetThickness_m;
 }
@@ -58,28 +52,6 @@ void DetectorConstructionMessenger::init()
     dipolePolarityStrength_m->SetGuidance("Scale the dipole field by some amount x (-1 < x < 1)");
     dipolePolarityStrength_m->SetParameterName("polarity", true);
     dipolePolarityStrength_m->SetDefaultValue(1.0);
-
-    // scintillator 1's thickness (closer of the two)
-    scint1Thickness_m = new G4UIcmdWithADoubleAndUnit("/MuSIC_Detector/scint1z", this); // closer
-    scint1Thickness_m->SetGuidance("Thickness of scintillator 1 (nearest to beam)");
-    scint1Thickness_m->SetParameterName("scint1z", true);
-    scint1Thickness_m->SetDefaultValue(1.0);
-    scint1Thickness_m->SetDefaultUnit("mm");
-    
-    scint1Material_m = new G4UIcmdWithAString("/MuSIC_Detector/scint1Mat", this); 
-    scint1Material_m->SetGuidance("Set the material to make scint1 from");
-    scint1Material_m->SetDefaultValue("Air");
-
-    // scintillator 2's thickness
-    scint2Thickness_m = new G4UIcmdWithADoubleAndUnit("/MuSIC_Detector/scint2z", this); // further
-    scint2Thickness_m->SetGuidance("Thickness of scintillator 2 (furthest from beam)");
-    scint2Thickness_m->SetParameterName("scint2z", true);
-    scint2Thickness_m->SetDefaultValue(20.0);
-    scint2Thickness_m->SetDefaultUnit("mm");
-    
-    scint2Material_m = new G4UIcmdWithAString("/MuSIC_Detector/scint2Mat", this); 
-    scint2Material_m->SetGuidance("Set the material to make scint2 from");
-    scint2Material_m->SetDefaultValue("Air");
 
     // degrader thickness & material
     degraderThickness_m = new G4UIcmdWithADoubleAndUnit("/MuSIC_Detector/degraderZ", this); 
@@ -121,22 +93,6 @@ void DetectorConstructionMessenger::SetNewValue(G4UIcommand* command, G4String n
     else if ( command == dipolePolarityStrength_m)
     {
         detConstructor_m->SetPolarity(dipolePolarityStrength_m->GetNewDoubleValue(newValue));
-    }
-    else if ( command == scint1Thickness_m)
-    {
-        detConstructor_m->SetScint1z(scint1Thickness_m->GetNewDoubleValue(newValue));
-    }
-    else if ( command == scint1Material_m)
-    {
-         detConstructor_m->SetScint1Mat(newValue);   
-    }
-    else if ( command == scint2Thickness_m)
-    {
-        detConstructor_m->SetScint2z(scint2Thickness_m->GetNewDoubleValue(newValue));
-    } 
-    else if ( command == scint2Material_m)
-    {
-        detConstructor_m->SetScint2Mat(newValue);   
     }
     else if ( command == degraderThickness_m)
     {

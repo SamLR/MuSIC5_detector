@@ -428,36 +428,13 @@ void DetectorConstruction::SetPolarity(double newPol)
     f_updated = true;
 }
 
-void DetectorConstruction::SetScint1Mat(G4String newVal)
-{
-    G4Material* newMat = G4Material::GetMaterial(newVal);
-    if (newMat)
-    {
-        f_scint1Mat = newMat;
-        G4cout << "Scint1 now made from "<< newVal << G4endl;
-    }
-    f_updated = true;
-}
-
-void DetectorConstruction::SetScint2Mat(G4String newVal)
-{
-    G4Material* newMat = G4Material::GetMaterial(newVal);
-    if (newMat)
-    {
-        f_scint2Mat = newMat;
-        G4cout << "Scint2 now made from "<< newVal << G4endl;
-    }
-    f_updated = true;
-}
-
-
 void DetectorConstruction::SetDegraderMat(G4String newVal)
 {
     G4Material* newMat = G4Material::GetMaterial(newVal);
     if (newMat)
     {
         f_degraderMat = newMat;
-//        f_logic_degrader->SetMaterial(f_degraderMat);
+        //        f_logic_degrader->SetMaterial(f_degraderMat);
         G4cout << "Degrader now made from "<< newVal << G4endl;
     }
     f_updated = true;
@@ -468,7 +445,7 @@ void DetectorConstruction::SetTargetMat(G4String newVal)
     if (newMat)
     {
         f_targetMat = newMat;
-//        f_logic_target->SetMaterial(f_targetMat);
+        //        f_logic_target->SetMaterial(f_targetMat);
         G4cout << "Target now made from "<< newVal << G4endl;
     }
     f_updated = true;
@@ -477,14 +454,14 @@ void DetectorConstruction::SetTargetMat(G4String newVal)
 void DetectorConstruction::SetDipFieldName(G4String newFile)
 {
     f_fname_dip = newFile;
-//    f_myField->SetDipoleField(newFile);
+    //    f_myField->SetDipoleField(newFile);
     f_updated = true;
 }
 
 void DetectorConstruction::SetSolFieldName(G4String newFile)
 {
     f_fname_sol = newFile;
-//    f_myField->SetSolenoidField(newFile);
+    //    f_myField->SetSolenoidField(newFile);
     f_updated=true;
 }
 
