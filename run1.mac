@@ -5,6 +5,7 @@
 /MuSIC_Detector/solField /Users/scook/code/MuSIC/simulation/MuSIC_5_detector_sim/MuSIC5/MuSIC5_detector/fieldmap/fieldmap_solenoid.txt
 
 /run/initialize
+/run/beamOn 5
 
 #/run/verbose 2
 #/event/verbose 2

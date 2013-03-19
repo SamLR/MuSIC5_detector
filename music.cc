@@ -122,7 +122,7 @@ int main(int argc,char** argv)
         G4String filename = macro_name;
         UImanager->ApplyCommand(command+filename);
 #ifndef G4VIS_USE 
-        runManager->BeamOn(root->nevents_g4bl);
+//        runManager->BeamOn(root->nevents_g4bl);
 #endif
 #ifdef G4VIS_USE
         delete visManager;
@@ -147,7 +147,7 @@ int main(int argc,char** argv)
 
     root->write();
 
-
+    delete root;
    // Job termination
    // Free the store: user actions, physics_list and detector_description are
    //                 owned and deleted by the run manager, so they should not
