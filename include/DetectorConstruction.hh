@@ -30,13 +30,14 @@
 #include "G4VUserDetectorConstruction.hh"
 #include "globals.hh"
 
-class G4VPhysicalVolume;
-class G4LogicalVolume;
-class G4Material;
-class G4Element;
-class Field;
-class DetectorConstructionMessenger;
-class G4UserLimits;
+class G4VPhysicalVolume;  // Physical information on the volume (rotation etc.)
+class G4LogicalVolume;    // Logical info (material, detector...)
+class G4Material;         // Keep materials at class level for use anywhere
+class G4Element;          // Elements
+class G4OpticalSurface;   // 2D surfaces rather than further volumes
+class Field;              // Magnets
+class DetectorConstructionMessenger; // Macro controls
+class G4UserLimits;       // Override tracking defaults
 
 class DetectorConstruction : public G4VUserDetectorConstruction
 {
@@ -99,9 +100,15 @@ private:
     G4Material* BCF91A_core; // The Wavelength shifting fibre
     G4Material* BCF91A_clad; // Fibre's cladding
     
+    // Optical surface (we have two: scintillator/mylar and wls/mylar)
+//    G4OpticalSurface* scint_mylar_op_surface;
+//    G4OpticalSurface* wls_mylar_op_surface;
+    // Assume we can use the same surface for both scintillator & WLS with mylar
+    G4OpticalSurface* mylar_surface;
+    
     // limits on step length in various materials
-    G4UserLimits* f_scint1_limit;
-    G4UserLimits* f_scint2_limit;
+    G4UserLimits* f_u_limit;
+    G4UserLimits* f_d_limit;
     G4UserLimits* f_deg_limit;
     G4UserLimits* f_st_limit;
 };
