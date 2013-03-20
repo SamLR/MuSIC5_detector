@@ -42,6 +42,10 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     PrimaryGeneratorAction(Root* root);
     ~PrimaryGeneratorAction();
 
+    inline void SetEventOffset (const int offset)
+    { // Specify which row we want to start from in the input root file
+        f_root->g_iev = offset; // This is vile
+    };
     void GeneratePrimaries(G4Event* anEvent);
     G4ParticleGun* particleGun;
 

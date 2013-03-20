@@ -17,7 +17,7 @@ public:
     // Input ROOT file from G4beamline, also saved to output in truth data
     TFile* file_g4bl;
     TTree* tree_g4bl;
-    int g_iev;      // Unique event ID
+    int g_iev;      // Unique event ID essentially the row for the entry
     int in_EventID; // Event ID (not unique, can have multiple particles from 1 event)
     int in_TrackID; // Track ID
     int in_PDGid;   // PDG ID
