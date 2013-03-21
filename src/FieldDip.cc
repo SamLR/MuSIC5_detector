@@ -214,7 +214,7 @@ void FieldDip::get_bfield(double x, double y, double z, double& bx, double& by, 
     
     // dipole only defined in positive quadrant, it is symmetric though
     // make this always break if indecies are not assigned elsewhere
-    unsigned int ix=uint_l::max(), iy=uint_l::max(), iz=uint_l::max();
+    unsigned int ix=uint_limits::max(), iy=uint_limits::max(), iz=uint_limits::max();
     double sx=0, sy=0, sz=0;
     int quadrant = global_pos_to_index(x,y,z,ix,iy,iz);
     

@@ -7,7 +7,7 @@
 /MuSIC_Detector/gun/inputOffset 3
 
 /run/initialize
-/run/beamOn 5
+/run/beamOn 1
 
 
 #/run/verbose 2

@@ -29,8 +29,8 @@
 #include <limits>
 
 using namespace std;
-typedef numeric_limits<double> dbl;
-typedef numeric_limits<unsigned int> uint;
+typedef numeric_limits<double> dbl_limits;
+typedef numeric_limits<unsigned int> uint_limits;
 
 void FieldSol::index_to_pos(unsigned int ix, unsigned int iy, unsigned int iz,
                             double &x, double &y, double &z)
@@ -83,8 +83,8 @@ void FieldSol::init()
             return;
         }
         /* map data is defined in global coordinate */
-        double in_x=dbl::max(), in_y=dbl::max(), in_z=dbl::max();
-        double in_bx=dbl::max(), in_by=dbl::max(), in_bz=dbl::max();
+        double in_x=dbl_limits::max(), in_y=dbl_limits::max(), in_z=dbl_limits::max();
+        double in_bx=dbl_limits::max(), in_by=dbl_limits::max(), in_bz=dbl_limits::max();
         while (fgets(line,sizeof(line),fp)) 
         {
             sscanf(line,"%lf %lf %lf %lf %lf %lf",&in_x,&in_y,&in_z,&in_bx,&in_by,&in_bz);
@@ -109,7 +109,7 @@ void FieldSol::get_bfield(double x, double y, double z, double& bx, double& by, 
         }
     }
         
-    unsigned int ix=uint::max(), iy=uint::max(), iz=uint::max();
+    unsigned int ix=uint_limits::max(), iy=uint_limits::max(), iz=uint_limits::max();
     pos_to_index(x,abs(y),z,ix,iy,iz);
     assert(ix>=0 && iy>=0 && iz>=0);
 
@@ -124,7 +124,7 @@ void FieldSol::GetFieldValue(const double Point[3],double *Bfield)
 {
     if (not valid_position(Point[0],Point[1],Point[2])) return;
     
-    double bx=dbl::max(),by=dbl::max(),bz=dbl::max();
+    double bx=dbl_limits::max(),by=dbl_limits::max(),bz=dbl_limits::max();
 
     get_bfield(Point[0],Point[1],Point[2],bx,by,bz);
 
