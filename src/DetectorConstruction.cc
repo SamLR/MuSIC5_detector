@@ -81,6 +81,7 @@ f_u_limit (0), f_d_limit(0), f_deg_limit(0), f_st_limit(0)
 DetectorConstruction::~DetectorConstruction()
 {
     delete f_myField;
+    delete f_messenger;
     
     // pure elements
     delete Pb;
