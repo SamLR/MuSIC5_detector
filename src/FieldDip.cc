@@ -123,7 +123,7 @@ int FieldDip::global_pos_to_index(double x, double y, double z,
 
 void FieldDip::set_bfield(double x, double y, double z, double bx, double by, double bz)
 {
-    unsigned int i=uint_l::max(),j=uint_l::max(),k=uint_l::max();
+    unsigned int i=uint_limits::max(),j=uint_limits::max(),k=uint_limits::max();
     centre_pos_to_index(x,y,z,i,j,k);
     
     if (i >= MAX_DIP_NX || j >= MAX_DIP_NY || k >= MAX_DIP_NZ) {
