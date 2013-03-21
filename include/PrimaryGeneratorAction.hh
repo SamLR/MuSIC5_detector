@@ -35,6 +35,7 @@
 
 class G4VPrimaryGenerator;
 class G4Event;
+class PrimaryGeneratorActionMessenger;
 
 class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
@@ -51,6 +52,7 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 
   private:
     Root* f_root;
+    PrimaryGeneratorActionMessenger* messenger;
 };
 
 #endif

@@ -32,56 +32,60 @@
 #include "G4ParticleTable.hh"
 #include "G4ParticleDefinition.hh"
 
+#include "PrimaryGeneratorActionMessenger.hh"
+
 #include "root.hh"
 
 PrimaryGeneratorAction::PrimaryGeneratorAction(Root* root)
+:f_root(root)
 {
-   f_root = root;
-
-   G4int n_particle = 1;
-   G4ParticleGun* fParticleGun = new G4ParticleGun(n_particle);
-   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-   G4String particleName;
-   G4ParticleDefinition* particle = particleTable->FindParticle(particleName="mu+");
-   fParticleGun->SetParticleDefinition(particle);
-   fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,1.,0.));
-   fParticleGun->SetParticleEnergy(100.*GeV);
-   fParticleGun->SetParticlePosition(G4ThreeVector(0.*cm,0.*cm,0.*cm));
-   particleGun = fParticleGun;
+    messenger = new PrimaryGeneratorActionMessenger(this);
+    
+    G4int n_particle = 1;
+    G4ParticleGun* fParticleGun = new G4ParticleGun(n_particle);
+    G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+    G4String particleName;
+    G4ParticleDefinition* particle = particleTable->FindParticle(particleName="mu+");
+    fParticleGun->SetParticleDefinition(particle);
+    fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,1.,0.));
+    fParticleGun->SetParticleEnergy(100.*GeV);
+    fParticleGun->SetParticlePosition(G4ThreeVector(0.*cm,0.*cm,0.*cm));
+    particleGun = fParticleGun;
 }
 
 PrimaryGeneratorAction::~PrimaryGeneratorAction()
 {
-   delete particleGun;
+    delete messenger;
+    delete particleGun;
 }
 
 void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-   f_root->tree_g4bl->GetEntry(f_root->g_iev);
-   int pdgid = f_root->in_PDGid;
-   // use position and momentum(*_new) in global coordinate
-   double posx = f_root->in_x_new*mm;
-   double posy = f_root->in_y*mm;
-   double posz = f_root->in_z_new*mm;
-   double momx = f_root->in_Px_new*MeV;
-   double momy = f_root->in_Py*MeV;
-   double momz = f_root->in_Pz_new*MeV;
-   //printf("iev %d pdgid %d\n",g_iev, pdgid);
-   //printf("iev %d posx %lf posy %lf posz %lf\n", g_iev,posx/mm,posy/mm,posz/mm);
-   //printf("iev %d momx %lf momy %lf momz %lf\n", g_iev,momx/MeV,momy/MeV,momz/MeV);
-
-   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-   G4ParticleDefinition* particle = particleTable->FindParticle(pdgid);
-   //G4ParticleDefinition* particle = particleTable->FindParticle("chargedgeantino");
-   particleGun->SetParticleDefinition(particle);
-
-   particleGun->SetParticleMomentum(G4ThreeVector(momx,momy,momz));
-   particleGun->SetParticlePosition(G4ThreeVector(posx,posy,posz));
-   //printf("posx %lf posy %lf posz %lf\n",posx,posy,posz);
-
-   particleGun->GeneratePrimaryVertex(anEvent);
-
-   f_root->g_iev++;
+    f_root->tree_g4bl->GetEntry(f_root->g_iev);
+    int pdgid = f_root->in_PDGid;
+    // use position and momentum(*_new) in global coordinate
+    double posx = f_root->in_x_new*mm;
+    double posy = f_root->in_y*mm;
+    double posz = f_root->in_z_new*mm;
+    double momx = f_root->in_Px_new*MeV;
+    double momy = f_root->in_Py*MeV;
+    double momz = f_root->in_Pz_new*MeV;
+    //printf("iev %d pdgid %d\n",g_iev, pdgid);
+    //printf("iev %d posx %lf posy %lf posz %lf\n", g_iev,posx/mm,posy/mm,posz/mm);
+    //printf("iev %d momx %lf momy %lf momz %lf\n", g_iev,momx/MeV,momy/MeV,momz/MeV);
+    
+    G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+    G4ParticleDefinition* particle = particleTable->FindParticle(pdgid);
+    //G4ParticleDefinition* particle = particleTable->FindParticle("chargedgeantino");
+    particleGun->SetParticleDefinition(particle);
+    
+    particleGun->SetParticleMomentum(G4ThreeVector(momx,momy,momz));
+    particleGun->SetParticlePosition(G4ThreeVector(posx,posy,posz));
+    //printf("posx %lf posy %lf posz %lf\n",posx,posy,posz);
+    
+    particleGun->GeneratePrimaryVertex(anEvent);
+    
+    f_root->g_iev++;
 }
 
 
