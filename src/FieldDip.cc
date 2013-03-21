@@ -28,8 +28,8 @@
 #include <limits>
 
 using namespace std;
-typedef numeric_limits<double> dbl;
-typedef numeric_limits<unsigned int> uint;
+typedef numeric_limits<double> dbl_limits;
+typedef numeric_limits<unsigned int> uint_limits;
 
 void set_quadrant_polarity(int quadrant, double& sx, double& sy, double& sz) 
 {
@@ -116,14 +116,14 @@ int FieldDip::centre_pos_to_index(double x, double y, double z,
 int FieldDip::global_pos_to_index(double x, double y, double z, 
                                   unsigned int& ix, unsigned int& iy, unsigned int& iz)
 {
-    double cx=dbl::max(), cy=dbl::max(), cz=dbl::max();
+    double cx=dbl_limits::max(), cy=dbl_limits::max(), cz=dbl_limits::max();
     global_to_center(x,y,z,cx,cy,cz);
     return centre_pos_to_index(cx,cy,cz,ix,iy,iz);
 }
 
 void FieldDip::set_bfield(double x, double y, double z, double bx, double by, double bz)
 {
-    unsigned int i=uint::max(),j=uint::max(),k=uint::max();
+    unsigned int i=uint_l::max(),j=uint_l::max(),k=uint_l::max();
     centre_pos_to_index(x,y,z,i,j,k);
     
     if (i >= MAX_DIP_NX || j >= MAX_DIP_NY || k >= MAX_DIP_NZ) {
@@ -140,9 +140,9 @@ void FieldDip::set_bfield(double x, double y, double z, double bx, double by, do
 FieldDip::FieldDip(G4String fname, int polarity)
 : coil8_x0 (776.3),      coil8_z0 (3420.1),       // set the dipole origin
 cos36(0.809016994),      sin36(0.587785252),      // precalc useful numbers 
-global_xmin(dbl::max()), global_xmax(dbl::min()), // set for absolute min&max
-global_ymin(dbl::max()), global_ymax(dbl::min()), 
-global_zmin(dbl::max()), global_zmax(dbl::min()),
+global_xmin(dbl_limits::max()), global_xmax(dbl_limits::min()), // set for absolute min&max
+global_ymin(dbl_limits::max()), global_ymax(dbl_limits::min()), 
+global_zmin(dbl_limits::max()), global_zmax(dbl_limits::min()),
 step_size(10.0),         polarity(polarity),      
 file_name(fname),        initialised(false)
 {
@@ -166,9 +166,9 @@ void FieldDip::init()
             return;
         }
         /* map data is defined in centerline coordinate */
-        double in_x=dbl::max(), in_y=dbl::max(), in_z=dbl::max(); // make errors obvious
-        double in_bx=dbl::max(), in_by=dbl::max(), in_bz=dbl::max();
-        double in_ba=dbl::max();
+        double in_x=dbl_limits::max(), in_y=dbl_limits::max(), in_z=dbl_limits::max(); // make errors obvious
+        double in_bx=dbl_limits::max(), in_by=dbl_limits::max(), in_bz=dbl_limits::max();
+        double in_ba=dbl_limits::max();
         
         while (fgets(line,sizeof(line),fp)) {
             sscanf(line,"%lf %lf %lf %lg %lg %lg %lg",&in_x,&in_y,&in_z,&in_bx,&in_by,&in_bz,&in_ba);
@@ -214,7 +214,7 @@ void FieldDip::get_bfield(double x, double y, double z, double& bx, double& by, 
     
     // dipole only defined in positive quadrant, it is symmetric though
     // make this always break if indecies are not assigned elsewhere
-    unsigned int ix=uint::max(), iy=uint::max(), iz=uint::max(); 
+    unsigned int ix=uint_l::max(), iy=uint_l::max(), iz=uint_l::max();
     double sx=0, sy=0, sz=0;
     int quadrant = global_pos_to_index(x,y,z,ix,iy,iz);
     
@@ -238,7 +238,7 @@ void FieldDip::GetFieldValue(const double Point[3],double *Bfield)
 {
     if (not valid_position(Point[0],Point[1],Point[2])) return;
     
-    double bx = dbl::max(), by = dbl::max(), bz = dbl::max();
+    double bx = dbl_limits::max(), by = dbl_limits::max(), bz = dbl_limits::max();
     
     get_bfield(Point[0],Point[1],Point[2],bx,by,bz);
     
