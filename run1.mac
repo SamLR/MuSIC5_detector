@@ -4,10 +4,10 @@
 /MuSIC_Detector/dipField /Users/scook/code/MuSIC/simulation/MuSIC_5_detector_sim/MuSIC5/MuSIC5_detector/fieldmap/fieldmap_dipole.txt
 /MuSIC_Detector/solField /Users/scook/code/MuSIC/simulation/MuSIC_5_detector_sim/MuSIC5/MuSIC5_detector/fieldmap/fieldmap_solenoid.txt
 
-/MuSIC_Detector/gun/inputOffset 3
+#/MuSIC_Detector/gun/inputOffset 
 
 /run/initialize
-/run/beamOn 1
+/run/beamOn 100
 
 
 #/run/verbose 2
