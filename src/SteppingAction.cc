@@ -49,13 +49,16 @@ SteppingAction::~SteppingAction()
 void SteppingAction::UserSteppingAction(const G4Step * aStep)
 {
     G4Track * track = aStep->GetTrack();
-    
     if (track->GetDefinition()->GetPDGEncoding() == 0)
     { // Optical photons == 0, gamma == 22 (op != gamma)
         if (f_root->mppc_hits >= MAX_HIT)
         {
             // Check we've not filled ROOT
-            G4cerr << "SteppingAction Error: MAX_HIT reached for MPPC" << G4endl;
+            if (f_root->mppc_hits == MAX_HIT)
+            { // Only send this error once
+                G4cerr << "SteppingAction Warning: MAX_HIT "
+                        << MAX_HIT <<" reached for MPPC" << G4endl;
+            }
             return;
         }
         mppc_hit(aStep);
@@ -68,7 +71,11 @@ void SteppingAction::UserSteppingAction(const G4Step * aStep)
         if (f_root->g_nhit >= MAX_HIT)
         {
             // Check we've not filled ROOT
-            G4cerr << "SteppingAction Error: MAX_HIT reached for truth" << G4endl;
+            if (f_root->g_nhit == MAX_HIT)
+            {
+                G4cerr << "SteppingAction Warning: MAX_HIT "
+                        << MAX_HIT <<" reached for truth" << G4endl;
+            }
             return;
         }
         
