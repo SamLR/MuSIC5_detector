@@ -67,7 +67,7 @@ DetectorConstruction::DetectorConstruction()
 f_fname_sol("../../fieldmap/MuSIC5_detector/fieldmap_solenoid.txt"),
 f_fname_dip("../../fieldmap/MuSIC5_detector/fieldmap_dipole.txt"),
 f_dip_polarity(1.0),
-f_degraderZ(1.0*mm/2.0), f_targetZ(6.0*mm/2.0),
+f_degraderZ(1.0*mm/2.0), f_targetZ(0.5*mm/2.0),
 f_u_limit (0), f_d_limit(0), f_deg_limit(0), f_st_limit(0)
 {
     f_messenger = new DetectorConstructionMessenger(this);
