@@ -27,3 +27,4 @@ test.C
 *.png
 *.heprep
 *.gdd
+generated_scripts/
