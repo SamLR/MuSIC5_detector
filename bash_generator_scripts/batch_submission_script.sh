@@ -58,6 +58,12 @@ function write_qsub_script {
 cat > $SCRIPT_FILE <<EOM
 #!/bin/bash
 # This is a generated file for use with qsub
+
+# Set the appropriate globals
+source /unix/lfv/scook/geant4_fast_build/share/Geant4-9.6.1/geant4make/geant4make.sh
+source /unix/lfv/scook/geant4_fast_build/bin/geant4.sh
+export LD_LIBRARY_PATH=/home/scook/MuSIC5_detector/WD/tmp/Linux-g++/music/:$LD_LIBRARY_PATH
+
 $EXE $IN_ROOT $OUT_ROOT $MAC_FILE          
 EOM
 # Make sure we can run the file
@@ -65,17 +71,17 @@ chmod 755 $SCRIPT_FILE
 }
 
 
-# WORK_DIR=/home/scook/MuSIC5_detector
-WORK_DIR=/Users/scook/code/MuSIC/simulation/MuSIC_5_detector_sim/MuSIC5/MuSIC5_detector
+WORK_DIR=/home/scook/MuSIC5_detector
+# WORK_DIR=/Users/scook/code/MuSIC/simulation/MuSIC_5_detector_sim/MuSIC5/MuSIC5_detector
 EXE=$WORK_DIR/WD/bin/Linux-g++/music
 IN_ROOT=$WORK_DIR/input/g4bl_out_36_rotation_30435841_particles.root
 FIELD_DIR=$WORK_DIR/input
-OUT_DIR=$WORK_DIR/output
+OUT_DIR=/unix/lfv/scook/music_data
 SCRIPT_DIR=$WORK_DIR/generated_scripts
 EMAIL=sam@samlr.com
 
-MID=10  # How many runs do we want on the short queue 
-MAX=85 # What's the maximum number of jobs (-1: count from 0)
+MID=9  # How many runs do we want on the short queue 
+MAX=84 # What's the maximum number of jobs (-1: count from 0)
 
 PICK_UP=0
 # do a set of short queue runs 
@@ -89,10 +95,11 @@ do
     # Make the script for qsub
     write_qsub_script $EXE $IN_ROOT $OUT_DIR $SCRIPT_DIR $QUEUE $N
     echo "        qsub -q $QUEUE -M $EMAIL $SCRIPT_DIR/${QUEUE}_$N.mac"
-    # qsub -q $QUEUE -M $EMAIL $SCRIPT_DIR/$N.sh
+    qsub -q $QUEUE -M $EMAIL $SCRIPT_DIR/${QUEUE}_$N.sh
 done
 
-PICK_UP=$(( $RUN_LENGTH*$MID ))
+# PICK_UP=$(( $RUN_LENGTH*$MID ))
+PICK_UP=5000
 echo "Pick up at: "$PICK_UP
 QUEUE=long # Max=72 hours, 96 wall time
 RUN_LENGTH=43000 # Assume 10 events/min ~ 72 hours (max)
@@ -104,6 +111,11 @@ do
     # Make the script for qsub
     write_qsub_script $EXE $IN_ROOT $OUT_DIR $SCRIPT_DIR $QUEUE $N
     echo "        qsub -q $QUEUE -M $EMAIL $SCRIPT_DIR/${QUEUE}_$N.mac"
-    # qsub -q $QUEUE -M $EMAIL $SCRIPT_DIR/$N.sh
+    qsub -q $QUEUE -M $EMAIL $SCRIPT_DIR/${QUEUE}_$N.sh
 done
+
+# check that the jobs are saved
+qstat | grep scook
+
 exit 0
+
