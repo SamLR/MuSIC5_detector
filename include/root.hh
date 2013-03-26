@@ -34,9 +34,7 @@ public:
     double in_Px_new; // Rotated momentum
     double in_Pz_new;
     
-    // max memory use should be 5e6x20x8 B = 800,000,000 B = 800 MB 
-//#define MAX_HIT 5000000 // Max array size
-  #define MAX_HIT 5000 // Max array size  
+  #define MAX_HIT 10000 // Max array size  
     /* Output ROOT file to be created */
     TFile* file_out;
     // Truth level data
