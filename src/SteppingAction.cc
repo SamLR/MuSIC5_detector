@@ -48,38 +48,53 @@ SteppingAction::~SteppingAction()
 
 void SteppingAction::UserSteppingAction(const G4Step * aStep)
 {
+    static bool issue_warning_mppc  = true;
+    static bool issue_warning_truth = true;
+    
     G4Track * track = aStep->GetTrack();
     if (track->GetDefinition()->GetPDGEncoding() == 0)
     { // Optical photons == 0, gamma == 22 (op != gamma)
-        if (f_root->mppc_hits >= MAX_HIT)
-        {
-            // Check we've not filled ROOT
-            if (f_root->mppc_hits == MAX_HIT)
-            { // Only send this error once
-                G4cerr << "SteppingAction Warning: MAX_HIT "
-                        << MAX_HIT <<" reached for MPPC" << G4endl;
-            }
+        if ((not issue_warning_mppc) and f_root->mppc_hits >= MAX_HIT)
+        { // try to make this quick
             return;
+        } else if (f_root->mppc_hits >= MAX_HIT)
+        {
+            G4cerr << "SteppingAction Warning: MAX_HIT "
+                   << MAX_HIT
+                   <<" reached for MPPC. Event: "
+                   << f_root->g_iev
+                   << G4endl;
+            issue_warning_mppc = false;
+
+            return;
+        } else
+        {
+            issue_warning_mppc = true;
+            mppc_hit(aStep);
         }
-        mppc_hit(aStep);
         
     } else if ( is_charged(track->GetDefinition()->GetPDGEncoding()) )
     {
         // The particles we're interested in are those that will scintillate
         // i.e. charged particles. We'll assume that none have |charge| < 0.1
-        
-        if (f_root->g_nhit >= MAX_HIT)
+        if ((not issue_warning_truth) and f_root->g_nhit >= MAX_HIT)
         {
-            // Check we've not filled ROOT
-            if (f_root->g_nhit == MAX_HIT)
-            {
-                G4cerr << "SteppingAction Warning: MAX_HIT "
-                        << MAX_HIT <<" reached for truth" << G4endl;
-            }
             return;
+        } else if (f_root->g_nhit >= MAX_HIT)
+        {
+            G4cerr << "SteppingAction Warning: MAX_HIT "
+                   << MAX_HIT
+                   <<" reached for truth. Event: "
+                   << f_root->g_iev
+                   << G4endl;
+            issue_warning_truth = false;
+
+            return;
+        } else
+        {
+            issue_warning_truth = true;
+            truth_hit(aStep);
         }
-        
-        truth_hit(aStep);
     }
 }
 
