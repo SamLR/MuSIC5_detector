@@ -28,3 +28,4 @@ test.C
 *.heprep
 *.gdd
 generated_scripts/
+output_from_hep_batch/
