@@ -7,7 +7,6 @@
 //
 
 #include <iostream>
-#include "PhysicsList.hh"
 
 #include "G4EmStandardPhysics_option3.hh"
 #include "HadronPhysicsQGSP_BERT_HP.hh" 
@@ -20,13 +19,29 @@
 // included to add specific settings
 #include "G4MuIonisation.hh"
 
+#include "PhysicsList.hh"
+#include "PhysicsListMessenger.hh"
 
-PhysicsList::PhysicsList() {
+
+PhysicsList::PhysicsList()
+: opticalPhysicsEnabled(false), opticalPhysics(NULL), messenger(NULL)
+{
+    messenger = new PhysicsListMessenger(this);
     init();
+    // calling this function should have no effect
+    // but if the default value (above) is true it should set
+    // things up correctly
+    EnableOpticalProcesses(opticalPhysicsEnabled);
+}
+
+PhysicsList::~PhysicsList()
+{
+    delete opticalPhysics;
 }
 
 
-void PhysicsList::init(){
+void PhysicsList::init()
+{ // Set a basic physics set, that doesn't include optical processes
     this->defaultCutValue = 50*um;
     this->RegisterPhysics(new G4EmStandardPhysics_option3());    
     this->RegisterPhysics(new HadronPhysicsQGSP_BERT_HP());
@@ -35,9 +50,24 @@ void PhysicsList::init(){
     this->RegisterPhysics(new G4HadronElasticPhysicsHP());
     this->RegisterPhysics(new G4QStoppingPhysics());
     this->RegisterPhysics(new G4IonPhysics());
-    this->RegisterPhysics(new G4OpticalPhysics());
 }
 
-void PhysicsList::SetCuts(){
-    ;
-}
+void PhysicsList::EnableOpticalProcesses(bool newVal)
+{
+    opticalPhysicsEnabled=newVal;
+    
+    if (opticalPhysicsEnabled)
+    { // enable optical processes
+        if (opticalPhysics)
+        { // if there are already optical processes enabled: tidy them up
+            this->RemovePhysics(opticalPhysics);
+            delete opticalPhysics;
+        }
+        opticalPhysics = new G4OpticalPhysics();
+        this->RegisterPhysics(opticalPhysics);
+    } else if (opticalPhysics)
+    { // If optical processes had been enabled tidy them up
+        this->RemovePhysics(opticalPhysics);
+        delete opticalPhysics;
+    }
+};

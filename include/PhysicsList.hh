@@ -12,21 +12,27 @@
 #include "G4VModularPhysicsList.hh"
 #include "globals.hh"
 
-//class G4VPhysicsConstructor;
+class G4VPhysicsConstructor;
 //class StepMax;
-//class PhysicsListMessenger;
+class PhysicsListMessenger;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 class PhysicsList: public G4VModularPhysicsList {
 public:
     PhysicsList();
-    ~PhysicsList() {;};
+    ~PhysicsList();
     // In theory should inherit everything we need
+    
+    void EnableOpticalProcesses(bool newVal);
     
 private:
     void init();
-    void SetCuts();
+    void SetCuts() {;} ;
+    
+    bool opticalPhysicsEnabled;
+    G4VPhysicsConstructor* opticalPhysics;
+    PhysicsListMessenger* messenger;
 };
 
 
