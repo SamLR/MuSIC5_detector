@@ -4,8 +4,8 @@
 images/muon_momentum_at_beam_pipe_exit.svg
 </title>
 <desc>
-Creator: ROOT Version 5.32/00
-CreationDate: Sun Dec  9 16:20:32 2012</desc>
+Creator: ROOT Version 5.34/05
+CreationDate: Fri Apr  5 16:24:01 2013</desc>
 <defs>
 </defs>
 <rect x="0" y="0" width="567" height="328" fill="white"/>
@@ -13,34 +13,34 @@ CreationDate: Sun Dec  9 16:20:32 2012</desc>
 <rect x="57" y="33" width="397" height="262" fill="none" stroke="black"/>
 <rect x="57" y="33" width="397" height="262" fill="white"/>
 <rect x="57" y="33" width="397" height="262" fill="none" stroke="black"/>
-<path d="M57,295h 4v -2h 4v -4h 4v -6h 4v -8h 4v -12h 4v -14h 3v -11h 4v -17h 4v -12h 4v -17h 4v -20h 4v -16h 4v -16h 4v -17h 4v -13h 4v -10h 4v 2h 4v -12h 4v -16h 4v -3h 4v -7h 8v -7h 4v -8h 4v -2h 4v -2h 4v 11h 4v 7h 4v 17h 4v 19h 4v 10h 4v 13h 4v
- 16h 4v 10h 4v 16h 4v 14h 4v 9h 3v 10h 4v 13h 4v 4h 4v 14h 4v 6h 4v 4h 4v 7h 4v 9h 4v 7h 4v -1h 4v 4h 4v 3h 4v 4h 4v 2h 4v 3h 8v 2h 4v 2h 4v 2h 8v 1h 4v 2h 4v 1h 4v 2h 4v -1h 4v 2h 4v 1h 4v 1h 8v 1h 4v 1h 7v 1h 24v 1h 96" fill="none" stroke="black"
- stroke-width="2"/>
+<path d="M57,295h 4v -2h 4v -4h 4v -6h 4v -8h 4v -12h 4v -14h 3v -11h 4v -17h 4v -12h 4v -17h 4v -20h 4v -16h 4v -16h 4v -18h 4v -12h 4v -10h 4v 1h 4v -12h 4v -15h 4v -3h 4v -7h 8v -7h 4v -8h 4v -3h 4v -1h 4v 11h 4v 7h 4v 17h 4v 18h 4v 11h 4v 13h 4v
+ 16h 4v 10h 4v 15h 4v 15h 4v 9h 3v 10h 4v 12h 4v 5h 4v 14h 4v 6h 4v 4h 4v 7h 4v 9h 4v 7h 4v -1h 4v 4h 4v 3h 4v 4h 4v 2h 4v 3h 4v -1h 4v 3h 4v 2h 4v 2h 8v 1h 4v 2h 4v 1h 4v 2h 4v -1h 4v 2h 4v 1h 4v 1h 8v 1h 8v 1h 3v 1h 24v 1h 96" fill="none"
+ stroke="black" stroke-width="2"/>
 <rect x="459" y="210" width="102" height="85" fill="white"/>
 <path d="M459,295h 102" fill="none" stroke="black"/>
 <path d="M561,295v -85" fill="none" stroke="black"/>
 <path d="M561,210h -102" fill="none" stroke="black"/>
 <path d="M459,210v 85" fill="none" stroke="black"/>
-<text x="500" y="227" fill="black" font-size="18" font-family="Helvetica">
+<text x="499" y="226" fill="black" font-size="18" font-family="Helvetica">
 All
 </text>
 <path d="M459,231h 102" fill="none" stroke="black"/>
-<text x="464" y="245" fill="black" font-size="8" font-family="Helvetica">
+<text x="464" y="244" fill="black" font-size="8" font-family="Helvetica">
 Mean  
 </text>
-<text x="522" y="245" fill="black" font-size="8" font-family="Helvetica">
+<text x="524" y="245" fill="black" font-size="8" font-family="Helvetica">
  0.08763
 </text>
 <text x="517" y="245" fill="black" font-size="8" font-family="Times">
 &#0177;
 </text>
-<text x="489" y="245" fill="black" font-size="8" font-family="Helvetica">
+<text x="490" y="245" fill="black" font-size="8" font-family="Helvetica">
   62.84 
 </text>
-<text x="464" y="267" fill="black" font-size="8" font-family="Helvetica">
+<text x="464" y="266" fill="black" font-size="8" font-family="Helvetica">
 RMS   
 </text>
-<text x="522" y="266" fill="black" font-size="8" font-family="Helvetica">
+<text x="524" y="266" fill="black" font-size="8" font-family="Helvetica">
  0.06197
 </text>
 <text x="517" y="266" fill="black" font-size="8" font-family="Times">
@@ -52,11 +52,11 @@ RMS
 <text x="464" y="287" fill="black" font-size="8" font-family="Helvetica">
 Integral 
 </text>
-<text x="512" y="288" fill="black" font-size="8" font-family="Helvetica">
- 9.572e+04
+<text x="514" y="287" fill="black" font-size="8" font-family="Helvetica">
+ 6.639e+08
 </text>
 <path d="M57,295h 397" fill="none" stroke="black"/>
-<text x="359" y="317" fill="black" font-size="11" font-family="Helvetica">
+<text x="353" y="317" fill="black" font-size="11" font-family="Helvetica">
 Momentum (MeV/c)
 </text>
 <path d="M57,288v 7" fill="none" stroke="black"/>
@@ -108,140 +108,141 @@ Momentum (MeV/c)
 <path d="M437,292v 3" fill="none" stroke="black"/>
 <path d="M445,292v 3" fill="none" stroke="black"/>
 <path d="M454,288v 7" fill="none" stroke="black"/>
-<text x="54" y="306" fill="black" font-size="11" font-family="Helvetica">
+<text x="53" y="306" fill="black" font-size="11" font-family="Helvetica">
 0
 </text>
-<text x="84" y="306" fill="black" font-size="11" font-family="Helvetica">
+<text x="83" y="306" fill="black" font-size="11" font-family="Helvetica">
 20
 </text>
-<text x="117" y="306" fill="black" font-size="11" font-family="Helvetica">
+<text x="116" y="306" fill="black" font-size="11" font-family="Helvetica">
 40
 </text>
-<text x="150" y="306" fill="black" font-size="11" font-family="Helvetica">
+<text x="149" y="306" fill="black" font-size="11" font-family="Helvetica">
 60
 </text>
 <text x="183" y="306" fill="black" font-size="11" font-family="Helvetica">
 80
 </text>
-<text x="213" y="306" fill="black" font-size="11" font-family="Helvetica">
+<text x="212" y="306" fill="black" font-size="11" font-family="Helvetica">
 100
 </text>
-<text x="246" y="306" fill="black" font-size="11" font-family="Helvetica">
+<text x="245" y="306" fill="black" font-size="11" font-family="Helvetica">
 120
 </text>
-<text x="279" y="306" fill="black" font-size="11" font-family="Helvetica">
+<text x="278" y="306" fill="black" font-size="11" font-family="Helvetica">
 140
 </text>
 <text x="312" y="306" fill="black" font-size="11" font-family="Helvetica">
 160
 </text>
-<text x="346" y="306" fill="black" font-size="11" font-family="Helvetica">
+<text x="345" y="306" fill="black" font-size="11" font-family="Helvetica">
 180
 </text>
 <text x="378" y="306" fill="black" font-size="11" font-family="Helvetica">
 200
 </text>
-<text x="412" y="306" fill="black" font-size="11" font-family="Helvetica">
+<text x="411" y="306" fill="black" font-size="11" font-family="Helvetica">
 220
 </text>
-<text x="445" y="306" fill="black" font-size="11" font-family="Helvetica">
+<text x="444" y="306" fill="black" font-size="11" font-family="Helvetica">
 240
 </text>
 <path d="M57,295v -262" fill="none" stroke="black"/>
-<g transform="rotate(-90,29,61)">
-<text x="29" y="61" fill="black" font-size="11" font-family="Helvetica">
-Count
+<g transform="rotate(-90,29,44)">
+<text x="29" y="44" fill="black" font-size="11" font-family="Helvetica">
+A)
+</text>
+</g>
+<g transform="rotate(-90,29,54)">
+<text x="29" y="54" fill="black" font-size="11" font-family="Times">
+&#0956;
+</text>
+</g>
+<g transform="rotate(-90,29,155)">
+<text x="29" y="155" fill="black" font-size="11" font-family="Helvetica">
+Muon Rate (muons/
 </text>
 </g>
 <path d="M70,295h -13" fill="none" stroke="black"/>
-<path d="M63,288h -6" fill="none" stroke="black"/>
-<path d="M63,282h -6" fill="none" stroke="black"/>
-<path d="M63,275h -6" fill="none" stroke="black"/>
-<path d="M63,268h -6" fill="none" stroke="black"/>
-<path d="M70,261h -13" fill="none" stroke="black"/>
-<path d="M63,254h -6" fill="none" stroke="black"/>
-<path d="M63,248h -6" fill="none" stroke="black"/>
-<path d="M63,241h -6" fill="none" stroke="black"/>
-<path d="M63,234h -6" fill="none" stroke="black"/>
-<path d="M70,227h -13" fill="none" stroke="black"/>
-<path d="M63,221h -6" fill="none" stroke="black"/>
-<path d="M63,214h -6" fill="none" stroke="black"/>
+<path d="M63,285h -6" fill="none" stroke="black"/>
+<path d="M63,276h -6" fill="none" stroke="black"/>
+<path d="M63,266h -6" fill="none" stroke="black"/>
+<path d="M63,256h -6" fill="none" stroke="black"/>
+<path d="M70,246h -13" fill="none" stroke="black"/>
+<path d="M63,236h -6" fill="none" stroke="black"/>
+<path d="M63,227h -6" fill="none" stroke="black"/>
+<path d="M63,217h -6" fill="none" stroke="black"/>
 <path d="M63,207h -6" fill="none" stroke="black"/>
-<path d="M63,200h -6" fill="none" stroke="black"/>
-<path d="M70,193h -13" fill="none" stroke="black"/>
+<path d="M70,197h -13" fill="none" stroke="black"/>
 <path d="M63,187h -6" fill="none" stroke="black"/>
-<path d="M63,180h -6" fill="none" stroke="black"/>
-<path d="M63,173h -6" fill="none" stroke="black"/>
-<path d="M63,166h -6" fill="none" stroke="black"/>
-<path d="M70,159h -13" fill="none" stroke="black"/>
-<path d="M63,153h -6" fill="none" stroke="black"/>
-<path d="M63,146h -6" fill="none" stroke="black"/>
-<path d="M63,139h -6" fill="none" stroke="black"/>
-<path d="M63,132h -6" fill="none" stroke="black"/>
-<path d="M70,126h -13" fill="none" stroke="black"/>
+<path d="M63,178h -6" fill="none" stroke="black"/>
+<path d="M63,168h -6" fill="none" stroke="black"/>
+<path d="M63,158h -6" fill="none" stroke="black"/>
+<path d="M70,148h -13" fill="none" stroke="black"/>
+<path d="M63,138h -6" fill="none" stroke="black"/>
+<path d="M63,129h -6" fill="none" stroke="black"/>
 <path d="M63,119h -6" fill="none" stroke="black"/>
-<path d="M63,112h -6" fill="none" stroke="black"/>
-<path d="M63,105h -6" fill="none" stroke="black"/>
-<path d="M63,98h -6" fill="none" stroke="black"/>
-<path d="M70,92h -13" fill="none" stroke="black"/>
-<path d="M63,85h -6" fill="none" stroke="black"/>
-<path d="M63,78h -6" fill="none" stroke="black"/>
-<path d="M63,71h -6" fill="none" stroke="black"/>
-<path d="M63,64h -6" fill="none" stroke="black"/>
-<path d="M70,58h -13" fill="none" stroke="black"/>
-<path d="M70,58h -13" fill="none" stroke="black"/>
-<path d="M63,51h -6" fill="none" stroke="black"/>
-<path d="M63,44h -6" fill="none" stroke="black"/>
-<path d="M63,37h -6" fill="none" stroke="black"/>
+<path d="M63,109h -6" fill="none" stroke="black"/>
+<path d="M70,99h -13" fill="none" stroke="black"/>
+<path d="M63,89h -6" fill="none" stroke="black"/>
+<path d="M63,80h -6" fill="none" stroke="black"/>
+<path d="M63,70h -6" fill="none" stroke="black"/>
+<path d="M63,60h -6" fill="none" stroke="black"/>
+<path d="M70,50h -13" fill="none" stroke="black"/>
+<path d="M70,50h -13" fill="none" stroke="black"/>
+<path d="M63,40h -6" fill="none" stroke="black"/>
 <text x="48" y="299" fill="black" font-size="11" font-family="Helvetica">
 0
 </text>
-<text x="36" y="265" fill="black" font-size="11" font-family="Helvetica">
-500
+<text x="48" y="250" fill="black" font-size="11" font-family="Helvetica">
+5
 </text>
-<text x="30" y="231" fill="black" font-size="11" font-family="Helvetica">
-1000
+<text x="41" y="201" fill="black" font-size="11" font-family="Helvetica">
+10
 </text>
-<text x="30" y="197" fill="black" font-size="11" font-family="Helvetica">
-1500
+<text x="41" y="151" fill="black" font-size="11" font-family="Helvetica">
+15
 </text>
-<text x="30" y="163" fill="black" font-size="11" font-family="Helvetica">
-2000
+<text x="41" y="103" fill="black" font-size="11" font-family="Helvetica">
+20
 </text>
-<text x="30" y="129" fill="black" font-size="11" font-family="Helvetica">
-2500
+<text x="41" y="54" fill="black" font-size="11" font-family="Helvetica">
+25
 </text>
-<text x="30" y="95" fill="black" font-size="11" font-family="Helvetica">
-3000
+<text x="76" y="22" fill="black" font-size="7" font-family="Helvetica">
+6
 </text>
-<text x="30" y="62" fill="black" font-size="11" font-family="Helvetica">
-3500
+<text x="64" y="31" fill="black" font-size="11" font-family="Helvetica">
+10
+</text>
+<text x="57" y="31" fill="black" font-size="11" font-family="Times">
+&#0215;
 </text>
 <rect x="459" y="210" width="102" height="85" fill="white"/>
 <path d="M459,295h 102" fill="none" stroke="black"/>
 <path d="M561,295v -85" fill="none" stroke="black"/>
 <path d="M561,210h -102" fill="none" stroke="black"/>
 <path d="M459,210v 85" fill="none" stroke="black"/>
-<text x="500" y="227" fill="black" font-size="18" font-family="Helvetica">
+<text x="499" y="226" fill="black" font-size="18" font-family="Helvetica">
 All
 </text>
 <path d="M459,231h 102" fill="none" stroke="black"/>
-<text x="464" y="245" fill="black" font-size="8" font-family="Helvetica">
+<text x="464" y="244" fill="black" font-size="8" font-family="Helvetica">
 Mean  
 </text>
-<text x="522" y="245" fill="black" font-size="8" font-family="Helvetica">
+<text x="524" y="245" fill="black" font-size="8" font-family="Helvetica">
  0.08763
 </text>
 <text x="517" y="245" fill="black" font-size="8" font-family="Times">
 &#0177;
 </text>
-<text x="489" y="245" fill="black" font-size="8" font-family="Helvetica">
+<text x="490" y="245" fill="black" font-size="8" font-family="Helvetica">
   62.84 
 </text>
-<text x="464" y="267" fill="black" font-size="8" font-family="Helvetica">
+<text x="464" y="266" fill="black" font-size="8" font-family="Helvetica">
 RMS   
 </text>
-<text x="522" y="266" fill="black" font-size="8" font-family="Helvetica">
+<text x="524" y="266" fill="black" font-size="8" font-family="Helvetica">
  0.06197
 </text>
 <text x="517" y="266" fill="black" font-size="8" font-family="Times">
@@ -253,129 +254,120 @@ RMS
 <text x="464" y="287" fill="black" font-size="8" font-family="Helvetica">
 Integral 
 </text>
-<text x="512" y="288" fill="black" font-size="8" font-family="Helvetica">
- 9.572e+04
+<text x="514" y="287" fill="black" font-size="8" font-family="Helvetica">
+ 6.639e+08
 </text>
-<text x="106" y="16" fill="black" font-size="16" font-family="Helvetica">
+<text x="96" y="17" fill="black" font-size="17" font-family="Helvetica">
 Muon momentum at beampipe
 </text>
-<path d="M57,295h 4v -1h 4v -4h 4v -5h 4v -7h 4v -11h 4v -12h 3v -10h 4v -15h 4v -11h 4v -14h 4v -19h 4v -16h 4v -15h 4v -14h 4v -12h 4v -5h 4v -1h 4v -12h 4v -12h 4v -5h 4v -6h 4v 2h 4v -8h 4v -10h 4v -2h 4v -1h 4v 8h 4v 7h 4v 15h 4v 15h 4v 12h 4v
- 9h 4v 16h 4v 9h 4v 13h 4v 14h 4v 8h 3v 10h 4v 12h 4v 3h 4v 13h 4v 6h 4v 3h 4v 7h 4v 8h 4v 7h 4v -2h 4v 4h 4v 4h 4v 3h 4v 2h 4v 2h 4v -1h 4v 3h 4v 2h 4v 2h 8v 1h 4v 1h 4v 2h 4v 2h 4v -1h 4v 2h 8v 1h 8v 1h 4v 1h 7v 1h 24v 1h 96" fill="none"
+<path d="M57,295h 4v -2h 4v -3h 4v -5h 4v -7h 4v -11h 4v -12h 3v -10h 4v -15h 4v -11h 4v -14h 4v -20h 4v -15h 4v -15h 4v -14h 4v -12h 4v -5h 4v -2h 4v -11h 4v -13h 4v -4h 4v -7h 4v 3h 4v -8h 4v -10h 4v -2h 4v -1h 4v 7h 4v 8h 4v 14h 4v 16h 4v 12h 4v
+ 9h 4v 15h 4v 10h 4v 13h 4v 14h 4v 8h 3v 10h 4v 12h 4v 3h 4v 13h 4v 6h 4v 3h 4v 7h 4v 8h 4v 6h 4v -1h 4v 4h 4v 4h 4v 3h 4v 2h 4v 2h 4v -1h 4v 3h 4v 1h 4v 3h 8v 1h 4v 1h 4v 2h 4v 2h 4v -1h 4v 2h 8v 1h 8v 1h 4v 1h 7v 1h 24v 1h 96" fill="none"
  stroke="#ff0000" stroke-width="2"/>
 <rect x="459" y="121" width="102" height="86" fill="white"/>
 <path d="M459,207h 102" fill="none" stroke="black"/>
 <path d="M561,207v -86" fill="none" stroke="black"/>
 <path d="M561,121h -102" fill="none" stroke="black"/>
 <path d="M459,121v 86" fill="none" stroke="black"/>
-<text x="510" y="136" fill="black" font-size="18" font-family="Helvetica">
-+
-</text>
-<text x="500" y="136" fill="black" font-size="18" font-family="Times">
-&#0956;
+<text x="473" y="137" fill="black" font-size="18" font-family="Helvetica">
+Muon(+)
 </text>
 <path d="M459,143h 102" fill="none" stroke="black"/>
-<text x="464" y="157" fill="black" font-size="8" font-family="Helvetica">
+<text x="464" y="156" fill="black" font-size="8" font-family="Helvetica">
 Mean  
 </text>
-<text x="522" y="157" fill="black" font-size="8" font-family="Helvetica">
+<text x="524" y="156" fill="black" font-size="8" font-family="Helvetica">
  0.09255
 </text>
-<text x="517" y="157" fill="black" font-size="8" font-family="Times">
+<text x="517" y="156" fill="black" font-size="8" font-family="Times">
 &#0177;
 </text>
-<text x="491" y="157" fill="black" font-size="8" font-family="Helvetica">
+<text x="492" y="156" fill="black" font-size="8" font-family="Helvetica">
    63.3 
 </text>
-<text x="464" y="178" fill="black" font-size="8" font-family="Helvetica">
+<text x="464" y="177" fill="black" font-size="8" font-family="Helvetica">
 RMS   
 </text>
-<text x="522" y="178" fill="black" font-size="8" font-family="Helvetica">
+<text x="524" y="178" fill="black" font-size="8" font-family="Helvetica">
  0.06544
 </text>
 <text x="517" y="178" fill="black" font-size="8" font-family="Times">
 &#0177;
 </text>
-<text x="489" y="178" fill="black" font-size="8" font-family="Helvetica">
+<text x="490" y="178" fill="black" font-size="8" font-family="Helvetica">
   27.25 
 </text>
-<text x="464" y="198" fill="black" font-size="8" font-family="Helvetica">
+<text x="464" y="199" fill="black" font-size="8" font-family="Helvetica">
 Integral 
 </text>
-<text x="512" y="199" fill="black" font-size="8" font-family="Helvetica">
- 8.671e+04
+<text x="514" y="199" fill="black" font-size="8" font-family="Helvetica">
+ 6.014e+08
 </text>
 <rect x="459" y="121" width="102" height="86" fill="white"/>
 <path d="M459,207h 102" fill="none" stroke="black"/>
 <path d="M561,207v -86" fill="none" stroke="black"/>
 <path d="M561,121h -102" fill="none" stroke="black"/>
 <path d="M459,121v 86" fill="none" stroke="black"/>
-<text x="510" y="136" fill="black" font-size="18" font-family="Helvetica">
-+
-</text>
-<text x="500" y="136" fill="black" font-size="18" font-family="Times">
-&#0956;
+<text x="473" y="137" fill="black" font-size="18" font-family="Helvetica">
+Muon(+)
 </text>
 <path d="M459,143h 102" fill="none" stroke="black"/>
-<text x="464" y="157" fill="black" font-size="8" font-family="Helvetica">
+<text x="464" y="156" fill="black" font-size="8" font-family="Helvetica">
 Mean  
 </text>
-<text x="522" y="157" fill="black" font-size="8" font-family="Helvetica">
+<text x="524" y="156" fill="black" font-size="8" font-family="Helvetica">
  0.09255
 </text>
-<text x="517" y="157" fill="black" font-size="8" font-family="Times">
+<text x="517" y="156" fill="black" font-size="8" font-family="Times">
 &#0177;
 </text>
-<text x="491" y="157" fill="black" font-size="8" font-family="Helvetica">
+<text x="492" y="156" fill="black" font-size="8" font-family="Helvetica">
    63.3 
 </text>
-<text x="464" y="178" fill="black" font-size="8" font-family="Helvetica">
+<text x="464" y="177" fill="black" font-size="8" font-family="Helvetica">
 RMS   
 </text>
-<text x="522" y="178" fill="black" font-size="8" font-family="Helvetica">
+<text x="524" y="178" fill="black" font-size="8" font-family="Helvetica">
  0.06544
 </text>
 <text x="517" y="178" fill="black" font-size="8" font-family="Times">
 &#0177;
 </text>
-<text x="489" y="178" fill="black" font-size="8" font-family="Helvetica">
+<text x="490" y="178" fill="black" font-size="8" font-family="Helvetica">
   27.25 
 </text>
-<text x="464" y="198" fill="black" font-size="8" font-family="Helvetica">
+<text x="464" y="199" fill="black" font-size="8" font-family="Helvetica">
 Integral 
 </text>
-<text x="512" y="199" fill="black" font-size="8" font-family="Helvetica">
- 8.671e+04
+<text x="514" y="199" fill="black" font-size="8" font-family="Helvetica">
+ 6.014e+08
 </text>
-<path d="M57,295h 13v -1h 3v -1h 3v -1h 3v -1h 4v -1h 3v -1h 3v -2h 7v -1h 3v -2h 6v -1h 4v -1h 3v -1h 6v -2h 4v -4h 3v 4h 3v -2h 3v -2h 3v 2h 7v -2h 6v -1h 4v 2h 3v 2h 3v -3h 7v 4h 3v -1h 3v 2h 3v 1h 4v 1h 3v -1h 3v 4h 3v -1h 4v 2h 6v 1h 7v 2h 3v
- -2h 3v 1h 3v 2h 7v 1h 3v 1h 13v 1h 10v 1h 3v -1h 6v 1h 23v 1h 104" fill="none" stroke="#0000ff" stroke-width="2"/>
+<path d="M57,295h 13v -1h 3v -1h 3v -1h 3v -1h 4v -1h 3v -1h 3v -2h 7v -1h 3v -2h 6v -1h 4v -1h 3v -1h 6v -2h 4v -4h 3v 3h 3v -1h 3v -2h 3v 1h 4v 1h 3v -2h 6v -1h 4v 2h 3v 2h 3v -3h 7v 4h 3v -1h 3v 1h 3v 2h 4v 1h 3v -1h 3v 4h 3v -1h 4v 2h 6v 1h 7v 2h
+ 3v -2h 3v 1h 3v 2h 7v 1h 3v 1h 13v 1h 10v 1h 3v -1h 6v 1h 23v 1h 104" fill="none" stroke="#0000ff" stroke-width="2"/>
 <rect x="459" y="33" width="102" height="85" fill="white"/>
 <path d="M459,118h 102" fill="none" stroke="black"/>
 <path d="M561,118v -85" fill="none" stroke="black"/>
 <path d="M561,33h -102" fill="none" stroke="black"/>
 <path d="M459,33v 85" fill="none" stroke="black"/>
-<text x="512" y="46" fill="black" font-size="18" font-family="Helvetica">
--
-</text>
-<text x="502" y="46" fill="black" font-size="18" font-family="Times">
-&#0956;
+<text x="471" y="48" fill="black" font-size="18" font-family="Helvetica">
+Muons(-)
 </text>
 <path d="M459,54h 102" fill="none" stroke="black"/>
-<text x="464" y="70" fill="black" font-size="14" font-family="Helvetica">
+<text x="464" y="68" fill="black" font-size="13" font-family="Helvetica">
 Entries 
 </text>
-<text x="521" y="70" fill="black" font-size="14" font-family="Helvetica">
+<text x="521" y="68" fill="black" font-size="13" font-family="Helvetica">
  9009
 </text>
-<text x="464" y="91" fill="black" font-size="14" font-family="Helvetica">
+<text x="464" y="90" fill="black" font-size="13" font-family="Helvetica">
 Mean  
 </text>
-<text x="514" y="91" fill="black" font-size="14" font-family="Helvetica">
+<text x="513" y="90" fill="black" font-size="13" font-family="Helvetica">
   58.42
 </text>
-<text x="464" y="113" fill="black" font-size="14" font-family="Helvetica">
+<text x="464" y="111" fill="black" font-size="13" font-family="Helvetica">
 RMS   
 </text>
-<text x="514" y="113" fill="black" font-size="14" font-family="Helvetica">
+<text x="513" y="111" fill="black" font-size="13" font-family="Helvetica">
   25.29
 </text>
 <rect x="459" y="33" width="102" height="85" fill="white"/>
@@ -383,75 +375,66 @@ RMS
 <path d="M561,118v -85" fill="none" stroke="black"/>
 <path d="M561,33h -102" fill="none" stroke="black"/>
 <path d="M459,33v 85" fill="none" stroke="black"/>
-<text x="512" y="46" fill="black" font-size="18" font-family="Helvetica">
--
-</text>
-<text x="502" y="46" fill="black" font-size="18" font-family="Times">
-&#0956;
+<text x="471" y="48" fill="black" font-size="18" font-family="Helvetica">
+Muons(-)
 </text>
 <path d="M459,54h 102" fill="none" stroke="black"/>
-<text x="464" y="68" fill="black" font-size="9" font-family="Helvetica">
+<text x="464" y="67" fill="black" font-size="8" font-family="Helvetica">
 Mean  
 </text>
-<text x="526" y="68" fill="black" font-size="9" font-family="Helvetica">
+<text x="527" y="68" fill="black" font-size="8" font-family="Helvetica">
  0.2665
 </text>
-<text x="521" y="68" fill="black" font-size="9" font-family="Times">
+<text x="520" y="68" fill="black" font-size="8" font-family="Times">
 &#0177;
 </text>
-<text x="491" y="68" fill="black" font-size="9" font-family="Helvetica">
+<text x="491" y="68" fill="black" font-size="8" font-family="Helvetica">
   58.42 
 </text>
-<text x="464" y="90" fill="black" font-size="9" font-family="Helvetica">
+<text x="464" y="88" fill="black" font-size="8" font-family="Helvetica">
 RMS   
 </text>
-<text x="526" y="90" fill="black" font-size="9" font-family="Helvetica">
+<text x="527" y="89" fill="black" font-size="8" font-family="Helvetica">
  0.1884
 </text>
-<text x="521" y="90" fill="black" font-size="9" font-family="Times">
+<text x="520" y="89" fill="black" font-size="8" font-family="Times">
 &#0177;
 </text>
-<text x="491" y="90" fill="black" font-size="9" font-family="Helvetica">
+<text x="491" y="89" fill="black" font-size="8" font-family="Helvetica">
   25.29 
 </text>
-<text x="464" y="110" fill="black" font-size="9" font-family="Helvetica">
+<text x="464" y="109" fill="black" font-size="8" font-family="Helvetica">
 Integral 
 </text>
-<text x="528" y="111" fill="black" font-size="9" font-family="Helvetica">
-   9009
+<text x="512" y="109" fill="black" font-size="8" font-family="Helvetica">
+ 6.248e+07
 </text>
 <rect x="340" y="33" width="114" height="39" fill="white"/>
 <path d="M340,72h 114" fill="none" stroke="black"/>
 <path d="M454,72v -39" fill="none" stroke="black"/>
 <path d="M454,33h -114" fill="none" stroke="black"/>
 <path d="M340,33v 39" fill="none" stroke="black"/>
-<text x="368" y="43" fill="black" font-size="9" font-family="Helvetica" font-weight="bold">
+<text x="368" y="43" fill="black" font-size="11" font-family="Helvetica">
 All
 </text>
 <path d="M344,44h 20v -9h -20z" fill="white"/>
-<path d="M344,40h 20" fill="none" stroke="black" stroke-width="2"/>
+<path d="M344,39h 20" fill="none" stroke="black" stroke-width="2"/>
 <g stroke="black" stroke-width="2" fill="none">
-<line x1="353" y1="40" x2="354" y2="40"/>
+<line x1="353" y1="39" x2="354" y2="39"/>
 </g>
-<text x="373" y="54" fill="black" font-size="9" font-family="Helvetica" font-weight="bold">
-+
-</text>
-<text x="368" y="54" fill="black" font-size="9" font-family="Times">
-&#0956;
+<text x="368" y="56" fill="black" font-size="11" font-family="Helvetica">
+Muon(+)
 </text>
 <path d="M344,57h 20v -9h -20z" fill="white"/>
-<path d="M344,53h 20" fill="none" stroke="#ff0000" stroke-width="2"/>
+<path d="M344,52h 20" fill="none" stroke="#ff0000" stroke-width="2"/>
 <g stroke="black" stroke-width="2" fill="none">
-<line x1="353" y1="53" x2="354" y2="53"/>
+<line x1="353" y1="52" x2="354" y2="52"/>
 </g>
-<text x="373" y="67" fill="black" font-size="9" font-family="Helvetica" font-weight="bold">
--
-</text>
-<text x="368" y="67" fill="black" font-size="9" font-family="Times">
-&#0956;
+<text x="368" y="69" fill="black" font-size="11" font-family="Helvetica">
+Muons(-)
 </text>
 <path d="M344,70h 20v -9h -20z" fill="white"/>
-<path d="M344,66h 20" fill="none" stroke="#0000ff" stroke-width="2"/>
+<path d="M344,65h 20" fill="none" stroke="#0000ff" stroke-width="2"/>
 <g stroke="black" stroke-width="2" fill="none">
-<line x1="353" y1="66" x2="354" y2="66"/>
+<line x1="353" y1="65" x2="354" y2="65"/>
 </g></svg>
