@@ -52,8 +52,11 @@ void SteppingAction::UserSteppingAction(const G4Step * aStep)
     static bool issue_warning_truth = true;
     
     G4Track * track = aStep->GetTrack();
-    if (track->GetDefinition()->GetPDGEncoding() == 0)
+    G4int pid = track->GetDefinition()->GetPDGEncoding();
+    
+    if ( pid == 0 )
     { // Optical photons == 0, gamma == 22 (op != gamma)
+        // if we're not using the mppc tree skip this whole block
         if ((not issue_warning_mppc) and f_root->mppc_hits >= MAX_HIT)
         { // try to make this quick
             return;
@@ -73,7 +76,7 @@ void SteppingAction::UserSteppingAction(const G4Step * aStep)
             mppc_hit(aStep);
         }
         
-    } else if ( is_charged(track->GetDefinition()->GetPDGEncoding()) )
+    } else if ( is_charged(pid) )
     {
         // The particles we're interested in are those that will scintillate
         // i.e. charged particles. We'll assume that none have |charge| < 0.1
