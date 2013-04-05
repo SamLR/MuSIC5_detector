@@ -28,15 +28,12 @@ PhysicsList::PhysicsList()
 {
     messenger = new PhysicsListMessenger(this);
     init();
-    // calling this function should have no effect
-    // but if the default value (above) is true it should set
-    // things up correctly
-    EnableOpticalProcesses(opticalPhysicsEnabled);
+    if (opticalPhysicsEnabled) EnableOpticalProcesses(opticalPhysicsEnabled);
 }
 
 PhysicsList::~PhysicsList()
-{
-    delete opticalPhysics;
+{ 
+    delete messenger;
 }
 
 
@@ -58,16 +55,12 @@ void PhysicsList::EnableOpticalProcesses(bool newVal)
     
     if (opticalPhysicsEnabled)
     { // enable optical processes
-        if (opticalPhysics)
-        { // if there are already optical processes enabled: tidy them up
-            this->RemovePhysics(opticalPhysics);
-            delete opticalPhysics;
-        }
+        // if there are already optical processes enabled: tidy them up
+        if (opticalPhysics) this->RemovePhysics(opticalPhysics);
         opticalPhysics = new G4OpticalPhysics();
         this->RegisterPhysics(opticalPhysics);
     } else if (opticalPhysics)
     { // If optical processes had been enabled tidy them up
         this->RemovePhysics(opticalPhysics);
-        delete opticalPhysics;
     }
 };
