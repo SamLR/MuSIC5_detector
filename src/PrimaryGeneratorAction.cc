@@ -31,15 +31,21 @@
 #include "G4ParticleGun.hh"
 #include "G4ParticleTable.hh"
 #include "G4ParticleDefinition.hh"
+#include "Randomize.hh"
 
 #include "PrimaryGeneratorActionMessenger.hh"
 
 #include "root.hh"
 
 PrimaryGeneratorAction::PrimaryGeneratorAction(Root* root)
-:f_root(root)
+:m_root(root), m_g4bl_input_enabled(false),
+m_x_mean(0.0),    m_y_mean(0.0),       m_z_mean(3901.1799), // z position is pretty much fixed
+m_x_sigma(-1.0),  m_y_sigma(-1.0),     m_z_sigma(0.0001),
+m_px_mean(0.0),   m_py_mean(0.0),      m_pz_mean(0.0),    m_pz_mean2(0.0),
+m_px_sigma(-1.0), m_py_sigma(-1.0),    m_pz_sigma(-1.0),  m_pz_sigma2(-1.0),
+m_pz_ratio(0.0),  m_x_offset(-1460.0), m_z_offset(-370.0)
 {
-    messenger = new PrimaryGeneratorActionMessenger(this);
+    m_messenger = new PrimaryGeneratorActionMessenger(this);
     
     G4int n_particle = 1;
     G4ParticleGun* fParticleGun = new G4ParticleGun(n_particle);
@@ -50,42 +56,123 @@ PrimaryGeneratorAction::PrimaryGeneratorAction(Root* root)
     fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,1.,0.));
     fParticleGun->SetParticleEnergy(100.*GeV);
     fParticleGun->SetParticlePosition(G4ThreeVector(0.*cm,0.*cm,0.*cm));
-    particleGun = fParticleGun;
+    m_particleGun = fParticleGun;
 }
 
 PrimaryGeneratorAction::~PrimaryGeneratorAction()
 {
-    delete messenger;
-    delete particleGun;
+    delete m_messenger;
+    delete m_particleGun;
 }
 
 void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-    f_root->tree_g4bl->GetEntry(f_root->g_iev);
-    int pdgid = f_root->in_PDGid;
+    // By default assume random, macro controlled position
+    // if generated multi particles are required they'll have
+    // to be run concurrently with macro
+    int pdgid=0;
+    G4ThreeVector position(0.0, 0.0, 0.0);
+    G4ThreeVector momentum(0.0, 0.0, 0.0);
+    
+    if (m_g4bl_input_enabled)
+    {
+        load_from_g4bl(position, momentum, pdgid);
+        
+        G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+        G4ParticleDefinition* particle = particleTable->FindParticle(pdgid);
+        m_particleGun->SetParticleDefinition(particle);
+        
+    } else {
+        // PID has already been set
+        load_from_dist(position, momentum);
+    }
+    
+    m_particleGun->SetParticleMomentum(position);
+    m_particleGun->SetParticlePosition(momentum);
+    m_particleGun->GeneratePrimaryVertex(anEvent);
+
+    m_root->g_iev++;
+}
+
+void PrimaryGeneratorAction::load_from_g4bl(G4ThreeVector &position,
+                                            G4ThreeVector &momentum,
+                                            int &pdgid)
+{
+    m_root->tree_g4bl->GetEntry(m_root->g_iev);
+    pdgid = m_root->in_PDGid;
     // use position and momentum(*_new) in global coordinate
-    double posx = f_root->in_x_new*mm;
-    double posy = f_root->in_y*mm;
-    double posz = f_root->in_z_new*mm;
-    double momx = f_root->in_Px_new*MeV;
-    double momy = f_root->in_Py*MeV;
-    double momz = f_root->in_Pz_new*MeV;
-    //printf("iev %d pdgid %d\n",g_iev, pdgid);
-    //printf("iev %d posx %lf posy %lf posz %lf\n", g_iev,posx/mm,posy/mm,posz/mm);
-    //printf("iev %d momx %lf momy %lf momz %lf\n", g_iev,momx/MeV,momy/MeV,momz/MeV);
+    position.setX(m_root->in_x_new*mm);
+    position.setY(m_root->in_y*mm);
+    position.setZ(m_root->in_z_new*mm);
     
-    G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-    G4ParticleDefinition* particle = particleTable->FindParticle(pdgid);
-    //G4ParticleDefinition* particle = particleTable->FindParticle("chargedgeantino");
-    particleGun->SetParticleDefinition(particle);
+    momentum.setX(m_root->in_Px_new*MeV);
+    momentum.setY(m_root->in_Py*MeV);
+    momentum.setZ(m_root->in_Pz_new*MeV);
+}
+
+void PrimaryGeneratorAction::load_from_dist(G4ThreeVector &position,
+                                            G4ThreeVector &momentum)
+{
+    // Event & track ID are set to -1 as they are unique to g4bl
+    m_root->in_EventID = -1;
+    m_root->in_TrackID = -1;
+    m_root->in_PDGid   = m_particleGun->GetParticleDefinition()->GetPDGEncoding();
     
-    particleGun->SetParticleMomentum(G4ThreeVector(momx,momy,momz));
-    particleGun->SetParticlePosition(G4ThreeVector(posx,posy,posz));
-    //printf("posx %lf posy %lf posz %lf\n",posx,posy,posz);
+    // Random position (g4bl co-ordinates)
+    double x = G4RandGauss::shoot(m_x_mean, m_x_sigma)*mm;
+    double y = G4RandGauss::shoot(m_y_mean, m_y_sigma)*mm;
+    double z = G4RandGauss::shoot(m_z_mean, m_z_sigma)*mm;
+    // Random momentum (g4bl co-ordinates)
+    double Px = G4RandGauss::shoot(m_px_mean, m_px_sigma)*MeV;
+    double Py = G4RandGauss::shoot(m_py_mean, m_py_sigma)*MeV;
+    // Pz given by the sum of two gaussians
+    double Pz = shoot_two_gaus(m_pz_mean,  m_pz_sigma,
+                               m_pz_mean2, m_pz_sigma2, m_pz_ratio)*MeV;
     
-    particleGun->GeneratePrimaryVertex(anEvent);
+    m_root->in_x   = x;
+    m_root->in_y   = y;
+    m_root->in_z   = z;
+    m_root->in_Px  = Px;
+    m_root->in_Py  = Py;
+    m_root->in_Pz  = Pz;
+    m_root->in_tof    = 0.0;
+    m_root->in_Weight = 1.0;
     
-    f_root->g_iev++;
+    // Precomputed values
+    const double cos_36 = 0.809016994375;
+    const double sin_36 = 0.587785252292;
+    
+    // Offset and rotate by 36 degrees
+    x = (x + m_x_offset)*cos_36 + (z + m_z_offset)*sin_36;
+    z = (z + m_z_offset)*cos_36 - (x + m_x_offset)*sin_36;
+    
+    // No offset for the momentum, just rotation
+    Px = Px*cos_36 + Pz*sin_36;
+    Pz = Pz*cos_36 - Px*sin_36;
+    
+    // record the new values
+    m_root->in_x_new  = x;
+    m_root->in_z_new  = z;
+    m_root->in_Px_new = Px;
+    m_root->in_Pz_new = Pz;
+    
+    // use position and momentum(*_new) in global coordinate
+    position = G4ThreeVector(x,  y,  z);
+    momentum = G4ThreeVector(Px, Py, Pz);
+}
+
+double PrimaryGeneratorAction::shoot_two_gaus(const double mean,  const double sigma,
+                                              const double mean2, const double sigma2,
+                                              const double ratio)
+{
+    double r = G4UniformRand();
+    if (r < ratio)
+    {
+        return G4RandGauss::shoot(mean, sigma);
+    } else
+    {
+        return G4RandGauss::shoot(mean2, sigma2);
+    }
 }
 
 
