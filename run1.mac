@@ -1,11 +1,34 @@
+# This is the basic skeleton for MuSIC macros
+
+# Setting the magnetic field, this shouldn't really need doing but is useful 
+# and stops the hard coded relative links breaking every time you move
 /MuSIC_Detector/dipField /Users/scook/code/MuSIC/simulation/MuSIC_5_detector_sim/MuSIC5/MuSIC5_detector/fieldmap/fieldmap_dipole.txt
 /MuSIC_Detector/solField /Users/scook/code/MuSIC/simulation/MuSIC_5_detector_sim/MuSIC5/MuSIC5_detector/fieldmap/fieldmap_solenoid.txt
 
+# If you're running without g4bl input you 
+#  a) Still need to pass as the second 
+#     argument to the program (sorry, lazy)
+#  b) Need to pick which particle to generate.
+#     If you want multiple particles types pick 
+#     a particle the '/run/beamOn X'
+# /control/execute pid_macros/pid_-211.mac
+# /control/execute pid_macros/pid_-13.mac
+# /control/execute pid_macros/pid_-11.mac
+# /control/execute pid_macros/pid_11.mac
+# /control/execute pid_macros/pid_13.mac
+# /control/execute pid_macros/pid_211.mac
+# /control/execute pid_macros/pid_2212.mac
 
-# this should run quickly (no optical processes)
-/MuSIC_Detector/gun/inputOffset 399
-#/MuSIC_Detector/enableOpticalProcesses false
-/MuSIC_Detector/enableOpticalProcesses true
+# If you are using the g4bl input you can set an offset 
+# into the file.
+# Note: event 399 is the first in g4bl that tends to leave to 
+# optical processes being needed
+# /MuSIC_Detector/gun/inputOffset 399
 
+# Toggle using optical processes these are _VERY_ slow
+/MuSIC_Detector/enableOpticalProcesses false
+
+# Basic command to set it all up and run it. 
 /run/initialize
-/run/beamOn 3
+/run/beamOn 1000000
+
