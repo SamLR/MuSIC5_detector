@@ -40,6 +40,7 @@
 #include "EventAction.hh"
 #include "SteppingAction.hh"
 #include "PhysicsList.hh"
+#include "RunAction.hh"
 
 #ifdef G4VIS_USE
 #include "G4VisExecutive.hh"
@@ -106,7 +107,9 @@ int main(int argc,char** argv)
     G4UserSteppingAction* stepping_action = new SteppingAction(root);
     runManager->SetUserAction(stepping_action);
 
-//    runManager->Initialize();
+    G4UserRunAction* run_action = new RunAction(root);
+    runManager->SetUserAction(run_action);
+    //    runManager->Initialize();
 
 #ifdef G4VIS_USE
     G4VisManager* visManager = new G4VisExecutive;

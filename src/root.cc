@@ -1,34 +1,57 @@
 #include "root.hh"
+#include <string>
 
 Root::Root(char* in_root_name, char* out_root_name)
+: g4bl_file_enabled(false), 
+  file_g4bl(NULL), tree_g4bl(NULL),
+  g_iev(0), in_EventID(0), in_TrackID(0), in_PDGid(0),
+  in_x(0),  in_y(0),  in_z(0),
+  in_Px(0), in_Py(0), in_Pz(0),
+  in_tof(0), in_Weight(0),
+  in_x_new(0),  in_z_new(0),
+  in_Px_new(0), in_Pz_new(0),
+  file_out(NULL),      truth_tree_out(NULL), g_nhit(0),
+  mppc_tree_out(NULL), mppc_hits(NULL)
 {
-    nevents_g4bl = open_g4bl(in_root_name);
-    printf("in_root_name %s has %lld entries\n",in_root_name,nevents_g4bl);
-    make_root(out_root_name);
-    g_nhit   = 0;
-    mppc_hits = 0;
+    std::strcpy(in_root_file_name,  in_root_name);
+    std::strcpy(out_root_file_name, out_root_name);
 }
 
 Root::~Root()
 {
     file_out->Close();
-    file_g4bl->Close();
+    
+    if(g4bl_file_enabled) file_g4bl->Close();
     // Trees should get auto deleted
+}
+
+void Root::init_root()
+{
+    if (g4bl_file_enabled) {
+        nevents_g4bl = open_g4bl(in_root_file_name);
+        printf("in_root_name %s has %lld entries\n",in_root_file_name,nevents_g4bl);
+    }
+    make_root(out_root_file_name);
+    g_nhit    = 0;
+    mppc_hits = 0;
 }
 
 void Root::write()
 {
+    file_out->cd();
     printf("\n\nPrinting the truth tree\n\n");
     truth_tree_out->Print();
+    truth_tree_out->Write();
+    
     printf("\n\nPrinting the MPPC tree\n\n");
     mppc_tree_out->Print();
-    file_out->cd();
-    truth_tree_out->Write();
     mppc_tree_out->Write();
 }
 
 void Root::make_root(char* root_name)
 {
+    if (file_out != NULL) return;
+    
     file_out = new TFile(root_name,"recreate");
     
     // Tree to store truth level data (only charged particles in
@@ -93,8 +116,11 @@ void Root::make_root(char* root_name)
     mppc_tree_out->Branch("mppc_z",     mppc_z,    "mppc_z[mppc_hits]/D");
     mppc_tree_out->Branch("mppc_time",  mppc_time, "mppc_time[mppc_hits]/D");
 }
+
 long long int Root::open_g4bl(const char* root_name)
 {
+    if (file_g4bl != NULL) return nevents_g4bl;
+        
     file_g4bl = new TFile(root_name);
     tree_g4bl = (TTree*)file_g4bl->Get("t");
     tree_g4bl->SetBranchAddress("EventID",&in_EventID);

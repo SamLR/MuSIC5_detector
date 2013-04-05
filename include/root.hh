@@ -11,8 +11,14 @@ public:
     ~Root();
     long long int nevents_g4bl;
     void write();
+    void init_root();
     void make_root(char* root_name);
+    void create_output(char* root_name);
     long long int open_g4bl(const char* root_name);
+    
+    bool g4bl_file_enabled;
+    char in_root_file_name [200];
+    char out_root_file_name[200];
     
     // Input ROOT file from G4beamline, also saved to output in truth data
     TFile* file_g4bl;
