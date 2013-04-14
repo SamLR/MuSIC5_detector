@@ -57,8 +57,8 @@ private:
     G4UIcmdWithADouble* setXoffset;
     G4UIcmdWithADouble* setZoffset;
     
-    void create_cmd_with_double(G4UIcmdWithADouble* cmd, const G4String &name,
-                                const double default_val = 0.0);
+    G4UIcmdWithADouble* create_cmd_with_double(const G4String &name,
+                                               const double default_val = 0.0);
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

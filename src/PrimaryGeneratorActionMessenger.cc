@@ -51,33 +51,40 @@ void PrimaryGeneratorActionMessenger::init()
     g4blEnable->SetDefaultValue(false);
     g4blOffsetCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
     
+    // Toggle using only charged particles from G4BL
+    g4blCharged = new G4UIcmdWithABool("/MuSIC_Detector/gun/g4blCharged", this);
+    g4blCharged->SetGuidance("Set input particles to only be charged");
+    g4blCharged->SetParameterName("Enabled", true);
+    g4blCharged->SetDefaultValue(false);
+    g4blCharged->AvailableForStates(G4State_PreInit,G4State_Idle);
+    
     // Create the cmds for setting the gaussian value
     // Position means
-    create_cmd_with_double(setXmean,    "setXmean");
-    create_cmd_with_double(setYmean,    "setYmean");
-    create_cmd_with_double(setZmean,    "setZmean", 3901.1799);
+    setXmean = create_cmd_with_double("setXmean");
+    setYmean = create_cmd_with_double("setYmean");
+    setZmean = create_cmd_with_double("setZmean", 3901.1799);
     // Position sigmas
-    create_cmd_with_double(setXsigma,   "setXsigma");
-    create_cmd_with_double(setYsigma,   "setYsigma");
-    create_cmd_with_double(setZsigma,   "setZsigma", 0.001);
+    setXsigma = create_cmd_with_double("setXsigma");
+    setYsigma = create_cmd_with_double("setYsigma");
+    setZsigma = create_cmd_with_double("setZsigma", 0.001);
     // Momentum means
-    create_cmd_with_double(setPxMean,   "setPxMean");
-    create_cmd_with_double(setPyMean,   "setPyMean");
-    create_cmd_with_double(setPzMean,   "setPzMean");
-    create_cmd_with_double(setPzMean2,  "setPzMean2");
+    setPxMean  = create_cmd_with_double("setPxMean");
+    setPyMean  = create_cmd_with_double("setPyMean");
+    setPzMean  = create_cmd_with_double("setPzMean");
+    setPzMean2 = create_cmd_with_double("setPzMean2");
     // Momentum Sigmas
-    create_cmd_with_double(setPxSigma,  "setPxSigma");
-    create_cmd_with_double(setPySigma,  "setPySigma");
-    create_cmd_with_double(setPzSigma,  "setPzSigma");
-    create_cmd_with_double(setPzSigma2, "setPzSigma2");
+    setPxSigma  = create_cmd_with_double("setPxSigma");
+    setPySigma  = create_cmd_with_double("setPySigma");
+    setPzSigma  = create_cmd_with_double("setPzSigma");
+    setPzSigma2 = create_cmd_with_double("setPzSigma2");
     
     // Odd commands
     // Set the ratio between gaus1(Pz) and gaus2(Pz)
-    create_cmd_with_double(setPzRatio,  "setPzRatio");
+    setPzRatio = create_cmd_with_double("setPzRatio");
     // These probably shouldn't be used...
     // Set the positional offsets for the rotation
-    create_cmd_with_double(setXoffset,  "setXoffset",-1460.0);
-    create_cmd_with_double(setZoffset,  "setZoffset", -370.0);
+    setXoffset = create_cmd_with_double("setXoffset",-1460.0);
+    setZoffset = create_cmd_with_double("setZoffset", -370.0);
 }
 
 void PrimaryGeneratorActionMessenger::SetNewValue(G4UIcommand* command,
@@ -142,16 +149,16 @@ void PrimaryGeneratorActionMessenger::SetNewValue(G4UIcommand* command,
     }
 }
 
-void PrimaryGeneratorActionMessenger::create_cmd_with_double(
-                                    G4UIcmdWithADouble *cmd,
+G4UIcmdWithADouble* PrimaryGeneratorActionMessenger::create_cmd_with_double(
                                     const G4String &name,
                                     const double default_val)
 {
     // Ton of setters for the distribution generators
     G4String path = G4String("/MuSIC_Detector/gun/") + name;
-    cmd = new G4UIcmdWithADouble(path, this);
+    G4UIcmdWithADouble* cmd = new G4UIcmdWithADouble(path, this);
     cmd->SetGuidance(name);
     cmd->SetParameterName(name, true);
     cmd->SetDefaultValue(default_val);
     cmd->AvailableForStates(G4State_PreInit, G4State_Idle);
+    return cmd;
 }
