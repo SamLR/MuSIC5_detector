@@ -75,8 +75,6 @@ private:
     double f_degraderZ; // degreader thickness
     double f_targetZ; // degreader thickness
     
-    G4Material* f_scint1Mat;
-    G4Material* f_scint2Mat;
     G4Material* f_degraderMat; // degrader material
     G4Material* f_targetMat; // degrader material
     

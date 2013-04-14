@@ -67,14 +67,12 @@ DetectorConstruction::DetectorConstruction()
 f_fname_sol("../../fieldmap/MuSIC5_detector/fieldmap_solenoid.txt"),
 f_fname_dip("../../fieldmap/MuSIC5_detector/fieldmap_dipole.txt"),
 f_dip_polarity(1.0),
-f_degraderZ(1.0*mm/2.0), f_targetZ(0.5*mm/2.0),
+f_degraderZ(5.0*mm/2.0), f_targetZ(0.5*mm/2.0),
 f_u_limit (0), f_d_limit(0), f_deg_limit(0), f_st_limit(0)
 {
     f_messenger = new DetectorConstructionMessenger(this);
     DefineMaterials();
-    f_scint1Mat   = G4Material::GetMaterial("Scintillator");
-    f_scint2Mat   = G4Material::GetMaterial("Scintillator");
-    f_degraderMat = G4Material::GetMaterial("Polystyrene");
+    f_degraderMat = G4Material::GetMaterial("Air");
     f_targetMat   = G4Material::GetMaterial("Copper");
 }
 
@@ -330,7 +328,9 @@ void DetectorConstruction::DefineMaterials()
     
     const int n_mylar_photons = 2;
     double mylar_photons[n_mylar_photons]      = {2.0*eV, 3.6*eV};
-    double mylar_reflectivity[n_mylar_photons] = {1., 1.};
+    // The reflectivity of Al for photos with wavelength <10um is ~90%
+    double mylar_reflectivity[n_mylar_photons] = {0.9, 0.9};
+    // Photoelectric efficiency
     double mylar_efficiency[n_mylar_photons]   = {0.0, 0.0};
     
     G4MaterialPropertiesTable* mylar_MPT = new G4MaterialPropertiesTable();
@@ -567,7 +567,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
             (*u_it)->GetLogicalVolume()->GetName() == "wls_fibre_clad_log")
         {
             new G4LogicalBorderSurface("mylar_wrap",  // Surface name
-                                       (*u_it),         // Leaving vol 1
+                                       (*u_it),       // Leaving vol 1
                                        f_physi_world, // Entering vol 2
                                        mylar_surface);// Has this surface
         }
