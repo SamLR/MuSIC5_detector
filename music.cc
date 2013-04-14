@@ -50,7 +50,7 @@
 #include "G4UIExecutive.hh"
 #endif
 
-#include "root.hh"
+#include "Root.hh"
 
 int main(int argc,char** argv)
 {
