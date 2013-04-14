@@ -87,8 +87,8 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
         load_from_dist(position, momentum);
     }
     
-    m_particleGun->SetParticleMomentum(position);
-    m_particleGun->SetParticlePosition(momentum);
+    m_particleGun->SetParticleMomentum(momentum);
+    m_particleGun->SetParticlePosition(position);
     m_particleGun->GeneratePrimaryVertex(anEvent);
 
     m_root->g_iev++;
@@ -116,49 +116,54 @@ void PrimaryGeneratorAction::load_from_dist(G4ThreeVector &position,
     // Event & track ID are set to -1 as they are unique to g4bl
     m_root->in_EventID = -1;
     m_root->in_TrackID = -1;
+    m_root->in_tof     = 0.0;
+    m_root->in_Weight  = 1.0;
     m_root->in_PDGid   = m_particleGun->GetParticleDefinition()->GetPDGEncoding();
     
     // Random position (g4bl co-ordinates)
-    double x = G4RandGauss::shoot(m_x_mean, m_x_sigma)*mm;
-    double y = G4RandGauss::shoot(m_y_mean, m_y_sigma)*mm;
-    double z = G4RandGauss::shoot(m_z_mean, m_z_sigma)*mm;
+    double x = G4RandGauss::shoot(m_x_mean, m_x_sigma);
+    double y = G4RandGauss::shoot(m_y_mean, m_y_sigma);
+    double z = G4RandGauss::shoot(m_z_mean, m_z_sigma);
     // Random momentum (g4bl co-ordinates)
-    double Px = G4RandGauss::shoot(m_px_mean, m_px_sigma)*MeV;
-    double Py = G4RandGauss::shoot(m_py_mean, m_py_sigma)*MeV;
+    double Px = G4RandGauss::shoot(m_px_mean, m_px_sigma);
+    double Py = G4RandGauss::shoot(m_py_mean, m_py_sigma);
     // Pz given by the sum of two gaussians
     double Pz = shoot_two_gaus(m_pz_mean,  m_pz_sigma,
-                               m_pz_mean2, m_pz_sigma2, m_pz_ratio)*MeV;
+                               m_pz_mean2, m_pz_sigma2, m_pz_ratio);
     
+    // Record the initial random values
     m_root->in_x   = x;
     m_root->in_y   = y;
     m_root->in_z   = z;
     m_root->in_Px  = Px;
     m_root->in_Py  = Py;
     m_root->in_Pz  = Pz;
-    m_root->in_tof    = 0.0;
-    m_root->in_Weight = 1.0;
     
-    // Precomputed values
+    // Precomputed values for sin and cos of 36degrees
     const double cos_36 = 0.809016994375;
     const double sin_36 = 0.587785252292;
     
     // Offset and rotate by 36 degrees
-    x = (x + m_x_offset)*cos_36 + (z + m_z_offset)*sin_36;
-    z = (z + m_z_offset)*cos_36 - (x + m_x_offset)*sin_36;
+    x += m_x_offset;
+    z += m_z_offset;
+    
+    const double x_new = x*cos_36 + z*sin_36;
+    const double z_new = z*cos_36 - x*sin_36;
     
     // No offset for the momentum, just rotation
-    Px = Px*cos_36 + Pz*sin_36;
-    Pz = Pz*cos_36 - Px*sin_36;
+    const double Px_new = Px*cos_36 + Pz*sin_36;
+    const double Pz_new = Pz*cos_36 - Px*sin_36;
     
-    // record the new values
-    m_root->in_x_new  = x;
-    m_root->in_z_new  = z;
-    m_root->in_Px_new = Px;
-    m_root->in_Pz_new = Pz;
+    // record the input values
+    m_root->in_x_new  = x_new;
+    m_root->in_z_new  = z_new;
+    m_root->in_Px_new = Px_new;
+    m_root->in_Pz_new = Pz_new;
+    
     
     // use position and momentum(*_new) in global coordinate
-    position = G4ThreeVector(x,  y,  z);
-    momentum = G4ThreeVector(Px, Py, Pz);
+    position = G4ThreeVector(x_new*mm,   y*mm,   z_new*mm);
+    momentum = G4ThreeVector(Px_new*MeV, Py*MeV, Pz_new*MeV);
 }
 
 double PrimaryGeneratorAction::shoot_two_gaus(const double mean,  const double sigma,

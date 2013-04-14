@@ -48,7 +48,11 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     G4ParticleGun* m_particleGun;
     
     // Enable/disable g4bl
-    inline void set_g4bl_mode(const bool new_val) {m_g4bl_input_enabled = new_val;};
+    inline void set_g4bl_mode(const bool new_val) {
+        m_g4bl_input_enabled = new_val;
+        m_root->g4bl_file_enabled = new_val;
+    };
+    inline void set_charged (const bool new_val) {m_g4bl_charged_only = new_val;} ;
 
     // Setters for all of the paramters
     // We want these so we can use macros to set profiles for different
