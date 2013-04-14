@@ -38,7 +38,7 @@
 #include "root.hh"
 
 PrimaryGeneratorAction::PrimaryGeneratorAction(Root* root)
-:m_root(root), m_g4bl_input_enabled(false),
+:m_root(root), m_g4bl_input_enabled(false), m_g4bl_charged_only(false),
 m_x_mean(0.0),    m_y_mean(0.0),       m_z_mean(3901.1799), // z position is pretty much fixed
 m_x_sigma(-1.0),  m_y_sigma(-1.0),     m_z_sigma(0.0001),
 m_px_mean(0.0),   m_py_mean(0.0),      m_pz_mean(0.0),    m_pz_mean2(0.0),
@@ -99,7 +99,20 @@ void PrimaryGeneratorAction::load_from_g4bl(G4ThreeVector &position,
                                             int &pdgid)
 {
     m_root->tree_g4bl->GetEntry(m_root->g_iev);
+    
+    // find only charged particles
+    if (m_g4bl_charged_only) {
+        while (!(   abs(m_root->in_PDGid) == 11       // electrons or positrons
+                 || abs(m_root->in_PDGid) == 13       // muons (+ or -)
+                 || abs(m_root->in_PDGid) == 211      // pions (_ or -)
+                 || m_root->in_PDGid      == 2212)) { // protons
+            m_root->g_iev += 1;
+            m_root->tree_g4bl->GetEntry(m_root->g_iev);
+        }
+    }
+    
     pdgid = m_root->in_PDGid;
+
     // use position and momentum(*_new) in global coordinate
     position.setX(m_root->in_x_new*mm);
     position.setY(m_root->in_y*mm);

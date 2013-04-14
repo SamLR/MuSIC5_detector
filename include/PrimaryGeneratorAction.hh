@@ -88,6 +88,7 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     void load_from_dist(G4ThreeVector &position, G4ThreeVector &momentum);
     
     bool m_g4bl_input_enabled;
+    bool m_g4bl_charged_only;
     // Variables for creating gaussian distributions, set via messenger
     double m_x_mean,   m_y_mean,   m_z_mean;
     double m_x_sigma,  m_y_sigma,  m_z_sigma;

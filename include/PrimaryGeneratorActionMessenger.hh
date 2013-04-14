@@ -37,6 +37,8 @@ private:
     G4UIcmdWithAnInteger*   g4blOffsetCmd;
     // Enable/disable g4bl input
     G4UIcmdWithABool*       g4blEnable;
+    // Toggle charged particles only from g4bl
+    G4UIcmdWithABool*       g4blCharged;
     
     // When g4bl is off use these to set generator distributions
     G4UIcmdWithADouble* setXmean;

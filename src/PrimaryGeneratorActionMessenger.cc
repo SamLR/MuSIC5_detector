@@ -96,6 +96,9 @@ void PrimaryGeneratorActionMessenger::SetNewValue(G4UIcommand* command,
     else if ( command == g4blEnable ){
         action->set_g4bl_mode(g4blEnable->GetNewBoolValue(newValue));
     }
+    else if ( command == g4blCharged ) {
+        action->set_charged(g4blCharged->GetNewBoolValue(newValue));
+    }
     else if ( command == setXmean    ) {
         action->set_x_mean(setXmean->GetNewDoubleValue(newValue));
     }
