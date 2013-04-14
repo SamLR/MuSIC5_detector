@@ -12,16 +12,23 @@
 /MuSIC_Detector/dipField /Users/scook/code/MuSIC/simulation/MuSIC_5_detector_sim/MuSIC5/MuSIC5_detector/fieldmap/fieldmap_dipole.txt
 /MuSIC_Detector/solField /Users/scook/code/MuSIC/simulation/MuSIC_5_detector_sim/MuSIC5/MuSIC5_detector/fieldmap/fieldmap_solenoid.txt
 
+
+/control/execute pid_macros/pid_-13.mac
+/MuSIC_Detector/enableOpticalProcesses false
+#/MuSIC_Detector/gun/g4blEnable true
+
+# Make sure the geometry etc is set then try and draw things
 /run/initialize
 
 /run/verbose 2
 
 /vis/open OGLIX
 
-# /vis/viewer/set/viewpointThetaPhi 126 0
-# Use targetPoint to look at the detector, can't set it here: causes segfault
-## /vis/viewer/set/targetPoint 75 10 400 cm
-# /vis/viewer/zoom 15
+
+# Rotate the viewpoint, make beam run top to bottom then rotate again (to see detector top down)
+/vis/viewer/set/viewpointThetaPhi 90 0
+/vis/viewer/set/upVector 0 0 1
+/vis/viewer/set/viewpointThetaPhi 90 90
 
 # /vis/open HepRepFile
 # /vis/heprep/setFileName music5_1
@@ -35,8 +42,8 @@
 
 #/vis/scene/add/hits
 
-/vis/scene/endOfEventAction accumulate
+/vis/scene/endOfEventAction accumulate 100
 
 /run/initialize
 
-/run/beamOn 3
+/run/beamOn 100

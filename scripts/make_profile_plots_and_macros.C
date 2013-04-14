@@ -38,9 +38,10 @@ void make_profile_plots_and_macros() {
     gStyle->SetOptFit(111);
     const int n_pids = 7;
     const int pids [n_pids] = {-211, -13, -11, 11, 13, 211, 2212};
-    const int n_parameters = 6;
-    const char* plots [n_parameters] = {"x", "y", "z", "Px", "Py", "Pz"};
-    const char img_root [] = "../../../images/g4bl_approximation/single_gaus_start_at_30p/position_and_momentum_by_axis_PID";
+    const int n_parameters = 10;
+    const char* plots [n_parameters] = {"x",  "x_new",  "y",  "z",  "z_new",
+                                        "Px", "Px_new", "Py", "Pz", "Pz_new"};
+    const char img_root [] = "../../../images/g4bl_approximation/dbl_gaus_start_at_30p/position_and_momentum_by_axis_PID";
     
     TFile* file = new TFile("../../g4blout/from_hep_1Bn/g4bl_out_36_rotation_30435841_particles.root", "READ");
     TTree* tree = (TTree*) file->Get("t");
@@ -56,7 +57,7 @@ void make_profile_plots_and_macros() {
         
         // magic numbers to full screen the canvas
         canvases[pid] = new TCanvas(can_name, can_name,1436,856);
-        canvases[pid]->Divide(3, 2);
+        canvases[pid]->Divide(5, 2);
         
         char cut_str[16];
         sprintf(cut_str, "PDGid==%i", pids[pid]);
@@ -67,13 +68,12 @@ void make_profile_plots_and_macros() {
             printf("\t %s %s\n", cut_str, plots[param]);
             canvases[pid]->cd(param+1);    
             tree->Draw(plots[param], cut_str);
-            // the z position is fixed, don't bother fitting it
-            if (strcmp(plots[param], "z") == 0)continue; 
             // Get the generated histogram for fitting
             TH1F *htemp = (TH1F*)gPad->GetPrimitive("htemp");
             // Pz tends to be a bit more varied, use 2 gaussians to reflect this
             // Also apparently fit functions _have_ to be TStrings to work
             const bool pz_fit = (strcmp("Pz",plots[param]) == 0);
+            // const bool pz_fit = false; // if using a single gaus
             TString fit_func = (pz_fit) ? TString("gaus(0)+gaus(3)") : TString("gaus(0)");
             // TString fit_func("gaus(0)");
             printf("%s \n ", fit_func.Data());
@@ -118,11 +118,11 @@ void make_profile_plots_and_macros() {
         sprintf(img_name,"%s_%i.png",img_root, pids[pid]);
         canvases[pid]->SaveAs(img_name);
         // Save the image as a SVG
-        sprintf(img_name,"%s_%i.png",img_root, pids[pid]);
+        sprintf(img_name,"%s_%i.svg",img_root, pids[pid]);
         canvases[pid]->SaveAs(img_name);
         
         // create the macro 
-        write_macro_for_pid(pids[pid],func);
+        // write_macro_for_pid(pids[pid],func);
     }
 }
 
@@ -149,7 +149,7 @@ void write_macro_for_pid(const int pid, TF1** func_array) {
     // Write a header
     fprintf(macro_file, "# This is a generated macro to create a distribution for %s\n", particle_name);
     // Disable use of the G4BL input file
-    fprintf(macro_file, "/MuSIC_Detector/gun/g4blEnable false\n", particle_name);
+    fprintf(macro_file, "/MuSIC_Detector/gun/g4blEnable false\n");
     // Now set the particle type
     fprintf(macro_file, "/gun/particle %s\n\n", particle_name);
 

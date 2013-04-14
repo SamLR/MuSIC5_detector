@@ -17,7 +17,7 @@
 # /control/execute pid_macros/pid_11.mac
 # /control/execute pid_macros/pid_13.mac
 # /control/execute pid_macros/pid_211.mac
-# /control/execute pid_macros/pid_2212.mac
+# /control/execute /Users/scook/code/MuSIC/simulation/MuSIC_5_detector_sim/MuSIC5/MuSIC5_detector/pid_macros/pid_2212.mac
 
 # If you are using the g4bl input you can set an offset 
 # into the file.
@@ -27,8 +27,10 @@
 
 # Toggle using optical processes these are _VERY_ slow
 /MuSIC_Detector/enableOpticalProcesses false
+/MuSIC_Detector/gun/g4blEnable true
 
 # Basic command to set it all up and run it. 
 /run/initialize
-/run/beamOn 1000000
+/run/beamOn 100
+# /run/beamOn 1000000
 
