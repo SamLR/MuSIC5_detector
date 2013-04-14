@@ -35,7 +35,7 @@ class G4String;
 class FieldDip
 {
 public:
-    FieldDip(G4String fname, int polarity);    
+    FieldDip(G4String fname, double polarity);
     ~FieldDip();
     
     void GetFieldValue( const  double Point[3], double *Bfield );

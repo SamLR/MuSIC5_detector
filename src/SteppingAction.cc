@@ -34,7 +34,7 @@
 #include "G4ParticleDefinition.hh"
 #include "G4ParticleTypes.hh"
 
-#include "root.hh"
+#include "Root.hh"
 
 // helper function at end of file
 int get_process_id(const G4String &process_name);

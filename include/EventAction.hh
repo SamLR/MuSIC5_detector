@@ -30,7 +30,7 @@
 #include "G4UserEventAction.hh"
 #include "globals.hh"
 
-#include "root.hh"
+#include "Root.hh"
 
 class EventAction : public G4UserEventAction
 {

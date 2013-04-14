@@ -111,7 +111,6 @@ void FieldSol::get_bfield(double x, double y, double z, double& bx, double& by, 
         
     unsigned int ix=uint_limits::max(), iy=uint_limits::max(), iz=uint_limits::max();
     pos_to_index(x,abs(y),z,ix,iy,iz);
-    assert(ix>=0 && iy>=0 && iz>=0);
 
     bx = magfld_bx[ix][iy][iz];
     by = magfld_by[ix][iy][iz];

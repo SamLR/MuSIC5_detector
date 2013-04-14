@@ -30,7 +30,7 @@
 #include "globals.hh"
 #include "G4UserSteppingAction.hh"
 
-#include "root.hh"
+#include "Root.hh"
 
 class SteppingAction : public G4UserSteppingAction
 {

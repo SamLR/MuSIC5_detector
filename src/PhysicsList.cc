@@ -63,4 +63,4 @@ void PhysicsList::EnableOpticalProcesses(bool newVal)
     { // If optical processes had been enabled tidy them up
         this->RemovePhysics(opticalPhysics);
     }
-};
+}

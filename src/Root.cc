@@ -1,4 +1,4 @@
-#include "root.hh"
+#include "Root.hh"
 #include <string>
 
 Root::Root(char* in_root_name, char* out_root_name)
@@ -11,7 +11,7 @@ Root::Root(char* in_root_name, char* out_root_name)
   in_x_new(0),  in_z_new(0),
   in_Px_new(0), in_Pz_new(0),
   file_out(NULL),      truth_tree_out(NULL), g_nhit(0),
-  mppc_tree_out(NULL), mppc_hits(NULL)
+  mppc_tree_out(NULL), mppc_hits(0)
 {
     std::strcpy(in_root_file_name,  in_root_name);
     std::strcpy(out_root_file_name, out_root_name);

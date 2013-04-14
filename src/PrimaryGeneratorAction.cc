@@ -35,7 +35,7 @@
 
 #include "PrimaryGeneratorActionMessenger.hh"
 
-#include "root.hh"
+#include "Root.hh"
 
 PrimaryGeneratorAction::PrimaryGeneratorAction(Root* root)
 :m_root(root), m_g4bl_input_enabled(false), m_g4bl_charged_only(false),

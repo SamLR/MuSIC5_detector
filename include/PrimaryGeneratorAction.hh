@@ -31,7 +31,7 @@
 #include "G4VUserPrimaryGeneratorAction.hh"
 #include "globals.hh"
 
-#include "root.hh"
+#include "Root.hh"
 
 class G4VPrimaryGenerator;
 class G4Event;

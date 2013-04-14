@@ -37,7 +37,7 @@
 #include "G4UImanager.hh"
 #include "G4ios.hh"
 
-#include "root.hh"
+#include "Root.hh"
 
 EventAction::EventAction(Root* root) { f_root = root; }
 EventAction::~EventAction() {;}

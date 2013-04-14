@@ -127,7 +127,7 @@ void FieldDip::set_bfield(double x, double y, double z, double bx, double by, do
     centre_pos_to_index(x,y,z,i,j,k);
     
     if (i >= MAX_DIP_NX || j >= MAX_DIP_NY || k >= MAX_DIP_NZ) {
-        fprintf(stderr,"ERROR: FieldDip::set_bfld overflowed x=%lf y=%lf z=%lf\n",x,y,z);
+        fprintf(stderr,"ERROR: FieldDip::set_bfld overflowed x=%f y=%f z=%f\n",x,y,z);
         exit(1);
     }
     
@@ -137,13 +137,13 @@ void FieldDip::set_bfield(double x, double y, double z, double bx, double by, do
 }
 
 
-FieldDip::FieldDip(G4String fname, int polarity)
+FieldDip::FieldDip(G4String fname, double polarity)
 : coil8_x0 (776.3),      coil8_z0 (3420.1),       // set the dipole origin
 cos36(0.809016994),      sin36(0.587785252),      // precalc useful numbers 
 global_xmin(dbl_limits::max()), global_xmax(dbl_limits::min()), // set for absolute min&max
 global_ymin(dbl_limits::max()), global_ymax(dbl_limits::min()), 
 global_zmin(dbl_limits::max()), global_zmax(dbl_limits::min()),
-step_size(10.0),         polarity(polarity),      
+step_size(10.0),         polarity(polarity),
 file_name(fname),        initialised(false)
 {
     init();
@@ -151,7 +151,7 @@ file_name(fname),        initialised(false)
 
 FieldDip::FieldDip()
 { 
-    FieldDip::FieldDip(G4String("ERROR: NO FILE SPECIFIED"), 0);
+    FieldDip::FieldDip(G4String("ERROR: NO FILE SPECIFIED"), 0.0);
 }
 
 void FieldDip::init()

@@ -26,7 +26,7 @@
 
 #include "Field.hh"
 
-Field::Field(G4String fname_sol, G4String fname_dip, int polarity)
+Field::Field(G4String fname_sol, G4String fname_dip, double polarity)
 {
    field_sol = new FieldSol(fname_sol);
    field_dip = new FieldDip(fname_dip,polarity);
