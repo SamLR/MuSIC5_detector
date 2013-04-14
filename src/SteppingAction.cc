@@ -118,7 +118,7 @@ void SteppingAction::truth_hit(const G4Step* aStep)
     // counts in analysis but this means we should catch particles born inside
     // a volume and exit. We have a problem with partices that exist wholey
     // within a volume but this shouldn't be a problem
-    if (!first_step || !last_step) return;
+    if ( not (first_step || last_step)) return;
     
     // Find out where we are
     const G4VPhysicalVolume* next_phys_vol = post_point->GetTouchableHandle()
