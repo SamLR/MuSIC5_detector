@@ -14,19 +14,25 @@ function make_macro {
 
 	# Basic command to set it all up and run it. 
 	/run/initialize
-	/run/beamOn 1000000
+	/run/beamOn $3
 	EOM
 }
-pids=( -211 -13 -11 11 13 211 2212 )
+pids=( -13 13 -11 11 211 -211 2212 )
 exe="../build/music not_a_file "
 macro_dir="../generated_scripts"
-outroot_dir="../pid_macros"
+outroot_dir="../pid_macros/root"
+
+if [[ $1 ]]; then
+	n_events=$1
+else
+	n_events=10000
+fi 
 
 for pid in ${pids[@]}; do
 	macro_file="$macro_dir/run_$pid.mac"
-	outroot_file="$outroot_dir/${pid}_1M.root"
-	echo $pid $macro_file $outroot_file
-	make_macro $macro_file $pid
+	outroot_file="$outroot_dir/${pid}_${n_events}.root"
+	echo $pid $macro_file $outroot_file $n_events
+	make_macro $macro_file $pid $n_events
 	echo $exe $outroot_file $macro_file
-	$exe $outroot_file $macro_file
+	$exe $outroot_file $macro_file > /dev/null
 done
