@@ -30,7 +30,7 @@ fi
 
 for pid in ${pids[@]}; do
 	macro_file="$macro_dir/run_$pid.mac"
-	outroot_file="$outroot_dir/${pid}_${n_events}.root"
+	outroot_file="$outroot_dir/pid_${pid}_events_${n_events}.root"
 	echo $pid $macro_file $outroot_file $n_events
 	make_macro $macro_file $pid $n_events
 	echo $exe $outroot_file $macro_file
