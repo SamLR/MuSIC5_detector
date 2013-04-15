@@ -27,9 +27,9 @@ error_suf="er"
 
 # locations of stuff
 base="../.." # was 'root' but that gets confusing using ROOT=
-infile="$base/g4blout/from_hep_1Bn/out_36_rotate.base"
+infile="$base/g4blout/from_hep_1Bn/out_36_rotate.root"
 exedir="$base/MuSIC5_detector/release"
-exe="$exedir/music" # usage: ./music <in.base> <out.base> [run.mac]
+exe="$exedir/music" # usage: ./music <in.root> <out.root> [run.mac]
 outdir="$base/output/$runname"
 logdir="$outdir/log"
 archivedir="$base/output/archive/"
