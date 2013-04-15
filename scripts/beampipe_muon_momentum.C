@@ -1,5 +1,6 @@
 #include "useful_for_root/drawing.C"
 #include "TString.h"
+#include "TCanvas.h"
 #include "TFile.h"
 #include "TTree.h"
 #include "TROOT.h"
@@ -44,8 +45,10 @@ void beampipe_muon_momentum()
     TH1F* array [] = {all, plus, minus};
     TString title = "Muon momentum at beampipe";
     TString leg_entries [] = {"All", "Muon(+)", "Muons(-)"};
-    TString save_location = "images/muon_momentum_at_beam_pipe_exit.svg";
+    TString save_location = "images/muon_momentum_at_beam_pipe_exit.";
     
     
-    draw_pretty_hists(3, array, title, leg_entries, save_location, 1002201);
+    TCanvas* can = draw_pretty_hists(3, array, title, leg_entries, save_location+"svg", 1002201);
+    can->SaveAs(save_location+"png");
+    
 }

@@ -59,7 +59,7 @@ void draw_pretty_two_hists(TH1* backHist, TH1* frontHist, const TString title,
 
 // the stupidly long variable name is to try and stop namespace collisions @ global
 const int __useful_default_colour_selection [] =  {1, 2, 4, 3, 6, 7, 8, 9};
-void draw_pretty_hists(const int& n_hists, TH1F** hist_array,   
+TCanvas* draw_pretty_hists(const int& n_hists, TH1F** hist_array,   
     const TString title,         // title for the entire plot
     const TString* leg_entries,  // titles for each legend entry
     const TString img_save_location ="",
@@ -134,6 +134,7 @@ void draw_pretty_hists(const int& n_hists, TH1F** hist_array,
     leg->Draw();
     
     if (img_save_location != "") can->SaveAs(img_save_location);
+    return can;
 }
 
 void draw_pretty_hist(TH1* hist, const TString title = "",
