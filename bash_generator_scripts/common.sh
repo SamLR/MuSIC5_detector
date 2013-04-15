@@ -19,20 +19,20 @@ header="#\n\
 # Generated on:\t $(date)\n\
 #\n"
 
-# common locations etc
-# locations etc
+# file suffixes
 outfile_suf="root" # '.' is added at location, mainly for readability
 macro_suf="mac"
 log_suf="log"
+error_suf="er"
 
-root="../.."
-# infile="$root/g4blout/monitor6_By-0.04T_cor.root"
-infile="$root/g4blout/from_hep_1Bn/out_36_rotate.root"
-exedir="$root/build/Release"
-exe="$exedir/music" # usage: ./music <in.root> <out.root> [run.mac]
-outdir="$root/output/$runname"
+# locations of stuff
+base="../.." # was 'root' but that gets confusing using ROOT=
+infile="$base/g4blout/from_hep_1Bn/out_36_rotate.base"
+exedir="$base/MuSIC5_detector/release"
+exe="$exedir/music" # usage: ./music <in.base> <out.base> [run.mac]
+outdir="$base/output/$runname"
 logdir="$outdir/log"
-archivedir="$root/output/archive/"
+archivedir="$base/output/archive/"
 
 runlog="$logdir/$runname.$log_suf" # master log
 
@@ -67,26 +67,33 @@ make_file_name()
 
 make_macro () 
 { # $1 ST material, $2 ST thickness, $3 DegMat $4 DegThickness $5 this filename
-    bulk="\
-$header\
-# Optimising stopping target\n\
-#\t STmaterial\t: $1\n\
-#\t STthickness\t: $2\n\
-#\t DegMaterial\t: $3\n\
-#\t DegThickness\t: $4
-#\n\
-# File name: $5\n\
-# \n\n\
-/MuSIC_Detector/dipField ../../MuSIC5_detector/fieldmap/fieldmap_dipole.txt\n\
-/MuSIC_Detector/solField ../../MuSIC5_detector/fieldmap/fieldmap_solenoid.txt\n\
-\n\
-/MuSIC_Detector/targetMat $1\n\
-/MuSIC_Detector/targetZ $2 mm\n\
-/MuSIC_Detector/degraderMat $3\n\
-/MuSIC_Detector/degraderZ $4 mm\n\
-/run/initialize\n\
-"
-    echo -e $bulk
+
+	cat > $5 <<-EOM
+	$header
+	# Optimising stopping target
+	#    STmaterial   : $1
+	#    STthickness  : $2
+	#    DegMaterial  : $3
+	#    DegThickness : $4
+	#
+	# File name: $5
+	
+	
+	# Make sure that we're using the G4BL file but not optical processes
+	/MuSIC_Detector/enableOpticalProcesses false
+	/MuSIC_Detector/gun/g4blEnable true
+	
+	# Load the correct fieldmaps
+	/MuSIC_Detector/dipField ../../MuSIC5_detector/fieldmap/fieldmap_dipole.txt
+	/MuSIC_Detector/solField ../../MuSIC5_detector/fieldmap/fieldmap_solenoid.txt
+	
+	/MuSIC_Detector/targetMat $1
+	/MuSIC_Detector/targetZ $2 mm
+	/MuSIC_Detector/degraderMat $3
+	/MuSIC_Detector/degraderZ $4 mm
+	/run/initialize
+	EOM
+
 }
 
 run_it()
@@ -94,20 +101,17 @@ run_it()
     prefix="$5"
     outfile="$outdir/$prefix.$outfile_suf"
     macfile="$logdir/$prefix.$macro_suf" # save the macros with the logs
+    erfile="$logdir/$prefix.$error_suf"
     logfile="$logdir/$prefix.$log_suf"
-    make_macro $1 $2 $3 $4 $macfile > $macfile
+    make_macro $1 $2 $3 $4 $macfile 
     echo "$5 run started" | tee -a $runlog 
     echo $macfile " generated" >> $runlog
     execmd="$exe $infile $outfile $macfile"
-    # for an explanation of the below command see doit.sh
-    # cmd="( $execmd >> $logfile ) 2>&1 | tee -a $logfile $runlog"
     # Log errors but sink everything else
-    cmd="$execmd > /dev/null 2> $logfile "
+    cmd="$execmd > $logfile 2> $erfile "
     echo "Running command:" >> $runlog
     echo $cmd >> $runlog
-    if [[ -z $testing ]]; then
-        eval $cmd
-    fi
+    eval $cmd
     # this will also go to stdout
     echo "$5 run complete" | tee -a $runlog 
     echo -e "************************\n" >> $runlog
