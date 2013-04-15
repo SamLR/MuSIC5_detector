@@ -126,9 +126,10 @@ int main(int argc,char** argv)
         G4String filename = macro_name;
         UImanager->ApplyCommand(command+filename);
 #ifndef G4VIS_USE 
-        if(runManager->GetCurrentRun()->GetRunID() == 0) {
-            // if we've not already been told to run, run everything
-            runManager->BeamOn(static_cast<int>(root->nevents_g4bl));
+        if(runManager->GetCurrentRun() == NULL) {
+            // If we've not already run anything, run everything
+            root->init_root();
+            runManager->BeamOn(root->nevents_g4bl);
         }
 #endif
 #ifdef G4VIS_USE

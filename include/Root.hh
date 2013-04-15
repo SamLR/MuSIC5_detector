@@ -9,12 +9,11 @@ class Root
 public:
     Root(char* in_root_name, char* out_root_name);
     ~Root();
-    long long int nevents_g4bl;
     void write();
     void init_root();
     void make_root(char* root_name);
     void create_output(char* root_name);
-    long long int open_g4bl(const char* root_name);
+    int  open_g4bl(const char* root_name);
     
     bool g4bl_file_enabled;
     char in_root_file_name [200];
@@ -23,6 +22,7 @@ public:
     // Input ROOT file from G4beamline, also saved to output in truth data
     TFile* file_g4bl;
     TTree* tree_g4bl;
+    int nevents_g4bl;
     int g_iev;      // Unique event ID essentially the row for the entry
     int in_EventID; // Event ID (not unique, can have multiple particles from 1 event)
     int in_TrackID; // Track ID

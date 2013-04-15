@@ -3,7 +3,7 @@
 
 Root::Root(char* in_root_name, char* out_root_name)
 : g4bl_file_enabled(false), 
-  file_g4bl(NULL), tree_g4bl(NULL),
+  file_g4bl(NULL), tree_g4bl(NULL), nevents_g4bl(0),
   g_iev(0), in_EventID(0), in_TrackID(0), in_PDGid(0),
   in_x(0),  in_y(0),  in_z(0),
   in_Px(0), in_Py(0), in_Pz(0),
@@ -29,7 +29,7 @@ void Root::init_root()
 {
     if (g4bl_file_enabled) {
         nevents_g4bl = open_g4bl(in_root_file_name);
-        printf("in_root_name %s has %lld entries\n",in_root_file_name,nevents_g4bl);
+        printf("in_root_name %s has %i entries\n",in_root_file_name,nevents_g4bl);
     }
     make_root(out_root_file_name);
     g_nhit    = 0;
@@ -117,7 +117,7 @@ void Root::make_root(char* root_name)
     mppc_tree_out->Branch("mppc_time",  mppc_time, "mppc_time[mppc_hits]/D");
 }
 
-long long int Root::open_g4bl(const char* root_name)
+int Root::open_g4bl(const char* root_name)
 {
     if (file_g4bl != NULL) return nevents_g4bl;
         
@@ -138,6 +138,6 @@ long long int Root::open_g4bl(const char* root_name)
     tree_g4bl->SetBranchAddress("z_new",&in_z_new);
     tree_g4bl->SetBranchAddress("Px_new",&in_Px_new);
     tree_g4bl->SetBranchAddress("Pz_new",&in_Pz_new);
-    return tree_g4bl->GetEntries();
+    return static_cast<int>(tree_g4bl->GetEntries());
 }
 
