@@ -32,6 +32,7 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 #include "G4RunManager.hh"
+#include "G4Run.hh"
 #include "G4UImanager.hh"
 
 #include "DetectorConstruction.hh"
@@ -125,7 +126,10 @@ int main(int argc,char** argv)
         G4String filename = macro_name;
         UImanager->ApplyCommand(command+filename);
 #ifndef G4VIS_USE 
-//        runManager->BeamOn(root->nevents_g4bl);
+        if(runManager->GetCurrentRun()->GetRunID() == 0) {
+            // if we've not already been told to run, run everything
+            runManager->BeamOn(static_cast<int>(root->nevents_g4bl));
+        }
 #endif
 #ifdef G4VIS_USE
         delete visManager;
