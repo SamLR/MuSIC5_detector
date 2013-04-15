@@ -32,3 +32,4 @@ build
 pid_macros
 scripts/position_and_momentum_fits.txt
 *.tar
+release
