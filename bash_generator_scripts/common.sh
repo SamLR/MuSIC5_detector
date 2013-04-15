@@ -102,13 +102,13 @@ run_it()
     outfile="$outdir/$prefix.$outfile_suf"
     macfile="$logdir/$prefix.$macro_suf" # save the macros with the logs
     erfile="$logdir/$prefix.$error_suf"
-    logfile="$logdir/$prefix.$log_suf"
+    # logfile="$logdir/$prefix.$log_suf"
     make_macro $1 $2 $3 $4 $macfile 
     echo "$5 run started" | tee -a $runlog 
     echo $macfile " generated" >> $runlog
     execmd="$exe $infile $outfile $macfile"
     # Log errors but sink everything else
-    cmd="$execmd > $logfile 2> $erfile "
+    cmd="$execmd > /dev/null 2> $erfile "
     echo "Running command:" >> $runlog
     echo $cmd >> $runlog
     eval $cmd
