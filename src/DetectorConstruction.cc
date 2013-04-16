@@ -63,11 +63,11 @@
 #include <string.h>
 
 DetectorConstruction::DetectorConstruction()
-:f_myField(0), f_updated(false),
+:f_myField(NULL), f_updated(false),
 f_fname_sol("../../fieldmap/MuSIC5_detector/fieldmap_solenoid.txt"),
 f_fname_dip("../../fieldmap/MuSIC5_detector/fieldmap_dipole.txt"),
 f_dip_polarity(1.0),
-f_degraderZ(5.0*mm/2.0), f_targetZ(0.5*mm/2.0),
+f_degraderZ(5.0*mm), f_targetZ(0.5*mm),
 f_u_limit (0), f_d_limit(0), f_deg_limit(0), f_st_limit(0)
 {
     f_messenger = new DetectorConstructionMessenger(this);
@@ -580,7 +580,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     // We'll use this distance later
     const double target_position_z = coil8_to_u_scint + u_scint_z + al_dz + f_targetZ;
     G4ThreeVector target_pos = get_global_pos(target_position_z);
-    G4Box* solid_target = new G4Box("target", target_x, target_y, f_targetZ);
+    G4Box* solid_target = new G4Box("target", target_x, target_y, f_targetZ/2.0);
     G4LogicalVolume* target_log = new G4LogicalVolume(solid_target,f_targetMat,"target",0,0,0);
     G4VPhysicalVolume* target_phys = new G4PVPlacement(G4Transform3D(rotate_36,target_pos),
                                                        target_log,"target",
@@ -666,7 +666,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     // degrader is in front of scint 1
     double degrader_posz = coil8_to_u_scint - u_scint_z - al_dz - f_degraderZ;
     G4ThreeVector degrader_pos = get_global_pos(degrader_posz);
-    G4Box* degrader_solid = new G4Box("degrader", degrader_x, degrader_y, f_degraderZ);
+    G4Box* degrader_solid = new G4Box("degrader", degrader_x, degrader_y, f_degraderZ/2.0);
     G4LogicalVolume* degrader_log =
         new G4LogicalVolume(degrader_solid,f_degraderMat,"degrader",0,0,0);
     G4PVPlacement* degrader_phys =
