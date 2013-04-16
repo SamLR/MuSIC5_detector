@@ -31,8 +31,9 @@
 /MuSIC_Detector/gun/g4blEnable true
 
 # Basic command to set it all up and run it. 
+/MuSIC_Detector/update
 /run/initialize
-# /run/beamOn 100
+/run/beamOn 3
 # /run/beamOn 5000
 # /run/beamOn 1000000
 

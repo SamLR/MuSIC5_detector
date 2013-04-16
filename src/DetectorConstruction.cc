@@ -366,9 +366,10 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     if (f_myField)
     {
         delete f_myField;
+        f_myField = NULL;
     }
     
-    if(!f_myField)
+    if(not f_myField)
     {
         f_myField = new Field(f_fname_sol,f_fname_dip,f_dip_polarity);
         G4FieldManager* fieldMgr
@@ -752,7 +753,7 @@ void DetectorConstruction::SetSolFieldName(G4String newFile)
 
 void DetectorConstruction::UpdateGeometry()
 {
-    
+    if (not f_updated) return;
     // clean-up previous geometry
     G4GeometryManager::GetInstance()->OpenGeometry();
     
