@@ -33,8 +33,20 @@ exe="$exedir/music" # usage: ./music <in.root> <out.root> [run.mac]
 outdir="$base/output/$runname"
 logdir="$outdir/log"
 archivedir="$base/output/archive/"
+sourcedir="$base/MuSIC5_detector"
 
 runlog="$logdir/$runname.$log_suf" # master log
+
+check_newest()
+{
+	for f in `find $sourcedir -name *.[ch][ch]`
+	do
+		if [ $f -nt $exe ]; then
+			echo "ERROR: $f is newer than $exe, please rebuild it"
+			exit 1
+		fi
+	done
+}
 
 # useful functions
 archive_dir ()

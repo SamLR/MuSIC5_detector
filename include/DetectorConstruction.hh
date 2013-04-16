@@ -53,7 +53,7 @@ public:
     void SetDipFieldName(G4String newFile);
 
     void SetDegraderZ(const double &newVal) {f_degraderZ = (newVal/2.0); f_updated = true;};
-    void SetTargetZ  (const double &newVal) {f_targetZ = (newVal/2.0);   f_updated = true;};
+    void SetTargetZ  (const double &newVal) {f_targetZ   = (newVal/2.0); f_updated = true;};
 
     // these need some amount of checking
     void SetPolarity(double);

@@ -23,8 +23,11 @@ source /usr/local/bin/geant4.sh
 
 # common holds all the variables
 source common.sh
-# save any previous results
 
+echo "Checking that we have the latest release of the program"
+check_newest
+
+# save any previous results
 echo "****archiving****"
 archive_dir $outdir $archivedir
 archive_dir $logdir $archivedir
