@@ -18,9 +18,12 @@ function make_macro {
 	EOM
 }
 pids=( -13 13 -11 11 211 -211 2212 )
-exe="../build/music not_a_file "
-macro_dir="../generated_scripts"
+exe="../release/music not_a_file "
+macro_dir="../pid_macros"
 outroot_dir="../pid_macros/root"
+
+source common.sh
+check_newest
 
 if [[ $1 ]]; then
 	n_events=$1
