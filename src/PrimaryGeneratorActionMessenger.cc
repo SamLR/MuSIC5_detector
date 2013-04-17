@@ -28,6 +28,26 @@ PrimaryGeneratorActionMessenger::~PrimaryGeneratorActionMessenger()
 {
     delete gunDir;
     delete g4blOffsetCmd;
+    delete g4blEnable;
+    delete g4blCharged;
+    delete g4blSinglePID;
+    delete setXmean;
+    delete setYmean;
+    delete setZmean;
+    delete setXsigma;
+    delete setYsigma;
+    delete setZsigma;
+    delete setPxMean;
+    delete setPyMean;
+    delete setPzMean;
+    delete setPzMean2;
+    delete setPxSigma;
+    delete setPySigma;
+    delete setPzSigma;
+    delete setPzSigma2;
+    delete setPzRatio;
+    delete setXoffset;
+    delete setZoffset;
 }
 
 void PrimaryGeneratorActionMessenger::init()
@@ -57,6 +77,14 @@ void PrimaryGeneratorActionMessenger::init()
     g4blCharged->SetParameterName("Enabled", true);
     g4blCharged->SetDefaultValue(false);
     g4blCharged->AvailableForStates(G4State_PreInit,G4State_Idle);
+    
+    // Toggle using only the selected PID
+    g4blSinglePID = new G4UIcmdWithABool("/MuSIC_Detector/gun/g4blSinglePID", this);
+    g4blSinglePID->SetGuidance("Only select particles with the current PID");
+    g4blSinglePID->SetGuidance("(set via /gun/particle)");
+    g4blSinglePID->SetParameterName("Enabled", true);
+    g4blSinglePID->SetDefaultValue(false);
+    g4blSinglePID->AvailableForStates(G4State_PreInit,G4State_Idle);
     
     // Create the cmds for setting the gaussian value
     // Position means
@@ -98,6 +126,9 @@ void PrimaryGeneratorActionMessenger::SetNewValue(G4UIcommand* command,
     }
     else if ( command == g4blCharged ) {
         action->set_charged(g4blCharged->GetNewBoolValue(newValue));
+    }
+    else if ( command == g4blSinglePID ) {
+        action->set_pid_only(g4blSinglePID->GetNewBoolValue(newValue));
     }
     else if ( command == setXmean    ) {
         action->set_x_mean(setXmean->GetNewDoubleValue(newValue));

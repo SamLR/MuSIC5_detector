@@ -52,7 +52,14 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
         m_g4bl_input_enabled = new_val;
         m_root->g4bl_file_enabled = new_val;
     };
-    inline void set_charged (const bool new_val) {m_g4bl_charged_only = new_val;} ;
+    inline void set_charged  (const bool new_val) {
+        m_g4bl_charged_only = new_val;
+        if (m_g4bl_pid_only) G4cerr <<"WARNING: PID only and charged only both set"<<G4endl;
+    };
+    inline void set_pid_only (const bool new_val) {
+        m_g4bl_pid_only = new_val;
+        if (m_g4bl_charged_only) G4cerr <<"WARNING: PID only and charged only both set"<<G4endl;
+    };
 
     // Setters for all of the paramters
     // We want these so we can use macros to set profiles for different
@@ -89,6 +96,7 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     
     bool m_g4bl_input_enabled;
     bool m_g4bl_charged_only;
+    bool m_g4bl_pid_only;
     // Variables for creating gaussian distributions, set via messenger
     double m_x_mean,   m_y_mean,   m_z_mean;
     double m_x_sigma,  m_y_sigma,  m_z_sigma;

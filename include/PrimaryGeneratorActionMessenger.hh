@@ -36,9 +36,11 @@ private:
     // Command for setting where to start reading the g4bl file from
     G4UIcmdWithAnInteger*   g4blOffsetCmd;
     // Enable/disable g4bl input
-    G4UIcmdWithABool*       g4blEnable;
+    G4UIcmdWithABool* g4blEnable;
     // Toggle charged particles only from g4bl
-    G4UIcmdWithABool*       g4blCharged;
+    G4UIcmdWithABool* g4blCharged;
+    // Toggle to run only the selected PID via g4bl
+    G4UIcmdWithABool* g4blSinglePID;
     
     // When g4bl is off use these to set generator distributions
     G4UIcmdWithADouble* setXmean;
