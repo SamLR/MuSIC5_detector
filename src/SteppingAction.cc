@@ -36,73 +36,57 @@
 
 #include "Root.hh"
 
-// helper function at end of file
-int get_process_id(const G4String &process_name);
-bool is_charged(const int pdg_id);
+SteppingAction::SteppingAction(Root* root) : f_root(root) {;}
 
-SteppingAction::SteppingAction(Root* root)
-{ f_root = root;}
-
-SteppingAction::~SteppingAction()
-{;}
-
-void SteppingAction::UserSteppingAction(const G4Step * aStep)
-{
+void SteppingAction::UserSteppingAction(const G4Step * aStep) {
+    // Two types of particle we care about: optical photons
+    // and charged particles (11, 13, 211, 2212: e, mu, pi, p).
+    // NOTE: optical photons, id = 0 ARE NOT gammas, id = 22
+    // 
+    // If it's an optical photon log those that hit our MPPCs
+    // charged particles we only care about in the main detector
+    // components: scintillators, degrader and target, there's also a
+    // special counter for particles entering the degrader.
+    
     static bool issue_warning_mppc  = true;
     static bool issue_warning_truth = true;
     
-    G4Track * track = aStep->GetTrack();
-    G4int pid = track->GetDefinition()->GetPDGEncoding();
+    const int pid = aStep->GetTrack()->GetDefinition()->GetPDGEncoding();
     
-    if ( pid == 0 )
-    { // Optical photons == 0, gamma == 22 (op != gamma)
-        // if we're not using the mppc tree skip this whole block
-        if ((not issue_warning_mppc) and f_root->mppc_hits >= MAX_HIT)
-        { // try to make this quick
+    if ( pid == 0 ) {
+        if ((not issue_warning_mppc) and f_root->mppc_hits >= MAX_HIT) {
             return;
-        } else if (f_root->mppc_hits >= MAX_HIT)
-        {
-            G4cerr << "SteppingAction Warning: MAX_HIT "
-                   << MAX_HIT
-                   <<" reached for MPPC. Event: "
-                   << f_root->g_iev
-                   << G4endl;
+            
+        } else if (f_root->mppc_hits >= MAX_HIT) {
             issue_warning_mppc = false;
-
+            issue_max_hit_warning(G4String("MPPC"), f_root->g_iev);
             return;
-        } else
-        {
+            
+        } else {
             issue_warning_mppc = true;
             mppc_hit(aStep);
+            return;
         }
         
-    } else if ( is_charged(pid) )
-    {
-        // The particles we're interested in are those that will scintillate
-        // i.e. charged particles. We'll assume that none have |charge| < 0.1
-        if ((not issue_warning_truth) and f_root->g_nhit >= MAX_HIT)
-        {
+    } else if (is_charged(pid)) {
+        if ((not issue_warning_truth) and f_root->g_nhit >= MAX_HIT) {
             return;
-        } else if (f_root->g_nhit >= MAX_HIT)
-        {
-            G4cerr << "SteppingAction Warning: MAX_HIT "
-                   << MAX_HIT
-                   <<" reached for truth. Event: "
-                   << f_root->g_iev
-                   << G4endl;
+            
+        } else if (f_root->g_nhit >= MAX_HIT) {
             issue_warning_truth = false;
-
+            issue_max_hit_warning(G4String("truth"), f_root->g_iev);
             return;
-        } else
-        {
+            
+        } else {
             issue_warning_truth = true;
             truth_hit(aStep);
+            return;
         }
     }
 }
 
-void SteppingAction::truth_hit(const G4Step* aStep)
-{
+void SteppingAction::truth_hit(const G4Step* aStep) {
+    
     G4Track* track = aStep->GetTrack();
     
     G4StepPoint* pre_point  = aStep->GetPreStepPoint();
@@ -134,26 +118,24 @@ void SteppingAction::truth_hit(const G4Step* aStep)
     const G4LogicalVolume* this_log_vol = this_phys_vol->GetLogicalVolume();
     
     const G4String& this_log_vol_name = this_log_vol->GetName();
+    const G4String& next_log_vol_name = next_log_vol->GetName();
     
     // Record before we enter the degrader (used as beam profile)
-    bool entering_degrader = last_step                               &&
-                             (next_log_vol->GetName() == "degrader") &&
-                             (this_log_vol_name       == "world");
+    bool entering_degrader = last_step
+                             && (next_log_vol_name == "degrader")
+                             && (this_log_vol_name == "world");
     
-    int counter_id = 0; // default 'bad' value
+    int counter_id = get_volume_id(this_log_vol_name, entering_degrader);
     
-    if     ( this_log_vol_name == "u_scint_log" ) { counter_id = 1; }
-    else if( this_log_vol_name == "target"      ) { counter_id = 2; }
-    else if( this_log_vol_name == "d_scint_log" ) { counter_id = 3; }
-    else if( this_log_vol_name == "degrader"    ) { counter_id = 4; }
-    else if( entering_degrader                  ) { counter_id = 5; }
-    else return; // not in a volume we're interested in
-    
+    if (counter_id < 1) return;
+        
     // The array value to write to
     const int g_nhit = f_root->g_nhit;
     // Process name
     const G4String process_name = post_point->GetProcessDefinedStep()->GetProcessName();
-    
+    // Parent vertex location name
+    const G4String parent_vol_name = track->GetLogicalVolumeAtVertex()->GetName();
+
     // Record directly into the root class. This is horrible code.
     
     // Information about this step (entering, exiting, where, what etc.)
@@ -172,6 +154,8 @@ void SteppingAction::truth_hit(const G4Step* aStep)
     f_root->px [g_nhit] = track->GetMomentum().x()/MeV;
     f_root->py [g_nhit] = track->GetMomentum().y()/MeV;
     f_root->pz [g_nhit] = track->GetMomentum().z()/MeV;
+    // Parent vertex
+    f_root->parent_counter[g_nhit] = get_volume_id(parent_vol_name, false);
     // Kinetic energy
     f_root->kinetic [g_nhit] = track->GetKineticEnergy()/MeV;
     // Energy deposited
@@ -182,8 +166,8 @@ void SteppingAction::truth_hit(const G4Step* aStep)
     f_root->g_nhit++;
 }
 
-void SteppingAction::mppc_hit(const G4Step* aStep)
-{
+void SteppingAction::mppc_hit(const G4Step* aStep) {
+    
     // Check if this is the first step in a volume?
     const G4StepPoint* pre_point = aStep->GetPreStepPoint();
     const bool first_step        = (pre_point->GetStepStatus() == fGeomBoundary);
@@ -208,42 +192,8 @@ void SteppingAction::mppc_hit(const G4Step* aStep)
     f_root->mppc_hits++;
 }
 
-int get_process_id(const G4String &process_name)
-{
-    if      ( process_name == "msc" )                       { return 1; } // multiple scattering
-    else if ( process_name == "Transportation" )            { return 2; }
-    else if ( process_name == "eIoni" )                     { return 3; }
-    else if ( process_name == "eBrem" )                     { return 4; }
-    else if ( process_name == "CoulombScat" )               { return 5; }
-    else if ( process_name == "phot" )                      { return 6; } // photo electric effect
-    else if ( process_name == "compt" )                     { return 7; }
-    else if ( process_name == "muMsc" )                     { return 8; }
-    else if ( process_name == "muIoni" )                    { return 9; }
-    else if ( process_name == "Decay" )                     { return 10; }
-    else if ( process_name == "hIoni" )                     { return 11; }
-    else if ( process_name == "annihil" )                   { return 12; }
-    else if ( process_name == "conv" )                      { return 13; }
-    else if ( process_name == "ionIoni" )                   { return 14; }
-    else if ( process_name == "muMinusCaptureAtRest" )      { return 15; }
-    else if ( process_name == "hadElastic" )                { return 16; }
-    else if ( process_name == "PionPlusInelastic" )         { return 17; }
-    else if ( process_name == "NeutronInelastic" )          { return 18; }
-    else if ( process_name == "CHIPSNuclearCaptureAtRest" ) { return 19; }
-    else if ( process_name == "PionMinusInelastic" )        { return 20; }
-    else { return  0; } // Error!
-}
 
-bool is_charged(const int pdg_id)
-{
-    switch (pdg_id) {
-        case -211:  return true; // pi-
-        case -13:   return true; // mu+
-        case -11:   return true; // e+
-        case  11:   return true; // e-
-        case  13:   return true; // mu-
-        case  211:  return true; // pi+
-        case  2212: return true; // proton
-            
-        default: return false;   // ignore everything else
-    }
-}
+
+
+
+

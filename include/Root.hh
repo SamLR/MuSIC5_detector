@@ -46,13 +46,14 @@ public:
     // Truth level data
     TTree* truth_tree_out;
     int g_nhit;
-    bool last_step  [MAX_HIT]; // flags for first/last step in a volume
-    bool first_step [MAX_HIT];
-    int procid   [MAX_HIT];    // Process ID (see SteppingAction.cc)
-    int counter  [MAX_HIT];    // Counter ID (see SteppingAction.cc)
-    int trkid    [MAX_HIT];    // Track ID
-    int parentid [MAX_HIT];    // Parent track ID
-    int pdgid    [MAX_HIT];    // PDG ID
+    bool last_step     [MAX_HIT];    // flags for first/last step in a volume
+    bool first_step    [MAX_HIT];
+    int procid         [MAX_HIT];    // Process ID (see SteppingAction.cc)
+    int counter        [MAX_HIT];    // Counter ID (see SteppingAction.cc)
+    int parent_counter [MAX_HIT];    // Location of parent vertex
+    int trkid          [MAX_HIT];    // Track ID
+    int parentid       [MAX_HIT];    // Parent track ID
+    int pdgid          [MAX_HIT];    // PDG ID
     double x [MAX_HIT];        // Position
     double y [MAX_HIT];
     double z [MAX_HIT];

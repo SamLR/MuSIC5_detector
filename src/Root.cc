@@ -71,8 +71,8 @@ void Root::make_root(char* root_name)
     truth_tree_out->Branch("in_Px", &in_Px, "in_Px/D");
     truth_tree_out->Branch("in_Py", &in_Py, "in_Py/D");
     truth_tree_out->Branch("in_Pz", &in_Pz, "in_Pz/D");
-    // 'Real' start time
-    truth_tree_out->Branch("in_tof", &in_tof, "in_tof/D");
+    // 'Real' start time  
+    truth_tree_out->Branch("in_tof",    &in_tof,    "in_tof/D");
     truth_tree_out->Branch("in_Weight", &in_Weight, "in_Weight/D");
     // Rotated start position (x & z only)
     truth_tree_out->Branch("in_x_new", &in_x_new, "in_x_new/D");
@@ -80,18 +80,24 @@ void Root::make_root(char* root_name)
     // Rotate start momentum (x & z only)
     truth_tree_out->Branch("in_Px_new", &in_Px_new, "in_Px_new/D");
     truth_tree_out->Branch("in_Pz_new", &in_Pz_new, "in_Pz_new/D");
-    
+
+    // Output information
     // Number of hits in this event
-    truth_tree_out->Branch("nhit",&g_nhit,"nhit/I");
-    // Was it a first/last step (these are arrays so automatically converted to pointers)
-    truth_tree_out->Branch("first_step", first_step, "first_step[nhit]/O"); // O = bool apparently
+    truth_tree_out->Branch("nhit", &g_nhit, "nhit/I");
+    
+    // Arrays are cast down to pointers automatically
+    // Was it a first/last step? (apparently O is bool in root)
+    truth_tree_out->Branch("first_step", first_step, "first_step[nhit]/O");
     truth_tree_out->Branch("last_step" , last_step,  "last_step[nhit]/O");
+    
     // Process, counter, track, parent and PDG IDs
-    truth_tree_out->Branch("procid",   procid,   "procid[nhit]/I");
-    truth_tree_out->Branch("counter",  counter,  "counter[nhit]/I");
-    truth_tree_out->Branch("trkid",    trkid,    "trkid[nhit]/I");
-    truth_tree_out->Branch("parentid", parentid, "parentid[nhit]/I");
-    truth_tree_out->Branch("pdgid",    pdgid,    "pdgid[nhit]/I");
+    truth_tree_out->Branch("procid",     procid,         "procid[nhit]/I");
+    truth_tree_out->Branch("counter",    counter,        "counter[nhit]/I");
+    truth_tree_out->Branch("vertex_vol", parent_counter, "counter[nhit]/I");
+    truth_tree_out->Branch("trkid",      trkid,          "trkid[nhit]/I");
+    truth_tree_out->Branch("parentid",   parentid,       "parentid[nhit]/I");
+    truth_tree_out->Branch("pdgid",      pdgid,          "pdgid[nhit]/I");
+    
     // Position
     truth_tree_out->Branch("x", x, "x[nhit]/D");
     truth_tree_out->Branch("y", y, "y[nhit]/D");
@@ -110,7 +116,7 @@ void Root::make_root(char* root_name)
     // Tree to store the information on photon hits at the MPPC
     mppc_tree_out = new TTree("mppc","mppc");
     // number of photons, which mppc they hit and when (global time)
-    mppc_tree_out->Branch("mppc_hits", &mppc_hits,  "mppc_hits/I");
+    mppc_tree_out->Branch("mppc_hits", &mppc_hits, "mppc_hits/I");
     mppc_tree_out->Branch("mppc_x",     mppc_x,    "mppc_x[mppc_hits]/D");
     mppc_tree_out->Branch("mppc_y",     mppc_y,    "mppc_y[mppc_hits]/D");
     mppc_tree_out->Branch("mppc_z",     mppc_z,    "mppc_z[mppc_hits]/D");
