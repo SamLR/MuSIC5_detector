@@ -4,6 +4,11 @@ source common.sh
 check_newest
 
 function make_macro () {
+	if [[ $2 == "+" ]]; then
+		pid="-13"
+	else
+		pid="13"
+	fi
 	cat > $1 <<-EOM
 	# This is a generated macro, DO NOT EDIT
 	# 
@@ -18,8 +23,8 @@ function make_macro () {
 	/MuSIC_Detector/dipField /Users/scook/code/MuSIC/simulation/MuSIC_5_detector_sim/MuSIC5/MuSIC5_detector/fieldmap/fieldmap_dipole.txt
 	/MuSIC_Detector/solField /Users/scook/code/MuSIC/simulation/MuSIC_5_detector_sim/MuSIC5/MuSIC5_detector/fieldmap/fieldmap_solenoid.txt
 	
-	/MuSIC_Detector/gun/g4blEnable False
-	/gun/particle mu$2
+	# gun/particle is set in the next macro
+	/control/execute ../pid_macros/pid_$pid.mac
 	
 	# Set up the degrader
 	/MuSIC_Detector/degraderZ $4 mm
