@@ -63,7 +63,7 @@ private:
     
     G4UIcmdWithADouble* create_cmd_with_double(const G4String &name,
                                                const double default_val = 0.0);
-};
+    };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 

@@ -133,6 +133,8 @@ void SteppingAction::truth_hit(const G4Step* aStep) {
     const int g_nhit = f_root->g_nhit;
     // Process name
     const G4String process_name = post_point->GetProcessDefinedStep()->GetProcessName();
+    const G4VProcess*  parent_proc = track->GetCreatorProcess();
+    const G4String parent_proc_name = (!parent_proc) ? G4String(""): parent_proc->GetProcessName();
     // Parent vertex location name
     const G4String parent_vol_name = track->GetLogicalVolumeAtVertex()->GetName();
 
@@ -156,6 +158,7 @@ void SteppingAction::truth_hit(const G4Step* aStep) {
     f_root->pz [g_nhit] = track->GetMomentum().z()/MeV;
     // Parent vertex
     f_root->parent_counter[g_nhit] = get_volume_id(parent_vol_name, false);
+    f_root->parent_process[g_nhit] = get_process_id(parent_proc_name);
     // Kinetic energy
     f_root->kinetic [g_nhit] = track->GetKineticEnergy()/MeV;
     // Energy deposited

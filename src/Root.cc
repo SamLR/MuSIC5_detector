@@ -91,12 +91,13 @@ void Root::make_root(char* root_name)
     truth_tree_out->Branch("last_step" , last_step,  "last_step[nhit]/O");
     
     // Process, counter, track, parent and PDG IDs
-    truth_tree_out->Branch("procid",     procid,         "procid[nhit]/I");
-    truth_tree_out->Branch("counter",    counter,        "counter[nhit]/I");
-    truth_tree_out->Branch("vertex_vol", parent_counter, "counter[nhit]/I");
-    truth_tree_out->Branch("trkid",      trkid,          "trkid[nhit]/I");
-    truth_tree_out->Branch("parentid",   parentid,       "parentid[nhit]/I");
-    truth_tree_out->Branch("pdgid",      pdgid,          "pdgid[nhit]/I");
+    truth_tree_out->Branch("procid",      procid,         "procid[nhit]/I");
+    truth_tree_out->Branch("counter",     counter,        "counter[nhit]/I");
+    truth_tree_out->Branch("vertex_vol",  parent_counter, "vertex_vol[nhit]/I");
+    truth_tree_out->Branch("vertex_proc", parent_process,  "vertex_proc[nhit]/I");
+    truth_tree_out->Branch("trkid",       trkid,          "trkid[nhit]/I");
+    truth_tree_out->Branch("parentid",    parentid,       "parentid[nhit]/I");
+    truth_tree_out->Branch("pdgid",       pdgid,          "pdgid[nhit]/I");
     
     // Position
     truth_tree_out->Branch("x", x, "x[nhit]/D");
