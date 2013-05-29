@@ -59,6 +59,9 @@
 #include "G4RunManager.hh"
 #include "G4UserLimits.hh"
 
+// Useful output
+#include "G4StopElementSelector.hh"
+
 #include <vector>
 #include <string.h>
 
@@ -97,6 +100,19 @@ DetectorConstruction::~DetectorConstruction()
     delete f_st_limit;
 }
 
+void print_decay_info(G4double Z, G4double A, G4String mat_name)
+{
+    static bool first_run = true;
+    if (first_run) {
+        printf("%10s | %12s | %12s\n", "Material", "Decay Rate", "Capture Rate");
+        first_run = false;
+    }
+    G4StopElementSelector tester;
+    G4double decay_rate = tester.GetMuonDecayRate(Z, A);
+    G4double capture_rate = tester.GetMuonCaptureRate(Z, A);
+    printf("%10s | %12.7f | %12.7f\n", mat_name.data(), decay_rate, capture_rate);
+}
+
 void DetectorConstruction::DefineMaterials()
 {
     G4String symbol;
@@ -113,6 +129,21 @@ void DetectorConstruction::DefineMaterials()
     Pb = new G4Material("Lead",      z=82.0, a= 207.19*g/mole, density= 11.35*g/cm3);
     Mg = new G4Material("Magnesium", z=12.0, a= 24.305*g/mole, density= 1.738*g/cm3);
     Cu = new G4Material("Copper",    z=29.0, a= 63.546*g/mole, density= 8.94 *g/cm3);
+    
+    
+    // This is useful for debugging but seems to give wierd results
+    G4Element* el_list [] = {H, C, N, O};
+    G4Material* mat_list [] = {Al, Cu, Pb, Mg};
+    
+    for (int i(0); i < 4; ++i) {
+        G4Element* el = el_list[i];
+        print_decay_info(el->GetZ(), el->GetA(), el->GetName());
+    }
+    
+    for (int i(0); i < 4; ++i) {
+        G4Material* mat = mat_list[i];
+        print_decay_info(mat->GetZ(), mat->GetA(), mat->GetName());
+    }
     
     // mixtures and compounds
     // possibly Polyvinyltoluene. See pg322 of Mokhov (2001) for calculated stopping power

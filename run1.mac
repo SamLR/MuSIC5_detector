@@ -15,7 +15,7 @@
 # /control/execute pid_macros/pid_-13.mac
 # /control/execute pid_macros/pid_-11.mac
 # /control/execute pid_macros/pid_11.mac
-# /control/execute pid_macros/pid_13.mac
+/control/execute /Users/scook/code/MuSIC/simulation/MuSIC_5_detector_sim/MuSIC5/MuSIC5_detector/pid_macros/pid_13.mac
 # /control/execute pid_macros/pid_211.mac
 # /control/execute pid_macros/pid_2212.mac
 
@@ -23,17 +23,21 @@
 # into the file.
 # Note: event 399 is the first in g4bl that tends to leave to 
 # optical processes being needed
-/MuSIC_Detector/gun/inputOffset 399
+# /MuSIC_Detector/gun/inputOffset 399
+# /MuSIC_Detector/targetMat Aluminium 
 
 # Toggle using optical processes these are _VERY_ slow
 # /MuSIC_Detector/enableOpticalProcesses false
 # /MuSIC_Detector/enableOpticalProcesses true
-/MuSIC_Detector/gun/g4blEnable true
+# /MuSIC_Detector/gun/g4blEnable true
+# Set it to only run muons
+#/MuSIC_Detector/gun/g4blSinglePID true
+#/gun/particle mu-
 
 # Basic command to set it all up and run it. 
 /MuSIC_Detector/update
 /run/initialize
-/run/beamOn 3
-# /run/beamOn 5000
-# /run/beamOn 1000000
+# /run/beamOn 30
+#/run/beamOn  5000
+/run/beamOn 50000
 

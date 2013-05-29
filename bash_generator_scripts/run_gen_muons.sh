@@ -29,6 +29,9 @@ function make_macro () {
 	# Set up the degrader
 	/MuSIC_Detector/degraderZ $4 mm
 	/MuSIC_Detector/degraderMat $5
+	# And the target
+	/MuSIC_Detector/targetMat Copper
+	/MuSIC_Detector/targetZ 0.5 mm
 	
 	# Basic command to set it all up and run it. 
 	/MuSIC_Detector/update
@@ -48,7 +51,7 @@ function make_file_name () {
 
 degraders=( "5 Air" "0.5 Aluminium" "1 Aluminium" "5 Aluminium" ) 
 charges=( "+" "-" )
-n_muons=100000
+n_muons=500000
 outdir="../../output/100k_mu"
 macrodir="../pid_macros"
 # 
