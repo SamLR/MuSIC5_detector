@@ -104,6 +104,7 @@ void print_decay_info(G4double Z, G4double A, G4String mat_name)
 {
     static bool first_run = true;
     if (first_run) {
+        printf("\n******** Muon nuclear capture rates ********\n\n");
         printf("%10s | %12s | %12s\n", "Material", "Decay Rate", "Capture Rate");
         first_run = false;
     }
@@ -129,7 +130,6 @@ void DetectorConstruction::DefineMaterials()
     Pb = new G4Material("Lead",      z=82.0, a= 207.19*g/mole, density= 11.35*g/cm3);
     Mg = new G4Material("Magnesium", z=12.0, a= 24.305*g/mole, density= 1.738*g/cm3);
     Cu = new G4Material("Copper",    z=29.0, a= 63.546*g/mole, density= 8.94 *g/cm3);
-    
     
     // This is useful for debugging but seems to give wierd results
     G4Element* el_list [] = {H, C, N, O};

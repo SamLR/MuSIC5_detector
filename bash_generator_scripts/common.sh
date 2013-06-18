@@ -74,7 +74,7 @@ make_file_name()
     # $3 = stopping target thickness
     # $4 = degrader material
     # $5 = degrader thickness
-    name="${1}_st_${2}_${3}mm_deg_${4}_${5}mm"
+    name="${1}_st_${2}_${3}mm_deg_${5}mm_${4}"
 }
 
 make_macro () 
