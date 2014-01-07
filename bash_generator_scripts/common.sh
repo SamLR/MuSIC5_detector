@@ -123,7 +123,8 @@ run_it()
     cmd="$execmd > /dev/null 2> $erfile "
     echo "Running command:" >> $runlog
     echo $cmd >> $runlog
-    eval $cmd
+    # If you want to do a dry run edit out the next line
+    # eval "$cmd"
     # this will also go to stdout
     echo "$5 run complete" | tee -a $runlog 
     echo -e "************************\n" >> $runlog

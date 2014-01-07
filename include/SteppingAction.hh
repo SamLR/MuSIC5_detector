@@ -80,13 +80,12 @@ inline int SteppingAction::get_process_id (const G4String &process_name) {
 
 inline int SteppingAction::get_volume_id (const G4String &volume_name,
                                           const bool entering_degrader) {
-    
-    if      (volume_name == "world"      ) return 0;
+    if      (entering_degrader           ) return 5;
     else if (volume_name == "u_scint_log") return 1;
     else if (volume_name == "target"     ) return 2;
     else if (volume_name == "d_scint_log") return 3;
     else if (volume_name == "degrader"   ) return 4;
-    else if (entering_degrader           ) return 5;
+    else if (volume_name == "world"      ) return 0;
     else return -1; // in something else (e.g. MPPC, WLS...)
 }
 

@@ -1,7 +1,7 @@
 #include "Root.hh"
 #include <string>
 //#define MAX_TREE_SIZE 500000000 // 0.5 GB
-#define MAX_TREE_SIZE 500 // 0.5 kB
+#define MAX_TREE_SIZE 500000 // 500 kB
 
 Root::Root(char* in_root_name, char* out_root_name)
 : g4bl_file_enabled(false), 
@@ -59,7 +59,7 @@ void Root::make_root(char* root_name)
     // Tree to store truth level data (only charged particles in
     // scintillators, target, degrader or just before degrader)
     truth_tree_out = new TTree("truth","truth");
-    truth_tree_out->SetMaxTreeSize(MAX_TREE_SIZE);
+//    truth_tree_out->SetMaxTreeSize(MAX_TREE_SIZE);
     
     // Input information
     truth_tree_out->Branch("iev",        &g_iev,      "iev/I");
@@ -119,7 +119,7 @@ void Root::make_root(char* root_name)
     
     // Tree to store the information on photon hits at the MPPC
     mppc_tree_out = new TTree("mppc","mppc");
-    mppc_tree_out->SetMaxTreeSize(MAX_TREE_SIZE);
+//    mppc_tree_out->SetMaxTreeSize(MAX_TREE_SIZE);
     // number of photons, which mppc they hit and when (global time)
     mppc_tree_out->Branch("mppc_hits", &mppc_hits, "mppc_hits/I");
     mppc_tree_out->Branch("mppc_x",     mppc_x,    "mppc_x[mppc_hits]/D");

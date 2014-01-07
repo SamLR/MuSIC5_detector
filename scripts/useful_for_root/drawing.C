@@ -59,7 +59,7 @@ void draw_pretty_two_hists(TH1* backHist, TH1* frontHist, const TString title,
 
 // the stupidly long variable name is to try and stop namespace collisions @ global
 const int __useful_default_colour_selection [] =  {1, 2, 4, 3, 6, 7, 8, 9};
-TCanvas* draw_pretty_hists(const int& n_hists, TH1F** hist_array,   
+TCanvas* draw_pretty_hists(const int n_hists, TH1F** hist_array,   
     const TString title,         // title for the entire plot
     const TString* leg_entries,  // titles for each legend entry
     const TString img_save_location ="",
@@ -76,58 +76,57 @@ TCanvas* draw_pretty_hists(const int& n_hists, TH1F** hist_array,
     // set up the legend
     const float x1 = (stats_opt) ? 0.60:0.70; // figure out where to put it 
     const float x2 = (stats_opt) ? 0.80:0.90;
-    const float y1 = 0.9 - 0.04*n_hists; 
+    const float y1 = 0.9 - 0.04*static_cast<float>(n_hists); 
     const float y2 = 0.90;
     TLegend* leg = new TLegend(x1, y1, x2, y2);
     // find the largest histogram (otherwise y range will be too small)
-    int max = -1;     
-    int first_hist = 0; // want to draw largest hist first               
+    double max = -1;     
+    int first_hist_id = 0; // want to draw largest hist first               
     
-    for(int hist = 0; hist < n_hists; ++hist) {
-        const int current_max = hist_array[hist]->GetMaximum();
+    for(int h_id = 0; h_id < n_hists; ++h_id) {
+        double current_max = (hist_array[h_id])->GetMaximum();
         if(current_max > max){
             max = current_max;
-            first_hist = hist;
+            first_hist_id = h_id;
         }
     }
-    
     if (stats_opt) {
         can->SetRightMargin((1.0 - x2)); // make space on the right hand side for the stats boxes
     } else {
-        hist_array[first_hist]->SetStats(false);// switch off stats for the first
+        hist_array[first_hist_id]->SetStats(false);// switch off stats for the first
     }
 
-    hist_array[first_hist]->Draw();
+    hist_array[first_hist_id]->Draw();
     
-    for(int hist = 0; hist < n_hists; ++hist) {
-        hist_array[hist]->SetLineWidth(2);// otherwise the lines are tiny
-        hist_array[hist]->SetLineColor(colours[hist]); // mmmm colour!
+    for(int h_i = 0; h_i < n_hists; ++h_i) {
+        hist_array[h_i]->SetLineWidth(2);// otherwise the lines are tiny
+        hist_array[h_i]->SetLineColor(colours[h_i]); // mmmm colour!
                                              
         // match the appropriate histogram to its title
-        leg->AddEntry(hist_array[hist], leg_entries[hist]); 
+        leg->AddEntry(hist_array[h_i], leg_entries[h_i]); 
         
         // enable stats box drawing if required
         const TString tmp_draw_opt = (stats_opt) ? "sameS"+draw_opt : "same"+draw_opt;
         
-        if (hist != first_hist) hist_array[hist]->Draw(tmp_draw_opt);
+        if (h_i != first_hist_id) hist_array[h_i]->Draw(tmp_draw_opt);
         
         if (stats_opt){
             // make sure that the name of on the stats box matches the legend entry
-            hist_array[hist]->SetName(leg_entries[hist]); 
+            hist_array[h_i]->SetName(leg_entries[h_i]); 
             // histogram has to have been drawn before you can modify stats box        
             // position the stats boxes so that they're all visible on the right hand side
-            const float y1_stat = (0.81/n_hists)*hist + 0.1;
-            const float y2_stat = (0.81/n_hists)*(hist+1) + 0.09; 
+            const float y1_stat = (0.81/n_hists)*h_i + 0.1;
+            const float y2_stat = (0.81/n_hists)*(h_i+1) + 0.09; 
             const float x1_stat = x2+0.01; 
             const float x2_stat = 0.99; 
             // tidy up the stats box
-            edit_stats_box(can, hist_array[hist], stats_opt, x1_stat, x2_stat, y1_stat, y2_stat);
+            edit_stats_box(can, hist_array[h_i], stats_opt, x1_stat, x2_stat, y1_stat, y2_stat);
         } 
     }    
 
     // hack to set the title of the histogram (yet have a different entry for 
     // the first hist in the legend, if desired)
-    hist_array[first_hist]->SetTitle(title);
+    hist_array[first_hist_id]->SetTitle(title);
     
     // make sure the y extent is enough to show everything
     leg->SetFillColor(0); // don't want grey backgrounds
@@ -164,7 +163,7 @@ void draw_pretty_hist(TH1* hist, const TString title = "",
 }
 
 void create_boxy_legend(const TString legend_header, const int n_boxes, 
-    const TString const* box_names, const int box_colors[n_boxes],
+    const TString *const box_names, const int box_colors[n_boxes],
     const float x1 = 0.15, const float x2 = 0.45, 
     const float y1 = 0.60, const float y2 = 0.90  
 ){

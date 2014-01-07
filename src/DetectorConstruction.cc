@@ -90,10 +90,10 @@ DetectorConstruction::~DetectorConstruction()
     delete Mg;
     delete Cu;
     delete Air;
-    delete Scint;
+    // delete Scint;
     delete Mylar;
-    delete Polystyrene;
-    delete Polyethylene;
+    // delete Polystyrene;
+    // delete Polyethylene;
     delete f_u_limit;
     delete f_d_limit;
     delete f_deg_limit;
@@ -147,9 +147,9 @@ void DetectorConstruction::DefineMaterials()
     
     // mixtures and compounds
     // possibly Polyvinyltoluene. See pg322 of Mokhov (2001) for calculated stopping power
-    Scint = new G4Material("Scintillator", density= 1.032*g/cm3, ncomponents=2);
-    Scint->AddElement(C, natoms=9);
-    Scint->AddElement(H, natoms=10);
+    // Scint = new G4Material("Scintillator", density= 1.032*g/cm3, ncomponents=2);
+    // Scint->AddElement(C, natoms=9);
+    // Scint->AddElement(H, natoms=10);
     
     Mylar = new G4Material("Mylar", density= 1.397*g/cm3, ncomponents=3);
     Mylar->AddElement(C, natoms=10);
@@ -170,14 +170,14 @@ void DetectorConstruction::DefineMaterials()
     Air->SetMaterialPropertiesTable(air_MPT);
     
     
-    Polyethylene = new G4Material("Polyethylene",density= 0.94*g/cm3, ncomponents=2);
-    Polyethylene -> AddElement(H,0.14);
-    
-    Polyethylene -> AddElement(C,0.86);
-    Polystyrene = new G4Material("Polystyrene", density= 1.03*g/cm3, 2);
-    Polystyrene->AddElement(C, 8);
-    Polystyrene->AddElement(H, 8);
-    
+    // Polyethylene = new G4Material("Polyethylene",density= 0.94*g/cm3, ncomponents=2);
+//     Polyethylene -> AddElement(H,0.14);
+//     
+//     Polyethylene -> AddElement(C,0.86);
+//     Polystyrene = new G4Material("Polystyrene", density= 1.03*g/cm3, 2);
+//     Polystyrene->AddElement(C, 8);
+//     Polystyrene->AddElement(H, 8);
+//     
     // EJ-212 Scintillator material
     // Values from http://www.eljentechnology.com/index.php/joomla-overview/what-is-new-in-1-5/64-ej-212
     // and from http://www.eljentechnology.com/images/stories/Technical_Information/Physical%20Constant%20of%20Plastic%20Scintillators.pdf

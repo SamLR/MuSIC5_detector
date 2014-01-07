@@ -39,7 +39,7 @@ void beampipe_muon_momentum()
     tree->Draw(tmp, cut_mu_all);
     TH1F* all = (TH1F*) gPad->GetPrimitive("all");
     all->GetXaxis()->SetTitle("Momentum (MeV/c)");
-    all->GetYaxis()->SetTitle("Muon Rate (muons/#muA)");
+    all->GetYaxis()->SetTitle("Muons/#muA");
     all->Scale(mu_per_uA);
     
     TH1F* array [] = {all, plus, minus};
@@ -49,6 +49,6 @@ void beampipe_muon_momentum()
     
     
     TCanvas* can = draw_pretty_hists(3, array, title, leg_entries, save_location+"svg", 1002201);
-    can->SaveAs(save_location+"png");
+    can->SaveAs(save_location+"eps");
     
 }
